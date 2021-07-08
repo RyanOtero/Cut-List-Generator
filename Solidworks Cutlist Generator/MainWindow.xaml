@@ -1,0 +1,29 @@
+﻿<Window x:Class="Solidworks_Cutlist_Generator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Solidworks_Cutlist_Generator"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <TabControl>
+        <TabItem Header="Cutlist">
+            <Grid>
+                <TextBox x:Name="filePathTextBox" HorizontalAlignment="Left" Margin="90,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="534" VerticalContentAlignment="Center" Height="21" Text="D:\Projects\2021\1-Aluminum Awnings\1-0004 Bill Schwinghammer St. Pete Beach, FL\Drawing\SolidWorks\Louvered Sunshade\Panel 1\Panel 1.SLDASM"/>
+                <Button x:Name="sourceBrowseButton" Content="Browse" HorizontalAlignment="Left" Margin="629,15,0,0" VerticalAlignment="Top" Click="sourceBrowseButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center"/>
+                <Label x:Name="filePathLabel" Content="File Path:&#xA;" HorizontalAlignment="Left" Margin="30,16,0,0" VerticalAlignment="Top" Width="55" Padding="3,0,3,3" Height="20" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="outputPathTextBox" HorizontalAlignment="Left" Margin="90,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="534" Height="21"/>
+                <Button x:Name="outputBrowseButton" Content="Browse" HorizontalAlignment="Left" Margin="629,47,0,0" VerticalAlignment="Top" Height="21" Padding="3,0,3,3" Click="outputBrowseButton_Click"/>
+                <Label x:Name="outputPathLlabel" Content="Output Path:" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top" Height="20" Width="75" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" Padding="3,0,3,3"/>
+                <Button x:Name="generateButton" Content="Generate" HorizontalAlignment="Left" Margin="710,15,0,0" VerticalAlignment="Top" Click="generateButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center"/>
+                <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="710,47,0,0" VerticalAlignment="Top" Click="generateButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Width="56.2"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Vendors">
+
+        </TabItem>
+        <TabItem Header="Profiles">
+
+        </TabItem>
+    </TabControl>
+</Window>
