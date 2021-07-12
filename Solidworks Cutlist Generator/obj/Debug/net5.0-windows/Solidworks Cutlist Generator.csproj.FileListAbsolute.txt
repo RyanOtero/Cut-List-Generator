@@ -50,3 +50,52 @@ C:\Users\corey\source\repos\Solidworks Cutlist Generator\Solidworks Cutlist Gene
 C:\Users\corey\source\repos\Solidworks Cutlist Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Ubiety.Dns.Core.dll
 C:\Users\corey\source\repos\Solidworks Cutlist Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Zstandard.Net.dll
 C:\Users\corey\source\repos\Solidworks Cutlist Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\MySql.EntityFrameworkCore.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Solidworks Cutlist Generator.exe
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Solidworks Cutlist Generator.deps.json
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Solidworks Cutlist Generator.runtimeconfig.json
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Solidworks Cutlist Generator.runtimeconfig.dev.json
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Solidworks Cutlist Generator.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\ref\Solidworks Cutlist Generator.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Solidworks Cutlist Generator.pdb
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\BouncyCastle.Crypto.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Google.Protobuf.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Humanizer.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\K4os.Compression.LZ4.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\K4os.Compression.LZ4.Streams.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\K4os.Hash.xxHash.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Microsoft.EntityFrameworkCore.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Microsoft.Extensions.Logging.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Microsoft.Extensions.Options.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Microsoft.Extensions.Primitives.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\MySql.Data.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Ubiety.Dns.Core.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Zstandard.Net.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\MySql.EntityFrameworkCore.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\SolidWorks.Interop.sldworks.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\SolidWorks.Interop.swconst.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\MainWindow.g.cs
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\App.g.cs
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cutlist Generator_MarkupCompile.cache
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cutlist Generator_MarkupCompile.lref
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\MainWindow.baml
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cutlist Generator.g.resources
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cutlist Generator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cutlist Generator.AssemblyInfoInputs.cache
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cutlist Generator.AssemblyInfo.cs
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cutlist Generator.csproj.CoreCompileInputs.cache
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cutlist Generator.csproj.CopyComplete
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cutlist Generator.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\ref\Solidworks Cutlist Generator.dll
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cutlist Generator.pdb
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cutlist Generator.genruntimeconfig.cache
+C:\Users\Ryan\source\repos\Cutlist-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cutlist Generator.csproj.AssemblyReference.cache

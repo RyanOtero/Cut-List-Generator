@@ -21,6 +21,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Solidworks_Cutlist_Generator.Model;
+using Solidworks_Cutlist_Generator.BusinessLogic;
 
 namespace Solidworks_Cutlist_Generator {
     /// <summary>
@@ -33,6 +34,7 @@ namespace Solidworks_Cutlist_Generator {
         bool inBodyFolder = false;
 
         Dictionary<string, int> modelDict = new Dictionary<string, int>();
+        List<CutItem> CutList = new List<CutItem>();
 
 
         public MainWindow() {
@@ -45,11 +47,44 @@ namespace Solidworks_Cutlist_Generator {
             }
         }
 
-        private void generateButton_Click(object sender, RoutedEventArgs e) {
-            modelDict.Clear();
+        #region Button Clicks
 
-            if (!filePathTextBox.Text.ToLower().Contains(".sldasm")) {
-                string messageBoxText = "You must select an assembly file!";
+        private void generateButton_Click(object sender, RoutedEventArgs e) {
+            Generate();
+        }
+
+        private void sourceBrowseButton_Click(object sender, RoutedEventArgs e) {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+                filePathTextBox.Text = openFileDialog.FileName;
+        }
+
+        private void outputBrowseButton_Click(object sender, RoutedEventArgs e) {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+                outputPathTextBox.Text = openFileDialog.FileName;
+        }
+
+        private void outputBrowseButton_Click_1(object sender, RoutedEventArgs e) {
+
+        }
+
+        #endregion
+
+        #region Business Logic
+        private void Generate() {
+            bool isPart;
+            bool isAssembly;
+
+            modelDict.Clear();
+            inBodyFolder = false;
+
+
+            isPart = filePathTextBox.Text.ToLower().Contains(".sldprt");
+            isAssembly = filePathTextBox.Text.ToLower().Contains(".sldasm");
+
+            if (!isPart && !isAssembly) {
+                string messageBoxText = "You must select an assembly or part file!";
                 string caption = "DERRRRP!";
                 MessageBoxButton button = MessageBoxButton.OK;
                 MessageBoxImage icon = MessageBoxImage.Warning;
@@ -65,19 +100,25 @@ namespace Solidworks_Cutlist_Generator {
             // increase performance 
             ModelDoc2 doc;
 
-            doc = swApp.OpenDoc6(filePathTextBox.Text, (int)swDocumentTypes_e.swDocASSEMBLY, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning);
+            doc = isAssembly ?
+                swApp.OpenDoc6(filePathTextBox.Text, (int)swDocumentTypes_e.swDocASSEMBLY, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning) :
+                swApp.OpenDoc6(filePathTextBox.Text, (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning);
 
             // Set the working directory to the document directory
             swApp.SetCurrentWorkingDirectory(doc.GetPathName().Substring(0, doc.GetPathName().LastIndexOf("\\")));
 
             swApp.CommandInProgress = true;
             ModelDoc2 swModel;
-            AssemblyDoc swAssy;
+            AssemblyDoc swAssy = default(AssemblyDoc);
+            PartDoc swPart = default(PartDoc);
             string fileName;
             string tmpPath;
-
             swModel = swApp.ActiveDoc as ModelDoc2;
-            swAssy = (AssemblyDoc)swModel;
+            if (isAssembly) {
+                swAssy = (AssemblyDoc)swModel;
+            } else {
+                swPart = (PartDoc)swModel;
+            }
             tmpPath = swModel.GetPathName();
             string[] tok;
             tok = tmpPath.Split('\\');
@@ -91,33 +132,15 @@ namespace Solidworks_Cutlist_Generator {
             fileName = tok[tok.Length - 1] + "_Cutlist.XXX";
             Debug.Print(fileName);
 
-            TraverseAssembly(swAssy);
+            if (isAssembly) {
+                TraverseAssembly(swAssy);
+            } else {
+                TraverseFeatures((Feature)swPart.FirstFeature(), true, "Root Feature");
+            }
             while (swApp.ActiveDoc != null) {
                 swApp.CloseDoc(((ModelDoc2)swApp.ActiveDoc).GetPathName());
             }
-            inBodyFolder = false;
-
-
         }
-
-        private void sourceBrowseButton_Click(object sender, RoutedEventArgs e) {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true)
-                filePathTextBox.Text = openFileDialog.FileName;
-        }
-        private void outputBrowseButton_Click(object sender, RoutedEventArgs e) {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true)
-                outputPathTextBox.Text = openFileDialog.FileName;
-        }
-
-        private void outputBrowseButton_Click_1(object sender, RoutedEventArgs e) {
-
-        }
-
-
-
-        #region Business Logic
 
         public void GetFeatureCustomProps(Feature thisFeat) {
             CustomPropertyManager CustomPropMgr = default(CustomPropertyManager);
@@ -125,54 +148,66 @@ namespace Solidworks_Cutlist_Generator {
             string[] vCustomPropNames;
             vCustomPropNames = (string[])CustomPropMgr.GetNames();
             if ((vCustomPropNames != null)) {
-                Debug.Print("               Cut-list custom properties:");
+                Debug.Print("\nCut-list custom properties:");
                 int i = 0;
-                StockItem item = StockItem.CreateStockItem();
-                int qty;
-                float length;
-                float angle1;
-                float angle2;
-                string description;
-                string material;
+                int qty = 0;
+                float length = 0;
+                float angle1 = 0;
+                float angle2 = 0;
+                string description = "";
+                string material = "";
+                bool isNew = false;
+                StockItem sItem = null;
+
 
 
                 //ctx.StockItems.Add(angle);
                 //ctx.SaveChanges();
                 using (var ctx = new CutlistGeneratorContext()) {
-
-                }
-
-                for (i = 0; i <= (vCustomPropNames.Length - 1); i++) {
-                    string CustomPropName = (string)vCustomPropNames[i];
-                    string CustomPropResolvedVal;
-                    CustomPropMgr.Get2(CustomPropName, out _, out CustomPropResolvedVal);
-                    switch (CustomPropName) {
-                        case "QUANTITY":
-                            Int32.TryParse(CustomPropResolvedVal, out qty);
-                            break;
-                        case "DESCRIPTION":
-                            description = CustomPropResolvedVal;
-                            break;
-                        case "LENGTH":
-                            float.TryParse(CustomPropResolvedVal, out length);
-                            break;
-                        case "ANGLE1":
-                            float.TryParse(CustomPropResolvedVal, out angle1);
-                            break;
-                        case "ANGLE2":
-                            float.TryParse(CustomPropResolvedVal, out angle2);
-                            break;
-                        case "MATERIAL":
-                            material = CustomPropResolvedVal;
-                            break;
-                        default:
-                            break;
+                    for (i = 0; i <= (vCustomPropNames.Length - 1); i++) {
+                        string CustomPropName = (string)vCustomPropNames[i];
+                        string CustomPropResolvedVal;
+                        CustomPropMgr.Get2(CustomPropName, out _, out CustomPropResolvedVal);
+                        switch (CustomPropName) {
+                            case "QUANTITY":
+                                Int32.TryParse(CustomPropResolvedVal, out qty);
+                                break;
+                            case "Description":
+                                description = CustomPropResolvedVal;
+                                sItem = ctx.StockItems.Where(item => item.Description == description).FirstOrDefault(); ;
+                                if (sItem == null) {
+                                    isNew = true;
+                                }
+                                break;
+                            case "LENGTH":
+                                float.TryParse(CustomPropResolvedVal, out length);
+                                break;
+                            case "ANGLE1":
+                                float.TryParse(CustomPropResolvedVal, out angle1);
+                                break;
+                            case "ANGLE2":
+                                float.TryParse(CustomPropResolvedVal, out angle2);
+                                break;
+                            case "MATERIAL":
+                                material = CustomPropResolvedVal;
+                                break;
+                            default:
+                                break;
+                        }
+                        Debug.Print("Name: " + CustomPropName);
+                        Debug.Print("Resolved value: " + CustomPropResolvedVal);
+                    }
+                    if (isNew) {
+                        sItem = new StockItem(description: description,
+                            materialType: StockItem.MaterialFromDescription(description),
+                            profType: StockItem.ProfileFromDescription(description));
+                        ctx.StockItems.Add(sItem);
+                        ctx.SaveChanges();
+                        isNew = false;
                     }
 
-
-                    Debug.Print("Name: " + CustomPropName);
-                    //ebug.Print("Value: " + CustomPropVal);
-                    Debug.Print("Resolved value: " + CustomPropResolvedVal);
+                    CutItem cItem = new CutItem(sItem, qty, length, angle1, angle2);
+                    CutList.Add(cItem);
                 }
 
 
@@ -181,7 +216,6 @@ namespace Solidworks_Cutlist_Generator {
 
             }
         }
-
 
         public void FindCutlist(Feature thisFeat, string ParentName) {
 
@@ -207,7 +241,7 @@ namespace Solidworks_Cutlist_Generator {
                 return;
             }
 
-            bool IsBodyFolder = false;
+            bool IsBodyFolder;
             if (FeatType == "SolidBodyFolder" | FeatType == "SurfaceBodyFolder" | FeatType == "CutListFolder" | FeatType == "SubWeldFolder" | FeatType == "SubAtomFolder") {
                 IsBodyFolder = true;
             } else {
@@ -223,14 +257,13 @@ namespace Solidworks_Cutlist_Generator {
                     //FeatureManager design tree, so skip it
                     return;
                 }
-
             }
+
             if (FeatType == "CutListFolder") {
                 if (BodyCount > 0) {
                     GetFeatureCustomProps(thisFeat);
                 }
             }
-
         }
 
         public void TraverseComponent(Component2 swComp, Action<Feature, bool, string> action) {

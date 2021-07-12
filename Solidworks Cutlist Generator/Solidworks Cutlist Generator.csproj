@@ -5,6 +5,12 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>Solidworks_Cutlist_Generator</RootNamespace>
     <UseWPF>true</UseWPF>
+    <StartupObject>Solidworks_Cutlist_Generator.App</StartupObject>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,20 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.Tools.Applications.Adapter">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio 8\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.Tools.Applications.Adapter.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.Tools.Applications.Contract">
-      <HintPath>..\..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.VisualStudio.Tools.Applications.Contract\8.0.0.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.Tools.Applications.Contract.dll</HintPath>
-    </Reference>
     <Reference Include="SolidWorks.Interop.sldworks">
       <HintPath>..\..\..\..\..\..\Program Files\SOLIDWORKS Corp\SOLIDWORKS\api\redist\SolidWorks.Interop.sldworks.dll</HintPath>
     </Reference>
     <Reference Include="SolidWorks.Interop.swconst">
       <HintPath>..\..\..\..\..\..\Program Files\SOLIDWORKS Corp\SOLIDWORKS\api\redist\SolidWorks.Interop.swconst.dll</HintPath>
-    </Reference>
-    <Reference Include="System.AddIn">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio 8\Common7\IDE\PublicAssemblies\System.AddIn.dll</HintPath>
     </Reference>
   </ItemGroup>
 
