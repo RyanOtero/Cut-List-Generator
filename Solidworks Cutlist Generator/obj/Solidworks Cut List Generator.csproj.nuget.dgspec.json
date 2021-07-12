@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\corey\\source\\repos\\Cut-List-Generator\\Solidworks Cutlist Generator\\Solidworks Cutlist Generator.csproj": {}
+    "C:\\Users\\corey\\source\\repos\\Cut-List-Generator\\Solidworks Cutlist Generator\\Solidworks Cut List Generator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\corey\\source\\repos\\Cut-List-Generator\\Solidworks Cutlist Generator\\Solidworks Cutlist Generator.csproj": {
+    "C:\\Users\\corey\\source\\repos\\Cut-List-Generator\\Solidworks Cutlist Generator\\Solidworks Cut List Generator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\corey\\source\\repos\\Cut-List-Generator\\Solidworks Cutlist Generator\\Solidworks Cutlist Generator.csproj",
-        "projectName": "Solidworks Cutlist Generator",
-        "projectPath": "C:\\Users\\corey\\source\\repos\\Cut-List-Generator\\Solidworks Cutlist Generator\\Solidworks Cutlist Generator.csproj",
+        "projectUniqueName": "C:\\Users\\corey\\source\\repos\\Cut-List-Generator\\Solidworks Cutlist Generator\\Solidworks Cut List Generator.csproj",
+        "projectName": "Solidworks Cut List Generator",
+        "projectPath": "C:\\Users\\corey\\source\\repos\\Cut-List-Generator\\Solidworks Cutlist Generator\\Solidworks Cut List Generator.csproj",
         "packagesPath": "C:\\Users\\corey\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\corey\\source\\repos\\Cut-List-Generator\\Solidworks Cutlist Generator\\obj\\",
         "projectStyle": "PackageReference",

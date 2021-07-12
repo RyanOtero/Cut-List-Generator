@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Solidworks_Cutlist_Generator.Model {
-    class CutlistGeneratorContext:DbContext {
+    class CutListGeneratorContext:DbContext {
         public DbSet<StockItem> StockItems { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
 
-        public CutlistGeneratorContext() : base() {
+        public CutListGeneratorContext() : base() {
            
         }
 

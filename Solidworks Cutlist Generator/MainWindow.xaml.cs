@@ -39,7 +39,7 @@ namespace Solidworks_Cutlist_Generator {
 
         public MainWindow() {
             InitializeComponent();
-            using (var ctx = new CutlistGeneratorContext()) {
+            using (var ctx = new CutListGeneratorContext()) {
                 //var angle = StockItem.CreateStockItem(description: "angle");
 
                 //ctx.StockItems.Add(angle);
@@ -163,7 +163,7 @@ namespace Solidworks_Cutlist_Generator {
 
                 //ctx.StockItems.Add(angle);
                 //ctx.SaveChanges();
-                using (var ctx = new CutlistGeneratorContext()) {
+                using (var ctx = new CutListGeneratorContext()) {
                     for (i = 0; i <= (vCustomPropNames.Length - 1); i++) {
                         string CustomPropName = (string)vCustomPropNames[i];
                         string CustomPropResolvedVal;

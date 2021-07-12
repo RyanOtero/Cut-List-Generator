@@ -1613,25 +1613,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ryan\\.nuget\\packages\\": {},
+    "C:\\Users\\corey\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ryan\\source\\repos\\Cutlist-Generator\\Solidworks Cutlist Generator\\Solidworks Cutlist Generator.csproj",
-      "projectName": "Solidworks Cutlist Generator",
-      "projectPath": "C:\\Users\\Ryan\\source\\repos\\Cutlist-Generator\\Solidworks Cutlist Generator\\Solidworks Cutlist Generator.csproj",
-      "packagesPath": "C:\\Users\\Ryan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ryan\\source\\repos\\Cutlist-Generator\\Solidworks Cutlist Generator\\obj\\",
+      "projectUniqueName": "C:\\Users\\corey\\source\\repos\\Cut-List-Generator\\Solidworks Cutlist Generator\\Solidworks Cut List Generator.csproj",
+      "projectName": "Solidworks Cut List Generator",
+      "projectPath": "C:\\Users\\corey\\source\\repos\\Cut-List-Generator\\Solidworks Cutlist Generator\\Solidworks Cut List Generator.csproj",
+      "packagesPath": "C:\\Users\\corey\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\corey\\source\\repos\\Cut-List-Generator\\Solidworks Cutlist Generator\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Ryan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\corey\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -1698,7 +1698,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

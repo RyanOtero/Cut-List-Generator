@@ -8,7 +8,7 @@ using Solidworks_Cutlist_Generator.Model;
 
 namespace Solidworks_Cutlist_Generator.Migrations
 {
-    [DbContext(typeof(CutlistGeneratorContext))]
+    [DbContext(typeof(CutListGeneratorContext))]
     [Migration("20210706195449_initial")]
     partial class initial
     {

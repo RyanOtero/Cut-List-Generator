@@ -7,7 +7,7 @@ using Solidworks_Cutlist_Generator.Model;
 
 namespace Solidworks_Cutlist_Generator.Migrations
 {
-    [DbContext(typeof(CutlistGeneratorContext))]
+    [DbContext(typeof(CutListGeneratorContext))]
     partial class CutlistGeneratorContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
