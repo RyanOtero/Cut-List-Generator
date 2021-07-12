@@ -46,3 +46,4 @@ C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\
 C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\ref\Solidworks Cut List Generator.dll
 C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator.pdb
 C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator.genruntimeconfig.cache
+C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator.csproj.AssemblyReference.cache

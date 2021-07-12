@@ -8,7 +8,7 @@ namespace Solidworks_Cutlist_Generator.Model {
 
 
     public enum MaterialType { none, steel, aluminum, stainless_steel, titanium, brass, bronze, zinc, copper, nickel, wood }
-    public enum ProfileType { none, angle, channel, flat_bar, solid_square, solid_rectangular, solid_round, solid_triangular, square_tube, rectangular_tube, round_tube, pipe, custom }
+    public enum ProfileType { custom, angle, channel, flat_bar, solid_square, solid_rectangular, solid_round, solid_triangular, square_tube, rectangular_tube, round_tube, pipe }
     public class StockItem {
         public int ID { get; set; }
         public MaterialType MatType { get; set; }
@@ -136,7 +136,7 @@ namespace Solidworks_Cutlist_Generator.Model {
         }
 
         public static ProfileType ProfileFromDescription(string desc) {
-            ProfileType pType = ProfileType.none;
+            ProfileType pType = ProfileType.custom;
             bool breaker = false;
             string[] descArray = desc.Split(" ");
             ProfileType[] types = (ProfileType[])Enum.GetValues(typeof(ProfileType));
@@ -155,81 +155,81 @@ namespace Solidworks_Cutlist_Generator.Model {
                         foreach (string str in descArray) {
                             if (str.ToLower() == "angle") {
                                 pType = ProfileType.angle;
+                                breaker = true;
                             }
                         }
-                        breaker = true;
                         break;
                     case ProfileType.channel:
                         foreach (string str in descArray) {
                             if (str.ToLower() == "channel") {
                                 pType = ProfileType.channel;
+                                breaker = true;
                             }
                         }
-                        breaker = true;
                         break;
                     case ProfileType.flat_bar:
                         foreach (string str in descArray) {
                             if (str.ToLower() == "flat" || str.ToLower() == "fb") {
                                 pType = ProfileType.flat_bar;
+                                breaker = true;
                             }
                         }
-                        breaker = true;
                         break;
                     case ProfileType.solid_square:
                         foreach (string str in descArray) {
                             if (str.ToLower() == "square") {
                                 isSquare = true;
                             }
-                            if (str.ToLower() == "solid") {
+                            if (str.ToLower() == "solid" || str.ToLower() == "sld") {
                                 isSolid = true;
                             }
                         }
                         if (isSquare && isSolid) {
                             pType = ProfileType.solid_square;
+                            breaker = true;
                         }
-                        breaker = true;
                         break;
                     case ProfileType.solid_rectangular:
                         foreach (string str in descArray) {
                             if (str.ToLower().Contains("rect")) {
                                 isRect = true;
                             }
-                            if (str.ToLower() == "solid") {
+                            if (str.ToLower() == "solid" || str.ToLower() == "sld") {
                                 isSolid = true;
                             }
                         }
                         if (isRect && isSolid) {
                             pType = ProfileType.solid_rectangular;
+                            breaker = true;
                         }
-                        breaker = true;
                         break;
                     case ProfileType.solid_round:
                         foreach (string str in descArray) {
                             if (str.ToLower() == "round") {
                                 isRound = true;
                             }
-                            if (str.ToLower() == "solid") {
+                            if (str.ToLower() == "solid" || str.ToLower() == "sld") {
                                 isSolid = true;
                             }
                         }
                         if (isRound && isSolid) {
                             pType = ProfileType.solid_round;
+                            breaker = true;
                         }
-                        breaker = true;
                         break;
                     case ProfileType.solid_triangular:
                         foreach (string str in descArray) {
                             if (str.ToLower().Contains("triang")) {
                                 isTri = true;
                             }
-                            if (str.ToLower() == "solid") {
+                            if (str.ToLower() == "solid" || str.ToLower() == "sld") {
                                 isSolid = true;
                             }
                         }
                         if (isTri && isSolid) {
                             pType = ProfileType.solid_triangular;
+                            breaker = true;
                         }
-                        breaker = true;
                         break;
                     case ProfileType.square_tube:
                         foreach (string str in descArray) {
@@ -242,8 +242,8 @@ namespace Solidworks_Cutlist_Generator.Model {
                         }
                         if (isSquare && isTube) {
                             pType = ProfileType.square_tube;
+                            breaker = true;
                         }
-                        breaker = true;
                         break;
                     case ProfileType.rectangular_tube:
                         foreach (string str in descArray) {
@@ -254,10 +254,10 @@ namespace Solidworks_Cutlist_Generator.Model {
                                 isTube = true;
                             }
                         }
-                        if (isRect && isSolid) {
-                            pType = ProfileType.solid_square;
+                        if (isRect && isTube) {
+                            pType = ProfileType.rectangular_tube;
+                            breaker = true;
                         }
-                        breaker = true;
                         break;
                     case ProfileType.round_tube:
                         foreach (string str in descArray) {
@@ -270,18 +270,18 @@ namespace Solidworks_Cutlist_Generator.Model {
                         }
                         if ((isRound || (!isSquare && !isRect)) && isTube) {
                             pType = ProfileType.round_tube;
+                            breaker = true;
                         }
-                        breaker = true;
                         break;
                     case ProfileType.pipe:
                         foreach (string str in descArray) {
-                            if (str.ToLower() == "rect") {
+                            if (str.ToLower() == "pipe") {
                                 pType = ProfileType.pipe;
                             }
                         }
                         break;
                     default:
-                        pType = ProfileType.solid_rectangular;
+                        pType = ProfileType.custom;
                         break;
                 }
             }
