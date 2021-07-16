@@ -22,6 +22,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Solidworks_Cutlist_Generator.Model;
 using Solidworks_Cutlist_Generator.BusinessLogic;
+using System.Collections.ObjectModel;
 
 namespace Solidworks_Cutlist_Generator {
     /// <summary>
@@ -30,11 +31,12 @@ namespace Solidworks_Cutlist_Generator {
     public partial class MainWindow : Window {
 
 
-        List<CutItem> CutList = new List<CutItem>();
+        ObservableCollection<CutItem> CutList = new ObservableCollection<CutItem>();
         CutListMaker CutListMaker;
 
         public MainWindow() {
             InitializeComponent();
+            cutListDataGrid.ItemsSource = CutList;
             CutListMaker = new CutListMaker(CutList, filePathTextBox);
             using (var ctx = new CutListGeneratorContext()) {
                 //var angle = StockItem.CreateStockItem(description: "angle");
@@ -48,6 +50,7 @@ namespace Solidworks_Cutlist_Generator {
 
         private void generateButton_Click(object sender, RoutedEventArgs e) {
             CutListMaker.Generate();
+            cutListDataGrid.Columns[0].Visibility = Visibility.Collapsed;
         }
 
         private void sourceBrowseButton_Click(object sender, RoutedEventArgs e) {

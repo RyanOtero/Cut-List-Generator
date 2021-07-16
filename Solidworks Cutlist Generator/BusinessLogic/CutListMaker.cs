@@ -3,6 +3,7 @@ using SolidWorks.Interop.swconst;
 using Solidworks_Cutlist_Generator.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -17,13 +18,11 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
         int filewarning = 0;
         bool inBodyFolder = false;
 
-        Dictionary<string, int> modelDict = new Dictionary<string, int>();
-
-        List<CutItem> CutList { get; }
+        ObservableCollection<CutItem> CutList { get; }
         TextBox FilePathTextBox { get; set; }
 
 
-        public CutListMaker(List<CutItem> rawList, TextBox filePathTextBox) {
+        public CutListMaker(ObservableCollection<CutItem> rawList, TextBox filePathTextBox) {
             CutList = rawList;
             FilePathTextBox = filePathTextBox;
 
@@ -38,7 +37,6 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
             bool isPart;
             bool isAssembly;
 
-            modelDict.Clear();
             inBodyFolder = false;
 
 
@@ -145,10 +143,10 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
                                 float.TryParse(CustomPropResolvedVal, out length);
                                 break;
                             case "angle1":
-                                float.TryParse(CustomPropResolvedVal, out angle1);
+                                float.TryParse(CustomPropResolvedVal.Substring(0,CustomPropResolvedVal.Length - 1), out angle1);
                                 break;
                             case "angle2":
-                                float.TryParse(CustomPropResolvedVal, out angle2);
+                                float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle2);
                                 break;
                             case "material":
                                 material = CustomPropResolvedVal;
@@ -242,16 +240,8 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
 
                 ModelDoc2 model = swApp.OpenDoc6(swComp.GetPathName(), (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning); ;
                 Feature feature = (Feature)model.FirstFeature();
-                if (modelDict.ContainsKey(swComp.GetPathName())) {
-                    modelDict[swComp.GetPathName()]++;
-                    Debug.Print(swComp.Name.Substring(0, swComp.Name.IndexOf("-")) + ": " + modelDict[swComp.GetPathName()]);
-                } else {
-                    modelDict[swComp.GetPathName()] = 1;
-                    Debug.Print("\n*********\n" + swComp.Name.Substring(0, swComp.Name.IndexOf("-")) + "\n*********\n");
-                    action(feature, true, "Root Feature");
-                }
+                action(feature, true, "Root Feature");
             }
-
         }
 
         public void TraverseAssembly(AssemblyDoc swAssy) {

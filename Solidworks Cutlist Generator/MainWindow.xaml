@@ -5,23 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Solidworks_Cutlist_Generator"
         mc:Ignorable="d"
-        Title="Cutlist Generator" Height="450" Width="800" WindowStyle="SingleBorderWindow" OpacityMask="Black" Background="#FF566281" BorderBrush="Black">
+        Title="Cutlist Generator" Height="450" Width="800" WindowStyle="SingleBorderWindow" OpacityMask="Black" Background="#FF566281" BorderBrush="Black" SizeToContent="Manual">
     <TabControl Background="#FF9EAED6">
         <TabItem Header="Cutlist" Background="#FF9EAED6" Margin="0,0,0,0" Height="22" VerticalAlignment="Top" Width="55">
             <Grid Background="#FF9EAED6">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="29*"/>
-                    <ColumnDefinition Width="12*"/>
-                    <ColumnDefinition Width="356*"/>
+                    <ColumnDefinition Width="58*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="711*"/>
                 </Grid.ColumnDefinitions>
                 <TextBox x:Name="filePathTextBox" HorizontalAlignment="Left" Margin="8,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="534" VerticalContentAlignment="Center" Height="21" Text="C:\Users\Ryan\Desktop\Drawing\Wooden Structures\Pergola - 16ft x 11ft.SLDPRT" Grid.Column="2"/>
-                <Button x:Name="sourceBrowseButton" Content="Browse" HorizontalAlignment="Left" Margin="547,15,0,0" VerticalAlignment="Top" Click="sourceBrowseButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Grid.Column="2"/>
+                <Button x:Name="sourceBrowseButton" Content="Browse" HorizontalAlignment="Left" Margin="547,15,0,0" VerticalAlignment="Top" Click="sourceBrowseButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Grid.Column="2" Height="21" Width="46"/>
                 <Label x:Name="filePathLabel" Content="File Path:&#xA;" HorizontalAlignment="Left" Margin="30,16,0,0" VerticalAlignment="Top" Width="55" Padding="3,0,3,3" Height="20" VerticalContentAlignment="Center" Grid.ColumnSpan="3"/>
                 <TextBox x:Name="outputPathTextBox" HorizontalAlignment="Left" Margin="8,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="534" Height="21" Grid.Column="2"/>
-                <Button x:Name="outputBrowseButton" Content="Browse" HorizontalAlignment="Left" Margin="547,47,0,0" VerticalAlignment="Top" Height="21" Padding="3,0,3,3" Click="outputBrowseButton_Click" Grid.Column="2"/>
+                <Button x:Name="outputBrowseButton" Content="Browse" HorizontalAlignment="Left" Margin="547,47,0,0" VerticalAlignment="Top" Height="21" Padding="3,0,3,3" Click="outputBrowseButton_Click" Grid.Column="2" Width="46"/>
                 <Label x:Name="outputPathLlabel" Content="Output Path:" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top" Height="20" Width="75" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left" Padding="3,0,3,3" Grid.ColumnSpan="3"/>
-                <Button x:Name="generateButton" Content="Generate" HorizontalAlignment="Left" Margin="628,15,0,0" VerticalAlignment="Top" Click="generateButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Grid.Column="2"/>
-                <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="628,47,0,0" VerticalAlignment="Top" Click="generateButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Width="56" Grid.Column="2"/>
+                <Button x:Name="generateButton" Content="Generate" HorizontalAlignment="Left" Margin="628,15,0,0" VerticalAlignment="Top" Click="generateButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Grid.Column="2" Height="21" Width="56"/>
+                <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="628,47,0,0" VerticalAlignment="Top" Click="generateButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Width="56" Grid.Column="2" Height="21"/>
+                <DataGrid x:Name="cutListDataGrid" HorizontalAlignment="Left" Height="296" Margin="20,87,0,0" VerticalAlignment="Top" Width="655" Grid.ColumnSpan="3" >
+                </DataGrid>
             </Grid>
         </TabItem>
         <TabItem Header="Vendors" Background="#FF9EAED6" Margin="0,0,0,0" Width="55" Height="22"/>
