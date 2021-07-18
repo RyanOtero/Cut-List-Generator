@@ -17,31 +17,24 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
         int fileerror = 0;
         int filewarning = 0;
         bool inBodyFolder = false;
+        public ObservableCollection<CutItem> CutList { get; set; }
 
-        ObservableCollection<CutItem> CutList { get; }
-        TextBox FilePathTextBox { get; set; }
-
-
-        public CutListMaker(ObservableCollection<CutItem> rawList, TextBox filePathTextBox) {
-            CutList = rawList;
-            FilePathTextBox = filePathTextBox;
-
+        public CutListMaker() {
+            CutList = new ObservableCollection<CutItem>();
         }
-        public List<CutItem> SortCuts() {
-            return new List<CutItem>();
+        internal void NewCutList() {
+            CutList = new ObservableCollection<CutItem>();
         }
 
-
-        #region Business Logic
-        public void Generate() {
+        public ObservableCollection<CutItem> Generate(string filePath, bool isDetailed) {
             bool isPart;
             bool isAssembly;
 
             inBodyFolder = false;
 
 
-            isPart = FilePathTextBox.Text.ToLower().Contains(".sldprt");
-            isAssembly = FilePathTextBox.Text.ToLower().Contains(".sldasm");
+            isPart = filePath.ToLower().Contains(".sldprt");
+            isAssembly = filePath.ToLower().Contains(".sldasm");
 
             if (!isPart && !isAssembly) {
                 string messageBoxText = "You must select an assembly or part file!";
@@ -51,18 +44,18 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
                 MessageBoxResult result;
 
                 result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-                return;
+                return null;
             }
             var progId = "SldWorks.Application";
-            var progType = System.Type.GetTypeFromProgID(progId);
+            var progType = Type.GetTypeFromProgID(progId);
             swApp = new SldWorks();
             swApp.Visible = true;
             // increase performance 
             ModelDoc2 doc;
 
             doc = isAssembly ?
-                swApp.OpenDoc6(FilePathTextBox.Text, (int)swDocumentTypes_e.swDocASSEMBLY, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning) :
-                swApp.OpenDoc6(FilePathTextBox.Text, (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning);
+                swApp.OpenDoc6(filePath, (int)swDocumentTypes_e.swDocASSEMBLY, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning) :
+                swApp.OpenDoc6(filePath, (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning);
 
             // Set the working directory to the document directory
             swApp.SetCurrentWorkingDirectory(doc.GetPathName().Substring(0, doc.GetPathName().LastIndexOf("\\")));
@@ -71,26 +64,12 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
             ModelDoc2 swModel;
             AssemblyDoc swAssy = default(AssemblyDoc);
             PartDoc swPart = default(PartDoc);
-            string fileName;
-            string tmpPath;
             swModel = swApp.ActiveDoc as ModelDoc2;
             if (isAssembly) {
                 swAssy = (AssemblyDoc)swModel;
             } else {
                 swPart = (PartDoc)swModel;
             }
-            tmpPath = swModel.GetPathName();
-            string[] tok;
-            tok = tmpPath.Split('\\');
-
-            // reconstruct the assembly path without the file name
-            int i;
-            string virAssPath = "";
-            for (i = 0; i < tok.Length - 1; i++) {
-                virAssPath = virAssPath + tok[i] + "\\";
-            }
-            fileName = tok[tok.Length - 1] + "_Cutlist.XXX";
-            Debug.Print(fileName);
 
             if (isAssembly) {
                 TraverseAssembly(swAssy);
@@ -100,29 +79,129 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
             while (swApp.ActiveDoc != null) {
                 swApp.CloseDoc(((ModelDoc2)swApp.ActiveDoc).GetPathName());
             }
+            if (!isDetailed) {
+                Consolidate(CutList);
+                return CutList;
+            }
+            SortCuts();
+            return CutList;
+
         }
 
-        public void GetFeatureCustomProps(Feature thisFeat) {
+        public void SortCuts() {
+            ObservableCollection<CutItem> temp = new ObservableCollection<CutItem>();
+            StockItem sType = null;
+            float leftOnStick = 0;
+            int stickNum = 1;
+
+            foreach (CutItem item in CutList) {
+                for (int i = 0; i < item.Qty; i++) {
+                    temp.Add(item.Clone());
+                }
+            }
+            CutList = temp;
+            temp = new ObservableCollection<CutItem>();
+            CutList.Sort();
+            CutList.Reverse();
+            int count = CutList.Count;
+
+            for (int i = count - 1; i > -1; i--) {
+                if (i == count - 1) {
+                    sType = CutList[i].StockType;
+                    CutList[i].StickNumber = stickNum;
+                    leftOnStick = CutList[i].StockType.StockLengthInInches - CutList[i].Length;
+                    temp.Add(CutList[i]);
+                    CutList.RemoveAt(i);
+                } else if (CutList[i].StockType == sType) {
+                    if (leftOnStick >= CutList[i].Length) {
+                        leftOnStick -= CutList[i].Length;
+                        CutList[i].StickNumber = stickNum;
+                        temp.Add(CutList[i]);
+                        CutList.RemoveAt(i);
+                    } else {
+                        bool isBroken = false;
+                        bool areMoreOfStockType = false;
+                        for (int j = i - 1; j > -1; j--) {
+                            if (CutList[j].StockType == sType) {
+                                areMoreOfStockType = true;
+                                if (leftOnStick >= CutList[j].Length) {
+                                    leftOnStick -= CutList[j].Length;
+                                    CutList[j].StickNumber = stickNum;
+                                    temp.Add(CutList[j]);
+                                    CutList.RemoveAt(j);
+                                    isBroken = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (!isBroken && areMoreOfStockType) {
+                            leftOnStick = CutList[i].StockType.StockLengthInInches;
+                            stickNum++;
+                            i++;
+                            continue;
+                        } else if (isBroken) {
+                            i++;
+                            continue;
+                        } else {
+                            stickNum++;
+                            CutList[i].StickNumber = stickNum;
+                            temp.Add(CutList[i]);
+                            CutList.RemoveAt(i);
+                            stickNum = 1;
+                            if (i > 0) {
+                                leftOnStick = CutList[i - 1].StockType.StockLengthInInches;
+                                sType = CutList[i - 1].StockType;
+                            }
+                            continue;
+                        }
+                    }
+                } else {
+                    sType = CutList[i].StockType;
+                    stickNum = 1;
+                    leftOnStick = CutList[i].StockType.StockLengthInInches - CutList[i].Length;
+                    CutList[i].StickNumber = stickNum;
+                    temp.Add(CutList[i]);
+                    CutList.RemoveAt(i);
+                }
+            }
+            Consolidate(temp);
+            CutList = temp;
+        }
+
+        public void Consolidate(ObservableCollection<CutItem> cList) {
+            for (int i = cList.Count - 1; i > -1; i--) {
+                for (int j = i - 1; j > -1; j--) {
+                    if (cList[i].Description == cList[j].Description &&
+                        cList[i].Length == cList[j].Length &&
+                        cList[i].Angle1 == cList[j].Angle1 &&
+                        cList[i].Angle2 == cList[j].Angle2 &&
+                        cList[i].StickNumber == cList[j].StickNumber) {
+                        cList[j].Qty += cList[i].Qty;
+                        cList.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void AddCutItem(Feature thisFeat) {
             CustomPropertyManager CustomPropMgr = default(CustomPropertyManager);
             CustomPropMgr = (CustomPropertyManager)thisFeat.CustomPropertyManager;
             string[] vCustomPropNames;
             vCustomPropNames = (string[])CustomPropMgr.GetNames();
             if ((vCustomPropNames != null)) {
-                Debug.Print("\nCut-list custom properties:");
                 int i = 0;
                 int qty = 0;
                 float length = 0;
                 float angle1 = 0;
                 float angle2 = 0;
+                string angleDirection = "";
+                string angleRotation = "";
                 string description = "";
                 string material = "";
                 bool isNew = false;
                 StockItem sItem = null;
 
-
-
-                //ctx.StockItems.Add(angle);
-                //ctx.SaveChanges();
                 using (var ctx = new CutListGeneratorContext()) {
                     for (i = 0; i <= (vCustomPropNames.Length - 1); i++) {
                         string CustomPropName = (string)vCustomPropNames[i];
@@ -143,7 +222,7 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
                                 float.TryParse(CustomPropResolvedVal, out length);
                                 break;
                             case "angle1":
-                                float.TryParse(CustomPropResolvedVal.Substring(0,CustomPropResolvedVal.Length - 1), out angle1);
+                                float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle1);
                                 break;
                             case "angle2":
                                 float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle2);
@@ -151,11 +230,15 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
                             case "material":
                                 material = CustomPropResolvedVal;
                                 break;
+                            case "angle direction":
+                                angleDirection = CustomPropResolvedVal;
+                                break;
+                            case "angle rotation":
+                                angleRotation = CustomPropResolvedVal;
+                                break;
                             default:
                                 break;
                         }
-                        Debug.Print("Name: " + CustomPropName);
-                        Debug.Print("Resolved value: " + CustomPropResolvedVal);
                     }
                     if (isNew) {
                         sItem = new StockItem(description: description,
@@ -166,19 +249,13 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
                     }
                     isNew = false;
 
-                    CutItem cItem = new CutItem(sItem, qty, length, angle1, angle2);
+                    CutItem cItem = new CutItem(sItem, qty, length, angle1, angle2, angleDirection, angleRotation);
                     CutList.Add(cItem);
                 }
-
-
-                //Check if StockItem is already in db, if not create.
-                //add cuts to temporary list. in db?
-
             }
         }
 
-        public void FindCutlist(Feature thisFeat, string ParentName) {
-
+        public ObservableCollection<CutItem> FindCutlist(Feature thisFeat, string ParentName) {
             int BodyCount = 0;
 
             string FeatType = null;
@@ -192,13 +269,13 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
 
             //Only consider the CutListFolders that are under SolidBodyFolder
             if ((inBodyFolder == false) & (FeatType == "CutListFolder")) {
-                return;
+                return null;
             }
 
             //Only consider the SubWeldFolder that are under the SolidBodyFolder
             if ((inBodyFolder == false) & (FeatType == "SubWeldFolder")) {
                 //Skip the second occurrence of the SubWeldFolders during the feature traversal
-                return;
+                return null;
             }
 
             bool IsBodyFolder;
@@ -215,15 +292,16 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
                 if ((FeatType == "CutListFolder") & (BodyCount < 1)) {
                     //When BodyCount = 0, this cut list folder is not displayed in the
                     //FeatureManager design tree, so skip it
-                    return;
+                    return null;
                 }
             }
 
             if (FeatType == "CutListFolder") {
                 if (BodyCount > 0) {
-                    GetFeatureCustomProps(thisFeat);
+                    AddCutItem(thisFeat);
                 }
             }
+            return null;
         }
 
         public void TraverseComponent(Component2 swComp, Action<Feature, bool, string> action) {
@@ -255,13 +333,19 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
                 Feature feat = (Feature)model.FirstFeature();
                 TraverseComponent(swChildComp, TraverseFeatures);
             }
+
         }
 
         public void TraverseFeatures(Feature thisFeat, bool isTopLevel, string ParentName) {
             Feature curFeat = default(Feature);
             curFeat = thisFeat;
             while ((curFeat != null)) {
-                FindCutlist(curFeat, ParentName);
+                ObservableCollection<CutItem> temp = FindCutlist(curFeat, ParentName);
+                if (temp != null) {
+                    foreach (CutItem item in temp) {
+                        CutList.Add(item);
+                    }
+                }
                 Feature subfeat = default(Feature);
                 subfeat = (Feature)curFeat.GetFirstSubFeature();
                 while ((subfeat != null)) {
@@ -279,10 +363,7 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
                     nextFeat = null;
                 }
                 curFeat = (Feature)nextFeat;
-                nextFeat = null;
             }
         }
-        #endregion
-
     }
 }

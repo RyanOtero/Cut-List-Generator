@@ -18,13 +18,19 @@ namespace Solidworks_Cutlist_Generator.Model {
         public int StockLength { get; set; }
         public string Description { get; set; }
         public Vendor Vendor { get; set; }
-        public decimal CostPerLength { get { return CostPerFoot * StockLength; } }
+        public decimal CostPerLength { get { return CostPerFoot * (decimal)StockLengthInInches; } }
+
+        public int StockLengthInInches {
+            get {
+                return StockLength * 12;
+            }
+        }
 
         public StockItem() { }
 
         public StockItem(Vendor vendor = null, MaterialType materialType = MaterialType.steel,
             ProfileType profType = ProfileType.square_tube, string series = "", decimal costPerFoot = 0m,
-            int stockLength = 24, string description = "") {
+            int stockLength = 240, string description = "") {
             MatType = materialType;
             ProfType = profType;
             Series = series;
