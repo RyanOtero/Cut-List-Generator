@@ -22,13 +22,12 @@ namespace Solidworks_Cutlist_Generator {
         Excel.Workbook workBook;
         Excel.Worksheet workSheet;
         Microsoft.Office.Interop.Excel.Range cellRange;
-        ObservableCollection<CutItem> CutList = new ObservableCollection<CutItem>();
         CutListMaker CutListMaker;
 
         public MainWindow() {
             InitializeComponent();
             CutListMaker = new CutListMaker();
-            cutListDataGrid.ItemsSource = CutList;
+            cutListDataGrid.ItemsSource = CutListMaker.CutList;
             //using (var ctx = new CutListGeneratorContext()) {
             //    var angle = StockItem.CreateStockItem(description: "angle");
 
@@ -42,11 +41,9 @@ namespace Solidworks_Cutlist_Generator {
         private async void generateButton_Click(object sender, RoutedEventArgs e) {
             string filePath = filePathTextBox.Text;
             bool isDetailed = (bool)detailedCutListCheckBox.IsChecked;
-            CutList = null;
-            var result = Task.Run(() => CutListMaker.Generate(filePath, isDetailed));
-            CutList = await result;
             cutListDataGrid.ItemsSource = null;
-            cutListDataGrid.ItemsSource = CutList;
+            var result = Task.Run(() => CutListMaker.Generate(filePath, isDetailed));
+            cutListDataGrid.ItemsSource = await result;
         }
 
         private void sourceBrowseButton_Click(object sender, RoutedEventArgs e) {
@@ -64,9 +61,9 @@ namespace Solidworks_Cutlist_Generator {
             if (saveFileDialog.ShowDialog() == true) {
                 filePath = saveFileDialog.FileName;
                 if (filePath.Contains(".xlsx")) {
-                    GenerateExcel(ToDataTable(CutList), filePath);
+                    GenerateExcel(ToDataTable(CutListMaker.CutList), filePath);
                 } else if (filePath.Contains(".csv")) {
-                    GenerateCSV(ToDataTable(CutList), filePath);
+                    GenerateCSV(ToDataTable(CutListMaker.CutList), filePath);
                 }
             }
         }
@@ -74,8 +71,7 @@ namespace Solidworks_Cutlist_Generator {
         private void clearButton_Click(object sender, RoutedEventArgs e) {
             cutListDataGrid.ItemsSource = null;
             CutListMaker.NewCutList();
-            CutList = new ObservableCollection<CutItem>();
-            cutListDataGrid.ItemsSource = CutList;
+            cutListDataGrid.ItemsSource = CutListMaker.CutList;
         }
 
         #endregion

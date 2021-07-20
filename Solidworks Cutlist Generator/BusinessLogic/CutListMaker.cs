@@ -22,7 +22,7 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
         public CutListMaker() {
             CutList = new ObservableCollection<CutItem>();
         }
-        internal void NewCutList() {
+        public void NewCutList() {
             CutList = new ObservableCollection<CutItem>();
         }
 
@@ -31,7 +31,7 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
             bool isAssembly;
 
             inBodyFolder = false;
-
+            NewCutList();
 
             isPart = filePath.ToLower().Contains(".sldprt");
             isAssembly = filePath.ToLower().Contains(".sldasm");
@@ -329,9 +329,11 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
             vChildComp = (object[])swAssy.GetComponents(false);
             for (int i = 0; i < vChildComp.Length; i++) {
                 swChildComp = (Component2)vChildComp[i];
+                if (swChildComp.GetSuppression() == 2) {
                 ModelDoc2 model = (ModelDoc2)swChildComp.GetModelDoc2();
                 Feature feat = (Feature)model.FirstFeature();
                 TraverseComponent(swChildComp, TraverseFeatures);
+                }
             }
 
         }

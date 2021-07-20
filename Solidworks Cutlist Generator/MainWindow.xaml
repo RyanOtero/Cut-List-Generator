@@ -16,7 +16,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="filePathTextBox" Margin="74,15,86,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="21" Text="C:\Users\Ryan\Desktop\Drawing\Wooden Structures\Pergola - 16ft x 11ft.SLDPRT"/>
+                <TextBox x:Name="filePathTextBox" Margin="74,15,86,0" TextWrapping="NoWrap" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="21" Text="C:\Users\Ryan\Desktop\Drawing\Wooden Structures\Pergola - 16ft x 11ft.SLDPRT"/>
                 <Button x:Name="sourceBrowseButton" Content="Browse" HorizontalAlignment="Right" Margin="0,15,20,0" VerticalAlignment="Top" Click="sourceBrowseButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Height="21" Width="56"/>
                 <Label x:Name="filePathLabel" Content="File Path:&#xA;" HorizontalAlignment="Left" Margin="18,16,0,0" VerticalAlignment="Top" Width="55" Padding="3,0,3,3" Height="20" VerticalContentAlignment="Center"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Width="300" Height="25" VerticalAlignment="Top" Margin="0,45,20,0" FlowDirection="RightToLeft">
