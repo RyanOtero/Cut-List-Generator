@@ -58,6 +58,7 @@ namespace Solidworks_Cutlist_Generator {
 
         private void sourceBrowseButton_Click(object sender, RoutedEventArgs e) {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.CheckFileExists = true;
             if (openFileDialog.ShowDialog() == true)
                 filePathTextBox.Text = openFileDialog.FileName;
         }

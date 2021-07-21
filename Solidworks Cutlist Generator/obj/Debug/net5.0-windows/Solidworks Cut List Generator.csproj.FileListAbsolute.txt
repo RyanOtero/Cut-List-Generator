@@ -99,3 +99,4 @@ C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\D
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator.pdb
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator.genruntimeconfig.cache
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\App.baml
+C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\App.baml

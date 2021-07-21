@@ -60,7 +60,7 @@ namespace Solidworks_Cutlist_Generator.Model {
 
         public StockItem(Vendor vendor = null, MaterialType materialType = MaterialType.steel,
             ProfileType profType = ProfileType.square_tube, string series = "", decimal costPerFoot = 0m,
-            int stockLength = 240, string internalDescription = "", string externalDescription = "") {
+            int stockLength = 24, string internalDescription = "", string externalDescription = "") {
             MatType = materialType;
             ProfType = profType;
             CostPerFoot = costPerFoot;

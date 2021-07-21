@@ -60,15 +60,15 @@
         <TabItem Header="Stock Types" HorizontalAlignment="Stretch" Height="22" RenderTransformOrigin="0.527,0.547" Margin="0,0,0,0" Padding="10,1,10,1">
             <DataGrid x:Name="stockTypesDataGrid" AutoGenerateColumns="False" Margin="20,92,20,20" Grid.RowSpan="2">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Path=ID}" Header="ID" Width=".5*"/>
-                    <DataGridTextColumn Binding="{Binding Path=VendorID}" Header="Vendor ID" Width="1.5*"/>
-                    <DataGridTextColumn Binding="{Binding Path=MatTypeString}" Header="Material Type" Width="2*"/>
-                    <DataGridTextColumn Binding="{Binding Path=ProfTypeString}" Header="Profile Type" Width="2*"/>
-                    <DataGridTextColumn Binding="{Binding Path=CostPerFootString}" Header="Cost/FT" Width="1.25*"/>
-                    <DataGridTextColumn Binding="{Binding Path=CostPerLengthString}" Header="Cost/Length" Width="1.75*"/>
-                    <DataGridTextColumn Binding="{Binding Path=StockLength}" Header="Stock Length" Width="2*"/>
-                    <DataGridTextColumn Binding="{Binding Path=InternalDescription}" Header="Internal Description" Width="2*"/>
-                    <DataGridTextColumn Binding="{Binding Path=ExternalDescription}" Header="External Description" Width="2*"/>
+                    <DataGridTextColumn Binding="{Binding Path=ID}" Header="ID" Width=".4*"/>
+                    <DataGridTextColumn Binding="{Binding Path=VendorIdentifier}" Header="Vendor ID" Width=".9*"/>
+                    <DataGridTextColumn Binding="{Binding Path=MatTypeString}" Header="Material Type" Width="1.15*"/>
+                    <DataGridTextColumn Binding="{Binding Path=ProfTypeString}" Header="Profile Type" Width="1.55*"/>
+                    <DataGridTextColumn Binding="{Binding Path=CostPerFootString}" Header="Cost/FT" Width=".75*"/>
+                    <DataGridTextColumn Binding="{Binding Path=CostPerLengthString}" Header="Cost/Length" Width="1*"/>
+                    <DataGridTextColumn Binding="{Binding Path=StockLength}" Header="Stock Length" Width="1.1*"/>
+                    <DataGridTextColumn Binding="{Binding Path=InternalDescription}" Header="Internal Description" Width="3*"/>
+                    <DataGridTextColumn Binding="{Binding Path=ExternalDescription}" Header="External Description" Width="3*"/>
 
                 </DataGrid.Columns>
             </DataGrid>
