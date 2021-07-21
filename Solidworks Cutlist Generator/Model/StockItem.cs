@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,11 +14,11 @@ namespace Solidworks_Cutlist_Generator.Model {
         public int ID { get; set; }
         public MaterialType MatType { get; set; }
         public ProfileType ProfType { get; set; }
-        public string Series { get; set; }
-        public decimal CostPerFoot { get; set; }
         public int StockLength { get; set; }
-        public string Description { get; set; }
+        public string InternalDescription { get; set; }
+        public string ExternalDescription { get; set; }
         public Vendor Vendor { get; set; }
+        public decimal CostPerFoot { get; set; }
         public decimal CostPerLength { get { return CostPerFoot * (decimal)StockLengthInInches; } }
 
         public int StockLengthInInches {
@@ -25,20 +26,49 @@ namespace Solidworks_Cutlist_Generator.Model {
                 return StockLength * 12;
             }
         }
+        public int VendorIdentifier {
+            get {
+                return Vendor.ID;
+            }
+        }
+
+        public string MatTypeString {
+            get {
+                return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(MatType.ToString().Replace("_", " "));
+            }
+        }
+        
+        public string ProfTypeString {
+            get {
+                return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(ProfType.ToString().Replace("_", " "));
+            }
+        }
+
+        public string CostPerFootString {
+            get {
+                return string.Format("{0:c}", CostPerFoot);
+            }
+        }
+
+        public string CostPerLengthString {
+            get {
+                return string.Format("{0:c}", CostPerLength);
+            }
+        }
 
         public StockItem() { }
 
         public StockItem(Vendor vendor = null, MaterialType materialType = MaterialType.steel,
             ProfileType profType = ProfileType.square_tube, string series = "", decimal costPerFoot = 0m,
-            int stockLength = 240, string description = "") {
+            int stockLength = 240, string internalDescription = "", string externalDescription = "") {
             MatType = materialType;
             ProfType = profType;
-            Series = series;
             CostPerFoot = costPerFoot;
             StockLength = stockLength;
-            Description = description;
+            InternalDescription = internalDescription;
+            ExternalDescription = externalDescription;
             if (vendor == null) {
-                Vendor = new Vendor();
+                Vendor = Vendor.NullVendor();
             } else {
                 Vendor = vendor;
             }

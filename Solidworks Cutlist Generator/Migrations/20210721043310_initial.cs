@@ -15,7 +15,8 @@ namespace Solidworks_Cutlist_Generator.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     VendorName = table.Column<string>(type: "text", nullable: true),
                     PhoneNumber = table.Column<string>(type: "text", nullable: true),
-                    ContactName = table.Column<string>(type: "text", nullable: true)
+                    ContactName = table.Column<string>(type: "text", nullable: true),
+                    ContactEmail = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -30,11 +31,11 @@ namespace Solidworks_Cutlist_Generator.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     MatType = table.Column<int>(type: "int", nullable: false),
                     ProfType = table.Column<int>(type: "int", nullable: false),
-                    Series = table.Column<string>(type: "text", nullable: true),
-                    CostPerFoot = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
                     StockLength = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    VendorID = table.Column<int>(type: "int", nullable: true)
+                    InternalDescription = table.Column<string>(type: "text", nullable: true),
+                    ExternalDescription = table.Column<string>(type: "text", nullable: true),
+                    VendorID = table.Column<int>(type: "int", nullable: true),
+                    CostPerFoot = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
                 },
                 constraints: table =>
                 {

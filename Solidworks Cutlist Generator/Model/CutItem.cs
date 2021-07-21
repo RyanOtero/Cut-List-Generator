@@ -7,7 +7,7 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
         public StockItem StockType { get; }
         public int Qty { get; set; }
         public string Description {
-            get { return StockType.Description; }
+            get { return StockType.InternalDescription; }
         }
         public float Length { get; set; }
         public float Angle1 { get; set; }

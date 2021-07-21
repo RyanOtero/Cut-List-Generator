@@ -9,8 +9,8 @@ using Solidworks_Cutlist_Generator.Model;
 namespace Solidworks_Cutlist_Generator.Migrations
 {
     [DbContext(typeof(CutListGeneratorContext))]
-    [Migration("20210717053236_AddAngleDescriptors")]
-    partial class AddAngleDescriptors
+    [Migration("20210721043310_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,10 @@ namespace Solidworks_Cutlist_Generator.Migrations
                     b.Property<decimal>("CostPerFoot")
                         .HasColumnType("decimal(18, 2)");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("ExternalDescription")
+                        .HasColumnType("text");
+
+                    b.Property<string>("InternalDescription")
                         .HasColumnType("text");
 
                     b.Property<int>("MatType")
@@ -36,9 +39,6 @@ namespace Solidworks_Cutlist_Generator.Migrations
 
                     b.Property<int>("ProfType")
                         .HasColumnType("int");
-
-                    b.Property<string>("Series")
-                        .HasColumnType("text");
 
                     b.Property<int>("StockLength")
                         .HasColumnType("int");
@@ -58,6 +58,9 @@ namespace Solidworks_Cutlist_Generator.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("ContactEmail")
+                        .HasColumnType("text");
 
                     b.Property<string>("ContactName")
                         .HasColumnType("text");

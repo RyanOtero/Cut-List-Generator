@@ -28,12 +28,21 @@ namespace Solidworks_Cutlist_Generator {
             InitializeComponent();
             CutListMaker = new CutListMaker();
             cutListDataGrid.ItemsSource = CutListMaker.CutList;
-            //using (var ctx = new CutListGeneratorContext()) {
-            //    var angle = StockItem.CreateStockItem(description: "angle");
+            RefreshGrids();
+        }
 
-            //    ctx.StockItems.Add(angle);
-            //    ctx.SaveChanges();
-            //}
+        private void RefreshGrids() {
+            using (var ctx = new CutListGeneratorContext()) {
+                var sTypes = from i in ctx.StockItems
+                             select i;
+                stockTypesDataGrid.ItemsSource = sTypes.ToList();
+                var vendors = from i in ctx.Vendors
+                              select i;
+                vendorDataGrid.ItemsSource = vendors.ToList();
+                //    var angle = StockItem.CreateStockItem(description: "angle");
+                //    ctx.StockItems.Add(angle);
+                //    ctx.SaveChanges();
+            }
         }
 
         #region Button Clicks
@@ -44,6 +53,7 @@ namespace Solidworks_Cutlist_Generator {
             cutListDataGrid.ItemsSource = null;
             var result = Task.Run(() => CutListMaker.Generate(filePath, isDetailed));
             cutListDataGrid.ItemsSource = await result;
+            RefreshGrids();
         }
 
         private void sourceBrowseButton_Click(object sender, RoutedEventArgs e) {
@@ -76,6 +86,8 @@ namespace Solidworks_Cutlist_Generator {
 
         #endregion
 
+        #region Export Functionality
+        
         public static DataTable ToDataTable<T>(ObservableCollection<T> items) {
             var dataTable = new DataTable(typeof(T).Name);
 
@@ -160,5 +172,7 @@ namespace Solidworks_Cutlist_Generator {
                 }
             }
         }
+        
+        #endregion
     }
 }

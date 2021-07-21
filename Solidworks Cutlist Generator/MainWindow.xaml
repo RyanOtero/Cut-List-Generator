@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Solidworks_Cutlist_Generator"
         mc:Ignorable="d"
-        Title="Cutlist Generator" Height="420" Width="769" WindowStyle="SingleBorderWindow" OpacityMask="Black" Background="#FF566281" BorderBrush="Black" SizeToContent="Manual">
-    <TabControl Background="#FF9EAED6">
-        <TabItem Header="Cutlist" Background="#FF9EAED6" Margin="0,0,0,0" Height="22" VerticalAlignment="Top" Width="55">
-            <Grid Background="#FF9EAED6" Margin="0,0,10,0">
+        Title="Cutlist Generator" Height="583" Width="996" WindowStyle="SingleBorderWindow" SizeToContent="Manual">
+    <TabControl>
+        <TabItem Header="Cutlist" Margin="0,0,0,0" Height="22" VerticalAlignment="Stretch" Width="55" Padding="10,1,10,1">
+            <Grid Margin="0,0,10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="23*"/>
                     <RowDefinition Height="83*"/>
@@ -16,7 +16,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="filePathTextBox" Margin="74,15,86,0" TextWrapping="NoWrap" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="21" Text="C:\Users\Ryan\Desktop\Drawing\Wooden Structures\Pergola - 16ft x 11ft.SLDPRT"/>
+                <TextBox x:Name="filePathTextBox" Margin="74,15,86,0" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="21" Text="C:\Users\Ryan\Desktop\Drawing\Wooden Structures\Pergola - 16ft x 11ft.SLDPRT"/>
                 <Button x:Name="sourceBrowseButton" Content="Browse" HorizontalAlignment="Right" Margin="0,15,20,0" VerticalAlignment="Top" Click="sourceBrowseButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Height="21" Width="56"/>
                 <Label x:Name="filePathLabel" Content="File Path:&#xA;" HorizontalAlignment="Left" Margin="18,16,0,0" VerticalAlignment="Top" Width="55" Padding="3,0,3,3" Height="20" VerticalContentAlignment="Center"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Width="300" Height="25" VerticalAlignment="Top" Margin="0,45,20,0" FlowDirection="RightToLeft">
@@ -24,7 +24,7 @@
                     <Button x:Name="saveButton" Content="Save" VerticalAlignment="Center" Click="saveButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Height="21" HorizontalAlignment="Right" Width="56" Margin="0,0,10,0"/>
                     <Button x:Name="clearButton" Content="Clear" HorizontalAlignment="Right" VerticalAlignment="Center" Click="clearButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Width="56" Height="21" Margin="0,0,10,0"/>
                 </StackPanel>
-                <DataGrid x:Name="cutListDataGrid" AutoGenerateColumns="False" Margin="20,92,20,20" Grid.RowSpan="2">
+                <DataGrid x:Name="cutListDataGrid" AutoGenerateColumns="False" Margin="20,12,20,20" Grid.Row="1">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Path=Qty}" Header="Qty" Width="1.5*"/>
                         <DataGridTextColumn Binding="{Binding Path=Description}" Header="Description" Width="8.5*"/>
@@ -46,7 +46,32 @@
                 </CheckBox>
             </Grid>
         </TabItem>
-        <TabItem Header="Vendors" Background="#FF9EAED6" Margin="0,0,0,0" Width="55" Height="22"/>
-        <TabItem Header="Stock Types" HorizontalAlignment="Left" Width="73" Background="#FF9EAED6" Height="22"/>
+        <TabItem Header="Vendors" Margin="0,0,0,0" Height="22" Padding="10,1,10,1">
+            <DataGrid x:Name="vendorDataGrid" AutoGenerateColumns="False" Margin="20,92,20,20" Grid.RowSpan="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=ID}" Header="ID" Width=".5*"/>
+                    <DataGridTextColumn Binding="{Binding Path=VendorName}" Header="Vendor Name" Width="3*"/>
+                    <DataGridTextColumn Binding="{Binding Path=PhoneNumber}" Header="Phone Number" Width="2*"/>
+                    <DataGridTextColumn Binding="{Binding Path=ContactName}" Header="Contact Name" Width="2*"/>
+                    <DataGridTextColumn Binding="{Binding Path=ContactEmail}" Header="Contact Email" Width="2*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </TabItem>
+        <TabItem Header="Stock Types" HorizontalAlignment="Stretch" Height="22" RenderTransformOrigin="0.527,0.547" Margin="0,0,0,0" Padding="10,1,10,1">
+            <DataGrid x:Name="stockTypesDataGrid" AutoGenerateColumns="False" Margin="20,92,20,20" Grid.RowSpan="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=ID}" Header="ID" Width=".5*"/>
+                    <DataGridTextColumn Binding="{Binding Path=VendorID}" Header="Vendor ID" Width="1.5*"/>
+                    <DataGridTextColumn Binding="{Binding Path=MatTypeString}" Header="Material Type" Width="2*"/>
+                    <DataGridTextColumn Binding="{Binding Path=ProfTypeString}" Header="Profile Type" Width="2*"/>
+                    <DataGridTextColumn Binding="{Binding Path=CostPerFootString}" Header="Cost/FT" Width="1.25*"/>
+                    <DataGridTextColumn Binding="{Binding Path=CostPerLengthString}" Header="Cost/Length" Width="1.75*"/>
+                    <DataGridTextColumn Binding="{Binding Path=StockLength}" Header="Stock Length" Width="2*"/>
+                    <DataGridTextColumn Binding="{Binding Path=InternalDescription}" Header="Internal Description" Width="2*"/>
+                    <DataGridTextColumn Binding="{Binding Path=ExternalDescription}" Header="External Description" Width="2*"/>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </TabItem>
     </TabControl>
 </Window>

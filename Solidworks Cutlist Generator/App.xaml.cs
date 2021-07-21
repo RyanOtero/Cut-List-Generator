@@ -6,12 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Solidworks_Cutlist_Generator
-{
+namespace Solidworks_Cutlist_Generator {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
-    {
+    public partial class App : Application {
     }
 }

@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:Solidworks_Cutlist_Generator"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/PresentationFramework.Aero;V3.0.0.0;31bf3856ad364e35;component\themes/aero.normalcolor.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!--other resources go here-->
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using static Solidworks_Cutlist_Generator.BusinessLogic.Messenger;
+
 
 namespace Solidworks_Cutlist_Generator.BusinessLogic {
     class CutListMaker {
@@ -37,14 +39,7 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
             isAssembly = filePath.ToLower().Contains(".sldasm");
 
             if (!isPart && !isAssembly) {
-                string messageBoxText = "You must select an assembly or part file!";
-                string caption = "DERRRRP!";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBoxResult result;
-
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-                return null;
+                ErrorMessage("Invalid File", "Please select a part file or an assembly file.");
             }
             var progId = "SldWorks.Application";
             var progType = Type.GetTypeFromProgID(progId);
@@ -186,7 +181,7 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
 
         public void AddCutItem(Feature thisFeat) {
             CustomPropertyManager CustomPropMgr = default(CustomPropertyManager);
-            CustomPropMgr = (CustomPropertyManager)thisFeat.CustomPropertyManager;
+            CustomPropMgr = thisFeat.CustomPropertyManager;
             string[] vCustomPropNames;
             vCustomPropNames = (string[])CustomPropMgr.GetNames();
             if ((vCustomPropNames != null)) {
@@ -203,54 +198,60 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
                 StockItem sItem = null;
 
                 using (var ctx = new CutListGeneratorContext()) {
-                    for (i = 0; i <= (vCustomPropNames.Length - 1); i++) {
-                        string CustomPropName = (string)vCustomPropNames[i];
-                        string CustomPropResolvedVal;
-                        CustomPropMgr.Get2(CustomPropName, out _, out CustomPropResolvedVal);
-                        switch (CustomPropName.ToLower()) {
-                            case "quantity":
-                                Int32.TryParse(CustomPropResolvedVal, out qty);
-                                break;
-                            case "description":
-                                description = CustomPropResolvedVal;
-                                sItem = ctx.StockItems.Where(item => item.Description == description).FirstOrDefault(); ;
-                                if (sItem == null) {
-                                    isNew = true;
-                                }
-                                break;
-                            case "length":
-                                float.TryParse(CustomPropResolvedVal, out length);
-                                break;
-                            case "angle1":
-                                float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle1);
-                                break;
-                            case "angle2":
-                                float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle2);
-                                break;
-                            case "material":
-                                material = CustomPropResolvedVal;
-                                break;
-                            case "angle direction":
-                                angleDirection = CustomPropResolvedVal;
-                                break;
-                            case "angle rotation":
-                                angleRotation = CustomPropResolvedVal;
-                                break;
-                            default:
-                                break;
+                    try {
+                        for (i = 0; i <= (vCustomPropNames.Length - 1); i++) {
+                            string CustomPropName = (string)vCustomPropNames[i];
+                            string CustomPropResolvedVal;
+                            CustomPropMgr.Get2(CustomPropName, out _, out CustomPropResolvedVal);
+                            switch (CustomPropName.ToLower()) {
+                                case "quantity":
+                                    Int32.TryParse(CustomPropResolvedVal, out qty);
+                                    break;
+                                case "description":
+                                    description = CustomPropResolvedVal;
+                                    sItem = ctx.StockItems.Where(item => item.InternalDescription == description).FirstOrDefault(); ;
+                                    if (sItem == null) {
+                                        isNew = true;
+                                    }
+                                    break;
+                                case "length":
+                                    float.TryParse(CustomPropResolvedVal, out length);
+                                    break;
+                                case "angle1":
+                                    float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle1);
+                                    break;
+                                case "angle2":
+                                    float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle2);
+                                    break;
+                                case "material":
+                                    material = CustomPropResolvedVal;
+                                    break;
+                                case "angle direction":
+                                    angleDirection = CustomPropResolvedVal;
+                                    break;
+                                case "angle rotation":
+                                    angleRotation = CustomPropResolvedVal;
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
-                    }
-                    if (isNew) {
-                        sItem = new StockItem(description: description,
-                            materialType: StockItem.MaterialFromDescription(description),
-                            profType: StockItem.ProfileFromDescription(description));
-                        ctx.StockItems.Add(sItem);
-                        ctx.SaveChanges();
-                    }
-                    isNew = false;
+                        if (isNew) {
+                            sItem = new StockItem(internalDescription: description,
+                                externalDescription: description,
+                                materialType: StockItem.MaterialFromDescription(description),
+                                profType: StockItem.ProfileFromDescription(description));
+                            ctx.StockItems.Add(sItem);
+                            ctx.SaveChanges();
+                        }
+                        isNew = false;
 
-                    CutItem cItem = new CutItem(sItem, qty, length, angle1, angle2, angleDirection, angleRotation);
-                    CutList.Add(cItem);
+                        CutItem cItem = new CutItem(sItem, qty, length, angle1, angle2, angleDirection, angleRotation);
+                        CutList.Add(cItem);
+                    } catch (Exception) {
+                        ErrorMessage("Database Error", "Cannot access database.Please check that it exists");
+                    }
+                   
                 }
             }
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using static Solidworks_Cutlist_Generator.BusinessLogic.Messenger;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,19 @@ namespace Solidworks_Cutlist_Generator.Model {
         public string VendorName { get; set; }
         public string PhoneNumber { get; set; }
         public string ContactName { get; set; }
+        public string ContactEmail { get; set; }
 
+        public static Vendor NullVendor() {
+            return new Vendor("NULL", "NULL", "NULL", "NULL");
+        }
+
+        private Vendor() { }
+
+        private Vendor(string vendorName = "", string phoneNumber = "", string contactName = "", string contactEmail = "") {
+            VendorName = vendorName;
+            PhoneNumber = phoneNumber;
+            ContactName = contactName;
+            ContactEmail = contactEmail;
+        }
     }
 }
