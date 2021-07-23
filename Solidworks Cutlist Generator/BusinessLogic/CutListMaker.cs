@@ -248,8 +248,8 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
 
                         CutItem cItem = new CutItem(sItem, qty, length, angle1, angle2, angleDirection, angleRotation);
                         CutList.Add(cItem);
-                    } catch (Exception) {
-                        ErrorMessage("Database Error", "Cannot access database.Please check that it exists");
+                    } catch (Exception e) {
+                        ErrorMessage("Database Error", "Cannot access database. Please check that it exists");
                     }
                    
                 }

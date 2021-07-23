@@ -17,10 +17,10 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBox x:Name="filePathTextBox" Margin="74,15,86,0" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="21" Text="C:\Users\Ryan\Desktop\Drawing\Wooden Structures\Pergola - 16ft x 11ft.SLDPRT"/>
-                <Button x:Name="sourceBrowseButton" Content="Browse" HorizontalAlignment="Right" Margin="0,15,20,0" VerticalAlignment="Top" Click="sourceBrowseButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Height="21" Width="56"/>
+                <Button x:Name="sourceBrowseButton" Content="Browse" HorizontalAlignment="Right" Margin="0,15,20,0" VerticalAlignment="Top" Click="sourceBrowseButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Height="21" Width="60"/>
                 <Label x:Name="filePathLabel" Content="File Path:&#xA;" HorizontalAlignment="Left" Margin="18,16,0,0" VerticalAlignment="Top" Width="55" Padding="3,0,3,3" Height="20" VerticalContentAlignment="Center"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Width="300" Height="25" VerticalAlignment="Top" Margin="0,45,20,0" FlowDirection="RightToLeft">
-                    <Button x:Name="generateButton" Content="Generate" Click="generateButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Height="21" Width="56" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                    <Button x:Name="generateButton" Content="Generate" Click="generateButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Height="21" Width="60" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
                     <Button x:Name="saveButton" Content="Save" VerticalAlignment="Center" Click="saveButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Height="21" HorizontalAlignment="Right" Width="56" Margin="0,0,10,0"/>
                     <Button x:Name="clearButton" Content="Clear" HorizontalAlignment="Right" VerticalAlignment="Center" Click="clearButton_Click" Padding="3,0,3,3" VerticalContentAlignment="Center" Width="56" Height="21" Margin="0,0,10,0"/>
                 </StackPanel>

@@ -15,7 +15,20 @@ namespace Solidworks_Cutlist_Generator.Model {
         public string ContactEmail { get; set; }
 
         public static Vendor NullVendor() {
-            return new Vendor("NULL", "NULL", "NULL", "NULL");
+            try {
+                using (var ctx = new CutListGeneratorContext()) {
+                    if (ctx.Vendors.Any()) {
+                        return ctx.Vendors.AsEnumerable().ElementAt(0);
+                    } else {
+                        Vendor v = new Vendor("NULL", "NULL", "NULL", "NULL");
+                        ctx.Vendors.Add(v);
+                        ctx.SaveChanges();
+                        return v;
+                    }
+                }
+            } catch (Exception) {
+                throw;
+            }
         }
 
         private Vendor() { }
