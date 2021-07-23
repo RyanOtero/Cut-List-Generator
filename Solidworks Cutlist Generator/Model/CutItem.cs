@@ -20,6 +20,12 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
             }
         }
 
+        public string TotalCost {
+            get {
+                return string.Format("{0:c}", StockType.CostPerFoot / 12m * (decimal)Length * Qty);
+            }
+        }
+
         public int StickNumber { get; set; }
 
 

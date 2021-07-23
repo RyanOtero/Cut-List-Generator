@@ -14,14 +14,14 @@ namespace Solidworks_Cutlist_Generator.Model {
         public int ID { get; set; }
         public MaterialType MatType { get; set; }
         public ProfileType ProfType { get; set; }
-        public int StockLength { get; set; }
+        public float StockLength { get; set; }
         public string InternalDescription { get; set; }
         public string ExternalDescription { get; set; }
         public Vendor Vendor { get; set; }
         public decimal CostPerFoot { get; set; }
         public decimal CostPerLength { get { return CostPerFoot * (decimal)StockLength; } }
 
-        public int StockLengthInInches {
+        public float StockLengthInInches {
             get {
                 return StockLength * 12;
             }
@@ -60,7 +60,7 @@ namespace Solidworks_Cutlist_Generator.Model {
 
         public StockItem(Vendor vendor = null, MaterialType materialType = MaterialType.steel,
             ProfileType profType = ProfileType.square_tube, string series = "", decimal costPerFoot = 0m,
-            int stockLength = 24, string internalDescription = "", string externalDescription = "") {
+            float stockLength = 24, string internalDescription = "", string externalDescription = "") {
             MatType = materialType;
             ProfType = profType;
             CostPerFoot = costPerFoot;

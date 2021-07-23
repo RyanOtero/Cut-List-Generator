@@ -28,13 +28,14 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Path=Qty}" Header="Qty" Width="1.5*"/>
                         <DataGridTextColumn Binding="{Binding Path=Description}" Header="Description" Width="8.5*"/>
-                        <DataGridTextColumn Binding="{Binding Path=Length}" Header="Length (IN)" Width="2*"/>
+                        <DataGridTextColumn Binding="{Binding Path=Length}" Header="Length (IN)" Width="2.25*"/>
                         <DataGridTextColumn Binding="{Binding Path=Angle1}" Header="Angle 1" Width="2*"/>
                         <DataGridTextColumn Binding="{Binding Path=Angle2}" Header="Angle 2" Width="2*"/>
                         <DataGridTextColumn Binding="{Binding Path=AngleDirection}" Header="Direction" Width="2.5*"/>
                         <DataGridTextColumn Binding="{Binding Path=AngleRotation}" Header="Rotation" Width="2.5*"/>
                         <DataGridTextColumn Binding="{Binding Path=StickNumber}" Header="Stick No." Width="2.5*"/>
-                        <DataGridTextColumn Binding="{Binding Path=Cost}" Header="Cost" Width="2*"/>
+                        <DataGridTextColumn Binding="{Binding Path=Cost}" Header="Cost Ea." Width="2*"/>
+                        <DataGridTextColumn Binding="{Binding Path=TotalCost}" Header="Total" Width="2*"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <CheckBox x:Name="detailedCutListCheckBox" Content="Detailed Cut List" HorizontalAlignment="Right" Margin="0,49,230,0" VerticalAlignment="Top" FlowDirection="RightToLeft">
