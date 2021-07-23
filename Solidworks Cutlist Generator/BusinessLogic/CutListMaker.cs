@@ -113,6 +113,13 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
                         CutList[i].StickNumber = stickNum;
                         temp.Add(CutList[i]);
                         CutList.RemoveAt(i);
+                    //} else if (CutList[i].Length > sType.StockLengthInInches) {
+                    //    leftOnStick = (((int)(sType.StockLengthInInches / CutList[i].Length) + 1) * sType.StockLengthInInches) - CutList[i].Length;
+                    //    stickNum++;
+                    //    CutList[i].StickNumber = stickNum;
+                    //    stickNum += (int)(sType.StockLengthInInches / CutList[i].Length) + 1;
+                    //    temp.Add(CutList[i]);
+                    //    CutList.RemoveAt(i);
                     } else {
                         bool isBroken = false;
                         bool areMoreOfStockType = false;
@@ -236,8 +243,16 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
                                     break;
                             }
                         }
+                        Vendor vendor;
                         if (isNew) {
-                            sItem = new StockItem(internalDescription: description,
+                            if (ctx.Vendors.Any()) {
+                                vendor = ctx.Vendors.AsEnumerable().ElementAt(0);
+                            } else {
+                                vendor = new Vendor("NULL", "NULL", "NULL", "NULL");
+                                ctx.Vendors.Add(vendor);
+                                ctx.SaveChanges();
+                            }
+                            sItem = new StockItem(vendor: vendor, internalDescription: description,
                                 externalDescription: description,
                                 materialType: StockItem.MaterialFromDescription(description),
                                 profType: StockItem.ProfileFromDescription(description));
@@ -248,10 +263,10 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
 
                         CutItem cItem = new CutItem(sItem, qty, length, angle1, angle2, angleDirection, angleRotation);
                         CutList.Add(cItem);
-                    } catch (Exception e) {
+                    } catch (Exception) {
                         ErrorMessage("Database Error", "Cannot access database. Please check that it exists");
                     }
-                   
+
                 }
             }
         }
@@ -331,9 +346,9 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
             for (int i = 0; i < vChildComp.Length; i++) {
                 swChildComp = (Component2)vChildComp[i];
                 if (swChildComp.GetSuppression() == 2) {
-                ModelDoc2 model = (ModelDoc2)swChildComp.GetModelDoc2();
-                Feature feat = (Feature)model.FirstFeature();
-                TraverseComponent(swChildComp, TraverseFeatures);
+                    ModelDoc2 model = (ModelDoc2)swChildComp.GetModelDoc2();
+                    Feature feat = (Feature)model.FirstFeature();
+                    TraverseComponent(swChildComp, TraverseFeatures);
                 }
             }
 

@@ -75,8 +75,7 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
         }
 
         public CutItem Clone() {
-            CutItem cItem = new CutItem(StockType, 1, Length, Angle1, Angle2, AngleDirection, AngleRotation);
-            return cItem;
+            return new CutItem(StockType, 1, Length, Angle1, Angle2, AngleDirection, AngleRotation);
         }
     }
 }

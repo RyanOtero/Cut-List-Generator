@@ -28,7 +28,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Path=Qty}" Header="Qty" Width="1.5*"/>
                         <DataGridTextColumn Binding="{Binding Path=Description}" Header="Description" Width="8.5*"/>
-                        <DataGridTextColumn Binding="{Binding Path=Length}" Header="Length" Width="2*"/>
+                        <DataGridTextColumn Binding="{Binding Path=Length}" Header="Length (IN)" Width="2*"/>
                         <DataGridTextColumn Binding="{Binding Path=Angle1}" Header="Angle 1" Width="2*"/>
                         <DataGridTextColumn Binding="{Binding Path=Angle2}" Header="Angle 2" Width="2*"/>
                         <DataGridTextColumn Binding="{Binding Path=AngleDirection}" Header="Direction" Width="2.5*"/>
