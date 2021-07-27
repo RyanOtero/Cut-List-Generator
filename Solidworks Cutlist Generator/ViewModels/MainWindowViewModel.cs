@@ -12,22 +12,65 @@ using Excel = Microsoft.Office.Interop.Excel;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Windows.Data;
 
-namespace Solidworks_Cutlist_Generator {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : System.Windows.Window {
+namespace Solidworks_Cutlist_Generator.ViewModels {
+    class MainWindowViewModel : ViewModelBase {
+        private readonly object cutListLock;
+        private string sourceText;
+        private bool isDetailed;
+        private ObservableCollection<Vendor> vendors;
+        private ObservableCollection<StockItem> stockItems;
+        private ObservableCollection<CutItem> cutList;
 
-        Excel.Workbook workBook;
-        Excel.Worksheet workSheet;
-        Microsoft.Office.Interop.Excel.Range cellRange;
-        CutListMaker CutListMaker;
+        public GenerateCommand GenerateCommand { get; set; }
 
-        public MainWindow() {
-            InitializeComponent();
-            CutListMaker = new CutListMaker();
-            cutListDataGrid.ItemsSource = CutListMaker.CutList;
+        public SaveCommand SaveCommand { get; set; }
+
+        public ClearCommand ClearCommand { get; set; }
+
+        public SourceBrowseCommand SourceBrowseCommand { get; set; }
+
+        public CutListMaker CutListMaker { get; set; }
+
+        public bool IsDetailed {
+            get => isDetailed;
+            set { SetProperty(ref isDetailed, value); }
+        }
+
+        public string SourceText {
+            get => sourceText;
+            set { SetProperty(ref sourceText, value); }
+        }
+
+        public ObservableCollection<Vendor> Vendors {
+            get => vendors;
+            set { SetProperty(ref vendors, value); }
+        }
+
+        public ObservableCollection<StockItem> StockItems {
+            get => stockItems;
+            set { SetProperty(ref stockItems, value); }
+        }
+
+        public ObservableCollection<CutItem> CutList {
+            get => cutList; set {
+                SetProperty(ref cutList, value);
+                BindingOperations.EnableCollectionSynchronization(cutList, cutListLock);
+            }
+        }
+
+        public MainWindowViewModel() {
+            GenerateCommand = new GenerateCommand(this);
+            SaveCommand = new SaveCommand(this);
+            ClearCommand = new ClearCommand(this);
+            SourceBrowseCommand = new SourceBrowseCommand(this);
+            cutListLock = new object();
+            CutList = new ObservableCollection<CutItem>();
+            CutListMaker = new CutListMaker(CutList);
+            Vendors = new ObservableCollection<Vendor>();
+            StockItems = new ObservableCollection<StockItem>();
             RefreshGrids();
         }
 
@@ -35,10 +78,14 @@ namespace Solidworks_Cutlist_Generator {
             using (var ctx = new CutListGeneratorContext()) {
                 var sTypes = from i in ctx.StockItems
                              select i;
-                stockTypesDataGrid.ItemsSource = sTypes.ToList();
+                foreach (StockItem item in sTypes.ToList()) {
+                    StockItems.Add(item);
+                }
                 var vendors = from i in ctx.Vendors
                               select i;
-                vendorDataGrid.ItemsSource = vendors.ToList();
+                foreach (Vendor item in vendors.ToList()) {
+                    Vendors.Add(item);
+                }
                 //    var angle = StockItem.CreateStockItem(description: "angle");
                 //    ctx.StockItems.Add(angle);
                 //    ctx.SaveChanges();
@@ -47,23 +94,19 @@ namespace Solidworks_Cutlist_Generator {
 
         #region Button Clicks
 
-        private async void generateButton_Click(object sender, RoutedEventArgs e) {
-            string filePath = filePathTextBox.Text;
-            bool isDetailed = (bool)detailedCutListCheckBox.IsChecked;
-            cutListDataGrid.ItemsSource = null;
-            var result = Task.Run(() => CutListMaker.Generate(filePath, isDetailed));
-            cutListDataGrid.ItemsSource = await result;
+        public async void GenerateCutList() {
+            await Task.Run(() => CutListMaker.Generate(SourceText, IsDetailed));
             RefreshGrids();
         }
 
-        private void sourceBrowseButton_Click(object sender, RoutedEventArgs e) {
+        public void SourceBrowse() {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.CheckFileExists = true;
             if (openFileDialog.ShowDialog() == true)
-                filePathTextBox.Text = openFileDialog.FileName;
+                SourceText = openFileDialog.FileName;
         }
 
-        private void saveButton_Click(object sender, RoutedEventArgs e) {
+        public void SaveCutList() {
             string filePath;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Excel File (*.xlsx)|*.xlsx|Comma-Separated Values (*.csv)|*.csv|All Files (*.*)|*.*";
@@ -79,16 +122,16 @@ namespace Solidworks_Cutlist_Generator {
             }
         }
 
-        private void clearButton_Click(object sender, RoutedEventArgs e) {
-            cutListDataGrid.ItemsSource = null;
+        public void ClearCutList() {
+            //cutListDataGrid.ItemsSource = null;
             CutListMaker.NewCutList();
-            cutListDataGrid.ItemsSource = CutListMaker.CutList;
+            //cutListDataGrid.ItemsSource = CutListMaker.CutList;
         }
 
         #endregion
 
         #region Export Functionality
-        
+
         public static DataTable ToDataTable<T>(ObservableCollection<T> items) {
             var dataTable = new DataTable(typeof(T).Name);
 
@@ -113,6 +156,9 @@ namespace Solidworks_Cutlist_Generator {
         }
 
         private void GenerateExcel(DataTable DtIN, string filePath) {
+            Excel.Workbook workBook;
+            Excel.Worksheet workSheet;
+            Excel.Range cellRange;
             try {
                 Excel.Application excel = new Excel.Application();
                 excel.DisplayAlerts = false;
@@ -173,7 +219,7 @@ namespace Solidworks_Cutlist_Generator {
                 }
             }
         }
-        
+
         #endregion
     }
 }

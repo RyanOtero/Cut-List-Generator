@@ -83,12 +83,15 @@ C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\bin\D
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\SolidWorks.Interop.sldworks.dll
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\SolidWorks.Interop.swconst.dll
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator.csproj.ResolveComReference.cache
-C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\MainWindow.g.cs
+C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\MainWindow.g.cs
+C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\Window1.g.cs
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\App.g.cs
+C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator_MarkupCompile.cache
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator_MarkupCompile.lref
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\App.baml
-C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\MainWindow.baml
+C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\MainWindow.baml
+C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\Window1.baml
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator.g.resources
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator.AssemblyInfoInputs.cache

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,51 +12,75 @@ namespace Solidworks_Cutlist_Generator.Model {
 
     public enum MaterialType { none, steel, aluminum, stainless_steel, titanium, brass, bronze, zinc, copper, nickel, wood }
     public enum ProfileType { custom, angle, channel, flat_bar, solid_square, solid_rectangular, solid_round, solid_triangular, square_tube, rectangular_tube, round_tube, pipe }
-    public class StockItem : IEquatable<StockItem> {
+    public class StockItem : IEquatable<StockItem>, INotifyPropertyChanged {
+        private MaterialType matType;
+        private ProfileType profType;
+        private float stockLength;
+        private string internalDescription;
+        private string externalDescription;
+        private Vendor vendor;
+        private decimal costPerFoot;
+
         public int ID { get; set; }
-        public MaterialType MatType { get; set; }
-        public ProfileType ProfType { get; set; }
-        public float StockLength { get; set; }
-        public string InternalDescription { get; set; }
-        public string ExternalDescription { get; set; }
-        public Vendor Vendor { get; set; }
-        public decimal CostPerFoot { get; set; }
-        public decimal CostPerLength { get { return CostPerFoot * (decimal)StockLength; } }
+        public MaterialType MatType {
+            get => matType;
+            set {
+                matType = value;
+                OnPropertyChanged();
+            }
+        }
+        public ProfileType ProfType {
+            get => profType;
+            set {
+                profType = value;
+                OnPropertyChanged();
+            }
+        }
+        public float StockLength {
+            get => stockLength;
+            set {
+                stockLength = value;
+                OnPropertyChanged();
+            }
+        }
+        public string InternalDescription {
+            get => internalDescription;
+            set {
+                internalDescription = value;
+                OnPropertyChanged();
+            }
+        }
+        public string ExternalDescription {
+            get => externalDescription;
+            set {
+                externalDescription = value;
+                OnPropertyChanged();
+            }
+        }
+        public Vendor Vendor {
+            get => vendor;
+            set {
+                vendor = value;
+                OnPropertyChanged();
+            }
+        }
+        public decimal CostPerFoot {
+            get => costPerFoot;
+            set {
+                costPerFoot = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public float StockLengthInInches {
-            get {
-                return StockLength * 12;
-            }
-        }
-        public int VendorIdentifier {
-            get {
-                return Vendor.ID;
-            }
-        }
+        public decimal CostPerLength => CostPerFoot * (decimal)StockLength;
+        public float StockLengthInInches => StockLength * 12;
+        public int VendorIdentifier => Vendor.ID;
+        public string MatTypeString => CultureInfo.InvariantCulture.TextInfo.ToTitleCase(MatType.ToString().Replace("_", " "));
+        public string ProfTypeString => CultureInfo.InvariantCulture.TextInfo.ToTitleCase(ProfType.ToString().Replace("_", " "));
+        public string CostPerFootString => string.Format("{0:c}", CostPerFoot);
+        public string CostPerLengthString => string.Format("{0:c}", CostPerLength);
 
-        public string MatTypeString {
-            get {
-                return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(MatType.ToString().Replace("_", " "));
-            }
-        }
-
-        public string ProfTypeString {
-            get {
-                return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(ProfType.ToString().Replace("_", " "));
-            }
-        }
-
-        public string CostPerFootString {
-            get {
-                return string.Format("{0:c}", CostPerFoot);
-            }
-        }
-
-        public string CostPerLengthString {
-            get {
-                return string.Format("{0:c}", CostPerLength);
-            }
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public StockItem() { }
 
@@ -68,6 +94,10 @@ namespace Solidworks_Cutlist_Generator.Model {
             InternalDescription = internalDescription;
             ExternalDescription = externalDescription;
             Vendor = vendor;
+        }
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public static MaterialType MaterialFromDescription(string desc) {
