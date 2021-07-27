@@ -20,6 +20,7 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
         private readonly object cutListLock;
         private string sourceText;
         private bool isDetailed;
+        private bool showPricing;
         private ObservableCollection<Vendor> vendors;
         private ObservableCollection<StockItem> stockItems;
         private ObservableCollection<CutItem> cutList;
@@ -37,6 +38,10 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
         public bool IsDetailed {
             get => isDetailed;
             set { SetProperty(ref isDetailed, value); }
+        }
+        public bool ShowPricing {
+            get => showPricing;
+            set { SetProperty(ref showPricing, value); }
         }
 
         public string SourceText {

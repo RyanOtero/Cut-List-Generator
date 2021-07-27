@@ -40,6 +40,9 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
         }
 
         public void Generate(string filePath, bool isDetailed) {
+            if (string.IsNullOrEmpty(filePath)) {
+                return;
+            }
             bool isPart;
             bool isAssembly;
 
