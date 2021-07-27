@@ -13,8 +13,8 @@
           "Microsoft.EntityFrameworkCore.Tools": "5.0.7",
           "MySql.EntityFrameworkCore": "5.0.3.1",
           "System.Runtime": "4.3.1",
-          "SolidWorks.Interop.sldworks": "28.0.0.5028",
-          "SolidWorks.Interop.swconst": "28.0.0.5028"
+          "SolidWorks.Interop.sldworks": "23.0.0.5020",
+          "SolidWorks.Interop.swconst": "23.0.0.5020"
         },
         "runtime": {
           "Solidworks Cut List Generator.dll": {}
@@ -338,19 +338,19 @@
           "System.Drawing.Common": "4.7.0"
         }
       },
-      "SolidWorks.Interop.sldworks/28.0.0.5028": {
+      "SolidWorks.Interop.sldworks/23.0.0.5020": {
         "runtime": {
           "SolidWorks.Interop.sldworks.dll": {
-            "assemblyVersion": "28.0.0.5028",
-            "fileVersion": "28.0.0.5028"
+            "assemblyVersion": "23.0.0.5020",
+            "fileVersion": "23.0.0.5020"
           }
         }
       },
-      "SolidWorks.Interop.swconst/28.0.0.5028": {
+      "SolidWorks.Interop.swconst/23.0.0.5020": {
         "runtime": {
           "SolidWorks.Interop.swconst.dll": {
-            "assemblyVersion": "28.0.0.5028",
-            "fileVersion": "28.0.0.5028"
+            "assemblyVersion": "23.0.0.5020",
+            "fileVersion": "23.0.0.5020"
           }
         }
       }
@@ -656,12 +656,12 @@
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
     },
-    "SolidWorks.Interop.sldworks/28.0.0.5028": {
+    "SolidWorks.Interop.sldworks/23.0.0.5020": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "SolidWorks.Interop.swconst/28.0.0.5028": {
+    "SolidWorks.Interop.swconst/23.0.0.5020": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

@@ -188,7 +188,6 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
                             continue;
                             //if other cuts fit on current stick, retry current iteration
                         } else if (isBroken) {
-                            i++;
                             continue;
                             //if no more cuts fit on the stick
                         } else {
