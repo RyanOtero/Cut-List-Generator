@@ -96,6 +96,8 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
             foreach (CutItem item in tempList) {
                 CutList.Add(item);
             }
+
+            swApp = null;
         }
 
         public void SortCuts(List<CutItem> cutList) {
