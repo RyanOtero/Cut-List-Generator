@@ -14,24 +14,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Windows.Data;
+using Solidworks_Cutlist_Generator.ViewModels.Commands;
 
 namespace Solidworks_Cutlist_Generator.ViewModels {
     class MainWindowViewModel : ViewModelBase {
         private readonly object cutListLock;
         private string sourceText;
+        private string loadingText;
         private bool isDetailed;
         private bool showPricing;
+        private bool isLoading;
         private ObservableCollection<Vendor> vendors;
         private ObservableCollection<StockItem> stockItems;
         private ObservableCollection<CutItem> cutList;
 
-        public GenerateCommand GenerateCommand { get; set; }
+        public RelayCommand GenerateCommand { get; set; }
 
-        public SaveCommand SaveCommand { get; set; }
+        public RelayCommand SaveCommand { get; set; }
 
-        public ClearCommand ClearCommand { get; set; }
+        public RelayCommand ClearCommand { get; set; }
 
-        public SourceBrowseCommand SourceBrowseCommand { get; set; }
+        public RelayCommand SourceBrowseCommand { get; set; }
 
         public CutListMaker CutListMaker { get; set; }
 
@@ -39,14 +42,28 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             get => isDetailed;
             set { SetProperty(ref isDetailed, value); }
         }
+        public bool IsLoading {
+            get => isLoading;
+            set { SetProperty(ref isLoading, value); }
+        }
+
         public bool ShowPricing {
             get => showPricing;
             set { SetProperty(ref showPricing, value); }
         }
 
         public string SourceText {
-            get => sourceText;
-            set { SetProperty(ref sourceText, value); }
+            get => sourceText;  
+            set {
+                SetProperty(ref sourceText, value); 
+            }
+        }
+
+        public string LoadingText {
+            get => loadingText;
+            set {
+                SetProperty(ref loadingText, value);
+            }
         }
 
         public ObservableCollection<Vendor> Vendors {
@@ -67,19 +84,23 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
         }
 
         public MainWindowViewModel() {
-            GenerateCommand = new GenerateCommand(this);
-            SaveCommand = new SaveCommand(this);
-            ClearCommand = new ClearCommand(this);
-            SourceBrowseCommand = new SourceBrowseCommand(this);
+            GenerateCommand = new RelayCommand(() => GenerateCutList() , () => !string.IsNullOrEmpty(SourceText));
+            SaveCommand = new RelayCommand(() => SaveCutList(), () => CutList != null && CutList.Count > 0);
+            ClearCommand = new RelayCommand(() => ClearCutList(), () => CutList != null && CutList.Count > 0);
+            SourceBrowseCommand = new RelayCommand(() => SourceBrowse());
             cutListLock = new object();
             CutList = new ObservableCollection<CutItem>();
             CutListMaker = new CutListMaker(CutList);
             Vendors = new ObservableCollection<Vendor>();
             StockItems = new ObservableCollection<StockItem>();
             RefreshGrids();
+            LoadingText = "Loading...";
+            IsLoading = false;
         }
 
         private void RefreshGrids() {
+            StockItems.Clear();
+            Vendors.Clear();
             using (var ctx = new CutListGeneratorContext()) {
                 var sTypes = from i in ctx.StockItems
                              select i;
@@ -100,8 +121,10 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
         #region Button Clicks
 
         public async void GenerateCutList() {
+            IsLoading = true;
             await Task.Run(() => CutListMaker.Generate(SourceText, IsDetailed));
             RefreshGrids();
+            IsLoading = false;
         }
 
         public void SourceBrowse() {
@@ -128,9 +151,7 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
         }
 
         public void ClearCutList() {
-            //cutListDataGrid.ItemsSource = null;
             CutListMaker.NewCutList();
-            //cutListDataGrid.ItemsSource = CutListMaker.CutList;
         }
 
         #endregion

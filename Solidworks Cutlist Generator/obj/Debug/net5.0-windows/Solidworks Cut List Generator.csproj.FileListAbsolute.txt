@@ -47,6 +47,17 @@ C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\
 C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator.csproj.AssemblyReference.cache
 C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator.csproj.ResolveComReference.cache
 C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\App.baml
+C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\MainWindow.g.cs
+C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\Window1.g.cs
+C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\MainWindow.baml
+C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\Window1.baml
+C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator.csproj.ResolveComReference.cache
+C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\Window1.g.cs
+C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\App.g.cs
+C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator_MarkupCompile.cache
+C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator_MarkupCompile.lref
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Solidworks Cut List Generator.exe
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Solidworks Cut List Generator.deps.json
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\Solidworks Cut List Generator.runtimeconfig.json
@@ -80,13 +91,8 @@ C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\bin\D
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\System.Diagnostics.DiagnosticSource.dll
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\SolidWorks.Interop.sldworks.dll
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\bin\Debug\net5.0-windows\SolidWorks.Interop.swconst.dll
-C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator.csproj.ResolveComReference.cache
+C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator.csproj.AssemblyReference.cache
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\MainWindow.g.cs
-C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\Window1.g.cs
-C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\App.g.cs
-C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
-C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator_MarkupCompile.cache
-C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator_MarkupCompile.lref
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\App.baml
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\MainWindow.baml
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\Window1.baml
@@ -100,8 +106,3 @@ C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\D
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\ref\Solidworks Cut List Generator.dll
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator.pdb
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Solidworks Cut List Generator.genruntimeconfig.cache
-C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\MainWindow.g.cs
-C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\Window1.g.cs
-C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
-C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\MainWindow.baml
-C:\Users\corey\source\repos\Cut-List-Generator\Solidworks Cutlist Generator\obj\Debug\net5.0-windows\Views\Window1.baml

@@ -6,57 +6,49 @@
         xmlns:local="clr-namespace:Solidworks_Cutlist_Generator"
         xmlns:vm="clr-namespace:Solidworks_Cutlist_Generator.ViewModels"
         mc:Ignorable="d"
-        Title="Cutlist Generator" Height="931" Width="1344" WindowStyle="SingleBorderWindow" SizeToContent="Manual">
+        Title="Cutlist Generator" Height="539" Width="800" WindowStyle="SingleBorderWindow" SizeToContent="Manual">
     <Window.Resources>
-       <BooleanToVisibilityConverter x:Key="b2v" />
+        <BooleanToVisibilityConverter x:Key="b2v" />
+        <vm:MainWindowViewModel x:Key="ViewModel"/>
     </Window.Resources>
     <Window.DataContext>
-        <vm:MainWindowViewModel/>
+        <StaticResource ResourceKey="ViewModel"/>
     </Window.DataContext>
-    <TabControl>
+    <TabControl >
         <TabItem Header="Cutlist" Margin="0,0,0,0" Height="22" VerticalAlignment="Stretch" Width="55" Padding="10,1,10,1">
             <Grid Margin="0,0,0,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="23*"/>
-                    <RowDefinition Height="83*"/>
-                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="90"/>
                 </Grid.ColumnDefinitions>
-
-                <Grid Margin="0,0,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="70"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="90"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                    </Grid.RowDefinitions>
-                    <Label x:Name="filePathLabel" Content="File Path:&#xA;" HorizontalAlignment="Right" Margin="18,16,0,0" VerticalAlignment="Top" Width="55" Padding="3,0,3,3" Height="20" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="0"/>
-                    <TextBox x:Name="filePathTextBox" Margin="10,15,10,0" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="21" Text="{Binding Path=SourceText, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="0" />
-                    <Button x:Name="sourceBrowseButton" Content="Browse" Margin="10,15,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding Path=SourceBrowseCommand}" Padding="3,0,3,3" Width="60" VerticalContentAlignment="Center" Height="21" Grid.Column="2" Grid.Row="0"/>
-                    <Button x:Name="generateButton" Content="Generate" Command="{Binding Path=GenerateCommand}" Padding="3,0,3,3" VerticalContentAlignment="Center" Height="21" Width="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Grid.Column="2" Grid.Row="1"/>
-                    <Button x:Name="saveButton" Content="Save" VerticalAlignment="Center" Command="{Binding Path=SaveCommand}" Padding="3,0,3,3" VerticalContentAlignment="Center" Height="21" HorizontalAlignment="Left" Width="60" Margin="10,0,10,0" Grid.Column="2" Grid.Row="2"/>
-                    <Button x:Name="clearButton" Content="Clear" HorizontalAlignment="right" VerticalAlignment="Center" Command="{Binding Path=ClearCommand}" Padding="3,0,3,3" VerticalContentAlignment="Center" Width="60" Height="21" Margin="10,0,10,0" Grid.Column="1" Grid.Row="1"/>
-                    <CheckBox x:Name="detailedCutListCheckBox" IsChecked="{Binding Path=IsDetailed, Mode=TwoWay}"  Content="Detailed Cut List" HorizontalAlignment="Right" Margin="0,0,90,0" VerticalAlignment="Center" FlowDirection="RightToLeft" Grid.Column="1" Grid.Row="1">
-                        <CheckBox.Resources>
-                            <Style TargetType="{x:Type Path}">
-                                <Setter Property="FlowDirection" Value="LeftToRight" />
-                            </Style>
-                        </CheckBox.Resources>
-                    </CheckBox>
-                    <CheckBox x:Name="showPricingCheckBox" IsChecked="{Binding Path=ShowPricing, Mode=TwoWay}" Content="Show Pricing" HorizontalAlignment="Right" Margin="0,0,210,0" VerticalAlignment="Center" FlowDirection="RightToLeft" Grid.Column="1" Grid.Row="1">
-                        <CheckBox.Resources>
-                            <Style TargetType="{x:Type Path}">
-                                <Setter Property="FlowDirection" Value="LeftToRight" />
-                            </Style>
-                        </CheckBox.Resources>
-                    </CheckBox>
-                </Grid>
-                <DataGrid x:Name="cutListDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding Path=CutList}" Margin="20,12,20,20" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="filePathLabel" Content="File Path:&#xA;" HorizontalAlignment="Right" Margin="18,16,0,0" VerticalAlignment="Top" Width="55" Padding="3,0,3,3" Height="20" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="0"/>
+                <TextBox x:Name="filePathTextBox" Margin="10,15,10,0" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="21" Text="{Binding Path=SourceText, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="0" />
+                <Button x:Name="sourceBrowseButton" Content="Browse" Margin="10,15,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding SourceBrowseCommand}" Padding="3,0,3,3" Width="60" VerticalContentAlignment="Center" Height="21" Grid.Column="2" Grid.Row="0"/>
+                <Button x:Name="generateButton" Content="Generate" Command="{Binding GenerateCommand}" Padding="3,0,3,3" VerticalContentAlignment="Center" Height="21" Width="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Grid.Column="2" Grid.Row="1"/>
+                <Button x:Name="saveButton" Content="Save" VerticalAlignment="Center" Command="{Binding SaveCommand}" Padding="3,0,3,3" VerticalContentAlignment="Center" Height="21" HorizontalAlignment="Left" Width="60" Margin="10,0,10,0" Grid.Column="2" Grid.Row="2"/>
+                <Button x:Name="clearButton" Content="Clear" HorizontalAlignment="right" VerticalAlignment="Center" Command="{Binding ClearCommand}" Padding="3,0,3,3" VerticalContentAlignment="Center" Width="60" Height="21" Margin="10,0,10,0" Grid.Column="1" Grid.Row="1"/>
+                <CheckBox x:Name="detailedCutListCheckBox" IsChecked="{Binding IsDetailed, Mode=TwoWay}"  Content="Detailed Cut List" HorizontalAlignment="Right" Margin="0,0,90,0" VerticalAlignment="Center" FlowDirection="RightToLeft" Grid.Column="1" Grid.Row="1">
+                    <CheckBox.Resources>
+                        <Style TargetType="{x:Type Path}">
+                            <Setter Property="FlowDirection" Value="LeftToRight" />
+                        </Style>
+                    </CheckBox.Resources>
+                </CheckBox>
+                <CheckBox x:Name="showPricingCheckBox" IsChecked="{Binding ShowPricing, Mode=TwoWay}" Content="Show Pricing" HorizontalAlignment="Right" Margin="0,0,210,0" VerticalAlignment="Center" FlowDirection="RightToLeft" Grid.Column="1" Grid.Row="1">
+                    <CheckBox.Resources>
+                        <Style TargetType="{x:Type Path}">
+                            <Setter Property="FlowDirection" Value="LeftToRight" />
+                        </Style>
+                    </CheckBox.Resources>
+                </CheckBox>
+                <DataGrid x:Name="cutListDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding CutList}" Margin="20,12,20,20" Grid.Row="4" Grid.ColumnSpan="3">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Path=Qty}" Header="Qty" Width="1.5*"/>
                         <DataGridTextColumn Binding="{Binding Path=Description}" Header="Description" Width="8.5*"/>
@@ -65,11 +57,12 @@
                         <DataGridTextColumn Binding="{Binding Path=Angle2}" Header="Angle 2" Width="2*"/>
                         <DataGridTextColumn Binding="{Binding Path=AngleDirection}" Header="Direction" Width="2.5*"/>
                         <DataGridTextColumn Binding="{Binding Path=AngleRotation}" Header="Rotation" Width="2.5*"/>
-                        <DataGridTextColumn Binding="{Binding Path=StickNumberString}" Header="Stick No." Width="2.5*" Visibility="{Binding IsChecked, ElementName=detailedCutListCheckBox,Converter={StaticResource b2v}}"/>
-                        <DataGridTextColumn Binding="{Binding Path=Cost}" Header="Cost Ea." Width="2*" Visibility="{Binding IsChecked, ElementName=showPricingCheckBox,Converter={StaticResource b2v}}"/>
-                        <DataGridTextColumn Binding="{Binding Path=TotalCost}" Header="Total" Width="2*" Visibility="{Binding IsChecked, ElementName=showPricingCheckBox,Converter={StaticResource b2v}}"/>
+                        <DataGridTextColumn Binding="{Binding Path=StickNumberString}" Header="Stick No." Width="2.5*" Visibility="{Binding IsDetailed, Source={StaticResource ViewModel}, Converter={StaticResource b2v}}"/>
+                        <DataGridTextColumn Binding="{Binding Path=Cost}" Header="Cost Ea." Width="2*" Visibility="{Binding ShowPricing, Source={StaticResource ViewModel},Converter={StaticResource b2v}}"/>
+                        <DataGridTextColumn Binding="{Binding Path=TotalCost}" Header="Total" Width="2*" Visibility= "{Binding ShowPricing, Source={StaticResource ViewModel}, Converter={StaticResource b2v}}"/>
                     </DataGrid.Columns>
                 </DataGrid>
+                <Label x:Name="loadingLabel" Content="{Binding LoadingText}" Visibility="{Binding IsLoading, Converter={StaticResource b2v}}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
         </TabItem>
         <TabItem Header="Vendors" Margin="0,0,0,0" Height="22" Padding="10,1,10,1">
@@ -95,7 +88,6 @@
                     <DataGridTextColumn Binding="{Binding Path=StockLength}" Header="Stock Length" Width="1.1*"/>
                     <DataGridTextColumn Binding="{Binding Path=InternalDescription}" Header="Internal Description" Width="3*"/>
                     <DataGridTextColumn Binding="{Binding Path=ExternalDescription}" Header="External Description" Width="3*"/>
-
                 </DataGrid.Columns>
             </DataGrid>
         </TabItem>
