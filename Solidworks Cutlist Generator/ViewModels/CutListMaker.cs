@@ -5,6 +5,7 @@ using Solidworks_Cutlist_Generator.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -22,17 +23,27 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
         int filewarning = 0;
         bool inBodyFolder = false;
         private ObservableCollection<CutItem> cutList;
-        private readonly object cutListLock;
+        private readonly object asyncLock;
+        private DataTable orderList;
+
+        public DataTable OrderList {
+            get => orderList;
+            set {
+                orderList = value;
+                BindingOperations.EnableCollectionSynchronization(orderList.AsEnumerable(), asyncLock);
+
+            }
+        }
 
         public ObservableCollection<CutItem> CutList {
             get => cutList; set {
                 cutList = value;
-                BindingOperations.EnableCollectionSynchronization(cutList, cutListLock);
+                BindingOperations.EnableCollectionSynchronization(cutList, asyncLock);
             }
         }
 
         public CutListMaker(ObservableCollection<CutItem> cList) {
-            cutListLock = new object();
+            asyncLock = new object();
             CutList = cList;
         }
         public void NewCutList() {
