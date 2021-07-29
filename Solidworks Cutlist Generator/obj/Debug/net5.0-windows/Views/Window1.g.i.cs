@@ -53,7 +53,7 @@ namespace Solidworks_Cutlist_Generator.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Solidworks Cut List Generator;V1.0.0.0;component/views/window1.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Solidworks Cut List Generator;component/views/window1.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\Window1.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

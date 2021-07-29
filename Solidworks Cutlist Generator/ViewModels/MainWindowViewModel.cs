@@ -18,7 +18,7 @@ using Solidworks_Cutlist_Generator.ViewModels.Commands;
 
 namespace Solidworks_Cutlist_Generator.ViewModels {
     class MainWindowViewModel : ViewModelBase {
-        private readonly object cutListLock;
+        private readonly object asyncLock;
         private string sourceText;
         private string loadingText;
         private bool isDetailed;
@@ -27,6 +27,7 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
         private ObservableCollection<Vendor> vendors;
         private ObservableCollection<StockItem> stockItems;
         private ObservableCollection<CutItem> cutList;
+        private DataTable orderList;
 
         public RelayCommand GenerateCommand { get; set; }
 
@@ -77,9 +78,18 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
         }
 
         public ObservableCollection<CutItem> CutList {
-            get => cutList; set {
+            get => cutList;
+            set {
                 SetProperty(ref cutList, value);
-                BindingOperations.EnableCollectionSynchronization(cutList, cutListLock);
+                BindingOperations.EnableCollectionSynchronization(cutList, asyncLock);
+            }
+        }
+
+        public DataTable OrderList {
+            get => orderList;
+            set {
+                SetProperty(ref orderList, value);
+                BindingOperations.EnableCollectionSynchronization(orderList.AsEnumerable(), asyncLock);
             }
         }
 
@@ -88,34 +98,14 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             SaveCommand = new RelayCommand(() => SaveCutList(), () => CutList != null && CutList.Count > 0);
             ClearCommand = new RelayCommand(() => ClearCutList(), () => CutList != null && CutList.Count > 0);
             SourceBrowseCommand = new RelayCommand(() => SourceBrowse());
-            cutListLock = new object();
+            asyncLock = new object();
             CutList = new ObservableCollection<CutItem>();
-            CutListMaker = new CutListMaker(CutList);
-            Vendors = new ObservableCollection<Vendor>();
-            StockItems = new ObservableCollection<StockItem>();
-            RefreshGrids();
+            OrderList = new DataTable();
+            CutListMaker = new CutListMaker();
+            Vendors = CutListMaker.Vendors;
+            StockItems = CutListMaker.StockItems;
             LoadingText = "Loading...";
             IsLoading = false;
-        }
-
-        private void RefreshGrids() {
-            StockItems.Clear();
-            Vendors.Clear();
-            using (var ctx = new CutListGeneratorContext()) {
-                var sTypes = from i in ctx.StockItems
-                             select i;
-                foreach (StockItem item in sTypes.ToList()) {
-                    StockItems.Add(item);
-                }
-                var vendors = from i in ctx.Vendors
-                              select i;
-                foreach (Vendor item in vendors.ToList()) {
-                    Vendors.Add(item);
-                }
-                //    var angle = StockItem.CreateStockItem(description: "angle");
-                //    ctx.StockItems.Add(angle);
-                //    ctx.SaveChanges();
-            }
         }
 
         #region Button Clicks
@@ -123,7 +113,7 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
         public async void GenerateCutList() {
             IsLoading = true;
             await Task.Run(() => CutListMaker.Generate(SourceText, IsDetailed));
-            RefreshGrids();
+            CutListMaker.RefreshGrids();
             IsLoading = false;
         }
 

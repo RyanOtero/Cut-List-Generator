@@ -24,28 +24,71 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
         bool inBodyFolder = false;
         private ObservableCollection<CutItem> cutList;
         private readonly object asyncLock;
-        private DataTable orderList;
+        private ObservableCollection<object> orderList;
+        private ObservableCollection<Vendor> vendors;
+        private ObservableCollection<StockItem> stockItems;
 
-        public DataTable OrderList {
+
+        public ObservableCollection<object> OrderList {
             get => orderList;
             set {
                 orderList = value;
                 BindingOperations.EnableCollectionSynchronization(orderList.AsEnumerable(), asyncLock);
-
             }
         }
 
         public ObservableCollection<CutItem> CutList {
-            get => cutList; set {
+            get => cutList;
+            set {
                 cutList = value;
                 BindingOperations.EnableCollectionSynchronization(cutList, asyncLock);
             }
         }
-
-        public CutListMaker(ObservableCollection<CutItem> cList) {
-            asyncLock = new object();
-            CutList = cList;
+        public ObservableCollection<Vendor> Vendors {
+            get => vendors;
+            set {
+                vendors = value;
+                BindingOperations.EnableCollectionSynchronization(vendors, asyncLock);
+            }
         }
+
+        public ObservableCollection<StockItem> StockItems {
+            get => stockItems;
+            set {
+                stockItems = value;
+                BindingOperations.EnableCollectionSynchronization(stockItems, asyncLock);
+            }
+        }
+
+        public CutListMaker() {
+            asyncLock = new object();
+            CutList = new ObservableCollection<CutItem>();
+            Vendors = new ObservableCollection<Vendor>();
+            StockItems = new ObservableCollection<StockItem>();
+            OrderList = new DataTable();
+            RefreshGrids();
+        }
+
+        public void RefreshGrids() {
+            StockItems.Clear();
+            Vendors.Clear();
+            using (var ctx = new CutListGeneratorContext()) {
+                var sTypes = from i in ctx.StockItems
+                             select i;
+                foreach (StockItem item in sTypes.ToList()) {
+                    StockItems.Add(item);
+                }
+                var vendors = from i in ctx.Vendors
+                              select i;
+                foreach (Vendor item in vendors.ToList()) {
+                    Vendors.Add(item);
+                }
+                //    var angle = StockItem.CreateStockItem(description: "angle");
+                //    ctx.StockItems.Add(angle);
+                //    ctx.SaveChanges();
+            }
+        }
+
         public void NewCutList() {
             CutList.Clear();
         }
@@ -99,14 +142,34 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
             while (swApp.ActiveDoc != null) {
                 swApp.CloseDoc(((ModelDoc2)swApp.ActiveDoc).GetPathName());
             }
-            if (isDetailed) {
-                SortCuts(tempList);
-                foreach (CutItem item in tempList) {
-                    CutList.Add(item);
+
+            SortCuts(tempList);
+            List<CutItem> tempOrderList = new List<CutItem>();
+            List<string> distinctOrderItems = new List<string>();
+            for (int i = tempList.Count - 1; i > -1; i--) {
+                if (distinctOrderItems.Contains(tempList[i].Description)) {
+                    continue;
                 }
-                return;
+                distinctOrderItems.Add(tempList[i].Description);
+                tempOrderList.Add(tempList[i]);
             }
-            Consolidate(tempList);
+
+            var queryResult = from c in tempOrderList
+                              join v in Vendors on c.StockType.Vendor equals v into tol
+                              from x in tol.DefaultIfEmpty()
+                              select new {c.StockType.ExternalDescription, c.StockType.StockLength, c.StockType.CostPerLength, c.StickNumber };
+
+            orderList = (List<object>)queryResult.ToList();
+
+
+
+            if (!isDetailed) {
+                foreach (CutItem item in tempList) {
+                    item.StickNumber = 0;
+                }
+                Consolidate(tempList);
+            }
+
             foreach (CutItem item in tempList) {
                 CutList.Add(item);
             }
