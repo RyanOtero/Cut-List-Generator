@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Solidworks_Cutlist_Generator.ViewModels;
 
 namespace Solidworks_Cutlist_Generator.Migrations
 {
     [DbContext(typeof(CutListGeneratorContext))]
-    partial class CutListGeneratorContextModelSnapshot : ModelSnapshot
+    [Migration("20210729185543_fixEntityRelationships")]
+    partial class fixEntityRelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

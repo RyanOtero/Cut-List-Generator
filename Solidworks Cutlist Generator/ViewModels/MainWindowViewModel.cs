@@ -3,8 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using Solidworks_Cutlist_Generator.Model;
-using Solidworks_Cutlist_Generator.BusinessLogic;
+using Solidworks_Cutlist_Generator.Models;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Data;
@@ -105,6 +104,7 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             Vendors = CutListMaker.Vendors;
             StockItems = CutListMaker.StockItems;
             LoadingText = "Loading...";
+            SourceText = @"D:\Projects\2021\1-Aluminum Awnings\1-0010 SL2 Consulting LLC Zephyrhills, FL\Drawing\SolidWorks\G-Gutter 1\G-Gutter 1.SLDASM";
             IsLoading = false;
         }
 

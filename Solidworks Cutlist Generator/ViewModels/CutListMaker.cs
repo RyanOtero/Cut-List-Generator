@@ -1,7 +1,7 @@
-﻿using SolidWorks.Interop.sldworks;
+﻿using Microsoft.EntityFrameworkCore;
+using SolidWorks.Interop.sldworks;
 using SolidWorks.Interop.swconst;
-using Solidworks_Cutlist_Generator.Model;
-using Solidworks_Cutlist_Generator.Utils;
+using Solidworks_Cutlist_Generator.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,10 +13,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using static Solidworks_Cutlist_Generator.BusinessLogic.Messenger;
+using static Solidworks_Cutlist_Generator.Utils.Messenger;
 
 
-namespace Solidworks_Cutlist_Generator.BusinessLogic {
+namespace Solidworks_Cutlist_Generator.Models {
     class CutListMaker {
         public SldWorks swApp;
         int fileerror = 0;
@@ -24,12 +24,12 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
         bool inBodyFolder = false;
         private ObservableCollection<CutItem> cutList;
         private readonly object asyncLock;
-        private ObservableCollection<object> orderList;
+        private ObservableCollection<OrderItem> orderList;
         private ObservableCollection<Vendor> vendors;
         private ObservableCollection<StockItem> stockItems;
 
 
-        public ObservableCollection<object> OrderList {
+        public ObservableCollection<OrderItem> OrderList {
             get => orderList;
             set {
                 orderList = value;
@@ -65,7 +65,7 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
             CutList = new ObservableCollection<CutItem>();
             Vendors = new ObservableCollection<Vendor>();
             StockItems = new ObservableCollection<StockItem>();
-            OrderList = new DataTable();
+            OrderList = new ObservableCollection<OrderItem>();
             RefreshGrids();
         }
 
@@ -91,6 +91,7 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
 
         public void NewCutList() {
             CutList.Clear();
+            OrderList.Clear();
         }
 
         public void Generate(string filePath, bool isDetailed) {
@@ -157,9 +158,11 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
             var queryResult = from c in tempOrderList
                               join v in Vendors on c.StockType.Vendor equals v into tol
                               from x in tol.DefaultIfEmpty()
-                              select new {c.StockType.ExternalDescription, c.StockType.StockLength, c.StockType.CostPerLength, c.StickNumber };
+                              select new OrderItem(c.Description, c.StockType.StockLength, c.Qty, c.StockType.CostPerLength, x.VendorName);
 
-            orderList = (List<object>)queryResult.ToList();
+            foreach (OrderItem item in queryResult) {
+                OrderList.Add(item);
+            }
 
 
 
@@ -178,6 +181,7 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
         }
 
         public void SortCuts(List<CutItem> cutList) {
+
             List<CutItem> temp = new List<CutItem>();
             StockItem sType = null;
             float leftOnStick = 0;
@@ -347,7 +351,7 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
                                     break;
                                 case "description":
                                     description = CustomPropResolvedVal;
-                                    sItem = ctx.StockItems.Where(item => item.InternalDescription == description).FirstOrDefault(); ;
+                                    sItem = ctx.StockItems.Include(i => i.Vendor).Where(item => item.InternalDescription == description).FirstOrDefault(); ;
                                     if (sItem == null) {
                                         isNew = true;
                                     }
@@ -377,7 +381,7 @@ namespace Solidworks_Cutlist_Generator.BusinessLogic {
                         Vendor vendor;
                         if (isNew) {
                             if (ctx.Vendors.Any()) {
-                                vendor = ctx.Vendors.AsEnumerable().ElementAt(0);
+                                vendor = new Vendor(ctx.Vendors.AsEnumerable().ElementAt(0));
                             } else {
                                 vendor = new Vendor("NULL", "NULL", "NULL", "NULL");
                                 ctx.Vendors.Add(vendor);

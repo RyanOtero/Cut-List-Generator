@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Solidworks_Cutlist_Generator.Model {
+namespace Solidworks_Cutlist_Generator.Models {
 
 
     public enum MaterialType { none, steel, aluminum, stainless_steel, titanium, brass, bronze, zinc, copper, nickel, wood }
@@ -22,6 +23,7 @@ namespace Solidworks_Cutlist_Generator.Model {
         private decimal costPerFoot;
 
         public int ID { get; set; }
+
         public MaterialType MatType {
             get => matType;
             set {
@@ -57,7 +59,8 @@ namespace Solidworks_Cutlist_Generator.Model {
                 OnPropertyChanged();
             }
         }
-        public Vendor Vendor {
+        [ForeignKey("SpeakerId")]
+        public virtual Vendor Vendor {
             get => vendor;
             set {
                 vendor = value;
@@ -74,7 +77,6 @@ namespace Solidworks_Cutlist_Generator.Model {
 
         public decimal CostPerLength => CostPerFoot * (decimal)StockLength;
         public float StockLengthInInches => StockLength * 12;
-        public int VendorIdentifier => Vendor.ID;
         public string MatTypeString => CultureInfo.InvariantCulture.TextInfo.ToTitleCase(MatType.ToString().Replace("_", " "));
         public string ProfTypeString => CultureInfo.InvariantCulture.TextInfo.ToTitleCase(ProfType.ToString().Replace("_", " "));
         public string CostPerFootString => string.Format("{0:c}", CostPerFoot);

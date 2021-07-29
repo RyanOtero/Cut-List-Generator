@@ -1,9 +1,8 @@
-﻿using Solidworks_Cutlist_Generator.Model;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Solidworks_Cutlist_Generator.BusinessLogic {
+namespace Solidworks_Cutlist_Generator.Models {
     public class CutItem : IComparable<CutItem>, IEquatable<CutItem>, INotifyPropertyChanged {
         private float length;
         private float angle1;
