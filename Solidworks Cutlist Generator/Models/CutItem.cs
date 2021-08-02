@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
 namespace Solidworks_Cutlist_Generator.Models {
@@ -9,14 +10,17 @@ namespace Solidworks_Cutlist_Generator.Models {
         private float angle2;
         private string angleDirection;
         private string angleRotation;
-        private StockItem stockType;
+        private StockItem stockItem;
         private int qty;
         private int stickNumber;
 
-        public StockItem StockType {
-            get => stockType;
+        public int ID { get; set; }
+
+        [ForeignKey("StockItemID")]
+        public StockItem StockItem {
+            get => stockItem;
             set {
-                stockType = value;
+                stockItem = value;
                 OnPropertyChanged();
             }
         }
@@ -29,7 +33,8 @@ namespace Solidworks_Cutlist_Generator.Models {
             }
         }
 
-        public string Description => StockType.InternalDescription;
+        public string Description => StockItem?.ExternalDescription;
+
         public float Length {
             get => length;
             set {
@@ -80,13 +85,13 @@ namespace Solidworks_Cutlist_Generator.Models {
 
         public string Cost {
             get {
-                return string.Format("{0:c}", StockType.CostPerFoot / 12m * (decimal)Length);
+                return string.Format("{0:c}", StockItem.CostPerFoot / 12m * (decimal)Length);
             }
         }
 
         public string TotalCost {
             get {
-                return string.Format("{0:c}", StockType.CostPerFoot / 12m * (decimal)Length * Qty);
+                return string.Format("{0:c}", StockItem.CostPerFoot / 12m * (decimal)Length * Qty);
             }
         }
 
@@ -101,8 +106,10 @@ namespace Solidworks_Cutlist_Generator.Models {
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public CutItem(StockItem stockType, int qty, float length, float angle1, float angle2, string angleDirection, string angleRotation, int stickNumber = 0) {
-            StockType = stockType;
+        public CutItem() { }
+
+        public CutItem(StockItem stockItem, int qty, float length, float angle1, float angle2, string angleDirection, string angleRotation, int stickNumber = 0) {
+            StockItem = stockItem;
             Qty = qty;
             Length = length;
             Angle1 = angle1;
@@ -117,20 +124,20 @@ namespace Solidworks_Cutlist_Generator.Models {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public int CompareTo(CutItem item2) {
-            int i = Description.CompareTo(item2.Description);
+        public int CompareTo(CutItem other) {
+            int i = Description.CompareTo(other.Description);
             if (i == -1) {
                 return -1;
             } else if (i == 1) {
                 return 1;
             } else {
-                int j = StickNumber.CompareTo(item2.StickNumber);
+                int j = StickNumber.CompareTo(other.StickNumber);
                 if (j == 1) {
                     return 1;
                 } else if (j == -1) {
                     return -1;
                 } else {
-                    int k = Length.CompareTo(item2.Length);
+                    int k = Length.CompareTo(other.Length);
                     if (k == -1) {
                         return 1;
                     } else if (k == 1) {
@@ -146,7 +153,7 @@ namespace Solidworks_Cutlist_Generator.Models {
         public bool Equals(CutItem other) {
             if (other.Length == Length &&
                 other.Description == Description &&
-                other.StockType == StockType &&
+                other.StockItem == StockItem &&
                 other.Qty == Qty &&
                 other.Angle1 == Angle1 &&
                 other.Angle2 == Angle2 &&
@@ -158,7 +165,7 @@ namespace Solidworks_Cutlist_Generator.Models {
         }
 
         public CutItem Clone() {
-            return new CutItem(StockType, 1, Length, Angle1, Angle2, AngleDirection, AngleRotation);
+            return new CutItem(StockItem, 1, Length, Angle1, Angle2, AngleDirection, AngleRotation);
         }
     }
 }

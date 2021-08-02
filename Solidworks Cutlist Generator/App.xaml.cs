@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Threading;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -11,5 +12,8 @@ namespace Solidworks_Cutlist_Generator {
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application {
+        public App() {
+            DispatcherHelper.Initialize();
+        }
     }
 }

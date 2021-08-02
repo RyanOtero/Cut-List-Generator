@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Windows.Data;
 using Solidworks_Cutlist_Generator.ViewModels.Commands;
+using System.Collections.Specialized;
+using System.Windows.Threading;
+using GalaSoft.MvvmLight.Threading;
 
 namespace Solidworks_Cutlist_Generator.ViewModels {
     class MainWindowViewModel : ViewModelBase {
@@ -26,7 +29,10 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
         private ObservableCollection<Vendor> vendors;
         private ObservableCollection<StockItem> stockItems;
         private ObservableCollection<CutItem> cutList;
-        private DataTable orderList;
+        private ObservableCollection<OrderItem> orderList;
+        private bool atWork;
+        private string orderTotal;
+        private string cutListTotal;
 
         public RelayCommand GenerateCommand { get; set; }
 
@@ -35,6 +41,8 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
         public RelayCommand ClearCommand { get; set; }
 
         public RelayCommand SourceBrowseCommand { get; set; }
+        
+        public RelayCommand RefreshCommand { get; set; }
 
         public CutListMaker CutListMaker { get; set; }
 
@@ -53,9 +61,9 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
         }
 
         public string SourceText {
-            get => sourceText;  
+            get => sourceText;
             set {
-                SetProperty(ref sourceText, value); 
+                SetProperty(ref sourceText, value);
             }
         }
 
@@ -63,6 +71,20 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             get => loadingText;
             set {
                 SetProperty(ref loadingText, value);
+            }
+        }
+
+        public string OrderTotal {
+            get => orderTotal;
+            set {
+                SetProperty(ref orderTotal, value);
+            }
+        }
+
+        public string CutListTotal {
+            get => cutListTotal;
+            set {
+                SetProperty(ref cutListTotal, value);
             }
         }
 
@@ -84,27 +106,36 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             }
         }
 
-        public DataTable OrderList {
+        public ObservableCollection<OrderItem> OrderList {
             get => orderList;
             set {
                 SetProperty(ref orderList, value);
-                BindingOperations.EnableCollectionSynchronization(orderList.AsEnumerable(), asyncLock);
+                BindingOperations.EnableCollectionSynchronization(orderList, asyncLock);
             }
         }
 
         public MainWindowViewModel() {
-            GenerateCommand = new RelayCommand(() => GenerateCutList() , () => !string.IsNullOrEmpty(SourceText));
+            GenerateCommand = new RelayCommand(() => GenerateCutList(), () => !string.IsNullOrEmpty(SourceText));
             SaveCommand = new RelayCommand(() => SaveCutList(), () => CutList != null && CutList.Count > 0);
             ClearCommand = new RelayCommand(() => ClearCutList(), () => CutList != null && CutList.Count > 0);
             SourceBrowseCommand = new RelayCommand(() => SourceBrowse());
+            RefreshCommand = new RelayCommand(() => CutListMaker.RefreshGrids());
             asyncLock = new object();
-            CutList = new ObservableCollection<CutItem>();
-            OrderList = new DataTable();
             CutListMaker = new CutListMaker();
+            CutList = CutListMaker.CutList;
+            OrderList = CutListMaker.OrderList;
             Vendors = CutListMaker.Vendors;
             StockItems = CutListMaker.StockItems;
             LoadingText = "Loading...";
-            SourceText = @"D:\Projects\2021\1-Aluminum Awnings\1-0010 SL2 Consulting LLC Zephyrhills, FL\Drawing\SolidWorks\G-Gutter 1\G-Gutter 1.SLDASM";
+            OrderTotal = "Total:";
+            CutListTotal = "Total:";
+
+            atWork = false;
+            if (atWork) {
+                SourceText = @"D:\Projects\2021\1-Aluminum Awnings\1-0010 SL2 Consulting LLC Zephyrhills, FL\Drawing\SolidWorks\G-Gutter 1\G-Gutter 1.SLDASM";
+            } else {
+                SourceText = @"C:\Users\Ryan\Desktop\Drawing\Wooden Structures\Pergola - 16ft x 11ft.SLDPRT";
+            }
             IsLoading = false;
         }
 
@@ -115,6 +146,17 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             await Task.Run(() => CutListMaker.Generate(SourceText, IsDetailed));
             CutListMaker.RefreshGrids();
             IsLoading = false;
+            decimal runningTotal = 0;
+            foreach (OrderItem item in orderList) {
+                runningTotal += decimal.Parse(item.TotalCost.Substring(1));
+            }
+            OrderTotal = "Total: " + string.Format("{0:c}", runningTotal);
+            runningTotal = 0;
+            foreach (CutItem item in cutList) {
+                runningTotal += decimal.Parse(item.TotalCost.Substring(1));
+            }
+            CutListTotal = "Total: " + string.Format("{0:c}", runningTotal);
+
         }
 
         public void SourceBrowse() {

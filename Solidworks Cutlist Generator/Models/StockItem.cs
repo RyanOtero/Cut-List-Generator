@@ -38,6 +38,7 @@ namespace Solidworks_Cutlist_Generator.Models {
                 OnPropertyChanged();
             }
         }
+
         public float StockLength {
             get => stockLength;
             set {
@@ -59,7 +60,7 @@ namespace Solidworks_Cutlist_Generator.Models {
                 OnPropertyChanged();
             }
         }
-        [ForeignKey("SpeakerId")]
+        [ForeignKey("VendorID")]
         public virtual Vendor Vendor {
             get => vendor;
             set {
@@ -75,6 +76,7 @@ namespace Solidworks_Cutlist_Generator.Models {
             }
         }
 
+        public string VendorName { get { return Vendor.VendorName; } }
         public decimal CostPerLength => CostPerFoot * (decimal)StockLength;
         public float StockLengthInInches => StockLength * 12;
         public string MatTypeString => CultureInfo.InvariantCulture.TextInfo.ToTitleCase(MatType.ToString().Replace("_", " "));
@@ -350,6 +352,41 @@ namespace Solidworks_Cutlist_Generator.Models {
                 }
             }
             return pType;
+        }
+
+        public int CompareTo(StockItem other) {
+            if (other != null) {
+                if (ID == other.ID) {
+                    if (Vendor.ID == other.Vendor.ID) {
+                        if (InternalDescription == other.InternalDescription) {
+                            if (ExternalDescription == other.ExternalDescription) {
+                                if (CostPerFoot == other.CostPerFoot) {
+                                    if (MatType == other.MatType) {
+                                        if (ProfType == other.ProfType) {
+                                            return StockLength.CompareTo(other.StockLength);
+                                        } else {
+                                            ProfType.CompareTo(other.ProfType);
+                                        }
+                                    } else {
+                                        MatType.CompareTo(other.MatType);
+                                    }
+                                } else {
+                                    return CostPerFoot.CompareTo(other.CostPerFoot);
+                                }
+                            } else {
+                                return ExternalDescription.CompareTo(other.ExternalDescription);
+                            }
+                        } else {
+                            return InternalDescription.CompareTo(other.InternalDescription);
+                        }
+                    } else {
+                        return Vendor.ID.CompareTo(other.Vendor.ID);
+                    }
+                } else {
+                    return ID.CompareTo(other.ID);
+                }
+            }
+            return 1;
         }
 
         public override bool Equals(object obj) => this.Equals(obj as StockItem);

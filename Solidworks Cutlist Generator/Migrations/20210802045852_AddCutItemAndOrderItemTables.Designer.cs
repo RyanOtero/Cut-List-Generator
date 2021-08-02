@@ -9,8 +9,8 @@ using Solidworks_Cutlist_Generator.Models;
 namespace Solidworks_Cutlist_Generator.Migrations
 {
     [DbContext(typeof(CutListGeneratorContext))]
-    [Migration("20210729185543_fixEntityRelationships")]
-    partial class fixEntityRelationships
+    [Migration("20210802045852_AddCutItemAndOrderItemTables")]
+    partial class AddCutItemAndOrderItemTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,62 @@ namespace Solidworks_Cutlist_Generator.Migrations
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.8");
+
+            modelBuilder.Entity("Solidworks_Cutlist_Generator.Models.CutItem", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<float>("Angle1")
+                        .HasColumnType("float");
+
+                    b.Property<float>("Angle2")
+                        .HasColumnType("float");
+
+                    b.Property<string>("AngleDirection")
+                        .HasColumnType("text");
+
+                    b.Property<string>("AngleRotation")
+                        .HasColumnType("text");
+
+                    b.Property<float>("Length")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Qty")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StickNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StockItemID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("StockItemID");
+
+                    b.ToTable("CutItems");
+                });
+
+            modelBuilder.Entity("Solidworks_Cutlist_Generator.Models.OrderItem", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Qty")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StockItemID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("StockItemID");
+
+                    b.ToTable("OrderItems");
+                });
 
             modelBuilder.Entity("Solidworks_Cutlist_Generator.Models.StockItem", b =>
                 {
@@ -40,9 +96,6 @@ namespace Solidworks_Cutlist_Generator.Migrations
                     b.Property<int>("ProfType")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SpeakerId")
-                        .HasColumnType("int");
-
                     b.Property<float>("StockLength")
                         .HasColumnType("float");
 
@@ -50,8 +103,6 @@ namespace Solidworks_Cutlist_Generator.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("SpeakerId");
 
                     b.HasIndex("VendorID");
 
@@ -81,13 +132,27 @@ namespace Solidworks_Cutlist_Generator.Migrations
                     b.ToTable("Vendors");
                 });
 
+            modelBuilder.Entity("Solidworks_Cutlist_Generator.Models.CutItem", b =>
+                {
+                    b.HasOne("Solidworks_Cutlist_Generator.Models.StockItem", "StockItem")
+                        .WithMany()
+                        .HasForeignKey("StockItemID");
+
+                    b.Navigation("StockItem");
+                });
+
+            modelBuilder.Entity("Solidworks_Cutlist_Generator.Models.OrderItem", b =>
+                {
+                    b.HasOne("Solidworks_Cutlist_Generator.Models.StockItem", "StockItem")
+                        .WithMany()
+                        .HasForeignKey("StockItemID");
+
+                    b.Navigation("StockItem");
+                });
+
             modelBuilder.Entity("Solidworks_Cutlist_Generator.Models.StockItem", b =>
                 {
                     b.HasOne("Solidworks_Cutlist_Generator.Models.Vendor", "Vendor")
-                        .WithMany()
-                        .HasForeignKey("SpeakerId");
-
-                    b.HasOne("Solidworks_Cutlist_Generator.Models.Vendor", null)
                         .WithMany("StockItems")
                         .HasForeignKey("VendorID");
 

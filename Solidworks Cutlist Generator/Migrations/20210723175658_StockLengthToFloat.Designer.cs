@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Solidworks_Cutlist_Generator.ViewModels;
+using Solidworks_Cutlist_Generator.Models;
 
 namespace Solidworks_Cutlist_Generator.Migrations
 {

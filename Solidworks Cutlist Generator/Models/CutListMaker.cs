@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SolidWorks.Interop.sldworks;
 using SolidWorks.Interop.swconst;
+using Solidworks_Cutlist_Generator.Utils;
 using Solidworks_Cutlist_Generator.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -156,15 +157,15 @@ namespace Solidworks_Cutlist_Generator.Models {
             }
 
             var queryResult = from c in tempOrderList
-                              join v in Vendors on c.StockType.Vendor equals v into tol
+                              join v in Vendors on c.StockItem.Vendor equals v into tol
                               from x in tol.DefaultIfEmpty()
-                              select new OrderItem(c.Description, c.StockType.StockLength, c.Qty, c.StockType.CostPerLength, x.VendorName);
+                              select new OrderItem(c.StickNumber, c.StockItem);
 
             foreach (OrderItem item in queryResult) {
                 OrderList.Add(item);
             }
 
-
+            OrderList.Sort();
 
             if (!isDetailed) {
                 foreach (CutItem item in tempList) {
@@ -204,39 +205,39 @@ namespace Solidworks_Cutlist_Generator.Models {
             for (int i = count - 1; i > -1; i--) {
                 //First item initialization
                 if (i == count - 1) {
-                    sType = cutList[i].StockType;
+                    sType = cutList[i].StockItem;
                     cutList[i].StickNumber = stickNum;
-                    leftOnStick = cutList[i].StockType.StockLengthInInches - cutList[i].Length;
+                    leftOnStick = cutList[i].StockItem.StockLengthInInches - cutList[i].Length;
                     bool isLarger = false;
                     while (leftOnStick <= 0) {
                         stickNum++;
-                        leftOnStick += cutList[i].StockType.StockLengthInInches;
+                        leftOnStick += cutList[i].StockItem.StockLengthInInches;
                         isLarger = true;
                     }
                     if (isLarger) stickNum++;
                     temp.Add(cutList[i]);
                     cutList.RemoveAt(i);
                     //If still same stock type as previous
-                } else if (cutList[i].StockType == sType) {
+                } else if (cutList[i].StockItem == sType) {
                     //If there is enough left on the current stick
                     if (leftOnStick >= cutList[i].Length) {
                         leftOnStick -= cutList[i].Length;
                         cutList[i].StickNumber = stickNum;
                         if (leftOnStick == 0) {
                             stickNum++;
-                            leftOnStick = cutList[i].StockType.StockLengthInInches;
+                            leftOnStick = cutList[i].StockItem.StockLengthInInches;
                         }
                         temp.Add(cutList[i]);
                         cutList.RemoveAt(i);
                         //If the piece is longer than the stock length
                     } else if (cutList[i].Length > sType.StockLengthInInches) {
-                        sType = cutList[i].StockType;
-                        leftOnStick = cutList[i].StockType.StockLengthInInches - cutList[i].Length;
+                        sType = cutList[i].StockItem;
+                        leftOnStick = cutList[i].StockItem.StockLengthInInches - cutList[i].Length;
                         cutList[i].StickNumber = stickNum;
                         bool isLarger = false;
                         while (leftOnStick <= 0) {
                             stickNum++;
-                            leftOnStick += cutList[i].StockType.StockLengthInInches;
+                            leftOnStick += cutList[i].StockItem.StockLengthInInches;
                             isLarger = true;
                         }
                         if (isLarger) stickNum++;
@@ -245,17 +246,17 @@ namespace Solidworks_Cutlist_Generator.Models {
                         //If the piece is longer than current stick
                     } else {
                         bool isBroken = false;
-                        bool areMoreOfStockType = false;
+                        bool areMoreOfStockItem = false;
                         //check what other cuts may fit on the current stick and remove them
                         for (int j = i - 1; j > -1; j--) {
-                            if (cutList[j].StockType == sType) {
-                                areMoreOfStockType = true;
+                            if (cutList[j].StockItem == sType) {
+                                areMoreOfStockItem = true;
                                 if (leftOnStick >= cutList[j].Length) {
                                     leftOnStick -= cutList[j].Length;
                                     cutList[j].StickNumber = stickNum;
                                     if (leftOnStick == 0) {
                                         stickNum++;
-                                        leftOnStick = cutList[i].StockType.StockLengthInInches;
+                                        leftOnStick = cutList[i].StockItem.StockLengthInInches;
                                     }
                                     temp.Add(cutList[j]);
                                     cutList.RemoveAt(j);
@@ -264,8 +265,8 @@ namespace Solidworks_Cutlist_Generator.Models {
                             }
                         }
                         //if no other cuts will fit on current stick, go to full stock length and retry current iteration
-                        if (!isBroken && areMoreOfStockType) {
-                            leftOnStick = cutList[i].StockType.StockLengthInInches;
+                        if (!isBroken && areMoreOfStockItem) {
+                            leftOnStick = cutList[i].StockItem.StockLengthInInches;
                             stickNum++;
                             i++;
                             continue;
@@ -281,16 +282,16 @@ namespace Solidworks_Cutlist_Generator.Models {
                             continue;
                         }
                     }
-                    // If new stocktype
+                    // If new StockItem
                 } else {
-                    sType = cutList[i].StockType;
+                    sType = cutList[i].StockItem;
                     stickNum = 1;
-                    leftOnStick = cutList[i].StockType.StockLengthInInches - cutList[i].Length;
+                    leftOnStick = cutList[i].StockItem.StockLengthInInches - cutList[i].Length;
                     cutList[i].StickNumber = stickNum;
                     bool isLarger = false;
                     while (leftOnStick <= 0) {
                         stickNum++;
-                        leftOnStick += cutList[i].StockType.StockLengthInInches;
+                        leftOnStick += cutList[i].StockItem.StockLengthInInches;
                         isLarger = true;
                     }
                     if (isLarger) stickNum++;
@@ -351,7 +352,8 @@ namespace Solidworks_Cutlist_Generator.Models {
                                     break;
                                 case "description":
                                     description = CustomPropResolvedVal;
-                                    sItem = ctx.StockItems.Include(i => i.Vendor).Where(item => item.InternalDescription == description).FirstOrDefault(); ;
+                                    var sItems = ctx.StockItems.Include(i => i.Vendor).ToList();
+                                    sItem = sItems.Where(item => item.InternalDescription == description).FirstOrDefault();
                                     if (sItem == null) {
                                         isNew = true;
                                     }

@@ -12,10 +12,12 @@
           "Microsoft.EntityFrameworkCore.Design": "5.0.8",
           "Microsoft.EntityFrameworkCore.Proxies": "5.0.8",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.8",
+          "Microsoft.Extensions.Logging.Debug": "5.0.0",
+          "MvvmLightLibs": "5.4.1.1",
           "MySql.EntityFrameworkCore": "5.0.5",
           "System.Runtime": "4.3.1",
-          "SolidWorks.Interop.sldworks": "23.0.0.5020",
-          "SolidWorks.Interop.swconst": "23.0.0.5020"
+          "SolidWorks.Interop.sldworks": "28.0.0.5028",
+          "SolidWorks.Interop.swconst": "28.0.0.5028"
         },
         "runtime": {
           "Solidworks Cut List Generator.dll": {}
@@ -251,6 +253,19 @@
           }
         }
       },
+      "Microsoft.Extensions.Logging.Debug/5.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Logging": "5.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "5.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Logging.Debug.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.51904"
+          }
+        }
+      },
       "Microsoft.Extensions.Options/5.0.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
@@ -283,6 +298,26 @@
       "Microsoft.Win32.SystemEvents/4.7.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0"
+        }
+      },
+      "MvvmLightLibs/5.4.1.1": {
+        "runtime": {
+          "lib/net45/GalaSoft.MvvmLight.Extras.dll": {
+            "assemblyVersion": "5.4.1.0",
+            "fileVersion": "5.4.1.0"
+          },
+          "lib/net45/GalaSoft.MvvmLight.Platform.dll": {
+            "assemblyVersion": "5.4.1.0",
+            "fileVersion": "5.4.1.0"
+          },
+          "lib/net45/GalaSoft.MvvmLight.dll": {
+            "assemblyVersion": "5.4.1.0",
+            "fileVersion": "5.4.1.0"
+          },
+          "lib/net45/System.Windows.Interactivity.dll": {
+            "assemblyVersion": "4.5.0.0",
+            "fileVersion": "3.0.40218.0"
+          }
         }
       },
       "MySql.Data/8.0.26": {
@@ -1108,19 +1143,19 @@
           "System.Xml.ReaderWriter": "4.3.0"
         }
       },
-      "SolidWorks.Interop.sldworks/23.0.0.5020": {
+      "SolidWorks.Interop.sldworks/28.0.0.5028": {
         "runtime": {
           "SolidWorks.Interop.sldworks.dll": {
-            "assemblyVersion": "23.0.0.5020",
-            "fileVersion": "23.0.0.5020"
+            "assemblyVersion": "28.0.0.5028",
+            "fileVersion": "28.0.0.5028"
           }
         }
       },
-      "SolidWorks.Interop.swconst/23.0.0.5020": {
+      "SolidWorks.Interop.swconst/28.0.0.5028": {
         "runtime": {
           "SolidWorks.Interop.swconst.dll": {
-            "assemblyVersion": "23.0.0.5020",
-            "fileVersion": "23.0.0.5020"
+            "assemblyVersion": "28.0.0.5028",
+            "fileVersion": "28.0.0.5028"
           }
         }
       }
@@ -1286,6 +1321,13 @@
       "path": "microsoft.extensions.logging.abstractions/5.0.0",
       "hashPath": "microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512"
     },
+    "Microsoft.Extensions.Logging.Debug/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9dvt0xqRrClvhaPNpfyS39WxnW9G55l5lrV5ZX7IrEgwo4VwtmJKtoPiKVYKbhAuOBGUI5WY3hWLvF+PSbJp5A==",
+      "path": "microsoft.extensions.logging.debug/5.0.0",
+      "hashPath": "microsoft.extensions.logging.debug.5.0.0.nupkg.sha512"
+    },
     "Microsoft.Extensions.Options/5.0.0": {
       "type": "package",
       "serviceable": true,
@@ -1327,6 +1369,13 @@
       "sha512": "sha512-mtVirZr++rq+XCDITMUdnETD59XoeMxSpLRIII7JRI6Yj0LEDiO1pPn0ktlnIj12Ix8bfvQqQDMMIF9wC98oCA==",
       "path": "microsoft.win32.systemevents/4.7.0",
       "hashPath": "microsoft.win32.systemevents.4.7.0.nupkg.sha512"
+    },
+    "MvvmLightLibs/5.4.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xYpVzOYnIz/M6T0pdc3w5t0vrt2ZKspSS+CZjQ+pZE+5yHv9qXSWkncHJXb6D7Egstalso4ivnIUkA1xEClViw==",
+      "path": "mvvmlightlibs/5.4.1.1",
+      "hashPath": "mvvmlightlibs.5.4.1.1.nupkg.sha512"
     },
     "MySql.Data/8.0.26": {
       "type": "package",
@@ -1972,12 +2021,12 @@
       "path": "system.xml.xmldocument/4.3.0",
       "hashPath": "system.xml.xmldocument.4.3.0.nupkg.sha512"
     },
-    "SolidWorks.Interop.sldworks/23.0.0.5020": {
+    "SolidWorks.Interop.sldworks/28.0.0.5028": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "SolidWorks.Interop.swconst/23.0.0.5020": {
+    "SolidWorks.Interop.swconst/28.0.0.5028": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
