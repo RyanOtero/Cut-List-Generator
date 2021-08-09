@@ -11,13 +11,13 @@ namespace Solidworks_Cutlist_Generator.ViewModels.Commands {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
-        private Action methodToExecute;
+        private Action<object> methodToExecute;
         private Func<bool> canExecuteEvaluator;
-        public RelayCommand(Action methodToExecute, Func<bool> canExecuteEvaluator) {
+        public RelayCommand(Action<object> methodToExecute, Func<bool> canExecuteEvaluator) {
             this.methodToExecute = methodToExecute;
             this.canExecuteEvaluator = canExecuteEvaluator;
         }
-        public RelayCommand(Action methodToExecute)
+        public RelayCommand(Action<object> methodToExecute)
             : this(methodToExecute, null) {
         }
         public bool CanExecute(object parameter) {
@@ -29,7 +29,7 @@ namespace Solidworks_Cutlist_Generator.ViewModels.Commands {
             }
         }
         public void Execute(object parameter) {
-            this.methodToExecute.Invoke();
+            this.methodToExecute.Invoke(parameter);
         }
     }
 }

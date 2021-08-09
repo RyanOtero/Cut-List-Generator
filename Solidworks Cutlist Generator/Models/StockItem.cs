@@ -9,11 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Solidworks_Cutlist_Generator.Models {
-
-
-    public enum MaterialType { none, steel, aluminum, stainless_steel, titanium, brass, bronze, zinc, copper, nickel, wood }
-    public enum ProfileType { custom, angle, channel, flat_bar, solid_square, solid_rectangular, solid_round, solid_triangular, square_tube, rectangular_tube, round_tube, pipe }
     public class StockItem : IEquatable<StockItem>, INotifyPropertyChanged {
+
+        #region Fields
         private MaterialType matType;
         private ProfileType profType;
         private float stockLength;
@@ -21,7 +19,10 @@ namespace Solidworks_Cutlist_Generator.Models {
         private string externalDescription;
         private Vendor vendor;
         private decimal costPerFoot;
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
+        #region Properties
         public int ID { get; set; }
 
         public MaterialType MatType {
@@ -76,20 +77,20 @@ namespace Solidworks_Cutlist_Generator.Models {
             }
         }
 
-        public string VendorName { get { return Vendor.VendorName; } }
+        public string VendorName { get { return Vendor?.VendorName; } }
         public decimal CostPerLength => CostPerFoot * (decimal)StockLength;
         public float StockLengthInInches => StockLength * 12;
         public string MatTypeString => CultureInfo.InvariantCulture.TextInfo.ToTitleCase(MatType.ToString().Replace("_", " "));
         public string ProfTypeString => CultureInfo.InvariantCulture.TextInfo.ToTitleCase(ProfType.ToString().Replace("_", " "));
         public string CostPerFootString => string.Format("{0:c}", CostPerFoot);
         public string CostPerLengthString => string.Format("{0:c}", CostPerLength);
+        #endregion
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        #region Constructors
         public StockItem() { }
 
         public StockItem(Vendor vendor = null, MaterialType materialType = MaterialType.steel,
-            ProfileType profType = ProfileType.square_tube, string series = "", decimal costPerFoot = 0m,
+            ProfileType profType = ProfileType.square_tube, decimal costPerFoot = 0m,
             float stockLength = 24, string internalDescription = "", string externalDescription = "") {
             MatType = materialType;
             ProfType = profType;
@@ -99,11 +100,15 @@ namespace Solidworks_Cutlist_Generator.Models {
             ExternalDescription = externalDescription;
             Vendor = vendor;
         }
+        #endregion
 
+        #region INotifyPropertyChanged
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
 
+        #region From Description Methods
         public static MaterialType MaterialFromDescription(string desc) {
             MaterialType mType = MaterialType.none;
             bool breaker = false;
@@ -353,7 +358,9 @@ namespace Solidworks_Cutlist_Generator.Models {
             }
             return pType;
         }
+        #endregion
 
+        #region Comparison Methods
         public int CompareTo(StockItem other) {
             if (other != null) {
                 if (ID == other.ID) {
@@ -437,4 +444,5 @@ namespace Solidworks_Cutlist_Generator.Models {
 
         public static bool operator !=(StockItem left, StockItem right) => !(left == right);
     }
+    #endregion
 }

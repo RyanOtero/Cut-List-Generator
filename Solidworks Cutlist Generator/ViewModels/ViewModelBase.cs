@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Solidworks_Cutlist_Generator.ViewModels {
     public abstract class ViewModelBase : INotifyPropertyChanged {
@@ -25,6 +26,10 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             storage = value;
             this.OnPropertyChanged(propertyName);
             return true;
+        }
+        public void CloseWin(object obj) {
+            Window win = obj as Window;
+            win.Close();
         }
     }
 }

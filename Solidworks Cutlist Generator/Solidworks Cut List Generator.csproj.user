@@ -7,15 +7,30 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\Window1.xaml.cs">
+    <Compile Update="MySQLInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Views\AddVendorWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\EditVendorWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Views\AddStockItemWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\EditStockItemWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\EditVendorWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Window1.xaml">
+    <Page Update="Views\AddVendorWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

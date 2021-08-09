@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\Ryan\source\repos\Cut List Generator\Solidworks Cutlist Generator\App.xaml
-2-614064983
+51390539400
 
-26870314242
-224-479056619
-Views\MainWindow.xaml;Views\Window1.xaml;
+44928876237
+231-1195688153
+Views\AddStockItemWindow.xaml;Views\AddVendorWindow.xaml;Views\EditStockItemWindow.xaml;Views\EditVendorWindow.xaml;Views\MainWindow.xaml;
 
 False
 

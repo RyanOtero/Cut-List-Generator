@@ -9,12 +9,16 @@ using System.Runtime.CompilerServices;
 
 namespace Solidworks_Cutlist_Generator.Models {
     public class Vendor : IEquatable<Vendor>, INotifyPropertyChanged {
+
+        #region Fields
         private string vendorName;
         private string phoneNumber;
         private string contactName;
         private string contactEmail;
-        private List<StockItem> stockItems;
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
+        #region Properties
         public int ID { get; set; }
         public string VendorName {
             get => vendorName; set {
@@ -40,23 +44,14 @@ namespace Solidworks_Cutlist_Generator.Models {
                 OnPropertyChanged();
             }
         }
+        #endregion
 
-        public virtual List<StockItem> StockItems {
-            get => stockItems; set {
-                stockItems = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        
+        #region Constructors        
         public Vendor(string vendorName = "", string phoneNumber = "", string contactName = "", string contactEmail = "") {
             VendorName = vendorName;
             PhoneNumber = phoneNumber;
             ContactName = contactName;
             ContactEmail = contactEmail;
-            StockItems = new List<StockItem>();
         }
 
         public Vendor(Vendor other) {
@@ -64,14 +59,16 @@ namespace Solidworks_Cutlist_Generator.Models {
             PhoneNumber = other.phoneNumber;
             ContactName = other.contactName;
             ContactEmail = other.contactEmail;
-            StockItems = new List<StockItem>();
-
         }
+        #endregion
 
+        #region INotifyPropertyChanged
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
 
+        #region Comparison
         public override bool Equals(object obj) => this.Equals(obj as Vendor);
 
         public override int GetHashCode() => ID.GetHashCode();
@@ -116,4 +113,5 @@ namespace Solidworks_Cutlist_Generator.Models {
 
         public static bool operator !=(Vendor left, Vendor right) => !(left == right);
     }
+    #endregion
 }

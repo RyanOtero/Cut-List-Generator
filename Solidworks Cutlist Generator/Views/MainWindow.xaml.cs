@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Solidworks_Cutlist_Generator {
+namespace Solidworks_Cutlist_Generator.Views {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>

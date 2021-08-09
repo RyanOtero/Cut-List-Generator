@@ -12,7 +12,6 @@ namespace Solidworks_Cutlist_Generator.Utils {
             MessageBoxImage icon = MessageBoxImage.Warning;
             MessageBoxResult result;
             result = MessageBox.Show(text, caption, button, icon, MessageBoxResult.Yes);
-            return;
         }
     }
 }

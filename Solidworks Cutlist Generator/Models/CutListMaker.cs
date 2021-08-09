@@ -6,9 +6,11 @@ using Solidworks_Cutlist_Generator.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,7 +20,9 @@ using static Solidworks_Cutlist_Generator.Utils.Messenger;
 
 
 namespace Solidworks_Cutlist_Generator.Models {
-    class CutListMaker {
+    public class CutListMaker: INotifyPropertyChanged {
+
+        #region Fields
         public SldWorks swApp;
         int fileerror = 0;
         int filewarning = 0;
@@ -28,13 +32,23 @@ namespace Solidworks_Cutlist_Generator.Models {
         private ObservableCollection<OrderItem> orderList;
         private ObservableCollection<Vendor> vendors;
         private ObservableCollection<StockItem> stockItems;
+        private string connectionString;
+        private bool hadError;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        #region Properties
+        public string ConnectionString {
+            get => connectionString;
+            set { connectionString = value; OnPropertyChanged(); }
+        }
 
         public ObservableCollection<OrderItem> OrderList {
             get => orderList;
             set {
                 orderList = value;
-                BindingOperations.EnableCollectionSynchronization(orderList.AsEnumerable(), asyncLock);
+                BindingOperations.EnableCollectionSynchronization(orderList, asyncLock);
             }
         }
 
@@ -60,6 +74,20 @@ namespace Solidworks_Cutlist_Generator.Models {
                 BindingOperations.EnableCollectionSynchronization(stockItems, asyncLock);
             }
         }
+        #endregion
+
+        #region Constructors
+        public CutListMaker(string cString) {
+            asyncLock = new object();
+            CutList = new ObservableCollection<CutItem>();
+            Vendors = new ObservableCollection<Vendor>();
+            StockItems = new ObservableCollection<StockItem>();
+            OrderList = new ObservableCollection<OrderItem>();
+            ConnectionString = cString;
+            if (!string.IsNullOrEmpty(ConnectionString)) {
+                Refresh();
+            }
+        }
 
         public CutListMaker() {
             asyncLock = new object();
@@ -67,26 +95,39 @@ namespace Solidworks_Cutlist_Generator.Models {
             Vendors = new ObservableCollection<Vendor>();
             StockItems = new ObservableCollection<StockItem>();
             OrderList = new ObservableCollection<OrderItem>();
-            RefreshGrids();
         }
+        #endregion
 
-        public void RefreshGrids() {
+        #region INotifyPropertyChanged
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
+        #region Methods
+        public void Refresh() {
+            if (string.IsNullOrEmpty(ConnectionString)) {
+                ErrorMessage("Database Error", "There was an error while accessing the database.");
+                return;
+            }
             StockItems.Clear();
             Vendors.Clear();
-            using (var ctx = new CutListGeneratorContext()) {
-                var sTypes = from i in ctx.StockItems
-                             select i;
-                foreach (StockItem item in sTypes.ToList()) {
-                    StockItems.Add(item);
+            try {
+                using (var ctx = new CutListGeneratorContext(ConnectionString)) {
+                    var sTypes = ctx.StockItems.Include(s => s.Vendor);
+                    foreach (StockItem item in sTypes.ToList()) {
+                        StockItems.Add(item);
+                    }
+                    var vendors = ctx.Vendors;
+                    foreach (Vendor item in vendors.ToList()) {
+                        Vendors.Add(item);
+                    }
+                    //    var angle = StockItem.CreateStockItem(description: "angle");
+                    //    ctx.StockItems.Add(angle);
+                    //    ctx.SaveChanges();
                 }
-                var vendors = from i in ctx.Vendors
-                              select i;
-                foreach (Vendor item in vendors.ToList()) {
-                    Vendors.Add(item);
-                }
-                //    var angle = StockItem.CreateStockItem(description: "angle");
-                //    ctx.StockItems.Add(angle);
-                //    ctx.SaveChanges();
+            } catch (Exception) {
+                ErrorMessage("Database Error", "There was an error while accessing the database.");
             }
         }
 
@@ -94,11 +135,12 @@ namespace Solidworks_Cutlist_Generator.Models {
             CutList.Clear();
             OrderList.Clear();
         }
+        #endregion
 
+        #region Generation
         public void Generate(string filePath, bool isDetailed) {
-            if (string.IsNullOrEmpty(filePath)) {
-                return;
-            }
+            if (string.IsNullOrEmpty(filePath)) return;
+
             bool isPart;
             bool isAssembly;
 
@@ -144,7 +186,10 @@ namespace Solidworks_Cutlist_Generator.Models {
             while (swApp.ActiveDoc != null) {
                 swApp.CloseDoc(((ModelDoc2)swApp.ActiveDoc).GetPathName());
             }
-
+            if (hadError) {
+                hadError = false;
+                return;
+            }
             SortCuts(tempList);
             List<CutItem> tempOrderList = new List<CutItem>();
             List<string> distinctOrderItems = new List<string>();
@@ -340,7 +385,7 @@ namespace Solidworks_Cutlist_Generator.Models {
                 bool isNew = false;
                 StockItem sItem = null;
 
-                using (var ctx = new CutListGeneratorContext()) {
+                using (var ctx = new CutListGeneratorContext(ConnectionString)) {
                     try {
                         for (i = 0; i <= (vCustomPropNames.Length - 1); i++) {
                             string CustomPropName = (string)vCustomPropNames[i];
@@ -353,7 +398,7 @@ namespace Solidworks_Cutlist_Generator.Models {
                                 case "description":
                                     description = CustomPropResolvedVal;
                                     var sItems = ctx.StockItems.Include(i => i.Vendor).ToList();
-                                    sItem = sItems.Where(item => item.InternalDescription == description).FirstOrDefault();
+                                    sItem = sItems.SingleOrDefault(item => item.InternalDescription == description);
                                     if (sItem == null) {
                                         isNew = true;
                                     }
@@ -383,9 +428,10 @@ namespace Solidworks_Cutlist_Generator.Models {
                         Vendor vendor;
                         if (isNew) {
                             if (ctx.Vendors.Any()) {
-                                vendor = new Vendor(ctx.Vendors.AsEnumerable().ElementAt(0));
+                                vendor = ctx.Vendors.AsEnumerable().ElementAt(0);
                             } else {
-                                vendor = new Vendor("NULL", "NULL", "NULL", "NULL");
+                                vendor = new Vendor("N/A", "N/A", "N/A", "N/A");
+                                vendor.ID = 1;
                                 ctx.Vendors.Add(vendor);
                                 ctx.SaveChanges();
                             }
@@ -394,14 +440,16 @@ namespace Solidworks_Cutlist_Generator.Models {
                                 materialType: StockItem.MaterialFromDescription(description),
                                 profType: StockItem.ProfileFromDescription(description));
                             ctx.StockItems.Add(sItem);
+                            ctx.Vendors.Update(vendor);
                             ctx.SaveChanges();
                         }
                         isNew = false;
 
                         CutItem cItem = new CutItem(sItem, qty, length, angle1, angle2, angleDirection, angleRotation);
                         cutList.Add(cItem);
-                    } catch (Exception) {
-                        ErrorMessage("Database Error", "Cannot access database. Please check that it exists");
+                    } catch (Exception e) {
+                        ErrorMessage("Database Error", "There was an error while accessing the database.");
+                        hadError = true;
                     }
 
                 }
@@ -409,6 +457,7 @@ namespace Solidworks_Cutlist_Generator.Models {
         }
 
         public void FindCutlist(List<CutItem> cutList, Feature thisFeat, string ParentName) {
+            if (hadError) return;
             int BodyCount = 0;
 
             string FeatType = null;
@@ -457,6 +506,7 @@ namespace Solidworks_Cutlist_Generator.Models {
         }
 
         public void TraverseComponent(List<CutItem> tempList, Component2 swComp, Action<List<CutItem>, Feature, bool, string> action) {
+            if (hadError) return;
             object[] vChildComp;
             Component2 swChildComp;
 
@@ -475,6 +525,7 @@ namespace Solidworks_Cutlist_Generator.Models {
         }
 
         public void TraverseAssembly(List<CutItem> tempList, AssemblyDoc swAssy) {
+            if (hadError) return;
             object[] vChildComp;
             Component2 swChildComp;
 
@@ -491,9 +542,10 @@ namespace Solidworks_Cutlist_Generator.Models {
         }
 
         public void TraverseFeatures(List<CutItem> tempList, Feature thisFeat, bool isTopLevel, string ParentName) {
+            if (hadError) return;
             Feature curFeat = default(Feature);
             curFeat = thisFeat;
-            while ((curFeat != null)) {
+            while (curFeat != null) {
                 if (tempList != null) {
                     FindCutlist(tempList, curFeat, ParentName);
                 }
@@ -503,7 +555,7 @@ namespace Solidworks_Cutlist_Generator.Models {
                     TraverseFeatures(tempList, subfeat, false, curFeat.Name);
                     Feature nextSubFeat = default(Feature);
                     nextSubFeat = (Feature)subfeat.GetNextSubFeature();
-                    subfeat = (Feature)nextSubFeat;
+                    subfeat = nextSubFeat;
                     nextSubFeat = null;
                 }
                 subfeat = null;
@@ -516,5 +568,6 @@ namespace Solidworks_Cutlist_Generator.Models {
                 curFeat = (Feature)nextFeat;
             }
         }
+        #endregion
     }
 }
