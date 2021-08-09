@@ -24,6 +24,7 @@ namespace Solidworks_Cutlist_Generator {
             this.Properties["UserString"] = "";
             this.Properties["PasswordString"] = "";
             this.Properties["UseExternalDB"] = false;
+            this.Properties["IsCreated"] = false;
         }
 
         private void App_Startup(object sender, StartupEventArgs e) {

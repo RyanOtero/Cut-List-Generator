@@ -17,6 +17,7 @@ namespace Solidworks_Cutlist_Generator.Models {
             new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider()
         });        public static string ConnectionString { get; set; }
 
+        private static bool _created = bool.Parse(Application.Current.Properties["IsCreated"].ToString());
         private static bool isMySQL;
 
 
@@ -31,6 +32,13 @@ namespace Solidworks_Cutlist_Generator.Models {
             public CutListGeneratorContext(string connectionString) : base() {
             isMySQL = (bool)Application.Current.Properties["UseExternalDB"];
             ConnectionString = connectionString;
+            if (!_created && !isMySQL) {
+                //Database.Migrate();
+                Database.EnsureDeleted();
+                Database.EnsureCreated();
+                Application.Current.Properties["IsCreated"] = true;
+                _created = true;
+            }
             try {
                 ChangeTracker.LazyLoadingEnabled = false;
             } catch (Exception) {
