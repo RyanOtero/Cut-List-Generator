@@ -222,7 +222,33 @@ namespace Solidworks_Cutlist_Generator.Models {
             foreach (CutItem item in tempList) {
                 CutList.Add(item);
             }
-
+            try {
+                using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
+                    ctx.CutItems.RemoveRange(ctx.CutItems);
+                    ctx.OrderItems.RemoveRange(ctx.OrderItems);
+                    foreach (CutItem item in CutList) {
+                        ctx.CutItems.Add(item);
+                        ctx.Entry(item.StockItem.Vendor).State = EntityState.Unchanged;
+                        ctx.Entry(item.StockItem).State = EntityState.Unchanged;
+                    }
+                    //ctx.CutItems.AddRange(CutList);
+                    foreach (OrderItem item in OrderList) {
+                        ctx.Entry(item.StockItem.Vendor).State = EntityState.Detached;
+                        ctx.OrderItems.Add(item);
+                    }
+                   //ctx.OrderItems.AddRange(OrderList);
+                    ctx.SaveChanges();
+                }
+            } catch (Exception e) {
+                throw;
+            }
+            try {
+                using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
+                    ctx.SaveChanges();
+                }
+            } catch (Exception e) {
+                throw;
+            }
             swApp = null;
         }
 

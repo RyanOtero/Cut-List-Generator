@@ -55,6 +55,9 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
                 Application.Current.Properties["UseExternalDB"] = useExternalDB;
                 if (CutListMaker != null) {
                     CutListMaker.ConnectionString = ConnectionString;
+                    if (ConnectionString != "server=;database=;user=;password=") {
+                        CutListMaker.Refresh();
+                    }
                 }
             }
         }

@@ -33,14 +33,14 @@ namespace Solidworks_Cutlist_Generator.Models {
             isMySQL = (bool)Application.Current.Properties["UseExternalDB"];
             ConnectionString = connectionString;
             if (!_created && !isMySQL) {
-                //Database.Migrate();
+                
                 Database.EnsureDeleted();
                 Database.EnsureCreated();
                 Application.Current.Properties["IsCreated"] = true;
                 _created = true;
             }
             try {
-                ChangeTracker.LazyLoadingEnabled = false;
+                //ChangeTracker.LazyLoadingEnabled = false;
             } catch (Exception) {
                 //fail silently
             }
@@ -69,6 +69,7 @@ namespace Solidworks_Cutlist_Generator.Models {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             optionsBuilder.UseLoggerFactory(_myLoggerFactory);
+            optionsBuilder.EnableSensitiveDataLogging(true);
             if (isMySQL) {
                 try {
                     optionsBuilder.UseMySQL(ConnectionString);
