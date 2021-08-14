@@ -361,13 +361,13 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             OrderTotal = "Total:";
             CutListTotal = "Total:";
 
-            // For testing
-            //atWork = false;
-            //if (atWork) {
-            //    SourceText = @"D:\Projects\2021\1-Aluminum Awnings\1-0010 SL2 Consulting LLC Zephyrhills, FL\Drawing\SolidWorks\G-Gutter 1\G-Gutter 1.SLDASM";
-            //} else {
-            //    SourceText = @"C:\Users\Ryan\Desktop\Drawing\Wooden Structures\Pergola - 16ft x 11ft.SLDPRT";
-            //}
+            ////For testing
+            atWork = true;
+            if (atWork) {
+                SourceText = @"D:\Projects\2021\1-Aluminum Awnings\1-0010 SL2 Consulting LLC Zephyrhills, FL\Drawing\SolidWorks\G-Gutter 1\G-Gutter 1.SLDASM";
+            } else {
+                SourceText = @"C:\Users\Ryan\Desktop\Drawing\Wooden Structures\Pergola - 16ft x 11ft.SLDPRT";
+            }
 
             IsLoading = false;
         }

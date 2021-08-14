@@ -11,8 +11,31 @@ namespace Solidworks_Cutlist_Generator.Models {
     public class OrderItem : IComparable<OrderItem>, IEquatable<OrderItem>, INotifyPropertyChanged {
         private StockItem stockItem;
         private int qty;
+        private int stockItemID;
+        private string description;
+        private float stockLengthInFeet;
+        private decimal costPerLength;
+        private string vendorName;
 
         public int ID { get; set; }
+
+        [ForeignKey("StockItemID")]
+        public int StockItemID {
+            get => stockItemID;
+            set {
+                stockItemID = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public StockItem StockItem {
+            get => stockItem;
+            set {
+                stockItem = value;
+                OnPropertyChanged();
+            }
+        }
+
         public int Qty {
             get => qty;
             set {
@@ -21,19 +44,39 @@ namespace Solidworks_Cutlist_Generator.Models {
             }
         }
 
-        [ForeignKey("StockItemID")]
-        public StockItem StockItem {
-            get => stockItem;
+        public string Description {
+            get => description;
             set {
-                stockItem = value;
+                description = value;
                 OnPropertyChanged();
             }
         }
-        public string Description { get { return StockItem.ExternalDescription; } }
-        public float StockLengthInFeet { get { return StockItem.StockLength; } }
-        public decimal CostPerLength { get { return StockItem.CostPerLength; } }
-        public string VendorName { get { return StockItem.VendorName; } }
-        public string CostPerLengthString { get { return StockItem.CostPerLengthString; } }
+        
+        public float StockLengthInFeet {
+            get => stockLengthInFeet;
+            set {
+                stockLengthInFeet = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        public Decimal CostPerLength {
+            get => costPerLength;
+            set {
+                costPerLength = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        public string VendorName {
+            get => vendorName;
+            set {
+                vendorName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string CostPerLengthString { get { return string.Format("{0:c}", CostPerLength); } }
         public string TotalCost { get { return string.Format("{0:c}", CostPerLength * Qty); } }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -41,6 +84,10 @@ namespace Solidworks_Cutlist_Generator.Models {
         public OrderItem() { }
 
         public OrderItem(int qty, StockItem stockItem) {
+            Description = StockItem.ExternalDescription;
+            StockLengthInFeet = StockItem.StockLength;
+            VendorName = StockItem.VendorName;
+            CostPerLength = StockItem.CostPerLength;
             Qty = qty;
             StockItem = stockItem;
         }

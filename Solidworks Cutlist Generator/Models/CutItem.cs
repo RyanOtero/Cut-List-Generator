@@ -6,17 +6,30 @@ using System.Runtime.CompilerServices;
 namespace Solidworks_Cutlist_Generator.Models {
     public class CutItem : IComparable<CutItem>, IEquatable<CutItem>, INotifyPropertyChanged {
         private float length;
+        private string description;
         private float angle1;
         private float angle2;
         private string angleDirection;
         private string angleRotation;
         private StockItem stockItem;
+        private int stockItemID;
         private int qty;
         private int stickNumber;
+        private string cost;
+        private string totalCost;
 
         public int ID { get; set; }
 
         [ForeignKey("StockItemID")]
+        public int StockItemID {
+            get => stockItemID;
+            set {
+                stockItemID = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         public StockItem StockItem {
             get => stockItem;
             set {
@@ -33,7 +46,13 @@ namespace Solidworks_Cutlist_Generator.Models {
             }
         }
 
-        public string Description => StockItem?.ExternalDescription;
+        public string Description {
+            get => description;
+            set {
+                description = value;
+                OnPropertyChanged();
+            }
+        }
 
         public float Length {
             get => length;
@@ -84,14 +103,18 @@ namespace Solidworks_Cutlist_Generator.Models {
         }
 
         public string Cost {
-            get {
-                return string.Format("{0:c}", StockItem.CostPerFoot / 12m * (decimal)Length);
+            get => cost;
+            set {
+                cost = value;
+                OnPropertyChanged();
             }
         }
 
         public string TotalCost {
-            get {
-                return string.Format("{0:c}", StockItem.CostPerFoot / 12m * (decimal)Length * Qty);
+            get => totalCost;
+            set {
+                totalCost = value;
+                OnPropertyChanged();
             }
         }
 
@@ -110,6 +133,9 @@ namespace Solidworks_Cutlist_Generator.Models {
 
         public CutItem(StockItem stockItem, int qty, float length, float angle1, float angle2, string angleDirection, string angleRotation, int stickNumber = 0) {
             StockItem = stockItem;
+            Cost = string.Format("{0:c}", stockItem.CostPerFoot / 12m * (decimal)Length);
+            TotalCost = string.Format("{0:c}", StockItem.CostPerFoot / 12m * (decimal)Length * Qty);
+            Description = stockItem.ExternalDescription;
             Qty = qty;
             Length = length;
             Angle1 = angle1;

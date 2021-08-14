@@ -12,15 +12,14 @@ using static Solidworks_Cutlist_Generator.Utils.Messenger;
 namespace Solidworks_Cutlist_Generator.Models {
     internal class CutListGeneratorContext : DbContext {
 
-        
+        //comment out to scaffold
         public static readonly LoggerFactory _myLoggerFactory = new LoggerFactory(new[] {
             new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider()
-        });        public static string ConnectionString { get; set; }
-
+        });
         private static bool _created = bool.Parse(Application.Current.Properties["IsCreated"].ToString());
         private static bool isMySQL;
-
-
+        /////////////
+        public string ConnectionString { get; set; }
         public DbSet<StockItem> StockItems { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
@@ -28,17 +27,22 @@ namespace Solidworks_Cutlist_Generator.Models {
 
 
 
+        public CutListGeneratorContext() { }
 
-            public CutListGeneratorContext(string connectionString) : base() {
+        public CutListGeneratorContext(string connectionString) : base() {
+
+            //comment out to scaffold
             isMySQL = (bool)Application.Current.Properties["UseExternalDB"];
             ConnectionString = connectionString;
             if (!_created && !isMySQL) {
-                
+
                 Database.EnsureDeleted();
                 Database.EnsureCreated();
                 Application.Current.Properties["IsCreated"] = true;
                 _created = true;
             }
+            /////////////
+
             try {
                 //ChangeTracker.LazyLoadingEnabled = false;
             } catch (Exception) {
@@ -70,6 +74,18 @@ namespace Solidworks_Cutlist_Generator.Models {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             optionsBuilder.UseLoggerFactory(_myLoggerFactory);
             optionsBuilder.EnableSensitiveDataLogging(true);
+            
+            //Uncomment to scaffold
+            //try {
+            //    optionsBuilder.UseMySQL("server=localhost;database=cut list generator;user=root;password=password");
+            //    base.OnConfiguring(optionsBuilder);
+            //} catch (Exception) {
+            //    ErrorMessage("Database Error", "Please enter a connection string in the format of:\n" +
+            //        "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
+            //}
+            //////////////
+            
+            //comment out to scaffold
             if (isMySQL) {
                 try {
                     optionsBuilder.UseMySQL(ConnectionString);
@@ -91,6 +107,7 @@ namespace Solidworks_Cutlist_Generator.Models {
                 }
 
             }
+            ///////////////
         }
     }
 }
