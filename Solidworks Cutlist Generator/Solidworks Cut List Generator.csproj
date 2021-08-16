@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net5.0-windows10.0.19041.0</TargetFramework>
     <RootNamespace>Solidworks_Cutlist_Generator</RootNamespace>
     <UseWPF>true</UseWPF>
     <StartupObject>Solidworks_Cutlist_Generator.App</StartupObject>
@@ -15,6 +15,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Page Remove="Themes\Generic.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <COMReference Include="Microsoft.Office.Interop.Excel">
       <VersionMinor>9</VersionMinor>
       <VersionMajor>1</VersionMajor>
@@ -24,6 +28,12 @@
       <EmbedInteropTypes>true</EmbedInteropTypes>
       <WrapperTool>primary</WrapperTool>
     </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
