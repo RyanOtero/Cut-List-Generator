@@ -12,10 +12,6 @@ namespace Solidworks_Cutlist_Generator.Models {
         private StockItem stockItem;
         private int qty;
         private int stockItemID;
-        private string description;
-        private float stockLengthInFeet;
-        private decimal costPerLength;
-        private string vendorName;
 
         public int ID { get; set; }
 
@@ -31,6 +27,7 @@ namespace Solidworks_Cutlist_Generator.Models {
         public StockItem StockItem {
             get => stockItem;
             set {
+                if (value != null) StockItemID = value.ID;
                 stockItem = value;
                 OnPropertyChanged();
             }
@@ -45,35 +42,45 @@ namespace Solidworks_Cutlist_Generator.Models {
         }
 
         public string Description {
-            get => description;
-            set {
-                description = value;
-                OnPropertyChanged();
-            }
+            get { return StockItem?.ExternalDescription; }
+            //get => description;
+            //set {
+            //    description = value;
+            //    OnPropertyChanged();
+            //}
         }
-        
+
         public float StockLengthInFeet {
-            get => stockLengthInFeet;
-            set {
-                stockLengthInFeet = value;
-                OnPropertyChanged();
+            get {
+                if (StockItem == null) return 0;
+                return StockItem.StockLength;
             }
+            //get => stockLengthInFeet;
+            //set {
+            //    stockLengthInFeet = value;
+            //    OnPropertyChanged();
+            //}
         }
-        
-        public Decimal CostPerLength {
-            get => costPerLength;
-            set {
-                costPerLength = value;
-                OnPropertyChanged();
+
+        public decimal CostPerLength {
+            get {
+                if (StockItem == null) return 0;
+                return StockItem.CostPerLength; 
             }
+            //get => costPerLength;
+            //set {
+            //    costPerLength = value;
+            //    OnPropertyChanged();
+            //}
         }
-        
+
         public string VendorName {
-            get => vendorName;
-            set {
-                vendorName = value;
-                OnPropertyChanged();
-            }
+            get { return StockItem?.VendorName; }
+            //get => vendorName;
+            //set {
+            //    vendorName = value;
+            //    OnPropertyChanged();
+            //}
         }
 
         public string CostPerLengthString { get { return string.Format("{0:c}", CostPerLength); } }
@@ -84,12 +91,13 @@ namespace Solidworks_Cutlist_Generator.Models {
         public OrderItem() { }
 
         public OrderItem(int qty, StockItem stockItem) {
-            Description = StockItem.ExternalDescription;
-            StockLengthInFeet = StockItem.StockLength;
-            VendorName = StockItem.VendorName;
-            CostPerLength = StockItem.CostPerLength;
+            //Description = stockItem.ExternalDescription;
+            //StockLengthInFeet = stockItem.StockLength;
+            //VendorName = stockItem.VendorName;
+            //CostPerLength = stockItem.CostPerLength;
             Qty = qty;
             StockItem = stockItem;
+            StockItemID = stockItem.ID;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {

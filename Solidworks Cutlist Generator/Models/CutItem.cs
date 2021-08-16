@@ -5,8 +5,9 @@ using System.Runtime.CompilerServices;
 
 namespace Solidworks_Cutlist_Generator.Models {
     public class CutItem : IComparable<CutItem>, IEquatable<CutItem>, INotifyPropertyChanged {
+
+        #region Fields
         private float length;
-        private string description;
         private float angle1;
         private float angle2;
         private string angleDirection;
@@ -15,9 +16,10 @@ namespace Solidworks_Cutlist_Generator.Models {
         private int stockItemID;
         private int qty;
         private int stickNumber;
-        private string cost;
-        private string totalCost;
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
+        #region Properties
         public int ID { get; set; }
 
         [ForeignKey("StockItemID")]
@@ -33,6 +35,7 @@ namespace Solidworks_Cutlist_Generator.Models {
         public StockItem StockItem {
             get => stockItem;
             set {
+                if (value != null) StockItemID = value.ID;
                 stockItem = value;
                 OnPropertyChanged();
             }
@@ -47,11 +50,12 @@ namespace Solidworks_Cutlist_Generator.Models {
         }
 
         public string Description {
-            get => description;
-            set {
-                description = value;
-                OnPropertyChanged();
-            }
+            get {return StockItem?.ExternalDescription; }
+            //get => description;
+            //set {
+            //    description = value;
+            //    OnPropertyChanged();
+            //}
         }
 
         public float Length {
@@ -103,19 +107,26 @@ namespace Solidworks_Cutlist_Generator.Models {
         }
 
         public string Cost {
-            get => cost;
-            set {
-                cost = value;
-                OnPropertyChanged();
+            get {
+                decimal num = StockItem != null ? StockItem.CostPerFoot : 0;
+                return string.Format("{0:c}", num / 12 * (decimal)Length);
             }
+            //get => cost;
+            //set {
+            //    cost = value;
+            //    OnPropertyChanged();
+            //}
         }
 
         public string TotalCost {
-            get => totalCost;
-            set {
-                totalCost = value;
-                OnPropertyChanged();
-            }
+            get {
+                decimal num = StockItem != null ? StockItem.CostPerFoot : 0;
+                return string.Format("{0:c}", num / 12 * (decimal)Length * Qty);
+            }        //    get => totalCost;
+                     //    set {
+                     //        totalCost = value;
+                     //        OnPropertyChanged();
+                     //    }
         }
 
         public string StickNumberString {
@@ -126,16 +137,17 @@ namespace Solidworks_Cutlist_Generator.Models {
                 return StickNumber.ToString();
             }
         }
+        #endregion
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public CutItem() { }
 
         public CutItem(StockItem stockItem, int qty, float length, float angle1, float angle2, string angleDirection, string angleRotation, int stickNumber = 0) {
             StockItem = stockItem;
-            Cost = string.Format("{0:c}", stockItem.CostPerFoot / 12m * (decimal)Length);
-            TotalCost = string.Format("{0:c}", StockItem.CostPerFoot / 12m * (decimal)Length * Qty);
-            Description = stockItem.ExternalDescription;
+            StockItemID = stockItem.ID;
+            //Cost = string.Format("{0:c}", stockItem.CostPerFoot / 12m * (decimal)Length);
+            //TotalCost = string.Format("{0:c}", StockItem.CostPerFoot / 12m * (decimal)Length * Qty);
+            //Description = stockItem.ExternalDescription;
             Qty = qty;
             Length = length;
             Angle1 = angle1;
@@ -191,7 +203,7 @@ namespace Solidworks_Cutlist_Generator.Models {
         }
 
         public CutItem Clone() {
-            return new CutItem(StockItem, 1, Length, Angle1, Angle2, AngleDirection, AngleRotation);
+            return new CutItem(StockItem, Qty, Length, Angle1, Angle2, AngleDirection, AngleRotation, StickNumber);
         }
     }
 }

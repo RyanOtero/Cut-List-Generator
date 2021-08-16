@@ -246,7 +246,10 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             SaveCommand = new RelayCommand((x) => SaveCutList(), () => CutList != null && CutList.Count > 0);
             ClearCommand = new RelayCommand((x) => ClearCutList(), () => CutList != null && CutList.Count > 0);
             SourceBrowseCommand = new RelayCommand((x) => SourceBrowse());
-            RefreshCommand = new RelayCommand((x) => { CutListMaker.ConnectionString = ConnectionString; CutListMaker.Refresh(); });
+            RefreshCommand = new RelayCommand((x) => {
+                CutListMaker.ConnectionString = ConnectionString; CutListMaker.Refresh();
+                GetTotalText();
+            });
             AddStockItemCommand = new RelayCommand((x) => {
                 var win = new AddStockItemWindow();
                 win.DataContext = new AddStockItemViewModel();
@@ -357,20 +360,38 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             OrderList = CutListMaker.OrderList;
             Vendors = CutListMaker.Vendors;
             StockItems = CutListMaker.StockItems;
+            IsLoading = false;
             LoadingText = "Loading...";
             OrderTotal = "Total:";
             CutListTotal = "Total:";
 
             ////For testing
-            atWork = true;
+            atWork = false;
             if (atWork) {
                 SourceText = @"D:\Projects\2021\1-Aluminum Awnings\1-0010 SL2 Consulting LLC Zephyrhills, FL\Drawing\SolidWorks\G-Gutter 1\G-Gutter 1.SLDASM";
             } else {
                 SourceText = @"C:\Users\Ryan\Desktop\Drawing\Wooden Structures\Pergola - 16ft x 11ft.SLDPRT";
             }
 
-            IsLoading = false;
+            GetTotalText();
         }
+
+
+        #region Methods
+        private void GetTotalText() {
+            decimal runningTotal = 0;
+            foreach (OrderItem item in OrderList) {
+                runningTotal += decimal.Parse(item.TotalCost.Substring(1));
+            }
+            OrderTotal = "Total: " + string.Format("{0:c}", runningTotal);
+            runningTotal = 0;
+            foreach (CutItem item in CutList) {
+                runningTotal += decimal.Parse(item.TotalCost.Substring(1));
+            }
+            CutListTotal = "Total: " + string.Format("{0:c}", runningTotal);
+        }
+
+        #endregion
 
         #region Button Clicks
 
@@ -381,19 +402,9 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             }
             IsLoading = true;
             await Task.Run(() => CutListMaker.Generate(SourceText, IsDetailed));
-            CutListMaker.Refresh();
+            //CutListMaker.Refresh();
             IsLoading = false;
-            decimal runningTotal = 0;
-            foreach (OrderItem item in orderList) {
-                runningTotal += decimal.Parse(item.TotalCost.Substring(1));
-            }
-            OrderTotal = "Total: " + string.Format("{0:c}", runningTotal);
-            runningTotal = 0;
-            foreach (CutItem item in cutList) {
-                runningTotal += decimal.Parse(item.TotalCost.Substring(1));
-            }
-            CutListTotal = "Total: " + string.Format("{0:c}", runningTotal);
-
+            GetTotalText();
         }
 
         public void SourceBrowse() {

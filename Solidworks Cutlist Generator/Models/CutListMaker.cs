@@ -20,7 +20,7 @@ using static Solidworks_Cutlist_Generator.Utils.Messenger;
 
 
 namespace Solidworks_Cutlist_Generator.Models {
-    public class CutListMaker: INotifyPropertyChanged {
+    public class CutListMaker : INotifyPropertyChanged {
 
         #region Fields
         public SldWorks swApp;
@@ -112,6 +112,8 @@ namespace Solidworks_Cutlist_Generator.Models {
             }
             StockItems.Clear();
             Vendors.Clear();
+            CutList.Clear();
+            OrderList.Clear();
             try {
                 using (var ctx = new CutListGeneratorContext(ConnectionString)) {
                     var sTypes = ctx.StockItems.Include(s => s.Vendor);
@@ -122,16 +124,33 @@ namespace Solidworks_Cutlist_Generator.Models {
                     foreach (Vendor item in vendors.ToList()) {
                         Vendors.Add(item);
                     }
-                    //    var angle = StockItem.CreateStockItem(description: "angle");
-                    //    ctx.StockItems.Add(angle);
-                    //    ctx.SaveChanges();
+                    var oList = ctx.OrderItems;
+                    foreach (OrderItem item in oList.ToList()) {
+                        OrderList.Add(item);
+                    }
+                    var cList = ctx.CutItems;
+                    foreach (CutItem item in cList.ToList()) {
+                        CutList.Add(item);
+                    }
+
                 }
             } catch (Exception) {
                 ErrorMessage("Database Error", "There was an error while accessing the database.");
             }
+            CutList.Sort();
+            OrderList.Sort();
         }
 
         public void NewCutList() {
+            try {
+                using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
+                    ctx.CutItems.RemoveRange(ctx.CutItems);
+                    ctx.OrderItems.RemoveRange(ctx.OrderItems);
+                    ctx.SaveChanges();
+                }
+            } catch (Exception e) {
+                throw;
+            }
             CutList.Clear();
             OrderList.Clear();
         }
@@ -228,12 +247,14 @@ namespace Solidworks_Cutlist_Generator.Models {
                     ctx.CutItems.RemoveRange(ctx.CutItems);
                     ctx.OrderItems.RemoveRange(ctx.OrderItems);
                     foreach (CutItem item in CutList) {
-                        item.StockItem = null;
-                        ctx.CutItems.Add(item);
+                        CutItem c = item.Clone();
+                        c.StockItem = null;
+                        ctx.CutItems.Add(c);
                     }
                     foreach (OrderItem item in OrderList) {
-                        item.StockItem = null;
-                        ctx.OrderItems.Add(item);
+                        OrderItem s = item.Clone();
+                        s.StockItem = null;
+                        ctx.OrderItems.Add(s);
                     }
                     ctx.SaveChanges();
                 }
@@ -253,7 +274,10 @@ namespace Solidworks_Cutlist_Generator.Models {
 
             foreach (CutItem item in cutList) {
                 for (int i = 0; i < item.Qty; i++) {
-                    temp.Add(item.Clone());
+                    CutItem c = item.Clone();
+                    c.Qty = 1;
+                    c.StickNumber = 0;
+                    temp.Add(c);
                 }
             }
             cutList.Clear();
@@ -368,6 +392,7 @@ namespace Solidworks_Cutlist_Generator.Models {
             foreach (CutItem item in temp) {
                 cutList.Add(item);
             }
+            cutList.Sort();
         }
 
         public void Consolidate(List<CutItem> cList) {

@@ -35,6 +35,12 @@ namespace Solidworks_Cutlist_Generator.Migrations
                     b.Property<string>("AngleRotation")
                         .HasColumnType("text");
 
+                    b.Property<string>("Cost")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
                     b.Property<float>("Length")
                         .HasColumnType("float");
 
@@ -46,6 +52,9 @@ namespace Solidworks_Cutlist_Generator.Migrations
 
                     b.Property<int>("StockItemID")
                         .HasColumnType("int");
+
+                    b.Property<string>("TotalCost")
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -60,11 +69,23 @@ namespace Solidworks_Cutlist_Generator.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<decimal>("CostPerLength")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
                     b.Property<int>("Qty")
                         .HasColumnType("int");
 
                     b.Property<int>("StockItemID")
                         .HasColumnType("int");
+
+                    b.Property<float>("StockLengthInFeet")
+                        .HasColumnType("float");
+
+                    b.Property<string>("VendorName")
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
