@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <PackageReference Include="Core.System.Configuration.Install" Version="1.1.0" />
+    <PackageReference Include="CustomChromeLibrary.WPF.NetCore" Version="1.1.7619" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.8">
       <PrivateAssets>all</PrivateAssets>

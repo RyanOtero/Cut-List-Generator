@@ -46,6 +46,18 @@
           "lib/netstandard2.0/System.Configuration.Install.dll": {}
         }
       },
+      "CustomChromeLibrary.WPF.NetCore/1.1.7619": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.1/CustomChromeLibrary.WPF.NetCore.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/CustomChromeLibrary.WPF.NetCore.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "Google.Protobuf/3.14.0": {
         "type": "package",
         "dependencies": {
@@ -2199,6 +2211,18 @@
         "core.system.configuration.install.1.1.0.nupkg.sha512",
         "core.system.configuration.install.nuspec",
         "lib/netstandard2.0/System.Configuration.Install.dll"
+      ]
+    },
+    "CustomChromeLibrary.WPF.NetCore/1.1.7619": {
+      "sha512": "kQ4PK8YpMQLtJxE6FnLl0DUUvBZrzPHffULGjWrpBdV7I7mSKXGnWlVRyBdp63Brtznm9tXBGoBlflIvbMhJaw==",
+      "type": "package",
+      "path": "customchromelibrary.wpf.netcore/1.1.7619",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "customchromelibrary.wpf.netcore.1.1.7619.nupkg.sha512",
+        "customchromelibrary.wpf.netcore.nuspec",
+        "lib/netcoreapp3.1/CustomChromeLibrary.WPF.NetCore.dll"
       ]
     },
     "Google.Protobuf/3.14.0": {
@@ -7226,6 +7250,7 @@
   "projectFileDependencyGroups": {
     "net5.0-windows7.0": [
       "Core.System.Configuration.Install >= 1.1.0",
+      "CustomChromeLibrary.WPF.NetCore >= 1.1.7619",
       "Microsoft.EntityFrameworkCore >= 5.0.8",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.8",
       "Microsoft.EntityFrameworkCore.Proxies >= 5.0.8",
@@ -7238,25 +7263,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\corey\\.nuget\\packages\\": {},
+    "C:\\Users\\Ryan\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\corey\\source\\repos\\Cut-List-Generator\\Solidworks Cutlist Generator\\Solidworks Cut List Generator.csproj",
+      "projectUniqueName": "C:\\Users\\Ryan\\source\\repos\\Cut List Generator\\Solidworks Cutlist Generator\\Solidworks Cut List Generator.csproj",
       "projectName": "Solidworks Cut List Generator",
-      "projectPath": "C:\\Users\\corey\\source\\repos\\Cut-List-Generator\\Solidworks Cutlist Generator\\Solidworks Cut List Generator.csproj",
-      "packagesPath": "C:\\Users\\corey\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\corey\\source\\repos\\Cut-List-Generator\\Solidworks Cutlist Generator\\obj\\",
+      "projectPath": "C:\\Users\\Ryan\\source\\repos\\Cut List Generator\\Solidworks Cutlist Generator\\Solidworks Cut List Generator.csproj",
+      "packagesPath": "C:\\Users\\Ryan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ryan\\source\\repos\\Cut List Generator\\Solidworks Cutlist Generator\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\corey\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ryan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -7290,6 +7315,10 @@
           "Core.System.Configuration.Install": {
             "target": "Package",
             "version": "[1.1.0, )"
+          },
+          "CustomChromeLibrary.WPF.NetCore": {
+            "target": "Package",
+            "version": "[1.1.7619, )"
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
@@ -7350,7 +7379,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
       }
     }
   }

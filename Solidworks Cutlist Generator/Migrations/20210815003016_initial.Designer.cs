@@ -9,8 +9,8 @@ using Solidworks_Cutlist_Generator.Models;
 namespace Solidworks_Cutlist_Generator.Migrations
 {
     [DbContext(typeof(CutListGeneratorContext))]
-    [Migration("20210802045852_AddCutItemAndOrderItemTables")]
-    partial class AddCutItemAndOrderItemTables
+    [Migration("20210815003016_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,12 @@ namespace Solidworks_Cutlist_Generator.Migrations
                     b.Property<string>("AngleRotation")
                         .HasColumnType("text");
 
+                    b.Property<string>("Cost")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
                     b.Property<float>("Length")
                         .HasColumnType("float");
 
@@ -46,8 +52,11 @@ namespace Solidworks_Cutlist_Generator.Migrations
                     b.Property<int>("StickNumber")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StockItemID")
+                    b.Property<int>("StockItemID")
                         .HasColumnType("int");
+
+                    b.Property<string>("TotalCost")
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -62,11 +71,23 @@ namespace Solidworks_Cutlist_Generator.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<decimal>("CostPerLength")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
                     b.Property<int>("Qty")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StockItemID")
+                    b.Property<int>("StockItemID")
                         .HasColumnType("int");
+
+                    b.Property<float>("StockLengthInFeet")
+                        .HasColumnType("float");
+
+                    b.Property<string>("VendorName")
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -136,7 +157,9 @@ namespace Solidworks_Cutlist_Generator.Migrations
                 {
                     b.HasOne("Solidworks_Cutlist_Generator.Models.StockItem", "StockItem")
                         .WithMany()
-                        .HasForeignKey("StockItemID");
+                        .HasForeignKey("StockItemID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("StockItem");
                 });
@@ -145,7 +168,9 @@ namespace Solidworks_Cutlist_Generator.Migrations
                 {
                     b.HasOne("Solidworks_Cutlist_Generator.Models.StockItem", "StockItem")
                         .WithMany()
-                        .HasForeignKey("StockItemID");
+                        .HasForeignKey("StockItemID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("StockItem");
                 });
@@ -153,15 +178,10 @@ namespace Solidworks_Cutlist_Generator.Migrations
             modelBuilder.Entity("Solidworks_Cutlist_Generator.Models.StockItem", b =>
                 {
                     b.HasOne("Solidworks_Cutlist_Generator.Models.Vendor", "Vendor")
-                        .WithMany("StockItems")
+                        .WithMany()
                         .HasForeignKey("VendorID");
 
                     b.Navigation("Vendor");
-                });
-
-            modelBuilder.Entity("Solidworks_Cutlist_Generator.Models.Vendor", b =>
-                {
-                    b.Navigation("StockItems");
                 });
 #pragma warning restore 612, 618
         }

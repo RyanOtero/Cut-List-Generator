@@ -47,6 +47,14 @@
           }
         }
       },
+      "CustomChromeLibrary.WPF.NetCore/1.1.7619": {
+        "runtime": {
+          "lib/netcoreapp3.1/CustomChromeLibrary.WPF.NetCore.dll": {
+            "assemblyVersion": "1.1.76.2019",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Google.Protobuf/3.14.0": {
         "dependencies": {
           "System.Memory": "4.5.3",
@@ -1932,6 +1940,13 @@
       "sha512": "sha512-26p4Humu3vRr5pe3bgn8QPJ3+iJdUu7OtWnRmteHszCPKjMmnYYDF4pWTcLcQd+25H70ivKCfeOR33c41ra/dg==",
       "path": "core.system.configuration.install/1.1.0",
       "hashPath": "core.system.configuration.install.1.1.0.nupkg.sha512"
+    },
+    "CustomChromeLibrary.WPF.NetCore/1.1.7619": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kQ4PK8YpMQLtJxE6FnLl0DUUvBZrzPHffULGjWrpBdV7I7mSKXGnWlVRyBdp63Brtznm9tXBGoBlflIvbMhJaw==",
+      "path": "customchromelibrary.wpf.netcore/1.1.7619",
+      "hashPath": "customchromelibrary.wpf.netcore.1.1.7619.nupkg.sha512"
     },
     "Google.Protobuf/3.14.0": {
       "type": "package",
