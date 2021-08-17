@@ -5,7 +5,14 @@
              Startup="App_Startup"
              Exit="App_Exit">
     <Application.Resources>
-        <ResourceDictionary Source="Solidworks_Cutlist_Generator.Themes.Generic.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Assets/window-close-regular.xaml" />
+                <ResourceDictionary Source="/Assets/window-minimize-solid.xaml" />
+                <ResourceDictionary Source="/Assets/window-maximize-regular.xaml" />
+                <ResourceDictionary Source="/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
 

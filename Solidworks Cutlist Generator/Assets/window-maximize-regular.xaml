@@ -1,0 +1,28 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="MaximizeButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="0">
+                        <Viewbox Stretch="Uniform">
+                            <Canvas Name="Layer_1" Canvas.Left="0" Canvas.Top="0" Width="30" Height="30">
+                                <Canvas.RenderTransform>
+                                    <TranslateTransform X="1.0" Y="1.0" />
+                                </Canvas.RenderTransform>
+                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path100" Fill="#639fc7" Data="M22.8,0H2.3C1,0,0,1.1,0,2.6v19.7C0,23.9,1,25,2.3,25h20.4c1.3,0,2.3-1.1,2.3-2.6V2.6C25.1,1.1,24.1,0,22.8,0z M22.7,22
+	c0,0.2-0.1,0.3-0.3,0.3H2.6c-0.2,0-0.3-0.1-0.3-0.3V6.9h20.4L22.7,22L22.7,22z" />
+                            </Canvas>
+                        </Viewbox>
+                    </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsFocused" Value="True">
+                            <Setter Property="Background" Value="Transparent" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

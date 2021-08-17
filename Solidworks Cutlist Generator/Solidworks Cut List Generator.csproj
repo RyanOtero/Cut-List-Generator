@@ -15,7 +15,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Page Remove="Themes\Generic.xaml" />
+    <None Remove="Assets\tapemeasure.png" />
+    <None Remove="Assets\window-close-regular.svg" />
+    <None Remove="Assets\window-maximize-regular.svg" />
+    <None Remove="Assets\window-minimize-solid.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Assets\window-close-regular.xaml" />
+    <Page Remove="Assets\window-maximize-regular.xaml" />
+    <Page Remove="Assets\window-minimize-solid.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,14 +40,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Core.System.Configuration.Install" Version="1.1.0" />
     <PackageReference Include="CustomChromeLibrary.WPF.NetCore" Version="1.1.7619" />
+    <PackageReference Include="DotNetProjects.SVGImage" Version="4.1.97" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.8">
       <PrivateAssets>all</PrivateAssets>
@@ -63,6 +67,16 @@
     <Reference Include="SolidWorks.Interop.swconst">
       <HintPath>..\..\..\..\..\..\Program Files\SOLIDWORKS Corp\SOLIDWORKS\api\redist\SolidWorks.Interop.swconst.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\tapemeasure.png" />
+    <Resource Include="Assets\window-close-regular.svg" />
+    <Resource Include="Assets\window-close-regular.xaml" />
+    <Resource Include="Assets\window-maximize-regular.svg" />
+    <Resource Include="Assets\window-maximize-regular.xaml" />
+    <Resource Include="Assets\window-minimize-solid.svg" />
+    <Resource Include="Assets\window-minimize-solid.xaml" />
   </ItemGroup>
 
   <ItemGroup>
