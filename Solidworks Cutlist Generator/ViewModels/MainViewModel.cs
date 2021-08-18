@@ -335,7 +335,6 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
                 var vModel = new EditStockItemViewModel(SelectedStockItem);
                 var win = new EditStockItemWindow();
                 win.DataContext = vModel;
-                win.Show();
 
             });
             EditVendorCommand = new RelayCommand((x) => {

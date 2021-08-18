@@ -1,15 +1,10 @@
-﻿<Window x:Name="CutList_Generator" x:Class="Solidworks_Cutlist_Generator.Views.MainWindow"
+﻿
+<Window x:Name="CutList_Generator" x:Class="Solidworks_Cutlist_Generator.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Solidworks_Cutlist_Generator.Views"
         xmlns:vm="clr-namespace:Solidworks_Cutlist_Generator.ViewModels"
-        xmlns:shell="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
-        mc:Ignorable="d"
         Title="Cutlist Generator" Height="531" Width="927" WindowStyle="None" SizeToContent="Manual"
         Style="{DynamicResource ResourceKey=SkinWindowStyle}">
-
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="b2v" />
         <vm:MainViewModel x:Key="ViewModel" />

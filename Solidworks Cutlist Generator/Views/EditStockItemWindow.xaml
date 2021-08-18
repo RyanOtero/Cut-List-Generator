@@ -1,15 +1,8 @@
 ﻿<Window x:Class="Solidworks_Cutlist_Generator.Views.EditStockItemWindow" Name="EditStockItemWin"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Solidworks_Cutlist_Generator.Views"
         xmlns:utils="clr-namespace:Solidworks_Cutlist_Generator.Utils"
         xmlns:models="clr-namespace:Solidworks_Cutlist_Generator.Models"
-        xmlns:vm="clr-namespace:Solidworks_Cutlist_Generator.ViewModels"
-        xmlns:src="clr-namespace:System;assembly=mscorlib"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        mc:Ignorable="d"
         Title="Edit Stock Item" Height="300" Width="420" ResizeMode="NoResize" ShowInTaskbar="False" >
     <Window.Resources>
         <utils:FloatToStringConverter x:Key="FloatToStringConverter"/>
@@ -32,7 +25,7 @@
             <RowDefinition Height="1.25*"/>
         </Grid.RowDefinitions>
         <Label Content="Material Type:" HorizontalAlignment="Right" Margin="0,2,5,0" VerticalAlignment="Bottom" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="1"/>
-        <ComboBox SelectedItem="{Binding SelectedMatType}" ItemsSource="{Binding Source={utils:EnumBindingSource {x:Type models:MaterialType}}}" Margin="0,0,15,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="20" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1"/>
+        <!--<ComboBox SelectedItem="{Binding SelectedMatType}" ItemsSource="{Binding Source={utils:EnumBindingSource {x:Type models:MaterialType}}}" Margin="0,0,15,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="20" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1"/>-->
         <Label Content="Profile Type:" HorizontalAlignment="Right" Margin="0,2,5,0" VerticalAlignment="Bottom" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="2"/>
         <ComboBox SelectedItem="{Binding SelectedProfType}" ItemsSource="{Binding Source={utils:EnumBindingSource {x:Type models:ProfileType}}}" Margin="0,0,15,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="20" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2"/>
         <Label Content="Vendor:" HorizontalAlignment="Right" Margin="0,2,5,0" VerticalAlignment="Bottom" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="3"/>
