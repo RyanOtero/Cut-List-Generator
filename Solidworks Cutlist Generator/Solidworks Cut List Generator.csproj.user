@@ -18,6 +18,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Resources\RectBorderStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\TitleFont.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\AddStockItemWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

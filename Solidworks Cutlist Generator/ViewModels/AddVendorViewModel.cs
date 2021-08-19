@@ -73,7 +73,7 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
                             ctx.Vendors.Add(vendor);
                             ctx.SaveChanges();
                         }
-                        MainVModel.CutListMaker.Refresh();
+                        MainVModel.CutListMngr.Refresh();
                         CloseWin(x);
                     } catch (Exception) {
                         ErrorMessage("Database Error", "There was an error while accessing the database.");

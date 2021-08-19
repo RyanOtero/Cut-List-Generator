@@ -25,7 +25,7 @@
             <RowDefinition Height="1.25*"/>
         </Grid.RowDefinitions>
         <Label Content="Material Type:" HorizontalAlignment="Right" Margin="0,2,5,0" VerticalAlignment="Bottom" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="1"/>
-        <!--<ComboBox SelectedItem="{Binding SelectedMatType}" ItemsSource="{Binding Source={utils:EnumBindingSource {x:Type models:MaterialType}}}" Margin="0,0,15,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="20" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1"/>-->
+        <ComboBox SelectedItem="{Binding SelectedMatType}" ItemsSource="{Binding Source={utils:EnumBindingSource {x:Type models:MaterialType}}}" Margin="0,0,15,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="20" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1"/>
         <Label Content="Profile Type:" HorizontalAlignment="Right" Margin="0,2,5,0" VerticalAlignment="Bottom" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="2"/>
         <ComboBox SelectedItem="{Binding SelectedProfType}" ItemsSource="{Binding Source={utils:EnumBindingSource {x:Type models:ProfileType}}}" Margin="0,0,15,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="20" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2"/>
         <Label Content="Vendor:" HorizontalAlignment="Right" Margin="0,2,5,0" VerticalAlignment="Bottom" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="3"/>

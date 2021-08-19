@@ -15,16 +15,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\tapemeasure.png" />
-    <None Remove="Assets\window-close-regular.svg" />
-    <None Remove="Assets\window-maximize-regular.svg" />
-    <None Remove="Assets\window-minimize-solid.svg" />
+    <None Remove="Resources\Fonts\AIRBORNE GP.ttf" />
+    <None Remove="Resources\Fonts\Pervitina-Dex-FFP.ttf" />
+    <None Remove="Resources\Fonts\SansitaOne.ttf" />
+    <None Remove="Resources\Sinethar.otf" />
+    <None Remove="Resources\tapemeasure.png" />
+    <None Remove="Resources\window-close-regular.svg" />
+    <None Remove="Resources\window-maximize-regular.svg" />
+    <None Remove="Resources\window-minimize-solid.svg" />
   </ItemGroup>
 
   <ItemGroup>
-    <Page Remove="Assets\window-close-regular.xaml" />
-    <Page Remove="Assets\window-maximize-regular.xaml" />
-    <Page Remove="Assets\window-minimize-solid.xaml" />
+    <Page Remove="Resources\window-close-regular.xaml" />
+    <Page Remove="Resources\window-maximize-regular.xaml" />
+    <Page Remove="Resources\window-minimize-solid.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -68,13 +72,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\tapemeasure.png" />
-    <Resource Include="Assets\window-close-regular.svg" />
-    <Resource Include="Assets\window-close-regular.xaml" />
-    <Resource Include="Assets\window-maximize-regular.svg" />
-    <Resource Include="Assets\window-maximize-regular.xaml" />
-    <Resource Include="Assets\window-minimize-solid.svg" />
-    <Resource Include="Assets\window-minimize-solid.xaml" />
+    <Resource Include="Resources\Fonts\AIRBORNE GP.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Fonts\Pervitina-Dex-FFP.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Fonts\SansitaOne.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Fonts\Sinethar.otf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\tapemeasure.png" />
+    <Resource Include="Resources\window-close-regular.svg" />
+    <Resource Include="Resources\window-close-regular.xaml" />
+    <Resource Include="Resources\window-maximize-regular.svg" />
+    <Resource Include="Resources\window-maximize-regular.xaml" />
+    <Resource Include="Resources\window-minimize-solid.svg" />
+    <Resource Include="Resources\window-minimize-solid.xaml" />
   </ItemGroup>
 
   <ItemGroup>

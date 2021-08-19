@@ -7,10 +7,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Assets/window-close-regular.xaml" />
-                <ResourceDictionary Source="/Assets/window-minimize-solid.xaml" />
-                <ResourceDictionary Source="/Assets/window-maximize-regular.xaml" />
-                <ResourceDictionary Source="/Themes/Generic.xaml" />
+                <ResourceDictionary Source="/Resources/window-close-regular.xaml" />
+                <ResourceDictionary Source="/Resources/window-minimize-solid.xaml" />
+                <ResourceDictionary Source="/Resources/window-maximize-regular.xaml" />
+                <ResourceDictionary Source="/Resources/RectBorderStyle.xaml" />
+                <ResourceDictionary Source="/Resources/TitleFont.xaml" />
+                <ResourceDictionary Source="/Resources/Themes/MainWindowStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

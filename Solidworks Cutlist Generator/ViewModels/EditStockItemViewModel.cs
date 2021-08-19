@@ -88,7 +88,10 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
                                 ctx.StockItems.Update(sItem);
                                 ctx.SaveChanges();
                             }
-                            MainVModel.CutListMaker.Refresh();
+                            List<CutItem> tempList = MainVModel.CutListMngr.CutList.ToList();
+                            MainVModel.ClearCutList();
+                            MainVModel.CutListMngr.SortCutListForDisplay(MainVModel.IsDetailed, tempList);
+                            MainVModel.CutListMngr.Refresh();
                             CloseWin(x);
                         } catch (Exception e) {
                             string s = e.Message;

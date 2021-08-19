@@ -20,7 +20,7 @@ using static Solidworks_Cutlist_Generator.Utils.Messenger;
 
 
 namespace Solidworks_Cutlist_Generator.Models {
-    public class CutListMaker : INotifyPropertyChanged {
+    public class CutListManager : INotifyPropertyChanged {
 
         #region Fields
         public SldWorks swApp;
@@ -77,7 +77,7 @@ namespace Solidworks_Cutlist_Generator.Models {
         #endregion
 
         #region Constructors
-        public CutListMaker(string cString) {
+        public CutListManager(string cString) {
             asyncLock = new object();
             CutList = new ObservableCollection<CutItem>();
             Vendors = new ObservableCollection<Vendor>();
@@ -89,7 +89,7 @@ namespace Solidworks_Cutlist_Generator.Models {
             }
         }
 
-        public CutListMaker() {
+        public CutListManager() {
             asyncLock = new object();
             CutList = new ObservableCollection<CutItem>();
             Vendors = new ObservableCollection<Vendor>();
@@ -209,6 +209,12 @@ namespace Solidworks_Cutlist_Generator.Models {
                 hadError = false;
                 return;
             }
+            SortCutListForDisplay(isDetailed, tempList);
+
+            swApp = null;
+        }
+
+        public void SortCutListForDisplay(bool isDetailed, List<CutItem> tempList) {
             SortCuts(tempList);
             List<CutItem> tempOrderList = new List<CutItem>();
             List<string> distinctOrderItems = new List<string>();
@@ -261,8 +267,6 @@ namespace Solidworks_Cutlist_Generator.Models {
             } catch (Exception e) {
                 throw;
             }
-
-            swApp = null;
         }
 
         public void SortCuts(List<CutItem> cutList) {

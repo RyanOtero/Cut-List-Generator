@@ -11,14 +11,10 @@ using Excel = Microsoft.Office.Interop.Excel;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
 using System.Windows.Data;
 using Solidworks_Cutlist_Generator.ViewModels.Commands;
-using System.Collections.Specialized;
-using System.Windows.Threading;
 using static Solidworks_Cutlist_Generator.Utils.Messenger;
 using Solidworks_Cutlist_Generator.Views;
-using Microsoft.EntityFrameworkCore;
 
 namespace Solidworks_Cutlist_Generator.ViewModels {
     public class MainViewModel : ViewModelBase {
@@ -53,10 +49,10 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             set {
                 SetProperty(ref useExternalDB, value);
                 Application.Current.Properties["UseExternalDB"] = useExternalDB;
-                if (CutListMaker != null) {
-                    CutListMaker.ConnectionString = ConnectionString;
+                if (CutListMngr != null) {
+                    CutListMngr.ConnectionString = ConnectionString;
                     if (ConnectionString != "server=;database=;user=;password=") {
-                        CutListMaker.Refresh();
+                        CutListMngr.Refresh();
                     }
                 }
             }
@@ -67,8 +63,8 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             set {
                 SetProperty(ref serverString, value);
                 Application.Current.Properties["ServerString"] = serverString;
-                if (CutListMaker != null) {
-                    CutListMaker.ConnectionString = ConnectionString;
+                if (CutListMngr != null) {
+                    CutListMngr.ConnectionString = ConnectionString;
                 }
             }
         }
@@ -77,8 +73,8 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             set {
                 SetProperty(ref databaseString, value);
                 Application.Current.Properties["DatabaseString"] = databaseString;
-                if (CutListMaker != null) {
-                    CutListMaker.ConnectionString = ConnectionString;
+                if (CutListMngr != null) {
+                    CutListMngr.ConnectionString = ConnectionString;
                 }
             }
         }
@@ -87,8 +83,8 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             set {
                 SetProperty(ref userString, value);
                 Application.Current.Properties["UserString"] = userString;
-                if (CutListMaker != null) {
-                    CutListMaker.ConnectionString = ConnectionString;
+                if (CutListMngr != null) {
+                    CutListMngr.ConnectionString = ConnectionString;
                 }
             }
         }
@@ -97,8 +93,8 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             set {
                 SetProperty(ref passwordString, value);
                 Application.Current.Properties["PasswordString"] = passwordString;
-                if (CutListMaker != null) {
-                    CutListMaker.ConnectionString = ConnectionString;
+                if (CutListMngr != null) {
+                    CutListMngr.ConnectionString = ConnectionString;
                 }
             }
         }
@@ -119,8 +115,8 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
                 }
             }
             set {
-                if (CutListMaker != null && CutListMaker.ConnectionString != value) {
-                    CutListMaker.ConnectionString = value;
+                if (CutListMngr != null && CutListMngr.ConnectionString != value) {
+                    CutListMngr.ConnectionString = value;
                     OnPropertyChanged();
                 }
             }
@@ -150,10 +146,12 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
         public RelayCommand DeleteVendorCommand { get; set; }
 
         public RelayCommand EditVendorCommand { get; set; }
+
+        public RelayCommand IsDetailedCommand { get; set; }
         #endregion
 
 
-        public CutListMaker CutListMaker { get; set; }
+        public CutListManager CutListMngr { get; set; }
 
         public Vendor SelectedVendor {
             get => selectedVendor;
@@ -247,7 +245,7 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             ClearCommand = new RelayCommand((x) => ClearCutList(), () => CutList != null && CutList.Count > 0);
             SourceBrowseCommand = new RelayCommand((x) => SourceBrowse());
             RefreshCommand = new RelayCommand((x) => {
-                CutListMaker.ConnectionString = ConnectionString; CutListMaker.Refresh();
+                CutListMngr.ConnectionString = ConnectionString; CutListMngr.Refresh();
                 GetTotalText();
             });
             AddStockItemCommand = new RelayCommand((x) => {
@@ -277,7 +275,7 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
 
                             ctx.StockItems.Remove(SelectedStockItem);
                             ctx.SaveChanges();
-                            CutListMaker.Refresh();
+                            CutListMngr.Refresh();
                         }
                     } catch (Exception e) {
                         string s = e.Message;
@@ -319,7 +317,7 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
                             }
                             ctx.StockItems.UpdateRange(sItems);
                             ctx.SaveChanges();
-                            CutListMaker.Refresh();
+                            CutListMngr.Refresh();
                         }
                     } catch (Exception e) {
                         string s = e.Message;
@@ -335,7 +333,7 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
                 var vModel = new EditStockItemViewModel(SelectedStockItem);
                 var win = new EditStockItemWindow();
                 win.DataContext = vModel;
-
+                win.Show();
             });
             EditVendorCommand = new RelayCommand((x) => {
                 if (SelectedVendor == null) {
@@ -351,30 +349,35 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
                 win.DataContext = vModel;
                 win.Show();
             });
+            IsDetailedCommand = new RelayCommand((x) => {
+                List<CutItem> tempList = CutListMngr.CutList.ToList();
+                ClearCutList();
+                CutListMngr.SortCutListForDisplay(IsDetailed, tempList);
+                CutListMngr.Refresh();
+            });
             #endregion
 
             asyncLock = new object();
-            CutListMaker = new CutListMaker(ConnectionString);
-            CutList = CutListMaker.CutList;
-            OrderList = CutListMaker.OrderList;
-            Vendors = CutListMaker.Vendors;
-            StockItems = CutListMaker.StockItems;
+            CutListMngr = new CutListManager(ConnectionString);
+            CutList = CutListMngr.CutList;
+            OrderList = CutListMngr.OrderList;
+            Vendors = CutListMngr.Vendors;
+            StockItems = CutListMngr.StockItems;
             IsLoading = false;
             LoadingText = "Loading...";
             OrderTotal = "Total:";
             CutListTotal = "Total:";
 
             ////For testing
-            atWork = false;
-            if (atWork) {
-                SourceText = @"D:\Projects\2021\1-Aluminum Awnings\1-0010 SL2 Consulting LLC Zephyrhills, FL\Drawing\SolidWorks\G-Gutter 1\G-Gutter 1.SLDASM";
-            } else {
-                SourceText = @"C:\Users\Ryan\Desktop\Drawing\Wooden Structures\Pergola - 16ft x 11ft.SLDPRT";
-            }
+            //atWork = false;
+            //if (atWork) {
+            //    SourceText = @"D:\Projects\2021\1-Aluminum Awnings\1-0010 SL2 Consulting LLC Zephyrhills, FL\Drawing\SolidWorks\G-Gutter 1\G-Gutter 1.SLDASM";
+            //} else {
+            //    SourceText = @"C:\Users\Ryan\Desktop\Drawing\Wooden Structures\Pergola - 16ft x 11ft.SLDPRT";
+            //}
 
             GetTotalText();
         }
-
 
         #region Methods
         private void GetTotalText() {
@@ -400,8 +403,8 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
                 return;
             }
             IsLoading = true;
-            await Task.Run(() => CutListMaker.Generate(SourceText, IsDetailed));
-            //CutListMaker.Refresh();
+            await Task.Run(() => CutListMngr.Generate(SourceText, IsDetailed));
+            CutListMngr.Refresh();
             IsLoading = false;
             GetTotalText();
         }
@@ -422,15 +425,15 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             if (saveFileDialog.ShowDialog() == true) {
                 filePath = saveFileDialog.FileName;
                 if (filePath.Contains(".xlsx")) {
-                    GenerateExcel(ToDataTable(CutListMaker.CutList), filePath);
+                    GenerateExcel(ToDataTable(CutListMngr.CutList), filePath);
                 } else if (filePath.Contains(".csv")) {
-                    GenerateCSV(ToDataTable(CutListMaker.CutList), filePath);
+                    GenerateCSV(ToDataTable(CutListMngr.CutList), filePath);
                 }
             }
         }
 
         public void ClearCutList() {
-            CutListMaker.NewCutList();
+            CutListMngr.NewCutList();
         }
         #endregion
 

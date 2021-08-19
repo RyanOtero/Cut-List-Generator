@@ -93,7 +93,7 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
                             ctx.StockItems.Add(stockItem);
                             ctx.SaveChanges();
                         }
-                        MainVModel.CutListMaker.Refresh();
+                        MainVModel.CutListMngr.Refresh();
                         CloseWin(x);
                     } catch (Exception e) {
                         string s = e.Message;

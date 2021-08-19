@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
 using System.Windows.Markup;
 
 namespace Solidworks_Cutlist_Generator.Utils {
