@@ -25,7 +25,7 @@
                 </Border.Background>
                 <!--Window Icon and Title-->
                 <Grid>
-                    <StackPanel Orientation="Horizontal" Margin="10,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30">
+                    <StackPanel Orientation="Horizontal" Margin="10,2,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30">
                         <TextBlock Text="Solid Price" Width="400" Style="{DynamicResource TitleFont}" FontSize="26" Foreground="#639fc7" VerticalAlignment="Bottom"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,8,6,0" VerticalAlignment="Top" HorizontalAlignment="Right">

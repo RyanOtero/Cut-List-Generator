@@ -425,9 +425,9 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             if (saveFileDialog.ShowDialog() == true) {
                 filePath = saveFileDialog.FileName;
                 if (filePath.Contains(".xlsx")) {
-                    GenerateExcel(ToDataTable(CutListMngr.CutList), filePath);
+                    GenerateExcel(ToDataTable(CutListMngr.OrderList), ToDataTable(CutListMngr.CutList), filePath);
                 } else if (filePath.Contains(".csv")) {
-                    GenerateCSV(ToDataTable(CutListMngr.CutList), filePath);
+                    GenerateCSV(ToDataTable(CutListMngr.OrderList), ToDataTable(CutListMngr.CutList), filePath);
                 }
             }
         }
@@ -462,58 +462,106 @@ namespace Solidworks_Cutlist_Generator.ViewModels {
             return dataTable;
         }
 
-        private void GenerateExcel(DataTable DtIN, string filePath) {
+        private void GenerateExcel(DataTable orderListDataTable, DataTable cutListDataTable, string filePath) {
             Excel.Workbook workBook;
             Excel.Worksheet workSheet;
+            Excel.Worksheet workSheet1;
             Excel.Range cellRange;
+            Excel.Range cellRange1;
             try {
                 Excel.Application excel = new Excel.Application();
                 excel.DisplayAlerts = false;
                 excel.Visible = false;
                 workBook = excel.Workbooks.Add(Type.Missing);
-                workSheet = (Excel.Worksheet)workBook.ActiveSheet;
-                workSheet.Name = "Cut List";
-                DataTable tempDt = DtIN;
-                workSheet.Cells.Font.Size = 11;
+
+                workSheet1 = (Excel.Worksheet)workBook.ActiveSheet;
+                workSheet1.Name = "Cut List";
+                DataTable tempDt = cutListDataTable;
+                workSheet1.Cells.Font.Size = 11;
                 int rowcount = 1;
                 for (int i = 2; i <= tempDt.Columns.Count; i++) //taking care of Headers.  
                 {
-                    workSheet.Cells[1, i - 1] = tempDt.Columns[i - 1].ColumnName;
+                    if (i - 1 == 1 || i - 1 == 2 || i - 1 == tempDt.Columns.Count - 1) continue;
+                    workSheet1.Cells[1, i - 3] = tempDt.Columns[i - 1].ColumnName;
                 }
                 foreach (DataRow row in tempDt.Rows) //taking care of each Row  
                     {
                     rowcount += 1;
                     for (int i = 1; i < tempDt.Columns.Count; i++) //taking care of each column  
                     {
-                        workSheet.Cells[rowcount, i] = row[i].ToString();
+                        if (i == 1 || i == 2 || i == tempDt.Columns.Count - 1) continue;
+                        workSheet1.Cells[rowcount, i - 2] = row[i].ToString();
+                    }
+                }
+                cellRange1 = workSheet1.Range[workSheet1.Cells[1, 1], workSheet1.Cells[rowcount, tempDt.Columns.Count]];
+                cellRange1.EntireColumn.AutoFit();
+
+                workSheet = (Excel.Worksheet)workBook.Worksheets.Add();
+                workSheet.Name = "Order List";
+                tempDt = orderListDataTable;
+                workSheet.Cells.Font.Size = 11;
+                rowcount = 1;
+                for (int i = 2; i <= tempDt.Columns.Count; i++) //taking care of Headers.  
+                {
+                    if (i - 1 == 1 || i - 1 == 2) continue;
+                    workSheet.Cells[1, i - 3] = tempDt.Columns[i - 1].ColumnName;
+                }
+                foreach (DataRow row in tempDt.Rows) //taking care of each Row  
+                    {
+                    rowcount += 1;
+                    for (int i = 1; i < tempDt.Columns.Count; i++) //taking care of each column  
+                     {
+                        if (i == 1 || i == 2) continue;
+                        workSheet.Cells[rowcount, i - 2] = row[i].ToString();
                     }
                 }
                 cellRange = workSheet.Range[workSheet.Cells[1, 1], workSheet.Cells[rowcount, tempDt.Columns.Count]];
                 cellRange.EntireColumn.AutoFit();
+
+
+
                 workBook.SaveAs(filePath, Excel.XlFileFormat.xlWorkbookDefault, Missing.Value, Missing.Value, false, false, Excel.XlSaveAsAccessMode.xlShared, false, false, System.Reflection.Missing.Value, System.Reflection.Missing.Value, System.Reflection.Missing.Value);
             } catch (Exception) {
                 throw;
             }
         }
 
-        private void GenerateCSV(DataTable dataTable, string filePath) {
+        private void GenerateCSV(DataTable orderListDataTable, DataTable cutListDataTable, string filePath) {
             FileStream fs = null;
             try {
                 fs = new FileStream(filePath, FileMode.Create);
                 using (StreamWriter writer = new StreamWriter(fs, Encoding.UTF8)) {
-                    foreach (DataColumn col in dataTable.Columns) {
-                        if (col == dataTable.Columns[0]) {
+                    foreach (DataColumn col in orderListDataTable.Columns) {
+                        if (col == orderListDataTable.Columns[0] || col == orderListDataTable.Columns[1] || col == orderListDataTable.Columns[2]) {
                             continue;
                         }
                         writer.Write(col.ColumnName + ",");
                     }
                     writer.Write("\n");
-                    foreach (DataRow row in dataTable.Rows) {
-                        foreach (var item in row.ItemArray) {
-                            if (item == row.ItemArray[0]) {
-                                continue;
+                    foreach (DataRow row in orderListDataTable.Rows) {
+                        for (int i = 3; i < row.ItemArray.Length; i++) {
+                            if (row.ItemArray[i].GetType() == typeof(string)) {
+                                writer.Write("\"" + row.ItemArray[i] + "\",");
+                            } else {
+                                writer.Write(row.ItemArray[i].ToString() + ",");
                             }
-                            writer.Write(item.ToString() + ",");
+                        }
+                        writer.Write("\n");
+                    }
+                    foreach (DataColumn col in cutListDataTable.Columns) {
+                        if (col == cutListDataTable.Columns[0] || col == cutListDataTable.Columns[1] || col == cutListDataTable.Columns[2] || col == cutListDataTable.Columns[cutListDataTable.Columns.Count - 1]) {
+                            continue;
+                        }
+                        writer.Write(col.ColumnName + ",");
+                    }
+                    writer.Write("\n");
+                    foreach (DataRow row in cutListDataTable.Rows) {
+                        for (int i = 3; i < row.ItemArray.Length - 1; i++) {
+                            if (row.ItemArray[i].GetType() == typeof(string)) {
+                                writer.Write("\"" + row.ItemArray[i] + "\",");
+                            } else {
+                                writer.Write(row.ItemArray[i].ToString() + ",");
+                            }
                         }
                         writer.Write("\n");
                     }
