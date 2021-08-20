@@ -6,7 +6,8 @@
     <RootNamespace>Solidworks_Cutlist_Generator</RootNamespace>
     <UseWPF>true</UseWPF>
     <StartupObject>Solidworks_Cutlist_Generator.App</StartupObject>
-    <ApplicationIcon>tape.ico</ApplicationIcon>
+    <ApplicationIcon>splogoico_.ico</ApplicationIcon>
+    <Win32Resource />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -19,6 +20,8 @@
     <None Remove="Resources\Fonts\Pervitina-Dex-FFP.ttf" />
     <None Remove="Resources\Fonts\SansitaOne.ttf" />
     <None Remove="Resources\Sinethar.otf" />
+    <None Remove="Resources\splogo.ico" />
+    <None Remove="Resources\SPLogo.png" />
     <None Remove="Resources\tapemeasure.png" />
     <None Remove="Resources\window-close-regular.svg" />
     <None Remove="Resources\window-maximize-regular.svg" />
@@ -82,6 +85,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Fonts\Sinethar.otf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\SPLogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\tapemeasure.png" />
