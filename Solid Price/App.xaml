@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="/Resources/Themes/window-minimize-solid.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/window-maximize-regular.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/RectBorderStyle.xaml" />
+                <ResourceDictionary Source="/Resources/Themes/TabControlStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/TitleFont.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/MainWindowStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
