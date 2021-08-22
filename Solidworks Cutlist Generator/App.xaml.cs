@@ -8,9 +8,9 @@ using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using static Solidworks_Cutlist_Generator.Utils.Messenger;
+using static Solid_Price.Utils.Messenger;
 
-namespace Solidworks_Cutlist_Generator {
+namespace Solid_Price {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>

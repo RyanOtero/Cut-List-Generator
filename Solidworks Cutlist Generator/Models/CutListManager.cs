@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SolidWorks.Interop.sldworks;
 using SolidWorks.Interop.swconst;
-using Solidworks_Cutlist_Generator.Utils;
-using Solidworks_Cutlist_Generator.ViewModels;
+using Solid_Price.Utils;
+using Solid_Price.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,10 +16,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using static Solidworks_Cutlist_Generator.Utils.Messenger;
+using static Solid_Price.Utils.Messenger;
 
 
-namespace Solidworks_Cutlist_Generator.Models {
+namespace Solid_Price.Models {
     public class CutListManager : INotifyPropertyChanged {
 
         #region Fields

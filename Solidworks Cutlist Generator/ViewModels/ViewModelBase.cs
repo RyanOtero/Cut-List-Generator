@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Solidworks_Cutlist_Generator.ViewModels {
+namespace Solid_Price.ViewModels {
     public abstract class ViewModelBase : INotifyPropertyChanged {
 
         public event PropertyChangedEventHandler PropertyChanged;

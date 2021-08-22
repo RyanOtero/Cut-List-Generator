@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Solidworks_Cutlist_Generator.Utils {
+namespace Solid_Price.Utils {
     public static class Messenger {
         public static void ErrorMessage(string caption, string text) {
             MessageBoxButton button = MessageBoxButton.OK;

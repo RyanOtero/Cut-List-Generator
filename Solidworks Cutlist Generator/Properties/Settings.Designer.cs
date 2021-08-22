@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Solidworks_Cutlist_Generator.Properties {
+namespace Solid_Price.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

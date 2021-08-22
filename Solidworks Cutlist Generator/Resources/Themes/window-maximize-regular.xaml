@@ -10,7 +10,7 @@
                                 <Canvas.RenderTransform>
                                     <TranslateTransform X="1.0" Y="1.0" />
                                 </Canvas.RenderTransform>
-                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path100" Fill="#639fc7" Data="M22.8,0H2.3C1,0,0,1.1,0,2.6v19.7C0,23.9,1,25,2.3,25h20.4c1.3,0,2.3-1.1,2.3-2.6V2.6C25.1,1.1,24.1,0,22.8,0z M22.7,22
+                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path100" Fill="LightBlue" Data="M22.8,0H2.3C1,0,0,1.1,0,2.6v19.7C0,23.9,1,25,2.3,25h20.4c1.3,0,2.3-1.1,2.3-2.6V2.6C25.1,1.1,24.1,0,22.8,0z M22.7,22
 	c0,0.2-0.1,0.3-0.3,0.3H2.6c-0.2,0-0.3-0.1-0.3-0.3V6.9h20.4L22.7,22L22.7,22z" />
                             </Canvas>
                         </Viewbox>

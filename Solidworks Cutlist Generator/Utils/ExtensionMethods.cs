@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Solidworks_Cutlist_Generator.Utils {
+namespace Solid_Price.Utils {
     public static class ExtensionMethods {
         public static void Sort<T>(this ObservableCollection<T> collection)
         where T : IComparable<T>, IEquatable<T> {

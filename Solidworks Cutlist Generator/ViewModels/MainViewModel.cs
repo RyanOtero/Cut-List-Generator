@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using Solidworks_Cutlist_Generator.Models;
+using Solid_Price.Models;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Data;
@@ -12,11 +12,11 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using Solidworks_Cutlist_Generator.ViewModels.Commands;
-using static Solidworks_Cutlist_Generator.Utils.Messenger;
-using Solidworks_Cutlist_Generator.Views;
+using Solid_Price.ViewModels.Commands;
+using static Solid_Price.Utils.Messenger;
+using Solid_Price.Views;
 
-namespace Solidworks_Cutlist_Generator.ViewModels {
+namespace Solid_Price.ViewModels {
     public class MainViewModel : ViewModelBase {
 
         #region Fields

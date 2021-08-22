@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Solidworks_Cutlist_Generator.Utils {
+namespace Solid_Price.Utils {
     public class EnumDescriptionTypeConverter : EnumConverter {
         public EnumDescriptionTypeConverter(Type type)
             : base(type) {

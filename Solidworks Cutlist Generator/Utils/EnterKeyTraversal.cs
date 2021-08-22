@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Solidworks_Cutlist_Generator.Utils
+namespace Solid_Price.Utils
 {
     public class EnterKeyTraversal {
         public static bool GetIsEnabled(DependencyObject obj) {

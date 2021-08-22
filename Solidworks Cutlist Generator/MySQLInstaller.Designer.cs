@@ -1,5 +1,5 @@
 ﻿
-namespace Solidworks_Cutlist_Generator {
+namespace Solid_Price {
     partial class MySQLInstaller {
         /// <summary>
         /// Required designer variable.

@@ -3,11 +3,12 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows10.0.19041.0</TargetFramework>
-    <RootNamespace>Solidworks_Cutlist_Generator</RootNamespace>
+    <RootNamespace>Solid_Price</RootNamespace>
     <UseWPF>true</UseWPF>
-    <StartupObject>Solidworks_Cutlist_Generator.App</StartupObject>
-    <ApplicationIcon>splogoico_.ico</ApplicationIcon>
+    <StartupObject>Solid_Price.App</StartupObject>
+    <ApplicationIcon>SPIcon.ico</ApplicationIcon>
     <Win32Resource />
+    <AssemblyName>Solid Price</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -19,7 +20,11 @@
     <None Remove="Resources\Fonts\AIRBORNE GP.ttf" />
     <None Remove="Resources\Fonts\Pervitina-Dex-FFP.ttf" />
     <None Remove="Resources\Fonts\SansitaOne.ttf" />
+    <None Remove="Resources\Logo.blend" />
+    <None Remove="Resources\Logo.blend1" />
     <None Remove="Resources\Sinethar.otf" />
+    <None Remove="Resources\SPIcon.ai" />
+    <None Remove="Resources\SPIcon.png" />
     <None Remove="Resources\splogo.ico" />
     <None Remove="Resources\SPLogo.png" />
     <None Remove="Resources\tapemeasure.png" />
@@ -87,16 +92,12 @@
     <Resource Include="Resources\Fonts\Sinethar.otf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\SPLogo.png">
+    <Resource Include="Resources\SPIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\tapemeasure.png" />
-    <Resource Include="Resources\window-close-regular.svg" />
-    <Resource Include="Resources\window-close-regular.xaml" />
-    <Resource Include="Resources\window-maximize-regular.svg" />
-    <Resource Include="Resources\window-maximize-regular.xaml" />
-    <Resource Include="Resources\window-minimize-solid.svg" />
-    <Resource Include="Resources\window-minimize-solid.xaml" />
+    <Resource Include="Resources\Themes\window-close-regular.xaml" />
+    <Resource Include="Resources\Themes\window-maximize-regular.xaml" />
+    <Resource Include="Resources\Themes\window-minimize-solid.xaml" />
   </ItemGroup>
 
   <ItemGroup>

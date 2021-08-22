@@ -1,7 +1,7 @@
-﻿using Solidworks_Cutlist_Generator.Utils;
+﻿using Solid_Price.Utils;
 using System.ComponentModel;
 
-namespace Solidworks_Cutlist_Generator.Models {
+namespace Solid_Price.Models {
 
     [TypeConverter(typeof(EnumDescriptionTypeConverter))]
     public enum ProfileType {

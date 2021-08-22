@@ -1,4 +1,4 @@
-﻿using static Solidworks_Cutlist_Generator.Utils.Messenger;
+﻿using static Solid_Price.Utils.Messenger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Solidworks_Cutlist_Generator.Models {
+namespace Solid_Price.Models {
     public class Vendor : IEquatable<Vendor>, INotifyPropertyChanged {
 
         #region Fields

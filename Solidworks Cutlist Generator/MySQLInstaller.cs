@@ -6,7 +6,7 @@ using System.Configuration.Install;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Solidworks_Cutlist_Generator {
+namespace Solid_Price {
     [RunInstaller(true)]
     public partial class MySQLInstaller : Installer {
         public MySQLInstaller() {

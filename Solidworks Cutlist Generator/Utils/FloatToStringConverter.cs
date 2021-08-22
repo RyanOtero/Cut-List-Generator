@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Solidworks_Cutlist_Generator.Utils {
+namespace Solid_Price.Utils {
     [ValueConversion(typeof(float), typeof(string))]
     public class FloatToStringConverter : IValueConverter {
         public FloatToStringConverter() {

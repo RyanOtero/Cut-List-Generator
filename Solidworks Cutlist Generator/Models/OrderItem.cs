@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Solidworks_Cutlist_Generator.Models {
+namespace Solid_Price.Models {
     public class OrderItem : IComparable<OrderItem>, IEquatable<OrderItem>, INotifyPropertyChanged {
         private StockItem stockItem;
         private int qty;

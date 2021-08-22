@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
-namespace Solidworks_Cutlist_Generator.Models {
+namespace Solid_Price.Models {
     public class CutItem : IComparable<CutItem>, IEquatable<CutItem>, INotifyPropertyChanged {
 
         #region Fields

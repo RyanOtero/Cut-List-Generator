@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shapes;
 
-namespace Solidworks_Cutlist_Generator.Themes {
+namespace Solid_Price.Themes {
     public partial class RectBorderStyle : ResourceDictionary {
 
         public RectBorderStyle() {

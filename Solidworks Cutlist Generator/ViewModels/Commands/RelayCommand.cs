@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Solidworks_Cutlist_Generator.ViewModels.Commands {
+namespace Solid_Price.ViewModels.Commands {
     public class RelayCommand : ICommand {
         public event EventHandler CanExecuteChanged {
             add { CommandManager.RequerySuggested += value; }

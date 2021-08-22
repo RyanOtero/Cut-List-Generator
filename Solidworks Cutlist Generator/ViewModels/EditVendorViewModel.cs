@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using Solidworks_Cutlist_Generator.Models;
-using Solidworks_Cutlist_Generator.ViewModels.Commands;
-using static Solidworks_Cutlist_Generator.Utils.Messenger;
+using Solid_Price.Models;
+using Solid_Price.ViewModels.Commands;
+using static Solid_Price.Utils.Messenger;
 
 
-namespace Solidworks_Cutlist_Generator.ViewModels {
+namespace Solid_Price.ViewModels {
     public class EditVendorViewModel : ViewModelBase {
         private string vendorName;
         private string phoneNumber;

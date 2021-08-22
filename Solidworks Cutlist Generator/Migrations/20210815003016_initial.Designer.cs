@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Solidworks_Cutlist_Generator.Models;
+using Solid_Price.Models;
 
-namespace Solidworks_Cutlist_Generator.Migrations
+namespace Solid_Price.Migrations
 {
     [DbContext(typeof(CutListGeneratorContext))]
     [Migration("20210815003016_initial")]

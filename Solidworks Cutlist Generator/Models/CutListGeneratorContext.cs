@@ -7,9 +7,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using static Solidworks_Cutlist_Generator.Utils.Messenger;
+using static Solid_Price.Utils.Messenger;
 
-namespace Solidworks_Cutlist_Generator.Models {
+namespace Solid_Price.Models {
     internal class CutListGeneratorContext : DbContext {
 
         //comment out to scaffold
@@ -77,7 +77,7 @@ namespace Solidworks_Cutlist_Generator.Models {
             
             //Uncomment to scaffold
             //try {
-            //    optionsBuilder.UseMySQL("server=localhost;database=cut list generator;user=root;password=password");
+            //    optionsBuilder.UseMySQL("server=localhost;database=solid price;user=root;password=password");
             //    base.OnConfiguring(optionsBuilder);
             //} catch (Exception) {
             //    ErrorMessage("Database Error", "Please enter a connection string in the format of:\n" +

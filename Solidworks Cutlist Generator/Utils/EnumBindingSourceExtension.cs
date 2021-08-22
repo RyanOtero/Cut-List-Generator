@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Markup;
 
-namespace Solidworks_Cutlist_Generator.Utils {
+namespace Solid_Price.Utils {
     public class EnumBindingSourceExtension : MarkupExtension {
         private Type _enumType;
         public Type EnumType {
