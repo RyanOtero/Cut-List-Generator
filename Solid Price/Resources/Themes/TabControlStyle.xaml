@@ -35,7 +35,7 @@
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
                         <Border x:Name="mainBorder" Background="#384f72" BorderThickness="2" CornerRadius="4,4,0,0" BorderBrush="{TemplateBinding BorderBrush}" Margin="0">
-                            <Border x:Name="innerBorder" Background="LightSkyBlue" BorderThickness="0" CornerRadius="7,2,0,0" BorderBrush="{StaticResource TabItem.Selected.Border}" Margin="-1,-1,-1,0" Opacity="0"/>
+                            <Border x:Name="innerBorder" Background="LightSkyBlue" BorderThickness="0" CornerRadius="0,0,0,0" BorderBrush="{StaticResource TabItem.Selected.Border}" Margin="-1,-1,-1,0" Opacity="0"/>
                         </Border>
                         <ContentPresenter x:Name="contentPresenter" TextBlock.FontWeight="Bold" TextBlock.FontSize="14" TextBlock.Foreground="LightSkyBlue" ContentSource="Header" Focusable="False" HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
                     </Grid>

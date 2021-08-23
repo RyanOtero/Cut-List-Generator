@@ -7,10 +7,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Themes/Colors.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/window-close-regular.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/window-minimize-solid.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/window-maximize-regular.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/TextStyle.xaml" />
+                <ResourceDictionary Source="/Resources/Themes/CheckBoxStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/ButtonStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/RectBorderStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/TabControlStyle.xaml" />
