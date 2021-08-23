@@ -12,43 +12,46 @@
         <StaticResource ResourceKey="ViewModel" />
     </Window.DataContext>
     <!--Content-->
-    <TabControl Grid.Row="1" Margin="12,0,12,12">
-        <TabItem Header="Cut List" Margin="-4,0,0,0" Height="22" VerticalAlignment="Stretch" Width="65" Padding="10,1,10,1">
+    <TabControl Style="{DynamicResource TabControlStyle}" Grid.Row="1" Margin="0,0,0,0">
+        <TabItem Header="Cut List" Style="{DynamicResource TabItemStyle}" Margin="-2,0,0,0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="90" />
+                    <ColumnDefinition Width="120" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="15"/>
                     <RowDefinition Height="40" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height=".75*" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height=".4*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Label x:Name="filePathLabel" Content="File Path:&#xA;" HorizontalAlignment="Right" Margin="18,16,0,0" VerticalAlignment="Top" Width="55" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="0" />
-                <TextBox x:Name="filePathTextBox" Margin="10,15,10,0" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Top" Height="Auto" VerticalContentAlignment="Center" Text="{Binding Path=SourceText, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="0" />
-                <Button x:Name="sourceBrowseButton" Content="Browse" Margin="10,15,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding SourceBrowseCommand}" Width="60" Height="Auto" VerticalContentAlignment="Center" Grid.Column="2" Grid.Row="0" />
-                <Button x:Name="generateButton" Content="Generate" Command="{Binding GenerateCommand}" Height="Auto" VerticalContentAlignment="Center" Width="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Grid.Column="2" Grid.Row="1" />
-                <Button x:Name="saveButton" Content="Save" VerticalAlignment="Top" Command="{Binding SaveCommand}" Height="Auto" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="60" Margin="10,5,10,0" Grid.Column="2" Grid.Row="2" />
-                <Button x:Name="refreshButton" Content="Refresh" VerticalAlignment="Top" Command="{Binding RefreshCommand}" Height="Auto" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="60" Margin="10,35,10,0" Grid.Column="2" Grid.Row="2" />
-                <Button x:Name="clearButton" Content="Clear" HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding ClearCommand}" VerticalContentAlignment="Center" Width="60" Height="Auto" Margin="10,0,10,0" Grid.Column="1" Grid.Row="1" />
-                <CheckBox x:Name="detailedCutListCheckBox" IsChecked="{Binding IsDetailed, Mode=TwoWay}" Content="Detailed Cut List" Command="{Binding IsDetailedCommand}" HorizontalAlignment="Right" Margin="0,0,90,0" VerticalAlignment="Center" FlowDirection="RightToLeft" Grid.Column="1" Grid.Row="1">
+                <Label x:Name="filePathLabel" Content="File Path:&#xA;" FontSize="16" Margin="16,0,0,6" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Bottom" Width="80" Height="30" Grid.Column="0" Grid.Row="1"  Grid.ColumnSpan="2"/>
+                <TextBox x:Name="filePathTextBox" Margin="25,0,10,9" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Bottom" Height="22" Text="{Binding Path=SourceText, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" />
+                <Button x:Name="sourceBrowseButton" Content="Browse" Command="{Binding SourceBrowseCommand}" Grid.Column="2" Grid.Row="1" />
+                <Button x:Name="generateButton" Content="Generate" Command="{Binding GenerateCommand}" Grid.Column="2" Grid.Row="2" />
+                <Button x:Name="saveButton" Content="Save" Command="{Binding SaveCommand}" Grid.Column="2" Grid.Row="3" />
+                <Button x:Name="refreshButton" Content="Refresh" Command="{Binding RefreshCommand}" Grid.Column="2" Grid.Row="4" />
+                <Button x:Name="clearButton" Content="Clear" Command="{Binding ClearCommand}"  Grid.Column="3" Grid.Row="5" VerticalAlignment="Top" Margin="0,5,0,0" />
+                <CheckBox x:Name="detailedCutListCheckBox" IsChecked="{Binding IsDetailed, Mode=TwoWay}" Content="Detailed Cut List" Command="{Binding IsDetailedCommand}" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" FlowDirection="RightToLeft" Grid.Column="1" Grid.Row="2">
                     <CheckBox.Resources>
                         <Style TargetType="{x:Type Path}">
                             <Setter Property="FlowDirection" Value="LeftToRight" />
                         </Style>
                     </CheckBox.Resources>
                 </CheckBox>
-                <CheckBox x:Name="showPricingCheckBox" IsChecked="{Binding ShowPricing, Mode=TwoWay}" Content="Show Pricing" HorizontalAlignment="Right" Margin="0,0,210,0" VerticalAlignment="Center" FlowDirection="RightToLeft" Grid.Column="1" Grid.Row="1">
+                <CheckBox x:Name="showPricingCheckBox" IsChecked="{Binding ShowPricing, Mode=TwoWay}" Content="Show Pricing" HorizontalAlignment="Right" Margin="0,0,130,0" VerticalAlignment="Center" FlowDirection="RightToLeft" Grid.Column="1" Grid.Row="2">
                     <CheckBox.Resources>
                         <Style TargetType="{x:Type Path}">
                             <Setter Property="FlowDirection" Value="LeftToRight" />
                         </Style>
                     </CheckBox.Resources>
                 </CheckBox>
-                <Label Content="Order List" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="2" Margin="-40,-20,0,0" />
-                <DataGrid x:Name="orderListDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding OrderList}" Margin="20,5,20,35" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+                <Label Content="Order List" Grid.Column="0" FontSize="18" HorizontalAlignment="Left" Grid.Row="3" Grid.ColumnSpan="2" Margin="18,-24,0,0" />
+                <DataGrid x:Name="orderListDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding OrderList}" Margin="20,5,10,35" Grid.Column="0" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="2">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Path=Qty, Mode=OneWay}" Header="Qty" Width="*" />
                         <DataGridTextColumn Binding="{Binding Path=Description, Mode=OneWay}" Header="Description" Width="7.5*" />
@@ -58,9 +61,9 @@
                         <DataGridTextColumn Binding="{Binding Path=VendorName, Mode=OneWay}" Header="Vendor" Width="2.5*" />
                     </DataGrid.Columns>
                 </DataGrid>
-                <Label Content="{Binding OrderTotal}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="2" Margin="-180,0,100,0" Height="30" Width="160" />
-                <Label Content="Cut List" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" Margin="-40,-20,0,0" />
-                <DataGrid x:Name="cutListDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding CutList}" Margin="20,5,20,35" Grid.Row="3" Grid.ColumnSpan="3">
+                <Label Content="{Binding OrderTotal}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="5" Margin="-180,0,80,0" Height="30" Width="160" />
+                <Label Content="Cut List" Grid.Column="0" FontSize="18" HorizontalAlignment="Left" Grid.Row="6" Grid.ColumnSpan="2" Margin="18,-24,0,0" />
+                <DataGrid x:Name="cutListDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding CutList}" Margin="20,5,20,35" Grid.Row="6" Grid.ColumnSpan="3">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Path=Qty, Mode=OneWay}" Header="Qty" Width="1.5*" />
                         <DataGridTextColumn Binding="{Binding Path=Description, Mode=OneWay}" Header="Description" Width="8.5*" />
@@ -74,23 +77,23 @@
                         <DataGridTextColumn Binding="{Binding Path=TotalCost, Mode=OneWay}" Header="Total" Width="2*" Visibility="{Binding ShowPricing, Source={StaticResource ViewModel}, Converter={StaticResource b2v}}" />
                     </DataGrid.Columns>
                 </DataGrid>
-                <Label Content="{Binding CutListTotal}" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="3" Margin="-90,0,0,0" Height="30" Width="160" />
+                <Label Content="{Binding CutListTotal}" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="6" Margin="-90,0,0,0" Height="30" Width="160" />
                 <Label x:Name="loadingLabel" Content="{Binding LoadingText}" Visibility="{Binding IsLoading, Converter={StaticResource b2v}}" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </Grid>
         </TabItem>
-        <TabItem Header="Vendors" Margin="-4,0,0,0" Height="22" Padding="10,1,10,1">
+        <TabItem Header="Vendors" Style="{DynamicResource TabItemStyle}" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="55" />
+                    <RowDefinition Height="60" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" Width="320" Height="24" VerticalAlignment="Top" Margin="20,20,0,10" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0">
-                    <Button x:Name="addVendorButton" Content="Add" VerticalAlignment="Top" Command="{Binding AddVendorCommand}" Height="Auto" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="60" Margin="0,0,0,0" />
-                    <Button x:Name="deleteVendorButton" Content="Delete" VerticalAlignment="Top" Command="{Binding DeleteVendorCommand}" Height="Auto" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="60" Margin="10,0,0,0" />
-                    <Button x:Name="editVendorsButton" Content="Edit" VerticalAlignment="Top" Command="{Binding EditVendorCommand}" Height="Auto" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="60" Margin="10,0,0,0" />
+                <StackPanel Orientation="Horizontal" Width="320" Height="60" VerticalAlignment="Top" Margin="20,0,0,10" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0">
+                    <Button x:Name="addVendorButton" Content="Add" Command="{Binding AddVendorCommand}"  Margin="5"/>
+                    <Button x:Name="deleteVendorButton" Content="Delete" Command="{Binding DeleteVendorCommand}" Margin="5"/>
+                    <Button x:Name="editVendorsButton" Content="Edit" Command="{Binding EditVendorCommand}" Margin="5"/>
                 </StackPanel>
                 <DataGrid x:Name="vendorDataGrid" ItemsSource="{Binding Path=Vendors}" SelectedItem="{Binding SelectedVendor, Mode=TwoWay}" HeadersVisibility="Column" CanUserAddRows="False" AutoGenerateColumns="False" Margin="20,0,20,20" Grid.Column="0" Grid.Row="1">
                     <DataGrid.Columns>
@@ -102,19 +105,19 @@
                 </DataGrid>
             </Grid>
         </TabItem>
-        <TabItem Header="Stock Types" HorizontalAlignment="Stretch" Height="22" Margin="-4,0,0,0" Padding="10,1,10,1">
+        <TabItem Header="Stock Types" Style="{DynamicResource TabItemStyle}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="55" />
+                    <RowDefinition Height="60" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" Width="320" Height="24" VerticalAlignment="Top" Margin="20,20,0,10" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0">
-                    <Button x:Name="addStockItemButton" Content="Add" VerticalAlignment="Top" Command="{Binding AddStockItemCommand}" Height="Auto" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="60" Margin="0,0,0,0" />
-                    <Button x:Name="deleteStockItemButton" Content="Delete" VerticalAlignment="Top" Command="{Binding DeleteStockItemCommand}" Height="Auto" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="60" Margin="10,0,0,0" />
-                    <Button x:Name="editStockItemButton" Content="Edit" VerticalAlignment="Top" Command="{Binding EditStockItemCommand}" Height="Auto" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="60" Margin="10,0,0,0" />
+                <StackPanel Orientation="Horizontal" Width="320" Height="60" VerticalAlignment="Top" Margin="20,0,0,10" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0">
+                    <Button x:Name="addStockItemButton" Content="Add" Command="{Binding AddStockItemCommand}"  Margin="5"/>
+                    <Button x:Name="deleteStockItemButton" Content="Delete" Command="{Binding DeleteStockItemCommand}" Margin="5"/>
+                    <Button x:Name="editStockItemsButton" Content="Edit" Command="{Binding EditVendorCommand}" Margin="5"/>
                 </StackPanel>
                 <DataGrid x:Name="StockItemsDataGrid" ItemsSource="{Binding Path=StockItems}" SelectedItem="{Binding SelectedStockItem, Mode=TwoWay}" HeadersVisibility="Column" CanUserAddRows="False" AutoGenerateColumns="False" Margin="20,0,20,20" Grid.Column="0" Grid.Row="1">
                     <DataGrid.Columns>
@@ -130,7 +133,7 @@
                 </DataGrid>
             </Grid>
         </TabItem>
-        <TabItem Header="Configuration" HorizontalAlignment="Stretch" Height="22" Margin="-4,0,0,0" Padding="10,1,10,1">
+        <TabItem Header="Configuration" Style="{DynamicResource TabItemStyle}" >
             <Grid>
                 <Grid Width="400" Height="300">
                     <Grid.ColumnDefinitions>

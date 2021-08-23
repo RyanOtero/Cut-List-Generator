@@ -6,7 +6,7 @@
     <RootNamespace>Solid_Price</RootNamespace>
     <UseWPF>true</UseWPF>
     <StartupObject>Solid_Price.App</StartupObject>
-    <ApplicationIcon>SPIcon.ico</ApplicationIcon>
+    <ApplicationIcon>spicon.ico</ApplicationIcon>
     <Win32Resource />
     <AssemblyName>Solid Price</AssemblyName>
   </PropertyGroup>
@@ -90,9 +90,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Fonts\Sinethar.otf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\SPIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Themes\window-close-regular.xaml" />
