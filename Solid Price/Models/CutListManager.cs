@@ -176,6 +176,16 @@ namespace Solid_Price.Models {
             var progType = Type.GetTypeFromProgID(progId);
             swApp = new SldWorks();
             swApp.Visible = true;
+
+            if (swApp.ActiveDoc != null) {
+                MessageBoxResult result = YesNoMessage("Solidworks", "All open Solidworks documents will be closed without saving. Proceed?");
+                if (result == MessageBoxResult.No) {
+                return;
+                } else {
+                    swApp.CloseAllDocuments(true);
+                }
+            }
+
             // increase performance 
             ModelDoc2 doc;
 
@@ -183,28 +193,32 @@ namespace Solid_Price.Models {
                 swApp.OpenDoc6(filePath, (int)swDocumentTypes_e.swDocASSEMBLY, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning) :
                 swApp.OpenDoc6(filePath, (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning);
 
+
+
             // Set the working directory to the document directory
             swApp.SetCurrentWorkingDirectory(doc.GetPathName().Substring(0, doc.GetPathName().LastIndexOf("\\")));
 
             swApp.CommandInProgress = true;
             ModelDoc2 swModel;
-            AssemblyDoc swAssy = default(AssemblyDoc);
+            Component2 swAssy = default(Component2);
             PartDoc swPart = default(PartDoc);
             swModel = swApp.ActiveDoc as ModelDoc2;
+            ConfigurationManager swConfMgr = swModel.ConfigurationManager;
+            Configuration swConf = swConfMgr.ActiveConfiguration;
+
             if (isAssembly) {
-                swAssy = (AssemblyDoc)swModel;
+                swAssy = swConf.GetRootComponent() as Component2;
             } else {
                 swPart = (PartDoc)swModel;
             }
 
             if (isAssembly) {
-                TraverseAssembly(tempList, swAssy);
+                TraverseComponent(tempList, swAssy, TraverseFeatures);
             } else {
-                TraverseFeatures(tempList, (Feature)swPart.FirstFeature(), true, "Root Feature");
+                TraverseFeatures(tempList, (Feature)swPart.FirstFeature(), true, "Root Feature", "");
             }
-            while (swApp.ActiveDoc != null) {
-                swApp.CloseDoc(((ModelDoc2)swApp.ActiveDoc).GetPathName());
-            }
+            swApp.CloseAllDocuments(true);
+
             if (hadError) {
                 hadError = false;
                 return;
@@ -504,16 +518,16 @@ namespace Solid_Price.Models {
             }
         }
 
-        public void FindCutlist(List<CutItem> cutList, Feature thisFeat, string ParentName) {
+        public void FindCutlist(List<CutItem> cutList, Feature thisFeat, string parentName, string config) {
             if (hadError) return;
             int BodyCount = 0;
 
             string FeatType = null;
             FeatType = thisFeat.GetTypeName();
-            if ((FeatType == "SolidBodyFolder") & (ParentName == "Root Feature")) {
+            if ((FeatType == "SolidBodyFolder") & (parentName == "Root Feature")) {
                 inBodyFolder = true;
             }
-            if ((FeatType != "SolidBodyFolder") & (ParentName == "Root Feature")) {
+            if ((FeatType != "SolidBodyFolder") & (parentName == "Root Feature")) {
                 inBodyFolder = false;
             }
 
@@ -548,12 +562,13 @@ namespace Solid_Price.Models {
 
             if (FeatType == "CutListFolder") {
                 if (BodyCount > 0) {
-                    AddCutItem(cutList, thisFeat);
+                    object obj = thisFeat.IsSuppressed2((int)swInConfigurationOpts_e.swThisConfiguration, null);
+                    if (obj != null) AddCutItem(cutList, thisFeat);
                 }
             }
         }
 
-        public void TraverseComponent(List<CutItem> tempList, Component2 swComp, Action<List<CutItem>, Feature, bool, string> action) {
+        public void TraverseComponent(List<CutItem> tempList, Component2 swComp, Action<List<CutItem>, Feature, bool, string, string> action) {
             if (hadError) return;
             object[] vChildComp;
             Component2 swChildComp;
@@ -562,51 +577,36 @@ namespace Solid_Price.Models {
             if (vChildComp.Length > 0) {
                 for (int i = 0; i < vChildComp.Length; i++) {
                     swChildComp = (Component2)vChildComp[i];
-                    TraverseComponent(tempList, swChildComp, action);
+                    if (swChildComp.GetSuppression() == 2) TraverseComponent(tempList, swChildComp, action);
                 }
             } else {
 
-                ModelDoc2 model = swApp.OpenDoc6(swComp.GetPathName(), (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning); ;
+                ModelDoc2 model = swComp.GetModelDoc2() as ModelDoc2;//swApp.OpenDoc6(swComp.GetPathName(), (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, swComp.ReferencedConfiguration, ref fileerror, ref filewarning);
+                Debug.Print(swComp.ReferencedConfiguration);
+
                 Feature feature = (Feature)model.FirstFeature();
-                action(tempList, feature, true, "Root Feature");
+                action(tempList, feature, true, "Root Feature", swComp.ReferencedConfiguration);
             }
         }
 
-        public void TraverseAssembly(List<CutItem> tempList, AssemblyDoc swAssy) {
-            if (hadError) return;
-            object[] vChildComp;
-            Component2 swChildComp;
 
-            vChildComp = (object[])swAssy.GetComponents(false);
-            for (int i = 0; i < vChildComp.Length; i++) {
-                swChildComp = (Component2)vChildComp[i];
-                if (swChildComp.GetSuppression() == 2) {
-                    ModelDoc2 model = (ModelDoc2)swChildComp.GetModelDoc2();
-                    Feature feat = (Feature)model.FirstFeature();
-                    TraverseComponent(tempList, swChildComp, TraverseFeatures);
-                }
-            }
-
-        }
-
-        public void TraverseFeatures(List<CutItem> tempList, Feature thisFeat, bool isTopLevel, string ParentName) {
+        public void TraverseFeatures(List<CutItem> tempList, Feature thisFeat, bool isTopLevel, string parentName, string config) {
             if (hadError) return;
             Feature curFeat = default(Feature);
             curFeat = thisFeat;
             while (curFeat != null) {
                 if (tempList != null) {
-                    FindCutlist(tempList, curFeat, ParentName);
+                    FindCutlist(tempList, curFeat, parentName, config);
                 }
                 Feature subfeat = default(Feature);
                 subfeat = (Feature)curFeat.GetFirstSubFeature();
-                while ((subfeat != null)) {
-                    TraverseFeatures(tempList, subfeat, false, curFeat.Name);
+                while (subfeat != null) {
+                    TraverseFeatures(tempList, subfeat, false, curFeat.Name, config);
                     Feature nextSubFeat = default(Feature);
                     nextSubFeat = (Feature)subfeat.GetNextSubFeature();
                     subfeat = nextSubFeat;
                     nextSubFeat = null;
                 }
-                subfeat = null;
                 Feature nextFeat = default(Feature);
                 if (isTopLevel) {
                     nextFeat = (Feature)curFeat.GetNextFeature();

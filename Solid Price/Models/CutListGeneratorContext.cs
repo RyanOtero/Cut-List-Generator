@@ -13,9 +13,9 @@ namespace Solid_Price.Models {
     internal class CutListGeneratorContext : DbContext {
 
         //comment out to scaffold
-        public static readonly LoggerFactory _myLoggerFactory = new LoggerFactory(new[] {
-            new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider()
-        });
+        //public static readonly LoggerFactory _myLoggerFactory = new LoggerFactory(new[] {
+        //    new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider()
+        //});
         private static bool _created = bool.Parse(Application.Current.Properties["IsCreated"].ToString());
         private static bool isMySQL;
         /////////////
@@ -72,7 +72,7 @@ namespace Solid_Price.Models {
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            optionsBuilder.UseLoggerFactory(_myLoggerFactory);
+            //optionsBuilder.UseLoggerFactory(_myLoggerFactory);
             optionsBuilder.EnableSensitiveDataLogging(true);
             
             //Uncomment to scaffold

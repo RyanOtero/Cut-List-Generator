@@ -402,6 +402,7 @@ namespace Solid_Price.ViewModels {
                 ErrorMessage("Database Error", "There was an error while accessing the database.");
                 return;
             }
+            ClearCutList();
             IsLoading = true;
             await Task.Run(() => CutListMngr.Generate(SourceText, IsDetailed));
             CutListMngr.Refresh();

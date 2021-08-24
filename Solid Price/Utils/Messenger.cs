@@ -10,8 +10,12 @@ namespace Solid_Price.Utils {
         public static void ErrorMessage(string caption, string text) {
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBoxResult result;
-            result = MessageBox.Show(text, caption, button, icon, MessageBoxResult.Yes);
+            MessageBox.Show(text, caption, button, icon, MessageBoxResult.Yes);
+        }
+        public static MessageBoxResult YesNoMessage(string caption, string text) {
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            return MessageBox.Show(text, caption, button, icon, MessageBoxResult.Yes);
         }
     }
 }
