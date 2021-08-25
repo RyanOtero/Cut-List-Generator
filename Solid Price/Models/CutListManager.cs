@@ -432,6 +432,7 @@ namespace Solid_Price.Models {
         public void AddCutItem(List<CutItem> cutList, Feature thisFeat) {
             CustomPropertyManager CustomPropMgr = default(CustomPropertyManager);
             CustomPropMgr = thisFeat.CustomPropertyManager;
+            Debug.Print(thisFeat.Description);
             string[] vCustomPropNames;
             vCustomPropNames = (string[])CustomPropMgr.GetNames();
             if ((vCustomPropNames != null)) {
@@ -451,8 +452,10 @@ namespace Solid_Price.Models {
                     try {
                         for (i = 0; i <= (vCustomPropNames.Length - 1); i++) {
                             string CustomPropName = (string)vCustomPropNames[i];
+                           
                             string CustomPropResolvedVal;
                             CustomPropMgr.Get2(CustomPropName, out _, out CustomPropResolvedVal);
+                            Debug.Print("\t\t" + CustomPropName + ": " + CustomPropResolvedVal);
                             switch (CustomPropName.ToLower()) {
                                 case "quantity":
                                     Int32.TryParse(CustomPropResolvedVal, out qty);
@@ -523,6 +526,8 @@ namespace Solid_Price.Models {
             int BodyCount = 0;
 
             string FeatType = null;
+            Debug.Print("\t" + thisFeat.Name);
+            string s = thisFeat.Name;
             FeatType = thisFeat.GetTypeName();
             if ((FeatType == "SolidBodyFolder") & (parentName == "Root Feature")) {
                 inBodyFolder = true;
@@ -550,13 +555,17 @@ namespace Solid_Price.Models {
             }
 
             if (IsBodyFolder) {
+                bool[] isSup = (bool[])thisFeat.IsSuppressed2((int)swInConfigurationOpts_e.swThisConfiguration, null);
+                if (isSup[0]) {
+                    return;
+                }
                 BodyFolder BodyFolder = default(BodyFolder);
                 BodyFolder = (BodyFolder)thisFeat.GetSpecificFeature2();
                 BodyCount = BodyFolder.GetBodyCount();
                 if ((FeatType == "CutListFolder") & (BodyCount < 1)) {
                     //When BodyCount = 0, this cut list folder is not displayed in the
                     //FeatureManager design tree, so skip it
-                    return;
+                    //return;
                 }
             }
 
@@ -582,8 +591,10 @@ namespace Solid_Price.Models {
             } else {
 
                 ModelDoc2 model = swComp.GetModelDoc2() as ModelDoc2;//swApp.OpenDoc6(swComp.GetPathName(), (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, swComp.ReferencedConfiguration, ref fileerror, ref filewarning);
-                Debug.Print(swComp.ReferencedConfiguration);
-
+                string config = swComp.ReferencedConfiguration;
+                Debug.Print(swComp.Name + " config: " + config + ", status: " + model.ShowConfiguration2(config));
+                //Configuration swConfig = (Configuration)model.GetConfigurationByName(config);
+                model.ForceRebuild3(false);
                 Feature feature = (Feature)model.FirstFeature();
                 action(tempList, feature, true, "Root Feature", swComp.ReferencedConfiguration);
             }
