@@ -1,11 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using static Solid_Price.Utils.Messenger;
 
@@ -13,9 +9,6 @@ namespace Solid_Price.Models {
     internal class CutListGeneratorContext : DbContext {
 
         //comment out to scaffold
-        //public static readonly LoggerFactory _myLoggerFactory = new LoggerFactory(new[] {
-        //    new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider()
-        //});
         private static bool _created = bool.Parse(Application.Current.Properties["IsCreated"].ToString());
         private static bool isMySQL;
         /////////////
@@ -74,7 +67,7 @@ namespace Solid_Price.Models {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             //optionsBuilder.UseLoggerFactory(_myLoggerFactory);
             optionsBuilder.EnableSensitiveDataLogging(true);
-            
+
             //Uncomment to scaffold
             //try {
             //    optionsBuilder.UseMySQL("server=localhost;database=solid price;user=root;password=password");
@@ -84,14 +77,14 @@ namespace Solid_Price.Models {
             //        "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
             //}
             //////////////
-            
+
             //comment out to scaffold
             if (isMySQL) {
                 try {
                     optionsBuilder.UseMySQL(ConnectionString);
                     base.OnConfiguring(optionsBuilder);
                 } catch (Exception) {
-                    ErrorMessage("Database Error", "Please enter a connection string in the format of:\n" +
+                    ErrorMessage("Database Error cgc.cs 94", "Please enter a connection string in the format of:\n" +
                         "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
                 }
             } else {
@@ -102,10 +95,9 @@ namespace Solid_Price.Models {
                     base.OnConfiguring(optionsBuilder);
                 } catch (Exception e) {
                     string s = e.Message;
-                    ErrorMessage("Database Error", "Please enter a connection string in the format of:\n" +
+                    ErrorMessage("Database Error cgc.cs 105", "Please enter a connection string in the format of:\n" +
                         "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
                 }
-
             }
             ///////////////
         }

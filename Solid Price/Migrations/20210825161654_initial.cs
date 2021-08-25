@@ -35,7 +35,8 @@ namespace Solid_Price.Migrations
                     InternalDescription = table.Column<string>(type: "text", nullable: true),
                     ExternalDescription = table.Column<string>(type: "text", nullable: true),
                     VendorID = table.Column<int>(type: "int", nullable: true),
-                    CostPerFoot = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
+                    CostPerFoot = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    VendorItemNumber = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -61,7 +62,7 @@ namespace Solid_Price.Migrations
                     Angle2 = table.Column<float>(type: "float", nullable: false),
                     AngleDirection = table.Column<string>(type: "text", nullable: true),
                     AngleRotation = table.Column<string>(type: "text", nullable: true),
-                    StickNumber = table.Column<int>(type: "int", nullable: false),
+                    StickNumber = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,7 +82,7 @@ namespace Solid_Price.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     StockItemID = table.Column<int>(type: "int", nullable: false),
-                    Qty = table.Column<int>(type: "int", nullable: false),
+                    Qty = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

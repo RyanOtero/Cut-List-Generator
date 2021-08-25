@@ -19,6 +19,7 @@ namespace Solid_Price.Models {
         private string externalDescription;
         private Vendor vendor;
         private decimal costPerFoot;
+        private string vendorItemNumber;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
@@ -77,6 +78,14 @@ namespace Solid_Price.Models {
             }
         }
 
+        public string VendorItemNumber {
+            get => vendorItemNumber;
+            set {
+                vendorItemNumber = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string VendorName { get { return Vendor?.VendorName; } }
         public decimal CostPerLength => CostPerFoot * (decimal)StockLength;
         public float StockLengthInInches => StockLength * 12;
@@ -91,7 +100,7 @@ namespace Solid_Price.Models {
 
         public StockItem(Vendor vendor = null, MaterialType materialType = MaterialType.steel,
             ProfileType profType = ProfileType.square_tube, decimal costPerFoot = 0m,
-            float stockLength = 24, string internalDescription = "", string externalDescription = "") {
+            float stockLength = 24, string internalDescription = "", string externalDescription = "", string vendorItemNumber = "") {
             MatType = materialType;
             ProfType = profType;
             CostPerFoot = costPerFoot;
@@ -99,6 +108,7 @@ namespace Solid_Price.Models {
             InternalDescription = internalDescription;
             ExternalDescription = externalDescription;
             Vendor = vendor;
+            VendorItemNumber = vendorItemNumber;
         }
         #endregion
 

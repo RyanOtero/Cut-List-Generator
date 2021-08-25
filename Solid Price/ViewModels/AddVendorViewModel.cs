@@ -62,7 +62,7 @@ namespace Solid_Price.ViewModels {
                             }
                         }
                     } catch (Exception e) {
-                        ErrorMessage("Database Error", "There was an error while accessing the database.");
+                        ErrorMessage("Database Error avvm.cs 65", "There was an error while accessing the database.");
                         return;
                     }
                 }
@@ -76,10 +76,10 @@ namespace Solid_Price.ViewModels {
                         MainVModel.CutListMngr.Refresh();
                         CloseWin(x);
                     } catch (Exception) {
-                        ErrorMessage("Database Error", "There was an error while accessing the database.");
+                        ErrorMessage("Database Error avvm.cs 79", "There was an error while accessing the database.");
                     }
                 } else {
-                    ErrorMessage("Empty Fields", "Fields cannot be empty. Please fill in the missing fields before confirming");
+                    ErrorMessage("Empty Fields avvm.cs 82", "Fields cannot be empty. Please fill in the missing fields before confirming");
                 }
             });
             CancelCommand = new RelayCommand(CloseWin);

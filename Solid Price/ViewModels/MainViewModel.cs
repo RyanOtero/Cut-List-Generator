@@ -279,7 +279,7 @@ namespace Solid_Price.ViewModels {
                         }
                     } catch (Exception e) {
                         string s = e.Message;
-                        ErrorMessage("Database Error", "There was an error while accessing the database.");
+                        ErrorMessage("Database Error mvm.cs 282", "There was an error while accessing the database.");
                     }
                 }
             });
@@ -288,7 +288,7 @@ namespace Solid_Price.ViewModels {
                     return;
                 }
                 if (SelectedVendor.ID == 1) {
-                    ErrorMessage("Forbidden Action", "You may not delete the default vendor.");
+                    ErrorMessage("Forbidden Action mvm.cs 291", "You may not delete the default vendor.");
                     return;
                 }
 
@@ -321,13 +321,13 @@ namespace Solid_Price.ViewModels {
                         }
                     } catch (Exception e) {
                         string s = e.Message;
-                        ErrorMessage("Database Error", "There was an error while accessing the database.");
+                        ErrorMessage("Database Error mvm.cs 324", "There was an error while accessing the database.");
                     }
                 }
             });
             EditStockItemCommand = new RelayCommand((x) => {
                 if (SelectedStockItem == null) {
-                    ErrorMessage("Stock Type", "Please select a stock type to edit.");
+                    ErrorMessage("Stock Type mvm.cs 330", "Please select a stock type to edit.");
                     return;
                 }
                 var vModel = new EditStockItemViewModel(SelectedStockItem);
@@ -337,11 +337,11 @@ namespace Solid_Price.ViewModels {
             });
             EditVendorCommand = new RelayCommand((x) => {
                 if (SelectedVendor == null) {
-                    ErrorMessage("Vender", "Please select a vendor to edit.");
+                    ErrorMessage("Vender mvm.cs 340", "Please select a vendor to edit.");
                     return;
                 }
                 if (SelectedVendor.ID == 1) {
-                    ErrorMessage("Vendor", "You may not edit the default vendor.");
+                    ErrorMessage("Vendor mvm.cs 344", "You may not edit the default vendor.");
                     return;
                 }
                 var vModel = new EditVendorViewModel(SelectedVendor);
@@ -399,7 +399,7 @@ namespace Solid_Price.ViewModels {
 
         public async void GenerateCutList() {
             if (string.IsNullOrEmpty(ConnectionString)) {
-                ErrorMessage("Database Error", "There was an error while accessing the database.");
+                ErrorMessage("Database Error mvm.cs 402", "There was an error while accessing the database.");
                 return;
             }
             ClearCutList();

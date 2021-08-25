@@ -2,7 +2,6 @@
 using SolidWorks.Interop.sldworks;
 using SolidWorks.Interop.swconst;
 using Solid_Price.Utils;
-using Solid_Price.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,13 +10,9 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using static Solid_Price.Utils.Messenger;
-
 
 namespace Solid_Price.Models {
     public class CutListManager : INotifyPropertyChanged {
@@ -107,7 +102,7 @@ namespace Solid_Price.Models {
         #region Methods
         public void Refresh() {
             if (string.IsNullOrEmpty(ConnectionString)) {
-                ErrorMessage("Database Error", "There was an error while accessing the database.");
+                ErrorMessage("Database Error clm.cs 110", "There was an error while accessing the database.");
                 return;
             }
             StockItems.Clear();
@@ -134,8 +129,8 @@ namespace Solid_Price.Models {
                     }
 
                 }
-            } catch (Exception) {
-                ErrorMessage("Database Error", "There was an error while accessing the database.");
+            } catch (Exception e) {
+                ErrorMessage("Database Error clm.cs 138", "There was an error while accessing the database.");
             }
             CutList.Sort();
             OrderList.Sort();
@@ -158,6 +153,8 @@ namespace Solid_Price.Models {
 
         #region Generation
         public void Generate(string filePath, bool isDetailed) {
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
             if (string.IsNullOrEmpty(filePath)) return;
 
             bool isPart;
@@ -170,7 +167,7 @@ namespace Solid_Price.Models {
             isAssembly = filePath.ToLower().Contains(".sldasm");
 
             if (!isPart && !isAssembly) {
-                ErrorMessage("Invalid File", "Please select a part file or an assembly file.");
+                ErrorMessage("Invalid File clm.cs 173", "Please select a part file or an assembly file.");
             }
             var progId = "SldWorks.Application";
             var progType = Type.GetTypeFromProgID(progId);
@@ -226,6 +223,14 @@ namespace Solid_Price.Models {
             SortCutListForDisplay(isDetailed, tempList);
 
             swApp = null;
+            timer.Stop();
+            TimeSpan ts = timer.Elapsed;
+
+            // Format and display the TimeSpan value.
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts.Hours, ts.Minutes, ts.Seconds,
+                ts.Milliseconds / 10);
+            Debug.Print("RunTime " + elapsedTime);
         }
 
         public void SortCutListForDisplay(bool isDetailed, List<CutItem> tempList) {
@@ -511,7 +516,7 @@ namespace Solid_Price.Models {
                         CutItem cItem = new CutItem(sItem, qty, length, angle1, angle2, angleDirection, angleRotation);
                         cutList.Add(cItem);
                     } catch (Exception e) {
-                        ErrorMessage("Database Error", "There was an error while accessing the database.");
+                        ErrorMessage("Database Error clm.cs 514", "There was an error while accessing the database.");
                         hadError = true;
                     }
 

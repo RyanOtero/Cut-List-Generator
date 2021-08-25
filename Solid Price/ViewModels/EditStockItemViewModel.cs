@@ -19,6 +19,7 @@ namespace Solid_Price.ViewModels {
         private string externalDescription;
         private Vendor selectedVendor;
         private decimal costPerFoot;
+        private string vendorItemNumber;
         #endregion
 
         #region Properties
@@ -57,6 +58,11 @@ namespace Solid_Price.ViewModels {
             set { SetProperty(ref costPerFoot, value); }
         }
 
+        public string VendorItemNumber {
+            get => vendorItemNumber;
+            set { SetProperty(ref vendorItemNumber, value); }
+        }
+
         public RelayCommand ConfirmCommand { get; set; }
         public RelayCommand CancelCommand { get; set; }
         public MainViewModel MainVModel { get; set; }
@@ -70,6 +76,7 @@ namespace Solid_Price.ViewModels {
             ExternalDescription = sItem.ExternalDescription;
             CostPerFoot = sItem.CostPerFoot;
             SelectedVendor = sItem.Vendor;
+            VendorItemNumber = sItem.VendorItemNumber;
             MainVModel = (MainViewModel)Application.Current.MainWindow.DataContext;
             ConfirmCommand = new RelayCommand((x) => {
                 if (!string.IsNullOrEmpty(InternalDescription) && !string.IsNullOrEmpty(ExternalDescription) && SelectedVendor != null) {
@@ -83,6 +90,7 @@ namespace Solid_Price.ViewModels {
                             sItem.ExternalDescription = ExternalDescription;
                             sItem.CostPerFoot = CostPerFoot;
                             sItem.Vendor = SelectedVendor;
+                            sItem.VendorItemNumber = VendorItemNumber;
                             using (CutListGeneratorContext ctx = new CutListGeneratorContext(MainVModel.ConnectionString)) {
                                 ctx.Entry(SelectedVendor).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
                                 ctx.StockItems.Update(sItem);
@@ -95,12 +103,12 @@ namespace Solid_Price.ViewModels {
                             CloseWin(x);
                         } catch (Exception e) {
                             string s = e.Message;
-                            ErrorMessage("Database Error", "There was an error while accessing the database.");
+                            ErrorMessage("Database Error esivm.cs 106", "There was an error while accessing the database.");
                         }
                     }
                     CloseWin(x);
                 } else {
-                    ErrorMessage("Empty Fields", "Fields cannot be empty. Please fill in the missing fields before confirming");
+                    ErrorMessage("Empty Fields esivm.cs 111", "Fields cannot be empty. Please fill in the missing fields before confirming");
                 }
             });
             CancelCommand = new RelayCommand(CloseWin);
