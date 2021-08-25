@@ -432,7 +432,6 @@ namespace Solid_Price.Models {
         public void AddCutItem(List<CutItem> cutList, Feature thisFeat) {
             CustomPropertyManager CustomPropMgr = default(CustomPropertyManager);
             CustomPropMgr = thisFeat.CustomPropertyManager;
-            Debug.Print(thisFeat.Description);
             string[] vCustomPropNames;
             vCustomPropNames = (string[])CustomPropMgr.GetNames();
             if ((vCustomPropNames != null)) {
@@ -455,7 +454,6 @@ namespace Solid_Price.Models {
                            
                             string CustomPropResolvedVal;
                             CustomPropMgr.Get2(CustomPropName, out _, out CustomPropResolvedVal);
-                            Debug.Print("\t\t" + CustomPropName + ": " + CustomPropResolvedVal);
                             switch (CustomPropName.ToLower()) {
                                 case "quantity":
                                     Int32.TryParse(CustomPropResolvedVal, out qty);
@@ -526,7 +524,6 @@ namespace Solid_Price.Models {
             int BodyCount = 0;
 
             string FeatType = null;
-            Debug.Print("\t" + thisFeat.Name);
             string s = thisFeat.Name;
             FeatType = thisFeat.GetTypeName();
             if ((FeatType == "SolidBodyFolder") & (parentName == "Root Feature")) {
@@ -590,10 +587,8 @@ namespace Solid_Price.Models {
                 }
             } else {
 
-                ModelDoc2 model = swComp.GetModelDoc2() as ModelDoc2;//swApp.OpenDoc6(swComp.GetPathName(), (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, swComp.ReferencedConfiguration, ref fileerror, ref filewarning);
+                ModelDoc2 model = swComp.GetModelDoc2() as ModelDoc2;
                 string config = swComp.ReferencedConfiguration;
-                Debug.Print(swComp.Name + " config: " + config + ", status: " + model.ShowConfiguration2(config));
-                //Configuration swConfig = (Configuration)model.GetConfigurationByName(config);
                 model.ForceRebuild3(false);
                 Feature feature = (Feature)model.FirstFeature();
                 action(tempList, feature, true, "Root Feature", swComp.ReferencedConfiguration);

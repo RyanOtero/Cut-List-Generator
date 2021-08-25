@@ -38,7 +38,6 @@ namespace Solid_Price {
                 while (!reader.EndOfStream) {
                     string[] keyValue = reader.ReadLine().Split(new char[] { ',' });
                     this.Properties[keyValue[0]] = keyValue[1];
-                    Debug.Print(keyValue[0] + ", " + keyValue[1]);
                     hasContents = true;
                 }
                 if (!hasContents) {
