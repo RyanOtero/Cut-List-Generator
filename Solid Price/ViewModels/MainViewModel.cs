@@ -51,9 +51,7 @@ namespace Solid_Price.ViewModels {
                 Application.Current.Properties["UseExternalDB"] = useExternalDB;
                 if (CutListMngr != null) {
                     CutListMngr.ConnectionString = ConnectionString;
-                    if (ConnectionString != "server=;database=;user=;password=") {
-                        CutListMngr.Refresh();
-                    }
+                    CutListMngr.Refresh();
                 }
             }
         }
@@ -251,12 +249,18 @@ namespace Solid_Price.ViewModels {
             AddStockItemCommand = new RelayCommand((x) => {
                 var win = new AddStockItemWindow();
                 win.DataContext = new AddStockItemViewModel();
-                win.Show();
+                Window mainWindow = App.Current.MainWindow;
+                win.Left = mainWindow.Left + (mainWindow.Width - win.Width) / 2;
+                win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
+                win.ShowDialog();
             });
             AddVendorCommand = new RelayCommand((x) => {
                 var win = new AddVendorWindow();
                 win.DataContext = new AddVendorViewModel();
-                win.Show();
+                Window mainWindow = App.Current.MainWindow;
+                win.Left = mainWindow.Left + (mainWindow.Width - win.Width) / 2;
+                win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
+                win.ShowDialog();
             });
             DeleteStockItemCommand = new RelayCommand((x) => {
                 if (SelectedStockItem == null) {
@@ -333,7 +337,10 @@ namespace Solid_Price.ViewModels {
                 var vModel = new EditStockItemViewModel(SelectedStockItem);
                 var win = new EditStockItemWindow();
                 win.DataContext = vModel;
-                win.Show();
+                Window mainWindow = App.Current.MainWindow;
+                win.Left = mainWindow.Left + (mainWindow.Width - win.Width) / 2;
+                win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
+                win.ShowDialog();
             });
             EditVendorCommand = new RelayCommand((x) => {
                 if (SelectedVendor == null) {
@@ -347,7 +354,10 @@ namespace Solid_Price.ViewModels {
                 var vModel = new EditVendorViewModel(SelectedVendor);
                 var win = new EditVendorWindow();
                 win.DataContext = vModel;
-                win.Show();
+                Window mainWindow = App.Current.MainWindow;
+                win.Left = mainWindow.Left + (mainWindow.Width - win.Width) / 2;
+                win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
+                win.ShowDialog();
             });
             IsDetailedCommand = new RelayCommand((x) => {
                 List<CutItem> tempList = CutListMngr.CutList.ToList();

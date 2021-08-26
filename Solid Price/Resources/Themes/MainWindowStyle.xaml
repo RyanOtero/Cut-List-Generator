@@ -41,9 +41,8 @@
             <Rectangle Name="bottomLeftSizeGrip" Width="7" Height="7" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="SizeNESW" Style="{StaticResource RectBorderStyle}" Grid.Row="1" />
         </Grid>
     </ControlTemplate>
-    <Style x:Key="SkinWindowStyle" TargetType="Window">
+    <Style x:Key="MainWindowStyle" TargetType="Window">
         <Setter Property="WindowStyle" Value="None" />
-        <Setter Property="ResizeMode" Value="CanResize" />
         <Setter Property="AllowsTransparency" Value="True" />
         <Setter Property="Opacity" Value="100" />
         <Setter Property="ResizeMode" Value="CanResize" />

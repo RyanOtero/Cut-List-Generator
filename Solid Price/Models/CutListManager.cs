@@ -80,9 +80,7 @@ namespace Solid_Price.Models {
             StockItems = new ObservableCollection<StockItem>();
             OrderList = new ObservableCollection<OrderItem>();
             ConnectionString = cString;
-            if (!string.IsNullOrEmpty(ConnectionString)) {
-                Refresh();
-            }
+            Refresh();
         }
 
         public CutListManager() {
@@ -102,8 +100,11 @@ namespace Solid_Price.Models {
 
         #region Methods
         public void Refresh() {
+            if (ConnectionString == "server=;database=;user=;password=") {
+                return;
+            }
             if (string.IsNullOrEmpty(ConnectionString)) {
-                ErrorMessage("Database Error clm.cs 110", "There was an error while accessing the database.");
+                ErrorMessage("Database Error clm.cs 110", "The connection string is invalid.");
                 return;
             }
             StockItems.Clear();
@@ -131,7 +132,7 @@ namespace Solid_Price.Models {
 
                 }
             } catch (Exception e) {
-                ErrorMessage("Database Error clm.cs 138", "There was an error while accessing the database.");
+                ErrorMessage("Database Error clm.cs 134", "There was an error while accessing the database.");
             }
             CutList.Sort();
             OrderList.Sort();
@@ -145,7 +146,8 @@ namespace Solid_Price.Models {
                     ctx.SaveChanges();
                 }
             } catch (Exception e) {
-                throw;
+                ErrorMessage("Database Error clm.cs 148", "There was an error while accessing the database.");
+
             }
             CutList.Clear();
             OrderList.Clear();

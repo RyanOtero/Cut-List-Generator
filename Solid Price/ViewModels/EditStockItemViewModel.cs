@@ -81,7 +81,7 @@ namespace Solid_Price.ViewModels {
             ConfirmCommand = new RelayCommand((x) => {
                 if (!string.IsNullOrEmpty(InternalDescription) && !string.IsNullOrEmpty(ExternalDescription) && SelectedVendor != null) {
                     if (SelectedVendor != sItem.Vendor || SelectedMatType != sItem.MatType || SelectedProfType != sItem.ProfType || CostPerFoot != sItem.CostPerFoot
-                        || StockLength != sItem.StockLength || InternalDescription != sItem.InternalDescription || ExternalDescription != sItem.ExternalDescription) {
+                        || StockLength != sItem.StockLength || InternalDescription != sItem.InternalDescription || ExternalDescription != sItem.ExternalDescription || sItem.VendorItemNumber != VendorItemNumber) {
                         try {
                             sItem.MatType = SelectedMatType;
                             sItem.ProfType = SelectedProfType;

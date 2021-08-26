@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:Solid_Price.ViewModels"
         Title="Solid Price" Height="531" Width="927" WindowStyle="None" SizeToContent="Manual"
-        Style="{DynamicResource ResourceKey=SkinWindowStyle}">
+        Style="{DynamicResource ResourceKey=MainWindowStyle}">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="b2v" />
         <vm:MainViewModel x:Key="ViewModel" />
