@@ -29,6 +29,7 @@ namespace Solid_Price.Models {
         private ObservableCollection<StockItem> stockItems;
         private string connectionString;
         private bool hadError;
+        private CutListGeneratorContext ctx;
 
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
@@ -177,7 +178,7 @@ namespace Solid_Price.Models {
             if (swApp.ActiveDoc != null) {
                 MessageBoxResult result = YesNoMessage("Solidworks", "All open Solidworks documents will be closed without saving. Proceed?");
                 if (result == MessageBoxResult.No) {
-                return;
+                    return;
                 } else {
                     swApp.CloseAllDocuments(true);
                 }
@@ -208,12 +209,20 @@ namespace Solid_Price.Models {
             } else {
                 swPart = (PartDoc)swModel;
             }
+            try {
+                using (ctx = new CutListGeneratorContext(ConnectionString)) {
+                    if (isAssembly) {
+                        TraverseComponent(tempList, swAssy, TraverseFeatures);
+                    } else {
+                        TraverseFeatures(tempList, (Feature)swPart.FirstFeature(), true, "Root Feature", "");
+                    }
+                }
 
-            if (isAssembly) {
-                TraverseComponent(tempList, swAssy, TraverseFeatures);
-            } else {
-                TraverseFeatures(tempList, (Feature)swPart.FirstFeature(), true, "Root Feature", "");
+            } catch (Exception e) {
+
+                //throw;
             }
+
             swApp.CloseAllDocuments(true);
 
             if (hadError) {
@@ -452,75 +461,72 @@ namespace Solid_Price.Models {
                 bool isNew = false;
                 StockItem sItem = null;
 
-                using (var ctx = new CutListGeneratorContext(ConnectionString)) {
-                    try {
-                        for (i = 0; i <= (vCustomPropNames.Length - 1); i++) {
-                            string CustomPropName = (string)vCustomPropNames[i];
-                           
-                            string CustomPropResolvedVal;
-                            CustomPropMgr.Get2(CustomPropName, out _, out CustomPropResolvedVal);
-                            switch (CustomPropName.ToLower()) {
-                                case "quantity":
-                                    Int32.TryParse(CustomPropResolvedVal, out qty);
-                                    break;
-                                case "description":
-                                    description = CustomPropResolvedVal;
-                                    var sItems = ctx.StockItems.Include(i => i.Vendor).ToList();
-                                    sItem = sItems.SingleOrDefault(item => item.InternalDescription == description);
-                                    if (sItem == null) {
-                                        isNew = true;
-                                    }
-                                    break;
-                                case "length":
-                                    float.TryParse(CustomPropResolvedVal, out length);
-                                    break;
-                                case "angle1":
-                                    float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle1);
-                                    break;
-                                case "angle2":
-                                    float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle2);
-                                    break;
-                                case "material":
-                                    material = CustomPropResolvedVal;
-                                    break;
-                                case "angle direction":
-                                    angleDirection = CustomPropResolvedVal;
-                                    break;
-                                case "angle rotation":
-                                    angleRotation = CustomPropResolvedVal;
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        Vendor vendor;
-                        if (isNew) {
-                            if (ctx.Vendors.Any()) {
-                                vendor = ctx.Vendors.AsEnumerable().ElementAt(0);
-                            } else {
-                                vendor = new Vendor("N/A", "N/A", "N/A", "N/A");
-                                vendor.ID = 1;
-                                ctx.Vendors.Add(vendor);
-                                ctx.SaveChanges();
-                            }
-                            sItem = new StockItem(vendor: vendor, internalDescription: description,
-                                externalDescription: description,
-                                materialType: StockItem.MaterialFromDescription(description),
-                                profType: StockItem.ProfileFromDescription(description));
-                            ctx.StockItems.Add(sItem);
-                            ctx.Vendors.Update(vendor);
-                            ctx.SaveChanges();
-                        }
-                        isNew = false;
 
-                        CutItem cItem = new CutItem(sItem, qty, length, angle1, angle2, angleDirection, angleRotation);
-                        cutList.Add(cItem);
-                    } catch (Exception e) {
-                        ErrorMessage("Database Error clm.cs 514", "There was an error while accessing the database.");
-                        hadError = true;
+                for (i = 0; i <= (vCustomPropNames.Length - 1); i++) {
+                    string CustomPropName = (string)vCustomPropNames[i];
+
+                    string CustomPropResolvedVal;
+                    CustomPropMgr.Get2(CustomPropName, out _, out CustomPropResolvedVal);
+                    //Debug.Print("\t\t" + CustomPropName + ": " + CustomPropResolvedVal);
+                    switch (CustomPropName.ToLower()) {
+                        case "quantity":
+                            Int32.TryParse(CustomPropResolvedVal, out qty);
+                            break;
+                        case "description":
+                            description = CustomPropResolvedVal;
+                            var sItems = ctx.StockItems.Include(i => i.Vendor).ToList();
+                            sItem = sItems.SingleOrDefault(item => item.InternalDescription == description);
+                            if (sItem == null) {
+                                isNew = true;
+                            }
+                            break;
+                        case "length":
+                            float.TryParse(CustomPropResolvedVal, out length);
+                            break;
+                        case "angle1":
+                            float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle1);
+                            break;
+                        case "angle2":
+                            float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle2);
+                            break;
+                        case "material":
+                            material = CustomPropResolvedVal;
+                            break;
+                        case "angle direction":
+                            angleDirection = CustomPropResolvedVal;
+                            break;
+                        case "angle rotation":
+                            angleRotation = CustomPropResolvedVal;
+                            break;
+                        default:
+                            break;
                     }
-
                 }
+                Vendor vendor;
+                if (isNew) {
+                    if (ctx.Vendors.Any()) {
+                        vendor = ctx.Vendors.AsEnumerable().ElementAt(0);
+                    } else {
+                        vendor = new Vendor("N/A", "N/A", "N/A", "N/A");
+                        vendor.ID = 1;
+                        ctx.Vendors.Add(vendor);
+                        ctx.SaveChanges();
+                    }
+                    sItem = new StockItem(vendor: vendor, internalDescription: description,
+                        externalDescription: description,
+                        materialType: StockItem.MaterialFromDescription(description),
+                        profType: StockItem.ProfileFromDescription(description));
+                    ctx.StockItems.Add(sItem);
+                    ctx.Vendors.Update(vendor);
+                    ctx.SaveChanges();
+                }
+                isNew = false;
+
+                CutItem cItem = new CutItem(sItem, qty, length, angle1, angle2, angleDirection, angleRotation);
+                cutList.Add(cItem);
+
+
+
             }
         }
 
@@ -572,6 +578,7 @@ namespace Solid_Price.Models {
             }
 
             if (FeatType == "CutListFolder") {
+                //Debug.Print("\t" + s);
                 if (BodyCount > 0) {
                     object obj = thisFeat.IsSuppressed2((int)swInConfigurationOpts_e.swThisConfiguration, null);
                     if (obj != null) AddCutItem(cutList, thisFeat);
@@ -594,7 +601,10 @@ namespace Solid_Price.Models {
 
                 ModelDoc2 model = swComp.GetModelDoc2() as ModelDoc2;
                 string config = swComp.ReferencedConfiguration;
-                model.ForceRebuild3(false);
+                model.ShowConfiguration2(config);
+                //Debug.Print(swComp.Name + "<" + config + ">");
+                bool b = model.ForceRebuild3(false);
+                //Debug.Print(b.ToString());
                 Feature feature = (Feature)model.FirstFeature();
                 action(tempList, feature, true, "Root Feature", swComp.ReferencedConfiguration);
             }

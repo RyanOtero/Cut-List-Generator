@@ -118,7 +118,7 @@
                 <StackPanel Orientation="Horizontal" Width="320" Height="60" VerticalAlignment="Top" Margin="20,0,0,10" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0">
                     <Button x:Name="addStockItemButton" Content="Add" Command="{Binding AddStockItemCommand}"  Margin="5"/>
                     <Button x:Name="deleteStockItemButton" Content="Delete" Command="{Binding DeleteStockItemCommand}" Margin="5"/>
-                    <Button x:Name="editStockItemsButton" Content="Edit" Command="{Binding EditVendorCommand}" Margin="5"/>
+                    <Button x:Name="editStockItemsButton" Content="Edit" Command="{Binding EditStockItemCommand}" Margin="5"/>
                 </StackPanel>
                 <DataGrid x:Name="StockItemsDataGrid" ItemsSource="{Binding Path=StockItems}" SelectedItem="{Binding SelectedStockItem, Mode=TwoWay}" HeadersVisibility="Column" CanUserAddRows="False" AutoGenerateColumns="False" Margin="20,0,20,20" Grid.Column="0" Grid.Row="1">
                     <DataGrid.Columns>
