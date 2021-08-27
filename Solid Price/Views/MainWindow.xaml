@@ -50,8 +50,9 @@
                         </Style>
                     </CheckBox.Resources>
                 </CheckBox>
-                <Label Content="Order List" Grid.Column="0" FontSize="18" HorizontalAlignment="Left" Grid.Row="3" Grid.ColumnSpan="2" Margin="18,-24,0,0" />
-                <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="orderListDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding OrderList}" Margin="20,5,10,35" Grid.Column="0" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="2">
+                <Label Content="Order List" Grid.Column="0" FontSize="18" HorizontalAlignment="Left" Grid.Row="3" Grid.ColumnSpan="2" Margin="28,-27,0,0" />
+                 <Label Content="{Binding OrderTotal}"  HorizontalAlignment="Left" Grid.Column="1" Grid.Row="3" Margin="60,-21.5,0,0" Width="160" />
+               <DataGrid x:Name="orderListDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding OrderList}" Margin="20,5,10,35" Grid.Column="0" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="2">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Path=Qty, Mode=OneWay}" Header="Qty" Width="*" />
                         <DataGridTextColumn Binding="{Binding Path=Description, Mode=OneWay}" Header="Description" Width="7.5*" />
@@ -61,9 +62,9 @@
                         <DataGridTextColumn Binding="{Binding Path=VendorName, Mode=OneWay}" Header="Vendor" Width="2.5*" />
                     </DataGrid.Columns>
                 </DataGrid>
-                <Label Content="{Binding OrderTotal}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="5" Margin="-180,0,80,0" Height="30" Width="160" />
-                <Label Content="Cut List" Grid.Column="0" FontSize="18" HorizontalAlignment="Left" Grid.Row="6" Grid.ColumnSpan="2" Margin="18,-24,0,0" />
-                <DataGrid CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="cutListDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding CutList}" Margin="20,5,20,35" Grid.Row="6" Grid.ColumnSpan="3">
+                <Label Content="Cut List" Grid.Column="0" FontSize="18" HorizontalAlignment="Left" Grid.Row="6" Grid.ColumnSpan="2" Margin="28,-27,0,0" />
+                <Label Content="{Binding CutListTotal}" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="6" Margin="40,-21.5,0,0" Width="160" />
+                <DataGrid x:Name="cutListDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding CutList}" Margin="20,5,20,35" Grid.Row="6" Grid.ColumnSpan="3">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Path=Qty, Mode=OneWay}" Header="Qty" Width="1.5*" />
                         <DataGridTextColumn Binding="{Binding Path=Description, Mode=OneWay}" Header="Description" Width="8.5*" />
@@ -77,7 +78,6 @@
                         <DataGridTextColumn Binding="{Binding Path=TotalCost, Mode=OneWay}" Header="Total" Width="2*" Visibility="{Binding ShowPricing, Source={StaticResource ViewModel}, Converter={StaticResource b2v}}" />
                     </DataGrid.Columns>
                 </DataGrid>
-                <Label Content="{Binding CutListTotal}" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="6" Margin="-90,0,0,0" Height="30" Width="160" />
                 <Label x:Name="loadingLabel1" Content="{Binding LoadingText}" Visibility="{Binding IsLoading, Converter={StaticResource b2v}}" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 <Label x:Name="loadingLabel2" Content="{Binding LoadingText}" Visibility="{Binding IsLoading, Converter={StaticResource b2v}}" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </Grid>
