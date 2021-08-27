@@ -13,6 +13,5 @@ namespace Solid_Price.Views {
         public MainWindow() {
             InitializeComponent();
         }
-
     }
 }

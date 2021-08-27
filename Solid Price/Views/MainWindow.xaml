@@ -51,7 +51,7 @@
                     </CheckBox.Resources>
                 </CheckBox>
                 <Label Content="Order List" Grid.Column="0" FontSize="18" HorizontalAlignment="Left" Grid.Row="3" Grid.ColumnSpan="2" Margin="18,-24,0,0" />
-                <DataGrid x:Name="orderListDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding OrderList}" Margin="20,5,10,35" Grid.Column="0" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="2">
+                <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="orderListDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding OrderList}" Margin="20,5,10,35" Grid.Column="0" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="2">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Path=Qty, Mode=OneWay}" Header="Qty" Width="*" />
                         <DataGridTextColumn Binding="{Binding Path=Description, Mode=OneWay}" Header="Description" Width="7.5*" />
@@ -63,7 +63,7 @@
                 </DataGrid>
                 <Label Content="{Binding OrderTotal}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="5" Margin="-180,0,80,0" Height="30" Width="160" />
                 <Label Content="Cut List" Grid.Column="0" FontSize="18" HorizontalAlignment="Left" Grid.Row="6" Grid.ColumnSpan="2" Margin="18,-24,0,0" />
-                <DataGrid x:Name="cutListDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding CutList}" Margin="20,5,20,35" Grid.Row="6" Grid.ColumnSpan="3">
+                <DataGrid CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="cutListDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding CutList}" Margin="20,5,20,35" Grid.Row="6" Grid.ColumnSpan="3">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Path=Qty, Mode=OneWay}" Header="Qty" Width="1.5*" />
                         <DataGridTextColumn Binding="{Binding Path=Description, Mode=OneWay}" Header="Description" Width="8.5*" />

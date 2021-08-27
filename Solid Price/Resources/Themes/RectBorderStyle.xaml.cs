@@ -27,7 +27,7 @@ namespace Solid_Price.Themes {
             }
         }
 
-        private void Resizeing_Form(object sender, MouseEventArgs e) {
+        private void Resizing_Form(object sender, MouseEventArgs e) {
             if (ResizeInProcess) {
                 Rectangle senderRect = sender as Rectangle;
                 Window mainWindow = senderRect.Tag as Window;
