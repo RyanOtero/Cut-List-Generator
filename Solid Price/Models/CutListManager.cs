@@ -170,7 +170,10 @@ namespace Solid_Price.Models {
             isAssembly = filePath.ToLower().Contains(".sldasm");
 
             if (!isPart && !isAssembly) {
-                ErrorMessage("Invalid File clm.cs 173", "Please select a part file or an assembly file.");
+                Application.Current.Dispatcher.Invoke(delegate {
+                    ErrorMessage("Invalid File clm.cs 173", "Please select a part file or an assembly file.");
+                });
+                return;
             }
             var progId = "SldWorks.Application";
             var progType = Type.GetTypeFromProgID(progId);
@@ -185,7 +188,7 @@ namespace Solid_Price.Models {
             }
             MessageBoxResult result;
             if (openFiles.Count != 0 || openFiles.Count >= 1 && openFiles[0] != filePath) {
-                bool isCancelled = Application.Current.Dispatcher.Invoke((Func<bool>)delegate {
+                bool isCancelled = Application.Current.Dispatcher.Invoke(delegate {
                     result = YesNoMessage("Solidworks", "All open Solidworks documents will be closed without saving. Proceed?");
                     if (result != MessageBoxResult.Yes) {
                         return true;
