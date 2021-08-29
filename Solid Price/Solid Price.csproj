@@ -6,7 +6,7 @@
     <RootNamespace>Solid_Price</RootNamespace>
     <UseWPF>true</UseWPF>
     <StartupObject>Solid_Price.App</StartupObject>
-    <ApplicationIcon>spicon.ico</ApplicationIcon>
+    <ApplicationIcon>solidprice.ico</ApplicationIcon>
     <Win32Resource />
     <AssemblyName>Solid Price</AssemblyName>
   </PropertyGroup>
@@ -108,6 +108,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Themes\AddEditWindowStyle - Copy.xaml.cs">
+      <DependentUpon>MessageWindowStyle.xaml.cs</DependentUpon>
+    </Compile>
     <Compile Update="Views\AddStockItemWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -139,6 +142,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Resources\Themes\AddEditWindowStyle.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
     <Page Update="Views\AddStockItemWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

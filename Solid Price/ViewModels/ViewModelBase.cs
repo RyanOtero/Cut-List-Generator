@@ -27,7 +27,7 @@ namespace Solid_Price.ViewModels {
             this.OnPropertyChanged(propertyName);
             return true;
         }
-        public void CloseWin(object obj) {
+        public virtual void CloseWin(object obj) {
             Window win = obj as Window;
             win.Close();
         }

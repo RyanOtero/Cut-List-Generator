@@ -4,7 +4,7 @@
         xmlns:utils="clr-namespace:Solid_Price.Utils"
         xmlns:models="clr-namespace:Solid_Price.Models"
         Title="Add New Stock Item" Height="400" Width="420" ResizeMode="NoResize" ShowInTaskbar="False" 
-        WindowStyle="None" SizeToContent="Manual"
+        WindowStyle="None" Topmost="True" SizeToContent="Manual"
         Style="{DynamicResource ResourceKey=AddEditWindowStyle}">
     <Window.Resources>
         <utils:FloatToStringConverter x:Key="FloatToStringConverter"/>

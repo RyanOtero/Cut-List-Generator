@@ -176,22 +176,38 @@ namespace Solid_Price.Models {
             var progType = Type.GetTypeFromProgID(progId);
             swApp = new SldWorks();
             swApp.Visible = true;
-
-            if (swApp.ActiveDoc != null) {
-                MessageBoxResult result = YesNoMessage("Solidworks", "All open Solidworks documents will be closed without saving. Proceed?");
-                if (result == MessageBoxResult.No) {
+            List<string> openFiles = new();
+            ModelDoc2 doc;
+            doc = (ModelDoc2)swApp.GetFirstDocument();
+            while (doc != null) {
+                openFiles.Add(doc.GetPathName());
+                doc = (ModelDoc2)doc.GetNext();
+            }
+            MessageBoxResult result;
+            if (openFiles.Count != 0 || openFiles.Count >= 1 && openFiles[0] != filePath) {
+                bool isCancelled = Application.Current.Dispatcher.Invoke((Func<bool>)delegate {
+                    result = YesNoMessage("Solidworks", "All open Solidworks documents will be closed without saving. Proceed?");
+                    if (result != MessageBoxResult.Yes) {
+                        return true;
+                    } else {
+                        for (int i = openFiles.Count - 1; i > -1; i--) {
+                            if (openFiles[i] != filePath) {
+                                swApp.CloseDoc(openFiles[i]);
+                            }
+                        }
+                        doc = (ModelDoc2)swApp.GetFirstDocument();
+                        return false;
+                    }
+                });
+                if (isCancelled) {
                     return;
-                } else {
-                    swApp.CloseAllDocuments(true);
                 }
             }
-
-            // increase performance 
-            ModelDoc2 doc;
-
-            doc = isAssembly ?
-                swApp.OpenDoc6(filePath, (int)swDocumentTypes_e.swDocASSEMBLY, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning) :
-                swApp.OpenDoc6(filePath, (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning);
+            if (doc == null) {
+                doc = isAssembly ?
+                    swApp.OpenDoc6(filePath, (int)swDocumentTypes_e.swDocASSEMBLY, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning) :
+                    swApp.OpenDoc6(filePath, (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning);
+            }
 
 
 
@@ -448,9 +464,14 @@ namespace Solid_Price.Models {
         public void AddCutItem(List<CutItem> cutList, Feature thisFeat) {
             CustomPropertyManager CustomPropMgr = default(CustomPropertyManager);
             CustomPropMgr = thisFeat.CustomPropertyManager;
-            string[] vCustomPropNames;
-            vCustomPropNames = (string[])CustomPropMgr.GetNames();
-            if ((vCustomPropNames != null)) {
+            List<string> vCustomPropNames = new((string[])CustomPropMgr.GetNames());
+            for (int i = 0; i < vCustomPropNames.Count; i++) {
+                vCustomPropNames[i] = vCustomPropNames[i].ToLower();
+            }
+            if (!vCustomPropNames.Contains("description")) {
+                vCustomPropNames.Add("description");
+            }
+            if ((vCustomPropNames.Count != 1)) {
                 int i = 0;
                 int qty = 0;
                 float length = 0;
@@ -464,8 +485,8 @@ namespace Solid_Price.Models {
                 StockItem sItem = null;
 
 
-                for (i = 0; i <= (vCustomPropNames.Length - 1); i++) {
-                    string CustomPropName = (string)vCustomPropNames[i];
+                for (i = 0; i <= (vCustomPropNames.Count - 1); i++) {
+                    string CustomPropName = vCustomPropNames[i];
 
                     string CustomPropResolvedVal;
                     CustomPropMgr.Get2(CustomPropName, out _, out CustomPropResolvedVal);
@@ -476,6 +497,7 @@ namespace Solid_Price.Models {
                             break;
                         case "description":
                             description = CustomPropResolvedVal;
+                            if (description == "") description = "no description property in file!";
                             var sItems = ctx.StockItems.Include(i => i.Vendor).ToList();
                             sItem = sItems.SingleOrDefault(item => item.InternalDescription == description);
                             if (sItem == null) {

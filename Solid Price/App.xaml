@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="/Resources/Themes/TitleFont.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/MainWindowStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/AddEditWindowStyle.xaml" />
+                <ResourceDictionary Source="/Resources/Themes/MessageWindowStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

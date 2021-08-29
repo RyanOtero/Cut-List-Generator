@@ -15,6 +15,9 @@ using System.Windows.Data;
 using Solid_Price.ViewModels.Commands;
 using static Solid_Price.Utils.Messenger;
 using Solid_Price.Views;
+using MessageBoxImage = Solid_Price.Models.MessageBoxImage;
+using Solid_Price.Resources.Views;
+using System.Windows.Media.Animation;
 
 namespace Solid_Price.ViewModels {
     public class MainViewModel : ViewModelBase {
@@ -22,15 +25,13 @@ namespace Solid_Price.ViewModels {
         #region Fields
         private readonly object asyncLock;
         private string sourceText;
-        private string loadingText;
         private bool isDetailed;
         private bool showPricing;
-        private bool isLoading;
         private ObservableCollection<Vendor> vendors;
         private ObservableCollection<StockItem> stockItems;
         private ObservableCollection<CutItem> cutList;
         private ObservableCollection<OrderItem> orderList;
-        private bool atWork;
+        //private bool atWork;
         private string orderTotal;
         private string cutListTotal;
         private Vendor selectedVendor;
@@ -41,6 +42,10 @@ namespace Solid_Price.ViewModels {
         private string userString;
         private string passwordString;
         private string sqliteString = "FileName=CutList.db";
+        Storyboard loadingAnimFadeIn;
+        Storyboard loadingAnimFadeOut;
+        Storyboard loadingAnimBounce;
+
         #endregion
 
         #region Properties
@@ -165,11 +170,6 @@ namespace Solid_Price.ViewModels {
             set { SetProperty(ref isDetailed, value); }
         }
 
-        public bool IsLoading {
-            get => isLoading;
-            set { SetProperty(ref isLoading, value); }
-        }
-
         public bool ShowPricing {
             get => showPricing;
             set { SetProperty(ref showPricing, value); }
@@ -179,13 +179,6 @@ namespace Solid_Price.ViewModels {
             get => sourceText;
             set {
                 SetProperty(ref sourceText, value);
-            }
-        }
-
-        public string LoadingText {
-            get => loadingText;
-            set {
-                SetProperty(ref loadingText, value);
             }
         }
 
@@ -271,7 +264,7 @@ namespace Solid_Price.ViewModels {
                 MessageBoxImage icon = MessageBoxImage.Warning;
                 MessageBoxResult result;
 
-                result = MessageBox.Show("Are you sure you want to delete this stock type from the database?", "Delete Stock Type", button, icon);
+                result = MessageWindow.Show("Delete Stock Type", "Are you sure you want to delete this stock type from the database?", button, icon);
                 if (result == MessageBoxResult.Yes) {
                     try {
                         using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
@@ -309,7 +302,7 @@ namespace Solid_Price.ViewModels {
                     "Are you sure you want to delete this vendor from the database?";
                 }
 
-                result = MessageBox.Show(msg, "Delete Vendor", button, icon);
+                result = MessageWindow.Show("Delete Vendor", msg, button, icon);
                 if (result == MessageBoxResult.Yes) {
                     try {
                         using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
@@ -373,10 +366,12 @@ namespace Solid_Price.ViewModels {
             OrderList = CutListMngr.OrderList;
             Vendors = CutListMngr.Vendors;
             StockItems = CutListMngr.StockItems;
-            IsLoading = false;
-            LoadingText = "Loading...";
             OrderTotal = "Total:";
             CutListTotal = "Total:";
+            loadingAnimFadeIn = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimFadeIn");
+            loadingAnimBounce = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimBounce");
+            loadingAnimFadeOut = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimFadeOut");
+            loadingAnimFadeOut.Completed += new EventHandler((s,e) => { loadingAnimBounce.Stop(); });
 
             ////For testing
             //atWork = false;
@@ -413,10 +408,11 @@ namespace Solid_Price.ViewModels {
                 return;
             }
             ClearCutList();
-            IsLoading = true;
+            loadingAnimFadeIn.Begin();
+            loadingAnimBounce.Begin();
             await Task.Run(() => CutListMngr.Generate(SourceText, IsDetailed));
             CutListMngr.Refresh();
-            IsLoading = false;
+            loadingAnimFadeOut.Begin();
             GetTotalText();
         }
 
@@ -578,7 +574,7 @@ namespace Solid_Price.ViewModels {
                     }
                 }
             } catch (Exception) {
-                MessageBox.Show("Unable to save file, try again.", "Save error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageWindow.Show("Save error", "Unable to save file, try again.", MessageBoxButton.OK, MessageBoxImage.Error);
             } finally {
                 if (fs != null) {
                     fs.Dispose();
