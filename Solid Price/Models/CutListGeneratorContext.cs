@@ -66,7 +66,7 @@ namespace Solid_Price.Models {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             //optionsBuilder.UseLoggerFactory(_myLoggerFactory);
-            optionsBuilder.EnableSensitiveDataLogging(true);
+            //optionsBuilder.EnableSensitiveDataLogging(true);
 
             //Uncomment to scaffold
             //try {

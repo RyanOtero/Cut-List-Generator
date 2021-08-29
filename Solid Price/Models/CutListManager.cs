@@ -188,24 +188,19 @@ namespace Solid_Price.Models {
             }
             MessageBoxResult result;
             if (openFiles.Count != 0 || openFiles.Count >= 1 && openFiles[0] != filePath) {
-                bool isCancelled = Application.Current.Dispatcher.Invoke(delegate {
-                    result = YesNoMessage("Solidworks", "All open Solidworks documents will be closed without saving. Proceed?");
-                    if (result != MessageBoxResult.Yes) {
-                        return true;
-                    } else {
-                        for (int i = openFiles.Count - 1; i > -1; i--) {
-                            if (openFiles[i] != filePath) {
-                                swApp.CloseDoc(openFiles[i]);
-                            }
-                        }
-                        doc = (ModelDoc2)swApp.GetFirstDocument();
-                        return false;
-                    }
-                });
-                if (isCancelled) {
+                result = YesNoMessage("Solidworks", "All open Solidworks documents will be closed without saving. Proceed?");
+                if (result != MessageBoxResult.Yes) {
                     return;
+                } else {
+                    for (int i = openFiles.Count - 1; i > -1; i--) {
+                        if (openFiles[i] != filePath) {
+                            swApp.CloseDoc(openFiles[i]);
+                        }
+                    }
+                    doc = (ModelDoc2)swApp.GetFirstDocument();
                 }
             }
+
             if (doc == null) {
                 doc = isAssembly ?
                     swApp.OpenDoc6(filePath, (int)swDocumentTypes_e.swDocASSEMBLY, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning) :
