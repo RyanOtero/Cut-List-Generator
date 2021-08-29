@@ -19,9 +19,6 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Product.wxs" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Solid Price\Solid Price.csproj">
       <Name>Solid Price</Name>
       <Project>{b0510923-5013-4bcd-9cf2-a26a69cbbb03}</Project>
@@ -33,18 +30,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BouncyCastle.Crypto.dll" />
-    <Content Include="Castle.Core.dll" />
     <Content Include="Google.Protobuf.dll" />
-    <Content Include="Humanizer.dll" />
     <Content Include="K4os.Compression.LZ4.dll" />
     <Content Include="K4os.Compression.LZ4.Streams.dll" />
     <Content Include="K4os.Hash.xxHash.dll" />
     <Content Include="Microsoft.Data.Sqlite.dll" />
     <Content Include="Microsoft.DotNet.PlatformAbstractions.dll" />
     <Content Include="Microsoft.EntityFrameworkCore.Abstractions.dll" />
-    <Content Include="Microsoft.EntityFrameworkCore.Design.dll" />
     <Content Include="Microsoft.EntityFrameworkCore.dll" />
-    <Content Include="Microsoft.EntityFrameworkCore.Proxies.dll" />
     <Content Include="Microsoft.EntityFrameworkCore.Relational.dll" />
     <Content Include="Microsoft.EntityFrameworkCore.Sqlite.dll" />
     <Content Include="Microsoft.Extensions.Caching.Abstractions.dll" />
@@ -54,21 +47,14 @@
     <Content Include="Microsoft.Extensions.DependencyInjection.dll" />
     <Content Include="Microsoft.Extensions.DependencyModel.dll" />
     <Content Include="Microsoft.Extensions.Logging.Abstractions.dll" />
-    <Content Include="Microsoft.Extensions.Logging.Debug.dll" />
     <Content Include="Microsoft.Extensions.Logging.dll" />
     <Content Include="Microsoft.Extensions.Options.dll" />
     <Content Include="Microsoft.Extensions.Primitives.dll" />
     <Content Include="Microsoft.Windows.SDK.NET.dll" />
-    <Content Include="Microsoft.Xaml.Behaviors.dll" />
     <Content Include="MySql.Data.dll" />
     <Content Include="MySql.EntityFrameworkCore.dll" />
     <Content Include="Newtonsoft.Json.dll" />
-    <Content Include="Solid Price.deps.json" />
     <Content Include="Solid Price.dll" />
-    <Content Include="Solid Price.exe" />
-    <Content Include="Solid Price.pdb" />
-    <Content Include="Solid Price.runtimeconfig.dev.json" />
-    <Content Include="Solid Price.runtimeconfig.json" />
     <Content Include="SolidWorks.Interop.sldworks.dll" />
     <Content Include="SolidWorks.Interop.swconst.dll" />
     <Content Include="SQLitePCLRaw.batteries_v2.dll" />
