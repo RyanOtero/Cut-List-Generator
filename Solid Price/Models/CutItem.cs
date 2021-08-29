@@ -50,7 +50,7 @@ namespace Solid_Price.Models {
         }
 
         public string Description {
-            get {return StockItem?.ExternalDescription; }
+            get { return StockItem?.ExternalDescription; }
             //get => description;
             //set {
             //    description = value;

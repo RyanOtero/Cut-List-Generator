@@ -1,7 +1,5 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Shapes;
 
 namespace Solid_Price.Themes {
     public partial class MainWindowStyle : ResourceDictionary {
@@ -34,7 +32,7 @@ namespace Solid_Price.Themes {
         **/
         private void Window_MouseDown(object sender, MouseButtonEventArgs e) {
             Window win = App.Current.MainWindow;
-            
+
             if (e.ClickCount > 1) {
                 if (win.WindowState == WindowState.Maximized)
                     win.WindowState = WindowState.Normal;

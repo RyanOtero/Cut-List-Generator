@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 
-namespace Solid_Price.Utils
-{
+namespace Solid_Price.Utils {
     public class EnterKeyTraversal {
         public static bool GetIsEnabled(DependencyObject obj) {
             return (bool)obj.GetValue(IsEnabledProperty);

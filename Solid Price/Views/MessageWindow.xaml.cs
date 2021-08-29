@@ -1,17 +1,7 @@
 ﻿using Solid_Price.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using MessageBoxImage = Solid_Price.Models.MessageBoxImage;
 
 namespace Solid_Price.Resources.Views {
@@ -19,14 +9,14 @@ namespace Solid_Price.Resources.Views {
     /// Interaction logic for MessageWindow.xaml
     /// </summary>
     public partial class MessageWindow : Window {
-        
+
         static MessageWindow _messageBox;
         static MessageBoxResult _result = MessageBoxResult.No;
 
         private MessageWindow() {
             InitializeComponent();
         }
-        
+
         public static MessageBoxResult Show
         (string caption, string msg, MessageBoxType type) {
 
@@ -70,7 +60,7 @@ namespace Solid_Price.Resources.Views {
         public static MessageBoxResult Show
         (string caption, string text,
         MessageBoxButton button, MessageBoxImage image) {
-            _messageBox = new MessageWindow { txtMsg = { Text = text }, Title = caption  };
+            _messageBox = new MessageWindow { txtMsg = { Text = text }, Title = caption };
             SetVisibilityOfButtons(button);
             SetImageOfMessageBox(image);
             _messageBox.ShowDialog();

@@ -1,16 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using MySql.EntityFrameworkCore.Metadata;
 
-namespace Solid_Price.Migrations
-{
-    public partial class initial : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+namespace Solid_Price.Migrations {
+    public partial class initial : Migration {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.CreateTable(
                 name: "Vendors",
-                columns: table => new
-                {
+                columns: table => new {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     VendorName = table.Column<string>(type: "text", nullable: true),
@@ -18,15 +14,13 @@ namespace Solid_Price.Migrations
                     ContactName = table.Column<string>(type: "text", nullable: true),
                     ContactEmail = table.Column<string>(type: "text", nullable: true)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Vendors", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "StockItems",
-                columns: table => new
-                {
+                columns: table => new {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     MatType = table.Column<int>(type: "int", nullable: false),
@@ -38,8 +32,7 @@ namespace Solid_Price.Migrations
                     CostPerFoot = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
                     VendorItemNumber = table.Column<string>(type: "text", nullable: true)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_StockItems", x => x.ID);
                     table.ForeignKey(
                         name: "FK_StockItems_Vendors_VendorID",
@@ -51,8 +44,7 @@ namespace Solid_Price.Migrations
 
             migrationBuilder.CreateTable(
                 name: "CutItems",
-                columns: table => new
-                {
+                columns: table => new {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     StockItemID = table.Column<int>(type: "int", nullable: false),
@@ -64,8 +56,7 @@ namespace Solid_Price.Migrations
                     AngleRotation = table.Column<string>(type: "text", nullable: true),
                     StickNumber = table.Column<int>(type: "int", nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_CutItems", x => x.ID);
                     table.ForeignKey(
                         name: "FK_CutItems_StockItems_StockItemID",
@@ -77,15 +68,13 @@ namespace Solid_Price.Migrations
 
             migrationBuilder.CreateTable(
                 name: "OrderItems",
-                columns: table => new
-                {
+                columns: table => new {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     StockItemID = table.Column<int>(type: "int", nullable: false),
                     Qty = table.Column<int>(type: "int", nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_OrderItems", x => x.ID);
                     table.ForeignKey(
                         name: "FK_OrderItems_StockItems_StockItemID",
@@ -111,8 +100,7 @@ namespace Solid_Price.Migrations
                 column: "VendorID");
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropTable(
                 name: "CutItems");
 

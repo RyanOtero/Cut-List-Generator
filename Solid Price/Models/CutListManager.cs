@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Solid_Price.Utils;
 using SolidWorks.Interop.sldworks;
 using SolidWorks.Interop.swconst;
-using Solid_Price.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

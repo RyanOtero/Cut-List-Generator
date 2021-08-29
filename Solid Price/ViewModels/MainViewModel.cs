@@ -1,23 +1,23 @@
 ﻿using Microsoft.Win32;
+using Solid_Price.Models;
+using Solid_Price.Resources.Views;
+using Solid_Price.ViewModels.Commands;
+using Solid_Price.Views;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using Solid_Price.Models;
 using System.Collections.ObjectModel;
-using System.Reflection;
 using System.Data;
-using Excel = Microsoft.Office.Interop.Excel;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
-using Solid_Price.ViewModels.Commands;
-using static Solid_Price.Utils.Messenger;
-using Solid_Price.Views;
-using MessageBoxImage = Solid_Price.Models.MessageBoxImage;
-using Solid_Price.Resources.Views;
 using System.Windows.Media.Animation;
+using static Solid_Price.Utils.Messenger;
+using Excel = Microsoft.Office.Interop.Excel;
+using MessageBoxImage = Solid_Price.Models.MessageBoxImage;
 
 namespace Solid_Price.ViewModels {
     public class MainViewModel : ViewModelBase {
@@ -371,7 +371,7 @@ namespace Solid_Price.ViewModels {
             loadingAnimFadeIn = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimFadeIn");
             loadingAnimBounce = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimBounce");
             loadingAnimFadeOut = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimFadeOut");
-            loadingAnimFadeOut.Completed += new EventHandler((s,e) => { loadingAnimBounce.Stop(); });
+            loadingAnimFadeOut.Completed += new EventHandler((s, e) => { loadingAnimBounce.Stop(); });
 
             ////For testing
             //atWork = false;

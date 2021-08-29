@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace Solid_Price.Themes {
     public partial class MessageWindowStyle : ResourceDictionary {
@@ -13,10 +10,10 @@ namespace Solid_Price.Themes {
         /**
         * Header Buttons Events
         **/
-        
+
 
         private void quitBtn_Click(object sender, RoutedEventArgs e) {
             Window.GetWindow(((FrameworkElement)e.Source)).Close();
-        }       
+        }
     }
 }

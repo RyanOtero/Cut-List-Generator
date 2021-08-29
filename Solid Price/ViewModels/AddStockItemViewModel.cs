@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using Solid_Price.Models;
+﻿using Solid_Price.Models;
 using Solid_Price.ViewModels.Commands;
+using System;
+using System.Linq;
+using System.Windows;
 using static Solid_Price.Utils.Messenger;
 
 
@@ -95,7 +93,7 @@ namespace Solid_Price.ViewModels {
                     try {
                         using (CutListGeneratorContext ctx = new CutListGeneratorContext(MainVModel.ConnectionString)) {
                             ctx.Entry(SelectedVendor).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
-                            StockItem stockItem = new StockItem( SelectedVendor, selectedMatType, SelectedProfType, CostPerFoot, StockLength, InternalDescription, ExternalDescription, VendorItemNumber);
+                            StockItem stockItem = new StockItem(SelectedVendor, selectedMatType, SelectedProfType, CostPerFoot, StockLength, InternalDescription, ExternalDescription, VendorItemNumber);
                             ctx.StockItems.Add(stockItem);
                             ctx.SaveChanges();
                         }

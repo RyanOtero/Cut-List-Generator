@@ -17,8 +17,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Fonts\AIRBORNE GP.ttf" />
-    <None Remove="Resources\Fonts\Pervitina-Dex-FFP.ttf" />
     <None Remove="Resources\Fonts\SansitaOne.ttf" />
     <None Remove="Resources\Logo.blend" />
     <None Remove="Resources\Logo.blend1" />
@@ -58,13 +56,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.5" />
     <PackageReference Include="System.Runtime" Version="4.3.1" />
@@ -80,16 +76,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Fonts\AIRBORNE GP.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\Pervitina-Dex-FFP.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Resources\Fonts\SansitaOne.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Fonts\Sinethar.otf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Themes\window-close-regular.xaml" />

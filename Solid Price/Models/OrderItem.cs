@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Solid_Price.Models {
     public class OrderItem : IComparable<OrderItem>, IEquatable<OrderItem>, INotifyPropertyChanged {
@@ -65,7 +61,7 @@ namespace Solid_Price.Models {
         public decimal CostPerLength {
             get {
                 if (StockItem == null) return 0;
-                return StockItem.CostPerLength; 
+                return StockItem.CostPerLength;
             }
             //get => costPerLength;
             //set {

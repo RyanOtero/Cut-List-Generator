@@ -1,10 +1,4 @@
-﻿using Solid_Price.Models;
-using Solid_Price.Resources.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Solid_Price.Resources.Views;
 using System.Windows;
 using MessageBoxImage = Solid_Price.Models.MessageBoxImage;
 

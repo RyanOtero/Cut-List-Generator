@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Diagnostics;
 using System.IO;
 using System.IO.IsolatedStorage;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
-using static Solid_Price.Utils.Messenger;
 
 namespace Solid_Price {
     /// <summary>
@@ -44,7 +37,7 @@ namespace Solid_Price {
                     MessageBoxButton button = MessageBoxButton.YesNo;
                     MessageBoxImage icon = MessageBoxImage.Warning;
                     MessageBoxResult result;
-                    string caption = "Database Needed"; 
+                    string caption = "Database Needed";
                     string text = "A database is needed to use this application. Would you like to use an external MySQL database?\n\n" +
                         "If so, you will need a connection string. On the Configuration tab, enter a connection string in the format of:\n" +
                         "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]";
@@ -56,7 +49,7 @@ namespace Solid_Price {
                         this.Properties["UseExternalDB"] = false;
                     }
                 }
-            } catch (Exception ) {
+            } catch (Exception) {
                 // Fail silently.
             }
         }

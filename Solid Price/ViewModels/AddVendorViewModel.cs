@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using Solid_Price.Models;
+﻿using Solid_Price.Models;
 using Solid_Price.ViewModels.Commands;
+using System;
+using System.Linq;
+using System.Windows;
 using static Solid_Price.Utils.Messenger;
 
 
