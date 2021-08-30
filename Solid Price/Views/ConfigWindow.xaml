@@ -3,12 +3,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:utils="clr-namespace:SolidPrice.Utils"
-        Title="Configuration" Height="400" Width="360"
+        Title="Configuration" Height="380" Width="360"
         ResizeMode="NoResize" ShowInTaskbar="True"
         WindowStyle="None" SizeToContent="Manual"
         Style="{DynamicResource ResourceKey=AddEditWindowStyle}">
-    <Grid Margin="20,20,20,20" utils:EnterKeyTraversal.IsEnabled="True">
-        <Grid Width="300" Height="300">
+    <Grid Margin="20,20,35,20" utils:EnterKeyTraversal.IsEnabled="True">
+        <Grid Width="270" Height="300">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=".35*" />
                 <ColumnDefinition Width="*" />
@@ -20,7 +20,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <CheckBox x:Name="UseExternalDBCheckBox" IsChecked="{Binding UseExternalDB, Mode=TwoWay}" Content="Use External MySQL Database" FlowDirection="RightToLeft" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,0,0" Grid.Column="1" Grid.Row="0">
+            <CheckBox x:Name="UseExternalDBCheckBox" Grid.ColumnSpan="2" Grid.Column="0" IsChecked="{Binding UseExternalDB, Mode=TwoWay}" Content="Use External MySQL Database" FlowDirection="RightToLeft" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,0,0">
                 <CheckBox.Resources>
                     <Style TargetType="{x:Type Path}">
                         <Setter Property="FlowDirection" Value="LeftToRight" />

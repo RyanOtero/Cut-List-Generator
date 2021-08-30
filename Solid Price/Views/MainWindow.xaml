@@ -35,7 +35,6 @@
                 </Path.Data>
             </Path>
         </Canvas>
-        <Button Style="{StaticResource ConfigButton}" Height="20" Width="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 5 20 0" Command="{Binding ConfigCommand}"/>
         <TabControl Style="{DynamicResource TabControlStyle}" Margin="0,0,0,0">
             <TabItem Header="Cut List" Style="{DynamicResource TabItemStyle}" Margin="-2,0,0,0">
                 <Grid>
@@ -191,6 +190,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <Button Style="{StaticResource ConfigButton}" Height="20" Width="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 5 20 0" Grid.Row="0" Grid.Column="0" Command="{Binding ConfigCommand}"/>
 
     </Grid>
 </Window>
