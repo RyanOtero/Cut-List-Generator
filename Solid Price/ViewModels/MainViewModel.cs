@@ -41,7 +41,6 @@ namespace Solid_Price.ViewModels {
         private string databaseString;
         private string userString;
         private string passwordString;
-        private string sqliteString = "FileName=CutList.db";
         Storyboard loadingAnimFadeIn;
         Storyboard loadingAnimFadeOut;
         Storyboard loadingAnimBounce;
@@ -114,7 +113,7 @@ namespace Solid_Price.ViewModels {
                 if (UseExternalDB) {
                     return ExternalConnectionString;
                 } else {
-                    return sqliteString;
+                    return @"Data Source=C:\ProgramData\Solid Price\CutList.db";
                 }
             }
             set {

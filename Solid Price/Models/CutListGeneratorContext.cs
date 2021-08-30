@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 //using Microsoft.Extensions.Logging;
 using System;
+using System.IO;
+using System.IO.IsolatedStorage;
 using System.Reflection;
 using System.Windows;
 using static Solid_Price.Utils.Messenger;
@@ -18,8 +20,6 @@ namespace Solid_Price.Models {
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<CutItem> CutItems { get; set; }
 
-
-
         public CutListGeneratorContext() { }
 
         public CutListGeneratorContext(string connectionString) : base() {
@@ -28,19 +28,18 @@ namespace Solid_Price.Models {
             isMySQL = (bool)Application.Current.Properties["UseExternalDB"];
             ConnectionString = connectionString;
             if (!_created && !isMySQL) {
-
-                Database.EnsureDeleted();
-                Database.EnsureCreated();
-                Application.Current.Properties["IsCreated"] = true;
-                _created = true;
+                try {
+                    Directory.CreateDirectory(@"C:\ProgramData\Solid Price");
+                    FileInfo fi = new FileInfo(@"C:\Program Files (x86)\Solid Price\CutList.db");
+                    fi.CopyTo(@"C:\ProgramData\Solid Price\CutList.db");                    
+                    Application.Current.Properties["IsCreated"] = true;
+                    _created = true;
+                } catch (Exception e) {
+                    ErrorMessage("Database Error cgc.cs 43", "Please enter a connection string in the format of:\n" +
+                                "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
+                }
             }
             /////////////
-
-            try {
-                //ChangeTracker.LazyLoadingEnabled = false;
-            } catch (Exception) {
-                //fail silently
-            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
@@ -89,10 +88,13 @@ namespace Solid_Price.Models {
                 }
             } else {
                 try {
-                    optionsBuilder.UseSqlite(ConnectionString, option => {
-                        option.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
-                    });
+                    ///////Release
+                    optionsBuilder.UseSqlite(ConnectionString);
+                    //optionsBuilder.UseSqlite(ConnectionString, option => {
+                    //    option.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
+                    //});
                     base.OnConfiguring(optionsBuilder);
+
                 } catch (Exception e) {
                     string s = e.Message;
                     ErrorMessage("Database Error cgc.cs 105", "Please enter a connection string in the format of:\n" +

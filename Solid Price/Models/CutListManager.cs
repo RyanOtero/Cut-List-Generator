@@ -100,6 +100,11 @@ namespace Solid_Price.Models {
 
         #region Methods
         public void Refresh() {
+            if ( bool.Parse(App.Current.Properties["IsCreated"].ToString()) == false) {
+                using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
+                    return;
+                }
+            }
             if (ConnectionString == "server=;database=;user=;password=") {
                 return;
             }
