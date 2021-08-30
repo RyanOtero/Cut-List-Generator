@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Solid_Price.Models {
+namespace SolidPrice.Models {
     public class Vendor : IEquatable<Vendor>, INotifyPropertyChanged {
 
         #region Fields

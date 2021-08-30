@@ -1,12 +1,12 @@
-﻿using Solid_Price.Models;
-using Solid_Price.ViewModels.Commands;
+﻿using SolidPrice.Models;
+using SolidPrice.ViewModels.Commands;
 using System;
 using System.Linq;
 using System.Windows;
-using static Solid_Price.Utils.Messenger;
+using static SolidPrice.Utils.Messenger;
 
 
-namespace Solid_Price.ViewModels {
+namespace SolidPrice.ViewModels {
     public class AddVendorViewModel : ViewModelBase {
 
         #region Fields

@@ -1,10 +1,10 @@
-﻿using Solid_Price.Models;
+﻿using SolidPrice.Models;
 using System;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using MessageBoxImage = Solid_Price.Models.MessageBoxImage;
+using MessageBoxImage = SolidPrice.Models.MessageBoxImage;
 
-namespace Solid_Price.Resources.Views {
+namespace SolidPrice.Resources.Views {
     /// <summary>
     /// Interaction logic for MessageWindow.xaml
     /// </summary>

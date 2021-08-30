@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Markup;
 
-namespace Solid_Price.Utils {
+namespace SolidPrice.Utils {
     public class EnumBindingSourceExtension : MarkupExtension {
         private Type _enumType;
         public Type EnumType {

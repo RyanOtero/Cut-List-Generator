@@ -5,7 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>SolidPrice</RootNamespace>
     <UseWPF>true</UseWPF>
-    <StartupObject>Solid_Price.App</StartupObject>
+    <StartupObject>SolidPrice.App</StartupObject>
     <ApplicationIcon>solidprice.ico</ApplicationIcon>
     <Win32Resource />
     <AssemblyName>SolidPrice</AssemblyName>
@@ -25,6 +25,7 @@
     <None Remove="Resources\Fonts\SansitaOne.ttf" />
     <None Remove="Resources\Logo.blend" />
     <None Remove="Resources\Logo.blend1" />
+    <None Remove="Resources\solidprice.ico" />
     <None Remove="Resources\SPIcon.ai" />
     <None Remove="Resources\SPIcon.png" />
     <None Remove="Resources\splogo.ico" />
@@ -32,9 +33,14 @@
     <None Remove="Resources\window-close-regular.svg" />
     <None Remove="Resources\window-maximize-regular.svg" />
     <None Remove="Resources\window-minimize-solid.svg" />
+    <None Remove="solidprice.ico" />
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Resources\Themes\window-close.xaml" />
+    <Page Remove="Resources\Themes\window-config.xaml" />
+    <Page Remove="Resources\Themes\window-maximize.xaml" />
+    <Page Remove="Resources\Themes\window-minimize.xaml" />
     <Page Remove="Resources\window-close-regular.xaml" />
     <Page Remove="Resources\window-maximize-regular.xaml" />
     <Page Remove="Resources\window-minimize-solid.xaml" />
@@ -78,9 +84,16 @@
     <Resource Include="Resources\Fonts\SansitaOne.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Themes\window-close-regular.xaml" />
-    <Resource Include="Resources\Themes\window-maximize-regular.xaml" />
-    <Resource Include="Resources\Themes\window-minimize-solid.xaml" />
+    <Resource Include="Resources\solidprice.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Themes\window-close.xaml" />
+    <Resource Include="Resources\Themes\window-maximize.xaml" />
+    <Resource Include="Resources\Themes\window-minimize.xaml" />
+    <Resource Include="Resources\Themes\window-config.xaml" />
+    <Resource Include="solidprice.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

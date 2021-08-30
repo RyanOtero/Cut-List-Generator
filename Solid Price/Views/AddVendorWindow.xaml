@@ -1,7 +1,7 @@
-﻿<Window x:Class="Solid_Price.Views.AddVendorWindow" Name="AddVendorWin"
+﻿<Window x:Class="SolidPrice.Views.AddVendorWindow" Name="AddVendorWin"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:utils="clr-namespace:Solid_Price.Utils"
+        xmlns:utils="clr-namespace:SolidPrice.Utils"
         Title="Add New Vendor" Height="260" Width="420" ResizeMode="NoResize" ShowInTaskbar="True" 
         WindowStyle="None" SizeToContent="Manual"
         Style="{DynamicResource ResourceKey=AddEditWindowStyle}">

@@ -1,4 +1,4 @@
-﻿namespace Solid_Price.Models {
+﻿namespace SolidPrice.Models {
     public enum MessageBoxType {
         ConfirmationWithYesNo = 0,
         ConfirmationWithYesNoCancel,

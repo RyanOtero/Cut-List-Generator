@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
-namespace Solid_Price.Models {
+namespace SolidPrice.Models {
     public class CutItem : IComparable<CutItem>, IEquatable<CutItem>, INotifyPropertyChanged {
 
         #region Fields

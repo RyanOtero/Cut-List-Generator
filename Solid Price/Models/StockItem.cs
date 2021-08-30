@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
-namespace Solid_Price.Models {
+namespace SolidPrice.Models {
     public class StockItem : IEquatable<StockItem>, INotifyPropertyChanged {
 
         #region Fields

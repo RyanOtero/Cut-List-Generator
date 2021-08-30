@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Reflection;
 
-namespace Solid_Price.Utils {
+namespace SolidPrice.Utils {
     public class EnumDescriptionTypeConverter : EnumConverter {
         public EnumDescriptionTypeConverter(Type type)
             : base(type) {

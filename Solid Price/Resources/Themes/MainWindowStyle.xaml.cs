@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
-namespace Solid_Price.Themes {
+namespace SolidPrice.Themes {
     public partial class MainWindowStyle : ResourceDictionary {
         public MainWindowStyle() {
             InitializeComponent();

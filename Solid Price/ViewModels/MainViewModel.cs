@@ -1,8 +1,8 @@
 ﻿using Microsoft.Win32;
-using Solid_Price.Models;
-using Solid_Price.Resources.Views;
-using Solid_Price.ViewModels.Commands;
-using Solid_Price.Views;
+using SolidPrice.Models;
+using SolidPrice.Resources.Views;
+using SolidPrice.ViewModels.Commands;
+using SolidPrice.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,11 +15,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Animation;
-using static Solid_Price.Utils.Messenger;
+using static SolidPrice.Utils.Messenger;
 using Excel = Microsoft.Office.Interop.Excel;
-using MessageBoxImage = Solid_Price.Models.MessageBoxImage;
+using MessageBoxImage = SolidPrice.Models.MessageBoxImage;
 
-namespace Solid_Price.ViewModels {
+namespace SolidPrice.ViewModels {
     public class MainViewModel : ViewModelBase {
 
         #region Fields
@@ -150,6 +150,8 @@ namespace Solid_Price.ViewModels {
         public RelayCommand EditVendorCommand { get; set; }
 
         public RelayCommand IsDetailedCommand { get; set; }
+
+        public RelayCommand ConfigCommand { get; set; }
         #endregion
 
 
@@ -230,15 +232,15 @@ namespace Solid_Price.ViewModels {
             PasswordString = Application.Current.Properties["PasswordString"].ToString();
 
             #region Commands Set
-            GenerateCommand = new RelayCommand((x) => GenerateCutList(), () => !string.IsNullOrEmpty(SourceText));
-            SaveCommand = new RelayCommand((x) => SaveCutList(), () => CutList != null && CutList.Count > 0);
-            ClearCommand = new RelayCommand((x) => ClearCutList(), () => CutList != null && CutList.Count > 0);
-            SourceBrowseCommand = new RelayCommand((x) => SourceBrowse());
-            RefreshCommand = new RelayCommand((x) => {
+            GenerateCommand = new RelayCommand(x => GenerateCutList(), () => !string.IsNullOrEmpty(SourceText));
+            SaveCommand = new RelayCommand(x => SaveCutList(), () => CutList != null && CutList.Count > 0);
+            ClearCommand = new RelayCommand(x => ClearCutList(), () => CutList != null && CutList.Count > 0);
+            SourceBrowseCommand = new RelayCommand(x => SourceBrowse());
+            RefreshCommand = new RelayCommand(x => {
                 CutListMngr.ConnectionString = ConnectionString; CutListMngr.Refresh();
                 GetTotalText();
             });
-            AddStockItemCommand = new RelayCommand((x) => {
+            AddStockItemCommand = new RelayCommand(x => {
                 var win = new AddStockItemWindow();
                 win.DataContext = new AddStockItemViewModel();
                 Window mainWindow = App.Current.MainWindow;
@@ -246,7 +248,7 @@ namespace Solid_Price.ViewModels {
                 win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
                 win.ShowDialog();
             });
-            AddVendorCommand = new RelayCommand((x) => {
+            AddVendorCommand = new RelayCommand(x => {
                 var win = new AddVendorWindow();
                 win.DataContext = new AddVendorViewModel();
                 Window mainWindow = App.Current.MainWindow;
@@ -254,7 +256,7 @@ namespace Solid_Price.ViewModels {
                 win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
                 win.ShowDialog();
             });
-            DeleteStockItemCommand = new RelayCommand((x) => {
+            DeleteStockItemCommand = new RelayCommand(x => {
                 if (SelectedStockItem == null) {
                     return;
                 }
@@ -279,7 +281,7 @@ namespace Solid_Price.ViewModels {
                     }
                 }
             });
-            DeleteVendorCommand = new RelayCommand((x) => {
+            DeleteVendorCommand = new RelayCommand(x => {
                 if (SelectedVendor == null) {
                     return;
                 }
@@ -321,7 +323,7 @@ namespace Solid_Price.ViewModels {
                     }
                 }
             });
-            EditStockItemCommand = new RelayCommand((x) => {
+            EditStockItemCommand = new RelayCommand(x => {
                 if (SelectedStockItem == null) {
                     ErrorMessage("Stock Type mvm.cs 330", "Please select a stock type to edit.");
                     return;
@@ -334,7 +336,7 @@ namespace Solid_Price.ViewModels {
                 win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
                 win.ShowDialog();
             });
-            EditVendorCommand = new RelayCommand((x) => {
+            EditVendorCommand = new RelayCommand(x => {
                 if (SelectedVendor == null) {
                     ErrorMessage("Vender mvm.cs 340", "Please select a vendor to edit.");
                     return;
@@ -351,11 +353,20 @@ namespace Solid_Price.ViewModels {
                 win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
                 win.ShowDialog();
             });
-            IsDetailedCommand = new RelayCommand((x) => {
+            IsDetailedCommand = new RelayCommand(x => {
                 List<CutItem> tempList = CutListMngr.CutList.ToList();
                 ClearCutList();
                 CutListMngr.SortCutListForDisplay(IsDetailed, tempList);
                 CutListMngr.Refresh();
+            });
+            ConfigCommand = new RelayCommand(x => {
+                var vModel = new ConfigViewModel();
+                var win = new ConfigWindow();
+                win.DataContext = vModel;
+                Window mainWindow = App.Current.MainWindow;
+                win.Left = mainWindow.Left + (mainWindow.Width - win.Width) / 2;
+                win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
+                win.ShowDialog();
             });
             #endregion
 

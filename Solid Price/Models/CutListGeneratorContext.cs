@@ -5,9 +5,9 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Reflection;
 using System.Windows;
-using static Solid_Price.Utils.Messenger;
+using static SolidPrice.Utils.Messenger;
 
-namespace Solid_Price.Models {
+namespace SolidPrice.Models {
     internal class CutListGeneratorContext : DbContext {
 
         //comment out to scaffold

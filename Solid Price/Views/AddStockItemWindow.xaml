@@ -1,8 +1,8 @@
-﻿<Window x:Class="Solid_Price.Views.AddStockItemWindow" Name="AddStockItemWin"
+﻿<Window x:Class="SolidPrice.Views.AddStockItemWindow" Name="AddStockItemWin"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:utils="clr-namespace:Solid_Price.Utils"
-        xmlns:models="clr-namespace:Solid_Price.Models"
+        xmlns:utils="clr-namespace:SolidPrice.Utils"
+        xmlns:models="clr-namespace:SolidPrice.Models"
         Title="Add New Stock Item" Height="400" Width="420" ResizeMode="NoResize" ShowInTaskbar="True" 
         WindowStyle="None" SizeToContent="Manual"
         Style="{DynamicResource ResourceKey=AddEditWindowStyle}">

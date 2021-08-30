@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Solid_Price.Models;
+using SolidPrice.Models;
 
-namespace Solid_Price.Migrations
+namespace SolidPrice.Migrations
 {
     [DbContext(typeof(CutListGeneratorContext))]
     [Migration("20210825161654_initial")]
@@ -19,7 +19,7 @@ namespace Solid_Price.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.9");
 
-            modelBuilder.Entity("Solid_Price.Models.CutItem", b =>
+            modelBuilder.Entity("SolidPrice.Models.CutItem", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -56,7 +56,7 @@ namespace Solid_Price.Migrations
                     b.ToTable("CutItems");
                 });
 
-            modelBuilder.Entity("Solid_Price.Models.OrderItem", b =>
+            modelBuilder.Entity("SolidPrice.Models.OrderItem", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -75,7 +75,7 @@ namespace Solid_Price.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("Solid_Price.Models.StockItem", b =>
+            modelBuilder.Entity("SolidPrice.Models.StockItem", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -112,7 +112,7 @@ namespace Solid_Price.Migrations
                     b.ToTable("StockItems");
                 });
 
-            modelBuilder.Entity("Solid_Price.Models.Vendor", b =>
+            modelBuilder.Entity("SolidPrice.Models.Vendor", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -135,9 +135,9 @@ namespace Solid_Price.Migrations
                     b.ToTable("Vendors");
                 });
 
-            modelBuilder.Entity("Solid_Price.Models.CutItem", b =>
+            modelBuilder.Entity("SolidPrice.Models.CutItem", b =>
                 {
-                    b.HasOne("Solid_Price.Models.StockItem", "StockItem")
+                    b.HasOne("SolidPrice.Models.StockItem", "StockItem")
                         .WithMany()
                         .HasForeignKey("StockItemID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -146,9 +146,9 @@ namespace Solid_Price.Migrations
                     b.Navigation("StockItem");
                 });
 
-            modelBuilder.Entity("Solid_Price.Models.OrderItem", b =>
+            modelBuilder.Entity("SolidPrice.Models.OrderItem", b =>
                 {
-                    b.HasOne("Solid_Price.Models.StockItem", "StockItem")
+                    b.HasOne("SolidPrice.Models.StockItem", "StockItem")
                         .WithMany()
                         .HasForeignKey("StockItemID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -157,9 +157,9 @@ namespace Solid_Price.Migrations
                     b.Navigation("StockItem");
                 });
 
-            modelBuilder.Entity("Solid_Price.Models.StockItem", b =>
+            modelBuilder.Entity("SolidPrice.Models.StockItem", b =>
                 {
-                    b.HasOne("Solid_Price.Models.Vendor", "Vendor")
+                    b.HasOne("SolidPrice.Models.Vendor", "Vendor")
                         .WithMany()
                         .HasForeignKey("VendorID");
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Solid_Price.ViewModels.Commands {
+namespace SolidPrice.ViewModels.Commands {
     public class RelayCommand : ICommand {
         public event EventHandler CanExecuteChanged {
             add { CommandManager.RequerySuggested += value; }

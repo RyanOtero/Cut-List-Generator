@@ -1,5 +1,5 @@
 ﻿
-namespace Solid_Price {
+namespace SolidPrice {
     partial class MySQLInstaller {
         /// <summary>
         /// Required designer variable.

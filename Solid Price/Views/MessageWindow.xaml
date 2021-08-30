@@ -1,4 +1,4 @@
-﻿<Window x:Class="Solid_Price.Resources.Views.MessageWindow"
+﻿<Window x:Class="SolidPrice.Resources.Views.MessageWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MessageWindow"  MinHeight="160" 

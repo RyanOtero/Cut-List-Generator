@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Data;
 
-namespace Solid_Price.Utils {
+namespace SolidPrice.Utils {
     [ValueConversion(typeof(float), typeof(string))]
     public class FloatToStringConverter : IValueConverter {
         public FloatToStringConverter() {

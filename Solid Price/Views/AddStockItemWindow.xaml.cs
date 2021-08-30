@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Solid_Price.Views {
+namespace SolidPrice.Views {
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>

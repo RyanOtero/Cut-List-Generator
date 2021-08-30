@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Solid_Price.Views {
+namespace SolidPrice.Views {
     /// <summary>
     /// Interaction logic for EditVendorWindow.xaml
     /// </summary>

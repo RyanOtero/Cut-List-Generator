@@ -1,7 +1,7 @@
-﻿using Solid_Price.Utils;
+﻿using SolidPrice.Utils;
 using System.ComponentModel;
 
-namespace Solid_Price.Models {
+namespace SolidPrice.Models {
 
     [TypeConverter(typeof(EnumDescriptionTypeConverter))]
     public enum ProfileType {

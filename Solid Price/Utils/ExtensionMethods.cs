@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Solid_Price.Utils {
+namespace SolidPrice.Utils {
     public static class ExtensionMethods {
         public static void Sort<T>(this ObservableCollection<T> collection)
         where T : IComparable<T>, IEquatable<T> {

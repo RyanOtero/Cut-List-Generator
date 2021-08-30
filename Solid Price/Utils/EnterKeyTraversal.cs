@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
-namespace Solid_Price.Utils {
+namespace SolidPrice.Utils {
     public class EnterKeyTraversal {
         public static bool GetIsEnabled(DependencyObject obj) {
             return (bool)obj.GetValue(IsEnabledProperty);

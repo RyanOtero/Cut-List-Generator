@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
-namespace Solid_Price.ViewModels {
+namespace SolidPrice.ViewModels {
     public abstract class ViewModelBase : INotifyPropertyChanged {
 
         public event PropertyChangedEventHandler PropertyChanged;

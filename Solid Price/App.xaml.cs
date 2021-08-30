@@ -3,7 +3,7 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Windows;
 
-namespace Solid_Price {
+namespace SolidPrice {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>

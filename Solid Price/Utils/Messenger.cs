@@ -1,8 +1,8 @@
-﻿using Solid_Price.Resources.Views;
+﻿using SolidPrice.Resources.Views;
 using System.Windows;
-using MessageBoxImage = Solid_Price.Models.MessageBoxImage;
+using MessageBoxImage = SolidPrice.Models.MessageBoxImage;
 
-namespace Solid_Price.Utils {
+namespace SolidPrice.Utils {
     public static class Messenger {
         public static void ErrorMessage(string caption, string text) {
             Application.Current.Dispatcher.Invoke(delegate {

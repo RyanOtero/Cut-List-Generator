@@ -1,4 +1,4 @@
-﻿namespace Solid_Price.Views {
+﻿namespace SolidPrice.Views {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>

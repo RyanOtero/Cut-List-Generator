@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Solid_Price.Utils;
+using SolidPrice.Utils;
 using SolidWorks.Interop.sldworks;
 using SolidWorks.Interop.swconst;
 using System;
@@ -12,9 +12,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Data;
-using static Solid_Price.Utils.Messenger;
+using static SolidPrice.Utils.Messenger;
 
-namespace Solid_Price.Models {
+namespace SolidPrice.Models {
     public class CutListManager : INotifyPropertyChanged {
 
         #region Fields
