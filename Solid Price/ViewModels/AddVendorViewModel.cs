@@ -71,7 +71,7 @@ namespace SolidPrice.ViewModels {
                             ctx.Vendors.Add(vendor);
                             ctx.SaveChanges();
                         }
-                        MainVModel.CutListMngr.Refresh();
+                        CutListManager.Instance.Refresh();
                         CloseWin(x);
                     } catch (Exception) {
                         ErrorMessage("Database Error avvm.cs 79", "There was an error while accessing the database.");

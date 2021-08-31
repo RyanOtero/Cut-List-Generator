@@ -97,7 +97,7 @@ namespace SolidPrice.ViewModels {
                             ctx.StockItems.Add(stockItem);
                             ctx.SaveChanges();
                         }
-                        MainVModel.CutListMngr.Refresh();
+                        CutListManager.Instance.Refresh();
                         CloseWin(x);
                     } catch (Exception e) {
                         string s = e.Message;

@@ -53,9 +53,9 @@ namespace SolidPrice.ViewModels {
             set {
                 SetProperty(ref useExternalDB, value);
                 Application.Current.Properties["UseExternalDB"] = useExternalDB;
-                if (CutListMngr != null) {
-                    CutListMngr.ConnectionString = ConnectionString;
-                    CutListMngr.Refresh();
+                if (CutListManager.Instance != null) {
+                    CutListManager.Instance.ConnectionString = ConnectionString;
+                    CutListManager.Instance.Refresh();
                 }
             }
         }
@@ -65,8 +65,8 @@ namespace SolidPrice.ViewModels {
             set {
                 SetProperty(ref serverString, value);
                 Application.Current.Properties["ServerString"] = serverString;
-                if (CutListMngr != null) {
-                    CutListMngr.ConnectionString = ConnectionString;
+                if (CutListManager.Instance != null) {
+                    CutListManager.Instance.ConnectionString = ConnectionString;
                 }
             }
         }
@@ -75,8 +75,8 @@ namespace SolidPrice.ViewModels {
             set {
                 SetProperty(ref databaseString, value);
                 Application.Current.Properties["DatabaseString"] = databaseString;
-                if (CutListMngr != null) {
-                    CutListMngr.ConnectionString = ConnectionString;
+                if (CutListManager.Instance != null) {
+                    CutListManager.Instance.ConnectionString = ConnectionString;
                 }
             }
         }
@@ -85,8 +85,8 @@ namespace SolidPrice.ViewModels {
             set {
                 SetProperty(ref userString, value);
                 Application.Current.Properties["UserString"] = userString;
-                if (CutListMngr != null) {
-                    CutListMngr.ConnectionString = ConnectionString;
+                if (CutListManager.Instance != null) {
+                    CutListManager.Instance.ConnectionString = ConnectionString;
                 }
             }
         }
@@ -95,8 +95,8 @@ namespace SolidPrice.ViewModels {
             set {
                 SetProperty(ref passwordString, value);
                 Application.Current.Properties["PasswordString"] = passwordString;
-                if (CutListMngr != null) {
-                    CutListMngr.ConnectionString = ConnectionString;
+                if (CutListManager.Instance != null) {
+                    CutListManager.Instance.ConnectionString = ConnectionString;
                 }
             }
         }
@@ -117,8 +117,8 @@ namespace SolidPrice.ViewModels {
                 }
             }
             set {
-                if (CutListMngr != null && CutListMngr.ConnectionString != value) {
-                    CutListMngr.ConnectionString = value;
+                if (CutListManager.Instance != null && CutListManager.Instance.ConnectionString != value) {
+                    CutListManager.Instance.ConnectionString = value;
                     OnPropertyChanged();
                 }
             }
@@ -155,7 +155,6 @@ namespace SolidPrice.ViewModels {
         #endregion
 
 
-        public CutListManager CutListMngr { get; set; }
 
         public Vendor SelectedVendor {
             get => selectedVendor;
@@ -237,7 +236,7 @@ namespace SolidPrice.ViewModels {
             ClearCommand = new RelayCommand(x => ClearCutList(), () => CutList != null && CutList.Count > 0);
             SourceBrowseCommand = new RelayCommand(x => SourceBrowse());
             RefreshCommand = new RelayCommand(x => {
-                CutListMngr.ConnectionString = ConnectionString; CutListMngr.Refresh();
+                CutListManager.Instance.ConnectionString = ConnectionString; CutListManager.Instance.Refresh();
                 GetTotalText();
             });
             AddStockItemCommand = new RelayCommand(x => {
@@ -273,7 +272,7 @@ namespace SolidPrice.ViewModels {
 
                             ctx.StockItems.Remove(SelectedStockItem);
                             ctx.SaveChanges();
-                            CutListMngr.Refresh();
+                            CutListManager.Instance.Refresh();
                         }
                     } catch (Exception e) {
                         string s = e.Message;
@@ -315,7 +314,7 @@ namespace SolidPrice.ViewModels {
                             }
                             ctx.StockItems.UpdateRange(sItems);
                             ctx.SaveChanges();
-                            CutListMngr.Refresh();
+                            CutListManager.Instance.Refresh();
                         }
                     } catch (Exception e) {
                         string s = e.Message;
@@ -354,10 +353,10 @@ namespace SolidPrice.ViewModels {
                 win.ShowDialog();
             });
             IsDetailedCommand = new RelayCommand(x => {
-                List<CutItem> tempList = CutListMngr.CutList.ToList();
+                List<CutItem> tempList = CutListManager.Instance.CutList.ToList();
                 ClearCutList();
-                CutListMngr.SortCutListForDisplay(IsDetailed, tempList);
-                CutListMngr.Refresh();
+                CutListManager.Instance.SortCutListForDisplay(IsDetailed, tempList);
+                CutListManager.Instance.Refresh();
             });
             ConfigCommand = new RelayCommand(x => {
                 var vModel = new ConfigViewModel();
@@ -371,11 +370,11 @@ namespace SolidPrice.ViewModels {
             #endregion
 
             asyncLock = new object();
-            CutListMngr = new CutListManager(ConnectionString);
-            CutList = CutListMngr.CutList;
-            OrderList = CutListMngr.OrderList;
-            Vendors = CutListMngr.Vendors;
-            StockItems = CutListMngr.StockItems;
+            CutListManager.Instance.ConnectionString = ConnectionString;
+            CutList = CutListManager.Instance.CutList;
+            OrderList = CutListManager.Instance.OrderList;
+            Vendors = CutListManager.Instance.Vendors;
+            StockItems = CutListManager.Instance.StockItems;
             OrderTotal = "Total:";
             CutListTotal = "Total:";
             loadingAnimFadeIn = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimFadeIn");
@@ -420,8 +419,8 @@ namespace SolidPrice.ViewModels {
             ClearCutList();
             loadingAnimFadeIn.Begin();
             loadingAnimBounce.Begin();
-            await Task.Run(() => CutListMngr.Generate(SourceText, IsDetailed));
-            CutListMngr.Refresh();
+            await Task.Run(() => CutListManager.Instance.Generate(SourceText, IsDetailed));
+            CutListManager.Instance.Refresh();
             loadingAnimFadeOut.Begin();
             GetTotalText();
         }
@@ -442,15 +441,15 @@ namespace SolidPrice.ViewModels {
             if (saveFileDialog.ShowDialog() == true) {
                 filePath = saveFileDialog.FileName;
                 if (filePath.Contains(".xlsx")) {
-                    GenerateExcel(ToDataTable(CutListMngr.OrderList), ToDataTable(CutListMngr.CutList), filePath);
+                    GenerateExcel(ToDataTable(CutListManager.Instance.OrderList), ToDataTable(CutListManager.Instance.CutList), filePath);
                 } else if (filePath.Contains(".csv")) {
-                    GenerateCSV(ToDataTable(CutListMngr.OrderList), ToDataTable(CutListMngr.CutList), filePath);
+                    GenerateCSV(ToDataTable(CutListManager.Instance.OrderList), ToDataTable(CutListManager.Instance.CutList), filePath);
                 }
             }
         }
 
         public void ClearCutList() {
-            CutListMngr.NewCutList();
+            CutListManager.Instance.NewCutList();
         }
         #endregion
 

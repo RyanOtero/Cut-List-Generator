@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SolidPrice.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace SolidPrice.ViewModels {
         }
 
         public override void CloseWin(object obj) {
-            MainVModel.CutListMngr.Refresh();
+            CutListManager.Instance.Refresh();
             base.CloseWin(obj);
         }
     }

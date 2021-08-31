@@ -18,7 +18,8 @@ namespace SolidPrice.Models {
     public class CutListManager : INotifyPropertyChanged {
 
         #region Fields
-        public SldWorks swApp;
+        private static readonly CutListManager instance = new CutListManager();
+        private SldWorks swApp;
         int fileerror = 0;
         int filewarning = 0;
         bool inBodyFolder = false;
@@ -35,6 +36,9 @@ namespace SolidPrice.Models {
         #endregion
 
         #region Properties
+
+        public static CutListManager Instance => instance;
+
         public string ConnectionString {
             get => connectionString;
             set { connectionString = value; OnPropertyChanged(); }
@@ -73,17 +77,8 @@ namespace SolidPrice.Models {
         #endregion
 
         #region Constructors
-        public CutListManager(string cString) {
-            asyncLock = new object();
-            CutList = new ObservableCollection<CutItem>();
-            Vendors = new ObservableCollection<Vendor>();
-            StockItems = new ObservableCollection<StockItem>();
-            OrderList = new ObservableCollection<OrderItem>();
-            ConnectionString = cString;
-            Refresh();
-        }
 
-        public CutListManager() {
+        private CutListManager() {
             asyncLock = new object();
             CutList = new ObservableCollection<CutItem>();
             Vendors = new ObservableCollection<Vendor>();

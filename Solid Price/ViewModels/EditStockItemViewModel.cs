@@ -95,10 +95,10 @@ namespace SolidPrice.ViewModels {
                                 ctx.StockItems.Update(sItem);
                                 ctx.SaveChanges();
                             }
-                            List<CutItem> tempList = MainVModel.CutListMngr.CutList.ToList();
+                            List<CutItem> tempList = CutListManager.Instance.CutList.ToList();
                             MainVModel.ClearCutList();
-                            MainVModel.CutListMngr.SortCutListForDisplay(MainVModel.IsDetailed, tempList);
-                            MainVModel.CutListMngr.Refresh();
+                            CutListManager.Instance.SortCutListForDisplay(MainVModel.IsDetailed, tempList);
+                            CutListManager.Instance.Refresh();
                             CloseWin(x);
                         } catch (Exception e) {
                             string s = e.Message;
