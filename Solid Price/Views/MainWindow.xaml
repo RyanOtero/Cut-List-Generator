@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:SolidPrice.ViewModels"
-        Title="Solid Price" Height="531" Width="927" WindowStyle="None" SizeToContent="Manual"
+        Title="Solid Price" Height="531" Width="900" MinWidth="900" WindowStyle="None" SizeToContent="Manual"
         Style="{DynamicResource ResourceKey=MainWindowStyle}">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="b2v" />
@@ -15,11 +15,11 @@
             <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="LoadingCanvas" Duration="0:0:.3" From="1" To="0"/>
         </Storyboard>
         <Storyboard x:Key="LoadingAnimBounce">
-            <RectAnimationUsingKeyFrames Storyboard.TargetProperty="Rect" Storyboard.TargetName="AnimatedRect" Duration="0:0:1.2" AutoReverse="True" RepeatBehavior="Forever" >
+            <RectAnimationUsingKeyFrames Storyboard.TargetProperty="Rect" Storyboard.TargetName="AnimatedRect" Duration="0:0:1.625" AutoReverse="True" RepeatBehavior="Forever" >
                 <LinearRectKeyFrame Value="0,0,16,16" KeyTime="0:0:0"/>
-                <LinearRectKeyFrame Value="0,0,16,16" KeyTime="0:0:.3"/>
-                <LinearRectKeyFrame Value="260,0,150,16" KeyTime="0:0:0.6"/>
-                <LinearRectKeyFrame Value="520,0,16,16" KeyTime="0:0:.9"/>
+                <LinearRectKeyFrame Value="0,0,16,16" KeyTime="0:0:.375"/>
+                <LinearRectKeyFrame Value="250,0,140,16" KeyTime="0:0:0.875"/>
+                <LinearRectKeyFrame Value="500,0,16,16" KeyTime="0:0:1.375"/>
             </RectAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
@@ -28,7 +28,7 @@
     </Window.DataContext>
     <!--Content-->
     <Grid Grid.Row="1" Margin="0 10 0 0">
-        <Canvas x:Name="LoadingCanvas" VerticalAlignment="Top" HorizontalAlignment="Right" Opacity="0" Grid.Row="1" Height="16" Width="540" Margin="0 8 15 0">
+        <Canvas x:Name="LoadingCanvas" VerticalAlignment="Top" HorizontalAlignment="Center" Opacity="0" Grid.Row="1" Height="16" Width="500" Margin="0 -26 0 0">
             <Path Fill="{StaticResource Light}">
                 <Path.Data>
                     <RectangleGeometry x:Name="AnimatedRect" Rect="0,0,16,16" RadiusY="8" RadiusX="8"/>
@@ -157,38 +157,6 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <!--<TabItem Header="Configuration" Style="{DynamicResource TabItemStyle}" >
-                <Grid>
-                    <Grid Width="400" Height="300">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".35*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <CheckBox x:Name="UseExternalDBCheckBox" IsChecked="{Binding UseExternalDB, Mode=TwoWay}" Content="Use External MySQL Database" FlowDirection="RightToLeft" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,0,0" Grid.Column="1" Grid.Row="0">
-                            <CheckBox.Resources>
-                                <Style TargetType="{x:Type Path}">
-                                    <Setter Property="FlowDirection" Value="LeftToRight" />
-                                </Style>
-                            </CheckBox.Resources>
-                        </CheckBox>
-                        <Label Content="Server: " HorizontalAlignment="Right" Margin="0,0,0,5" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="1" />
-                        <TextBox x:Name="ServerTextBox" Margin="0,0,0,0" IsEnabled="{Binding UseExternalDB}" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Text="{Binding ServerString, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" />
-                        <Label Content="Database: " HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="2" />
-                        <TextBox x:Name="DatabaseTextBox" Margin="0,0,0,0" IsEnabled="{Binding UseExternalDB}" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Text="{Binding DatabaseString, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" />
-                        <Label Content="User: " HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="3" />
-                        <TextBox x:Name="UserTextBox" Margin="0,0,0,0" IsEnabled="{Binding UseExternalDB}" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Text="{Binding UserString, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3" />
-                        <Label Content="Password: " HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="4" />
-                        <TextBox x:Name="PasswordTextBox" Margin="0,0,0,0" IsEnabled="{Binding UseExternalDB}" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Text="{Binding PasswordString, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="4" />
-                    </Grid>
-                </Grid>
-            </TabItem>-->
         </TabControl>
         <Button Style="{StaticResource ConfigButton}" Height="20" Width="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 5 20 0" Grid.Row="0" Grid.Column="0" Command="{Binding ConfigCommand}"/>
 
