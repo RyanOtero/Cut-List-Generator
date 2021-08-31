@@ -32,7 +32,7 @@ namespace SolidPrice.Models {
                 try {
                     Directory.CreateDirectory(@"C:\ProgramData\Solid Price");
                     FileInfo fi;
-                    if (Debugger.IsAttached) {
+                    if (!Debugger.IsAttached) {
                         fi = new FileInfo(@"C:\Program Files (x86)\Solid Price\CutList.db");
                     } else {
                         fi = new FileInfo(@"C:\Users\Ryan\source\repos\Solid Price\Solid Price\CutList.db");

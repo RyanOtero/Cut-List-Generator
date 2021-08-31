@@ -44,6 +44,7 @@ namespace SolidPrice.ViewModels {
         Storyboard loadingAnimFadeIn;
         Storyboard loadingAnimFadeOut;
         Storyboard loadingAnimBounce;
+        private bool isWorking;
 
         #endregion
 
@@ -55,7 +56,7 @@ namespace SolidPrice.ViewModels {
                 Application.Current.Properties["UseExternalDB"] = useExternalDB;
                 if (CutListManager.Instance != null) {
                     CutListManager.Instance.ConnectionString = ConnectionString;
-                    CutListManager.Instance.Refresh();
+                    if (!value) CutListManager.Instance.Refresh();
                 }
             }
         }
@@ -221,9 +222,17 @@ namespace SolidPrice.ViewModels {
                 BindingOperations.EnableCollectionSynchronization(orderList, asyncLock);
             }
         }
+
+        public bool IsWorking {
+            get => isWorking;
+            set {
+                SetProperty(ref isWorking, value);
+            }
+        }
         #endregion
 
         public MainViewModel() {
+            IsWorking = false;
             UseExternalDB = bool.Parse(Application.Current.Properties["UseExternalDB"].ToString());
             ServerString = Application.Current.Properties["ServerString"].ToString();
             DatabaseString = Application.Current.Properties["DatabaseString"].ToString();
@@ -231,14 +240,17 @@ namespace SolidPrice.ViewModels {
             PasswordString = Application.Current.Properties["PasswordString"].ToString();
 
             #region Commands Set
-            GenerateCommand = new RelayCommand(x => GenerateCutList(), () => !string.IsNullOrEmpty(SourceText));
-            SaveCommand = new RelayCommand(x => SaveCutList(), () => CutList != null && CutList.Count > 0);
-            ClearCommand = new RelayCommand(x => ClearCutList(), () => CutList != null && CutList.Count > 0);
-            SourceBrowseCommand = new RelayCommand(x => SourceBrowse());
+            GenerateCommand = new RelayCommand(x => { 
+                IsWorking = true;
+                GenerateCutList();
+            }, () => !string.IsNullOrEmpty(SourceText) && !IsWorking);
+            SaveCommand = new RelayCommand(x => SaveCutList(), () => CutList != null && CutList.Count > 0 && !IsWorking);
+            ClearCommand = new RelayCommand(x => ClearCutList(), () => CutList != null && CutList.Count > 0 && !IsWorking);
+            SourceBrowseCommand = new RelayCommand(x => SourceBrowse(), () => !IsWorking);
             RefreshCommand = new RelayCommand(x => {
                 CutListManager.Instance.ConnectionString = ConnectionString; CutListManager.Instance.Refresh();
                 GetTotalText();
-            });
+            }, () => !IsWorking);
             AddStockItemCommand = new RelayCommand(x => {
                 var win = new AddStockItemWindow();
                 win.DataContext = new AddStockItemViewModel();
@@ -246,7 +258,7 @@ namespace SolidPrice.ViewModels {
                 win.Left = mainWindow.Left + (mainWindow.Width - win.Width) / 2;
                 win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
                 win.ShowDialog();
-            });
+            }, () => !IsWorking);
             AddVendorCommand = new RelayCommand(x => {
                 var win = new AddVendorWindow();
                 win.DataContext = new AddVendorViewModel();
@@ -254,7 +266,7 @@ namespace SolidPrice.ViewModels {
                 win.Left = mainWindow.Left + (mainWindow.Width - win.Width) / 2;
                 win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
                 win.ShowDialog();
-            });
+            }, () => !isWorking);
             DeleteStockItemCommand = new RelayCommand(x => {
                 if (SelectedStockItem == null) {
                     return;
@@ -279,7 +291,7 @@ namespace SolidPrice.ViewModels {
                         ErrorMessage("Database Error mvm.cs 282", "There was an error while accessing the database.");
                     }
                 }
-            });
+            }, () => !IsWorking);
             DeleteVendorCommand = new RelayCommand(x => {
                 if (SelectedVendor == null) {
                     return;
@@ -321,7 +333,7 @@ namespace SolidPrice.ViewModels {
                         ErrorMessage("Database Error mvm.cs 324", "There was an error while accessing the database.");
                     }
                 }
-            });
+            }, () => !IsWorking);
             EditStockItemCommand = new RelayCommand(x => {
                 if (SelectedStockItem == null) {
                     ErrorMessage("Stock Type mvm.cs 330", "Please select a stock type to edit.");
@@ -334,7 +346,7 @@ namespace SolidPrice.ViewModels {
                 win.Left = mainWindow.Left + (mainWindow.Width - win.Width) / 2;
                 win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
                 win.ShowDialog();
-            });
+            }, () => !IsWorking);
             EditVendorCommand = new RelayCommand(x => {
                 if (SelectedVendor == null) {
                     ErrorMessage("Vender mvm.cs 340", "Please select a vendor to edit.");
@@ -351,7 +363,7 @@ namespace SolidPrice.ViewModels {
                 win.Left = mainWindow.Left + (mainWindow.Width - win.Width) / 2;
                 win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
                 win.ShowDialog();
-            });
+            }, () => !IsWorking);
             IsDetailedCommand = new RelayCommand(x => {
                 List<CutItem> tempList = CutListManager.Instance.CutList.ToList();
                 ClearCutList();
@@ -366,7 +378,7 @@ namespace SolidPrice.ViewModels {
                 win.Left = mainWindow.Left + (mainWindow.Width - win.Width) / 2;
                 win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
                 win.ShowDialog();
-            });
+            }, () => !IsWorking);
             #endregion
 
             asyncLock = new object();
@@ -414,6 +426,7 @@ namespace SolidPrice.ViewModels {
         public async void GenerateCutList() {
             if (string.IsNullOrEmpty(ConnectionString)) {
                 ErrorMessage("Database Error mvm.cs 402", "There was an error while accessing the database.");
+                IsWorking = false;
                 return;
             }
             ClearCutList();
@@ -423,6 +436,7 @@ namespace SolidPrice.ViewModels {
             CutListManager.Instance.Refresh();
             loadingAnimFadeOut.Begin();
             GetTotalText();
+            IsWorking = false;
         }
 
         public void SourceBrowse() {

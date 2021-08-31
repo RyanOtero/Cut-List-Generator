@@ -204,9 +204,14 @@ namespace SolidPrice.Models {
             }
 
             if (doc == null) {
+                try {
                 doc = isAssembly ?
                     swApp.OpenDoc6(filePath, (int)swDocumentTypes_e.swDocASSEMBLY, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning) :
                     swApp.OpenDoc6(filePath, (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning);
+                } catch (Exception e) {
+                    ErrorMessage("SolidWorks Error", "There was an error while trying to access SolidWorks.");
+                    return;
+                }
             }
 
 
@@ -477,8 +482,8 @@ namespace SolidPrice.Models {
                 float length = 0;
                 float angle1 = 0;
                 float angle2 = 0;
-                string angleDirection = "";
-                string angleRotation = "";
+                string angleDirection = "-";
+                string angleRotation = "-";
                 string description = "";
                 string material = "";
                 bool isNew = false;
