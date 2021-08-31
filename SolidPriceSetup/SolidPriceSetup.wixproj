@@ -336,6 +336,16 @@
     <Content Include="wpfgfx_cor3.dll" />
     <Content Include="Zstandard.Net.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Solid Price\SolidPrice.csproj">
+      <Name>SolidPrice</Name>
+      <Project>{b0510923-5013-4bcd-9cf2-a26a69cbbb03}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />
   <Target Name="EnsureWixToolsetInstalled" Condition=" '$(WixTargetsImported)' != 'true' ">
