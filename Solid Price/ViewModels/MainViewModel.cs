@@ -105,7 +105,7 @@ namespace SolidPrice.ViewModels {
             get => "server=" + ServerString
                 + ";database=" + DatabaseString
                 + ";user=" + UserString
-                + ";password=" + PasswordString;
+                + ";password=" + PasswordString + ";";
         }
 
         public string ConnectionString {

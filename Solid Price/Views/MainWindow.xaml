@@ -157,7 +157,7 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Configuration" Style="{DynamicResource TabItemStyle}" >
+            <!--<TabItem Header="Configuration" Style="{DynamicResource TabItemStyle}" >
                 <Grid>
                     <Grid Width="400" Height="300">
                         <Grid.ColumnDefinitions>
@@ -188,7 +188,7 @@
                         <TextBox x:Name="PasswordTextBox" Margin="0,0,0,0" IsEnabled="{Binding UseExternalDB}" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Text="{Binding PasswordString, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="4" />
                     </Grid>
                 </Grid>
-            </TabItem>
+            </TabItem>-->
         </TabControl>
         <Button Style="{StaticResource ConfigButton}" Height="20" Width="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 5 20 0" Grid.Row="0" Grid.Column="0" Command="{Binding ConfigCommand}"/>
 

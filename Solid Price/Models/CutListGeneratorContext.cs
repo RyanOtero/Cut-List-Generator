@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 //using Microsoft.Extensions.Logging;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Reflection;
@@ -30,8 +31,13 @@ namespace SolidPrice.Models {
             if (!_created && !isMySQL) {
                 try {
                     Directory.CreateDirectory(@"C:\ProgramData\Solid Price");
-                    FileInfo fi = new FileInfo(@"C:\Program Files (x86)\Solid Price\CutList.db");
-                    fi.CopyTo(@"C:\ProgramData\Solid Price\CutList.db");                    
+                    FileInfo fi;
+                    if (Debugger.IsAttached) {
+                        fi = new FileInfo(@"C:\Program Files (x86)\Solid Price\CutList.db");
+                    } else {
+                        fi = new FileInfo(@"C:\Users\Ryan\source\repos\Solid Price\Solid Price\CutList.db");
+                    }
+                    fi.CopyTo(@"C:\ProgramData\Solid Price\CutList.db", true);
                     Application.Current.Properties["IsCreated"] = true;
                     _created = true;
                 } catch (Exception e) {

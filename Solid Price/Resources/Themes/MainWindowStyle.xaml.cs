@@ -24,7 +24,9 @@ namespace SolidPrice.Themes {
         }
 
         private void quitBtn_Click(object sender, RoutedEventArgs e) {
-            Window.GetWindow(((FrameworkElement)e.Source)).Close();
+            Window win = Window.GetWindow(((FrameworkElement)e.Source));
+            dynamic d = win.DataContext;
+            d.CloseWin(win);
         }
 
         /** 

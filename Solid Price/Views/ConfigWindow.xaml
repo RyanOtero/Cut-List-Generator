@@ -20,7 +20,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <CheckBox x:Name="UseExternalDBCheckBox" Grid.ColumnSpan="2" Grid.Column="0" IsChecked="{Binding UseExternalDB, Mode=TwoWay}" Content="Use External MySQL Database" FlowDirection="RightToLeft" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,0,0">
+            <CheckBox x:Name="UseExternalDBCheckBox" Grid.ColumnSpan="2" Grid.Column="0" IsChecked="{Binding MainVModel.UseExternalDB, Mode=TwoWay}" Content="Use External MySQL Database" FlowDirection="RightToLeft" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,0,0">
                 <CheckBox.Resources>
                     <Style TargetType="{x:Type Path}">
                         <Setter Property="FlowDirection" Value="LeftToRight" />
@@ -28,13 +28,13 @@
                 </CheckBox.Resources>
             </CheckBox>
             <Label Content="Server: " HorizontalAlignment="Right" Margin="0,0,0,5" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="1" />
-            <TextBox x:Name="ServerTextBox" Margin="0,0,0,0" IsEnabled="{Binding UseExternalDB}" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Text="{Binding ServerString, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" />
+            <TextBox x:Name="ServerTextBox" Margin="0,0,0,0" IsEnabled="{Binding  MainVModel.UseExternalDB}" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Text="{Binding MainVModel.ServerString, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" />
             <Label Content="Database: " HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="2" />
-            <TextBox x:Name="DatabaseTextBox" Margin="0,0,0,0" IsEnabled="{Binding UseExternalDB}" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Text="{Binding DatabaseString, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" />
+            <TextBox x:Name="DatabaseTextBox" Margin="0,0,0,0" IsEnabled="{Binding MainVModel.UseExternalDB}" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Text="{Binding MainVModel.DatabaseString, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" />
             <Label Content="User: " HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="3" />
-            <TextBox x:Name="UserTextBox" Margin="0,0,0,0" IsEnabled="{Binding UseExternalDB}" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Text="{Binding UserString, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3" />
+            <TextBox x:Name="UserTextBox" Margin="0,0,0,0" IsEnabled="{Binding MainVModel.UseExternalDB}" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Text="{Binding MainVModel.UserString, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3" />
             <Label Content="Password: " HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="4" />
-            <TextBox x:Name="PasswordTextBox" Margin="0,0,0,0" IsEnabled="{Binding UseExternalDB}" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Text="{Binding PasswordString, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="4" />
+            <TextBox x:Name="PasswordTextBox" Margin="0,0,0,0" IsEnabled="{Binding MainVModel.UseExternalDB}" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Center" Height="Auto" VerticalContentAlignment="Center" Text="{Binding MainVModel.PasswordString, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="4" />
         </Grid>
     </Grid>
 </Window>

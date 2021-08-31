@@ -100,16 +100,18 @@ namespace SolidPrice.Models {
 
         #region Methods
         public void Refresh() {
-            if ( bool.Parse(App.Current.Properties["IsCreated"].ToString()) == false) {
+            if (!bool.Parse(App.Current.Properties["IsCreated"].ToString())) {
                 using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
                     return;
                 }
             }
-            if (ConnectionString == "server=;database=;user=;password=") {
+            if (ConnectionString.Contains("server=;") || ConnectionString.Contains("database=;") 
+                || ConnectionString.Contains("user=;") || ConnectionString.Contains("password=;")) {
+                ErrorMessage("Database Error clm.cs 110", "The connection string is incomplete.");
                 return;
             }
             if (string.IsNullOrEmpty(ConnectionString)) {
-                ErrorMessage("Database Error clm.cs 110", "The connection string is invalid.");
+                ErrorMessage("Database Error clm.cs 115", "The connection string is invalid.");
                 return;
             }
             StockItems.Clear();
