@@ -145,9 +145,6 @@ namespace SolidPrice.Models {
         public CutItem(StockItem stockItem, int qty, float length, float angle1, float angle2, string angleDirection, string angleRotation, int stickNumber = 0) {
             StockItem = stockItem;
             StockItemID = stockItem.ID;
-            //Cost = string.Format("{0:c}", stockItem.CostPerFoot / 12m * (decimal)Length);
-            //TotalCost = string.Format("{0:c}", StockItem.CostPerFoot / 12m * (decimal)Length * Qty);
-            //Description = stockItem.ExternalDescription;
             Qty = qty;
             Length = length;
             Angle1 = angle1;
