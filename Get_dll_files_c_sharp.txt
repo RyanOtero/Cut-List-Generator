@@ -7,7 +7,7 @@ string str = "";
 
 foreach(FileInfo file in Files )
 {
-if (file.Name.Contains(".dll") || file.Name.Contains(".db") || file.Name.Contains(".db-wal") || file.Name.Contains(".db-shm") || file.Name.Contains(".exe")) {
+if (file.Name.Contains(".dll") || file.Name.Contains(".db") || file.Name.Contains(".exe")) {
   str = str + "\n" + "<Component Id=\"" + file.Name + "\" Guid=\"" + Guid.NewGuid() + "\">" + "\n" +
  "  <File Id=\"" + file.Name + "\" Source=\"" + file.Name + "\" KeyPath=\"yes\" Checksum=\"yes\"/>" + "\n" +
 "</Component>";

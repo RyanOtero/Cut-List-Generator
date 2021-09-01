@@ -286,7 +286,7 @@ namespace SolidPrice.Models {
                 OrderList.Add(item);
             }
 
-            OrderList.Sort();
+            OrderList.OrderBy(x => x.Qty).ThenBy(x => x.StockItem);
 
             if (!isDetailed) {
                 foreach (CutItem item in tempList) {
