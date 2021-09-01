@@ -43,942 +43,939 @@
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
 			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-      <Component Id="Accessibility.dll" Guid="f2cd9fcb-0886-4e8c-9b7b-b5ea1e2fe18e">
-        <File Id="Accessibility.dll" Source="Accessibility.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_console_l1_1_0.dll" Guid="1e9e8a92-1c71-4905-b192-64893d9d8681">
-        <File Id="api_ms_win_core_console_l1_1_0.dll" Source="api-ms-win-core-console-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_console_l1_2_0.dll" Guid="1c2d213a-2648-4495-98bd-9a4b7ad111d6">
-        <File Id="api_ms_win_core_console_l1_2_0.dll" Source="api-ms-win-core-console-l1-2-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_datetime_l1_1_0.dll" Guid="e241190c-6590-4341-b68a-9b1c233276d0">
-        <File Id="api_ms_win_core_datetime_l1_1_0.dll" Source="api-ms-win-core-datetime-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_debug_l1_1_0.dll" Guid="68b0bf65-8ad5-4b52-ba8c-4b0d5207cfe6">
-        <File Id="api_ms_win_core_debug_l1_1_0.dll" Source="api-ms-win-core-debug-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_errorhandling_l1_1_0.dll" Guid="8272b6ea-1cfa-4682-8385-7ec1b3f4c1c0">
-        <File Id="api_ms_win_core_errorhandling_l1_1_0.dll" Source="api-ms-win-core-errorhandling-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_file_l1_1_0.dll" Guid="db83f78c-0aef-457a-8d9f-2b5ef8505d30">
-        <File Id="api_ms_win_core_file_l1_1_0.dll" Source="api-ms-win-core-file-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_file_l1_2_0.dll" Guid="6ae3c9fd-ea7c-482a-8fc8-aa58a70e571e">
-        <File Id="api_ms_win_core_file_l1_2_0.dll" Source="api-ms-win-core-file-l1-2-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_file_l2_1_0.dll" Guid="f1f37616-819c-45d1-9ba0-2d97507f964c">
-        <File Id="api_ms_win_core_file_l2_1_0.dll" Source="api-ms-win-core-file-l2-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_handle_l1_1_0.dll" Guid="3b4de6b4-362e-4e43-b2ec-360f8309ccc4">
-        <File Id="api_ms_win_core_handle_l1_1_0.dll" Source="api-ms-win-core-handle-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_heap_l1_1_0.dll" Guid="8bd207db-0fe1-4986-b844-2fa549ffc794">
-        <File Id="api_ms_win_core_heap_l1_1_0.dll" Source="api-ms-win-core-heap-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_interlocked_l1_1_0.dll" Guid="63670b6d-8740-449a-9d5e-725afe74083e">
-        <File Id="api_ms_win_core_interlocked_l1_1_0.dll" Source="api-ms-win-core-interlocked-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_libraryloader_l1_1_0.dll" Guid="7415a05a-e7f3-4fbe-b9d3-20ef67a4200d">
-        <File Id="api_ms_win_core_libraryloader_l1_1_0.dll" Source="api-ms-win-core-libraryloader-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_localization_l1_2_0.dll" Guid="6f4b0a85-ac5e-41da-8c0e-79e0a5d1149b">
-        <File Id="api_ms_win_core_localization_l1_2_0.dll" Source="api-ms-win-core-localization-l1-2-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_memory_l1_1_0.dll" Guid="1cbe02fd-4523-412d-a60d-d59a0785447d">
-        <File Id="api_ms_win_core_memory_l1_1_0.dll" Source="api-ms-win-core-memory-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_namedpipe_l1_1_0.dll" Guid="f9a2e890-695a-4966-ad27-fb707c631978">
-        <File Id="api_ms_win_core_namedpipe_l1_1_0.dll" Source="api-ms-win-core-namedpipe-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_processenvironment_l1_1_0.dll" Guid="36a4de85-50e2-458f-853b-f68cf905eb4e">
-        <File Id="api_ms_win_core_processenvironment_l1_1_0.dll" Source="api-ms-win-core-processenvironment-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_processthreads_l1_1_0.dll" Guid="edebe12f-0024-43f7-abb0-f4e3eb2e18d7">
-        <File Id="api_ms_win_core_processthreads_l1_1_0.dll" Source="api-ms-win-core-processthreads-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_processthreads_l1_1_1.dll" Guid="fecd05c7-b36c-4f65-8f0f-78ecd7c9e6f2">
-        <File Id="api_ms_win_core_processthreads_l1_1_1.dll" Source="api-ms-win-core-processthreads-l1-1-1.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_profile_l1_1_0.dll" Guid="8a61f4ad-cf4d-4331-9515-412a5649fc82">
-        <File Id="api_ms_win_core_profile_l1_1_0.dll" Source="api-ms-win-core-profile-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_rtlsupport_l1_1_0.dll" Guid="99e43646-625a-4a4a-8dfc-694ef75b3e18">
-        <File Id="api_ms_win_core_rtlsupport_l1_1_0.dll" Source="api-ms-win-core-rtlsupport-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_string_l1_1_0.dll" Guid="1fd1848b-249d-4674-8180-58b44459f15c">
-        <File Id="api_ms_win_core_string_l1_1_0.dll" Source="api-ms-win-core-string-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_synch_l1_1_0.dll" Guid="cf45b615-48c4-4404-9e22-ff48d81fb325">
-        <File Id="api_ms_win_core_synch_l1_1_0.dll" Source="api-ms-win-core-synch-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_synch_l1_2_0.dll" Guid="ea923ee7-d829-4734-9070-86609a2d8359">
-        <File Id="api_ms_win_core_synch_l1_2_0.dll" Source="api-ms-win-core-synch-l1-2-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_sysinfo_l1_1_0.dll" Guid="86e6f682-0138-4eec-82be-ad1685fdbb8e">
-        <File Id="api_ms_win_core_sysinfo_l1_1_0.dll" Source="api-ms-win-core-sysinfo-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_timezone_l1_1_0.dll" Guid="b9b6e50a-6136-49b4-a3de-61d7585cdf87">
-        <File Id="api_ms_win_core_timezone_l1_1_0.dll" Source="api-ms-win-core-timezone-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_core_util_l1_1_0.dll" Guid="537c7b75-74ba-4132-9be8-8bd6b87d5131">
-        <File Id="api_ms_win_core_util_l1_1_0.dll" Source="api-ms-win-core-util-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_crt_conio_l1_1_0.dll" Guid="e38fbcbb-0a1c-4151-9d65-7480db8c421a">
-        <File Id="api_ms_win_crt_conio_l1_1_0.dll" Source="api-ms-win-crt-conio-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_crt_convert_l1_1_0.dll" Guid="cc0d313b-964f-41fc-b9c2-96ad944235ca">
-        <File Id="api_ms_win_crt_convert_l1_1_0.dll" Source="api-ms-win-crt-convert-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_crt_environment_l1_1_0.dll" Guid="7d5f6a10-74c3-4d7f-b846-f1ec406ce2da">
-        <File Id="api_ms_win_crt_environment_l1_1_0.dll" Source="api-ms-win-crt-environment-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_crt_filesystem_l1_1_0.dll" Guid="d3994520-34c8-444a-86c1-167d916ef933">
-        <File Id="api_ms_win_crt_filesystem_l1_1_0.dll" Source="api-ms-win-crt-filesystem-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_crt_heap_l1_1_0.dll" Guid="46a13c10-fb98-423a-a9fd-98636295a6f4">
-        <File Id="api_ms_win_crt_heap_l1_1_0.dll" Source="api-ms-win-crt-heap-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_crt_locale_l1_1_0.dll" Guid="1db24636-afda-494d-b045-2c005c41ace5">
-        <File Id="api_ms_win_crt_locale_l1_1_0.dll" Source="api-ms-win-crt-locale-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_crt_math_l1_1_0.dll" Guid="e14ba483-ca69-41e9-ac78-85eca31bf186">
-        <File Id="api_ms_win_crt_math_l1_1_0.dll" Source="api-ms-win-crt-math-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_crt_multibyte_l1_1_0.dll" Guid="e9f64ffd-4ddd-4585-99dc-bcb1f29e60a9">
-        <File Id="api_ms_win_crt_multibyte_l1_1_0.dll" Source="api-ms-win-crt-multibyte-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_crt_private_l1_1_0.dll" Guid="fe19c4b0-7b2a-4ec2-816f-67cc9cc49ed6">
-        <File Id="api_ms_win_crt_private_l1_1_0.dll" Source="api-ms-win-crt-private-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_crt_process_l1_1_0.dll" Guid="6846f492-727c-4bf6-9b2c-621be58a1f6f">
-        <File Id="api_ms_win_crt_process_l1_1_0.dll" Source="api-ms-win-crt-process-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_crt_runtime_l1_1_0.dll" Guid="8d63f8ba-cf3d-428c-bee5-870e5416b453">
-        <File Id="api_ms_win_crt_runtime_l1_1_0.dll" Source="api-ms-win-crt-runtime-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_crt_stdio_l1_1_0.dll" Guid="c692a059-ce76-45d7-9779-e083bd6677cb">
-        <File Id="api_ms_win_crt_stdio_l1_1_0.dll" Source="api-ms-win-crt-stdio-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_crt_string_l1_1_0.dll" Guid="8974bc1d-1bda-4a60-bea0-e699eb8d16bb">
-        <File Id="api_ms_win_crt_string_l1_1_0.dll" Source="api-ms-win-crt-string-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_crt_time_l1_1_0.dll" Guid="518d79dd-256f-4cad-9bdf-0f902597715e">
-        <File Id="api_ms_win_crt_time_l1_1_0.dll" Source="api-ms-win-crt-time-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="api_ms_win_crt_utility_l1_1_0.dll" Guid="55b87434-cdfc-49e8-b39b-bf82a0803ed0">
-        <File Id="api_ms_win_crt_utility_l1_1_0.dll" Source="api-ms-win-crt-utility-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="BouncyCastle.Crypto.dll" Guid="1eb72c9d-9ffb-4b20-8171-1c2212872112">
-        <File Id="BouncyCastle.Crypto.dll" Source="BouncyCastle.Crypto.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="clrcompression.dll" Guid="ce14b2c7-06db-4bc0-82c9-3faeb2a07786">
-        <File Id="clrcompression.dll" Source="clrcompression.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="clretwrc.dll" Guid="b38afe37-4f55-40e8-bfab-08b61414d281">
-        <File Id="clretwrc.dll" Source="clretwrc.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="clrjit.dll" Guid="f7c73b1a-effa-4e93-b145-53ab270a4bb1">
-        <File Id="clrjit.dll" Source="clrjit.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="coreclr.dll" Guid="7763a070-8b98-4153-8b39-e5672ed4ea86">
-        <File Id="coreclr.dll" Source="coreclr.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="createdump.exe" Guid="4befc3dd-9dd7-411d-a084-316503ae4333">
-        <File Id="createdump.exe" Source="createdump.exe" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="CutList.db" Guid="beb2830f-4df7-4265-a0ff-ad3ef96a8ebe">
-        <File Id="CutList.db" Source="CutList.db" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="D3DCompiler_47_cor3.dll" Guid="d50fb10f-69e4-4b10-9ab1-fb18c1cede1d">
-        <File Id="D3DCompiler_47_cor3.dll" Source="D3DCompiler_47_cor3.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="dbgshim.dll" Guid="d38c1082-4e8f-4cb6-928a-979159fb19d7">
-        <File Id="dbgshim.dll" Source="dbgshim.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="DirectWriteForwarder.dll" Guid="7a8086cc-d75e-48a0-8f66-a118786f5ab4">
-        <File Id="DirectWriteForwarder.dll" Source="DirectWriteForwarder.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="e_sqlite3.dll" Guid="5c3fa063-1eb7-4f4f-b4a5-2d1ea852968b">
-        <File Id="e_sqlite3.dll" Source="e_sqlite3.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Google.Protobuf.dll" Guid="54867da0-e865-4d32-a04f-6299fda52fe6">
-        <File Id="Google.Protobuf.dll" Source="Google.Protobuf.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="hostfxr.dll" Guid="5430fb03-f13b-459d-8820-54aa197b160e">
-        <File Id="hostfxr.dll" Source="hostfxr.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="hostpolicy.dll" Guid="bbc15470-dfe9-4e5d-a4f9-1646d12e33e8">
-        <File Id="hostpolicy.dll" Source="hostpolicy.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="K4os.Compression.LZ4.dll" Guid="6f6135d0-2daf-4cfa-bcdb-ac0e2ef48b04">
-        <File Id="K4os.Compression.LZ4.dll" Source="K4os.Compression.LZ4.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="K4os.Compression.LZ4.Streams.dll" Guid="11cdc35b-4336-4985-9507-c723b1116e0d">
-        <File Id="K4os.Compression.LZ4.Streams.dll" Source="K4os.Compression.LZ4.Streams.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="K4os.Hash.xxHash.dll" Guid="826d287a-69a6-4884-9856-3601bf43ce7d">
-        <File Id="K4os.Hash.xxHash.dll" Source="K4os.Hash.xxHash.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.CSharp.dll" Guid="a1d4092f-a651-4fcb-97a7-23f3d236e238">
-        <File Id="Microsoft.CSharp.dll" Source="Microsoft.CSharp.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.Data.Sqlite.dll" Guid="77f9e850-7dc7-448f-babf-d5247b71d5b6">
-        <File Id="Microsoft.Data.Sqlite.dll" Source="Microsoft.Data.Sqlite.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.DiaSymReader.Native.amd64.dll" Guid="d0516bb2-6379-4afa-8e0a-aac989727d83">
-        <File Id="Microsoft.DiaSymReader.Native.amd64.dll" Source="Microsoft.DiaSymReader.Native.amd64.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.DotNet.PlatformAbstractions.dll" Guid="16e93a5b-ed32-43d8-b761-b520b125df7d">
-        <File Id="Microsoft.DotNet.PlatformAbstractions.dll" Source="Microsoft.DotNet.PlatformAbstractions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.EntityFrameworkCore.Abstractions.dll" Guid="f485ca12-838c-4026-8b37-ccc257ee60d3">
-        <File Id="Microsoft.EntityFrameworkCore.Abstractions.dll" Source="Microsoft.EntityFrameworkCore.Abstractions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.EntityFrameworkCore.dll" Guid="e148eb91-c3cb-446a-b1d6-c5ef11c768c2">
-        <File Id="Microsoft.EntityFrameworkCore.dll" Source="Microsoft.EntityFrameworkCore.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.EntityFrameworkCore.Relational.dll" Guid="3556b6f8-76e8-48d2-a781-e1e2d3088c24">
-        <File Id="Microsoft.EntityFrameworkCore.Relational.dll" Source="Microsoft.EntityFrameworkCore.Relational.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.EntityFrameworkCore.Sqlite.dll" Guid="bac02384-5f18-4b02-876f-20a21b8d2c0c">
-        <File Id="Microsoft.EntityFrameworkCore.Sqlite.dll" Source="Microsoft.EntityFrameworkCore.Sqlite.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.Extensions.Caching.Abstractions.dll" Guid="9ea6c908-5c74-4cec-ba0f-8aac89906337">
-        <File Id="Microsoft.Extensions.Caching.Abstractions.dll" Source="Microsoft.Extensions.Caching.Abstractions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.Extensions.Caching.Memory.dll" Guid="2954e03d-9276-4d8e-8580-409cd69327d8">
-        <File Id="Microsoft.Extensions.Caching.Memory.dll" Source="Microsoft.Extensions.Caching.Memory.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.Extensions.Configuration.Abstractions.dll" Guid="d580a5a7-8049-4622-8098-a9d0d19adac5">
-        <File Id="Microsoft.Extensions.Configuration.Abstractions.dll" Source="Microsoft.Extensions.Configuration.Abstractions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.Extensions.DependencyInjection.Abstractions.dll" Guid="b67a431f-d43b-4bae-ba85-9b149a016318">
-        <File Id="Microsoft.Extensions.DependencyInjection.Abstractions.dll" Source="Microsoft.Extensions.DependencyInjection.Abstractions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.Extensions.DependencyInjection.dll" Guid="c959b529-0800-44e1-bff2-0d23abe705c1">
-        <File Id="Microsoft.Extensions.DependencyInjection.dll" Source="Microsoft.Extensions.DependencyInjection.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.Extensions.DependencyModel.dll" Guid="5cbd804a-c483-4618-8cc8-4cfc2f61e798">
-        <File Id="Microsoft.Extensions.DependencyModel.dll" Source="Microsoft.Extensions.DependencyModel.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.Extensions.Logging.Abstractions.dll" Guid="876b0faf-9949-4650-b87e-075353200a25">
-        <File Id="Microsoft.Extensions.Logging.Abstractions.dll" Source="Microsoft.Extensions.Logging.Abstractions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.Extensions.Logging.dll" Guid="62e05fbd-ad58-49b8-ad9d-5c2b6e87aacd">
-        <File Id="Microsoft.Extensions.Logging.dll" Source="Microsoft.Extensions.Logging.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.Extensions.Options.dll" Guid="3df2c4f1-6646-4eaf-bfb5-45412b9b891a">
-        <File Id="Microsoft.Extensions.Options.dll" Source="Microsoft.Extensions.Options.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.Extensions.Primitives.dll" Guid="9e32ba24-821f-45f2-9352-3455ab42a7f5">
-        <File Id="Microsoft.Extensions.Primitives.dll" Source="Microsoft.Extensions.Primitives.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.VisualBasic.Core.dll" Guid="a8481780-3619-4d21-aac3-16b63261bb90">
-        <File Id="Microsoft.VisualBasic.Core.dll" Source="Microsoft.VisualBasic.Core.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.VisualBasic.dll" Guid="3d747205-b9a3-4fba-8eb3-035c5e7a6b46">
-        <File Id="Microsoft.VisualBasic.dll" Source="Microsoft.VisualBasic.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.VisualBasic.Forms.dll" Guid="1a9faf16-1b26-443b-9a10-5c1000ec0683">
-        <File Id="Microsoft.VisualBasic.Forms.dll" Source="Microsoft.VisualBasic.Forms.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.Win32.Primitives.dll" Guid="cbea0ca4-b669-4d4d-ae5e-c18f2391d466">
-        <File Id="Microsoft.Win32.Primitives.dll" Source="Microsoft.Win32.Primitives.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.Win32.Registry.AccessControl.dll" Guid="688db80f-bf15-4da3-a9c0-51aabfc2d773">
-        <File Id="Microsoft.Win32.Registry.AccessControl.dll" Source="Microsoft.Win32.Registry.AccessControl.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.Win32.Registry.dll" Guid="ac99b210-2d37-47ae-bad3-747adbacb5d2">
-        <File Id="Microsoft.Win32.Registry.dll" Source="Microsoft.Win32.Registry.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Microsoft.Win32.SystemEvents.dll" Guid="cb11aa4e-034a-420b-a6b6-183ca549106a">
-        <File Id="Microsoft.Win32.SystemEvents.dll" Source="Microsoft.Win32.SystemEvents.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="mscordaccore.dll" Guid="6a6c90d3-cb36-4811-aadf-784237843a37">
-        <File Id="mscordaccore.dll" Source="mscordaccore.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="mscordaccore_amd64_amd64_5.0.721.25508.dll" Guid="23372864-5de7-42fe-a40b-060cea16dab5">
-        <File Id="mscordaccore_amd64_amd64_5.0.721.25508.dll" Source="mscordaccore_amd64_amd64_5.0.721.25508.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="mscordbi.dll" Guid="3d4f966a-a832-4045-89fd-a01fddbf3e38">
-        <File Id="mscordbi.dll" Source="mscordbi.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="mscorlib.dll" Guid="d7abe3fd-af39-438d-a634-b93aadfe423a">
-        <File Id="mscorlib.dll" Source="mscorlib.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="mscorrc.dll" Guid="3f648eef-9b9a-471b-8999-0216747ac978">
-        <File Id="mscorrc.dll" Source="mscorrc.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="MySql.Data.dll" Guid="0eac0db9-8c59-494f-87cf-cdb1a43fa9c1">
-        <File Id="MySql.Data.dll" Source="MySql.Data.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="MySql.EntityFrameworkCore.dll" Guid="23bcf8f8-4f9f-41c5-95fe-faa9046f6971">
-        <File Id="MySql.EntityFrameworkCore.dll" Source="MySql.EntityFrameworkCore.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="netstandard.dll" Guid="0e553cd5-d200-4a76-bedd-b4320df5425f">
-        <File Id="netstandard.dll" Source="netstandard.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Newtonsoft.Json.dll" Guid="498e8b26-c509-4aad-be35-14f5141eeb0f">
-        <File Id="Newtonsoft.Json.dll" Source="Newtonsoft.Json.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="PenImc_cor3.dll" Guid="b6066004-5b6d-444e-b634-7f266f827398">
-        <File Id="PenImc_cor3.dll" Source="PenImc_cor3.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="PresentationCore.dll" Guid="c847e3c3-90d9-4236-ad1e-ea4fb7467036">
-        <File Id="PresentationCore.dll" Source="PresentationCore.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="PresentationFramework_SystemCore.dll" Guid="50f41f3b-a6fd-4498-af23-fb9549b4fdb2">
-        <File Id="PresentationFramework_SystemCore.dll" Source="PresentationFramework-SystemCore.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="PresentationFramework_SystemData.dll" Guid="be191863-81c2-40c7-9da5-ab2b688ee2a2">
-        <File Id="PresentationFramework_SystemData.dll" Source="PresentationFramework-SystemData.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="PresentationFramework_SystemDrawing.dll" Guid="c7ccd08c-1019-45b3-bcb2-e4f4889a1ad9">
-        <File Id="PresentationFramework_SystemDrawing.dll" Source="PresentationFramework-SystemDrawing.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="PresentationFramework_SystemXml.dll" Guid="738e5fc7-b793-4c26-b855-d359120021cf">
-        <File Id="PresentationFramework_SystemXml.dll" Source="PresentationFramework-SystemXml.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="PresentationFramework_SystemXmlLinq.dll" Guid="b2ba76ea-5228-4f68-a71d-0073566f6780">
-        <File Id="PresentationFramework_SystemXmlLinq.dll" Source="PresentationFramework-SystemXmlLinq.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="PresentationFramework.Aero.dll" Guid="5c01e74b-b435-4973-9027-f68272475244">
-        <File Id="PresentationFramework.Aero.dll" Source="PresentationFramework.Aero.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="PresentationFramework.Aero2.dll" Guid="829cfd06-d2ee-4275-938a-46449f0596a3">
-        <File Id="PresentationFramework.Aero2.dll" Source="PresentationFramework.Aero2.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="PresentationFramework.AeroLite.dll" Guid="87654ea9-d697-44a2-b530-535cf9de3584">
-        <File Id="PresentationFramework.AeroLite.dll" Source="PresentationFramework.AeroLite.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="PresentationFramework.Classic.dll" Guid="f0775350-8c4b-4e60-a502-a7f3dcdcc533">
-        <File Id="PresentationFramework.Classic.dll" Source="PresentationFramework.Classic.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="PresentationFramework.dll" Guid="9b2b866b-8682-4ab9-b853-a19a79f0fdbd">
-        <File Id="PresentationFramework.dll" Source="PresentationFramework.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="PresentationFramework.Luna.dll" Guid="ec6554ea-bce4-4a4b-8349-6cb28c786417">
-        <File Id="PresentationFramework.Luna.dll" Source="PresentationFramework.Luna.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="PresentationFramework.Royale.dll" Guid="d8603bae-3533-417a-ac04-22fa06babea3">
-        <File Id="PresentationFramework.Royale.dll" Source="PresentationFramework.Royale.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="PresentationNative_cor3.dll" Guid="1ce0f1d1-01d4-4bf6-982a-118b0961dc3d">
-        <File Id="PresentationNative_cor3.dll" Source="PresentationNative_cor3.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="PresentationUI.dll" Guid="bd25545f-43e4-4c10-9802-ff0692536e61">
-        <File Id="PresentationUI.dll" Source="PresentationUI.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="ReachFramework.dll" Guid="5b45fbf1-f7b1-4b16-86fb-0daa69fd79c1">
-        <File Id="ReachFramework.dll" Source="ReachFramework.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="SolidPrice.dll" Guid="6c931455-baa4-47fe-97e0-69a872931275">
-        <File Id="SolidPrice.dll" Source="SolidPrice.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="SolidPrice.exe" Guid="15e43456-a3a5-4299-819d-0401722aa5f6">
-        <File Id="SolidPrice.exe" Source="SolidPrice.exe" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="SolidWorks.Interop.sldworks.dll" Guid="48c043da-75fd-4699-a3d7-ea1ec12817ec">
-        <File Id="SolidWorks.Interop.sldworks.dll" Source="SolidWorks.Interop.sldworks.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="SolidWorks.Interop.swconst.dll" Guid="221bcda7-0854-43d4-a740-88ec0ac2d3ff">
-        <File Id="SolidWorks.Interop.swconst.dll" Source="SolidWorks.Interop.swconst.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="SQLitePCLRaw.batteries_v2.dll" Guid="4749aa2c-8a59-403e-99cd-885576998baa">
-        <File Id="SQLitePCLRaw.batteries_v2.dll" Source="SQLitePCLRaw.batteries_v2.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="SQLitePCLRaw.core.dll" Guid="19ca5703-8c80-447a-8d61-92552922bdb7">
-        <File Id="SQLitePCLRaw.core.dll" Source="SQLitePCLRaw.core.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="SQLitePCLRaw.nativelibrary.dll" Guid="a01da357-5d4d-457e-a0eb-92573485d76c">
-        <File Id="SQLitePCLRaw.nativelibrary.dll" Source="SQLitePCLRaw.nativelibrary.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="SQLitePCLRaw.provider.dynamic_cdecl.dll" Guid="1f315381-67db-4f8f-abc8-520e8bdc77af">
-        <File Id="SQLitePCLRaw.provider.dynamic_cdecl.dll" Source="SQLitePCLRaw.provider.dynamic_cdecl.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.AppContext.dll" Guid="87d3c428-7e6b-4436-88bc-50b2af2f4ac5">
-        <File Id="System.AppContext.dll" Source="System.AppContext.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Buffers.dll" Guid="a637e0de-ba82-4dc1-a02f-2f1b412a6dcd">
-        <File Id="System.Buffers.dll" Source="System.Buffers.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.CodeDom.dll" Guid="9a032877-dc9e-495f-b807-e13ece73b4aa">
-        <File Id="System.CodeDom.dll" Source="System.CodeDom.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Collections.Concurrent.dll" Guid="11be20aa-ed0d-4b76-aeff-525eaf3915e3">
-        <File Id="System.Collections.Concurrent.dll" Source="System.Collections.Concurrent.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Collections.dll" Guid="5d274056-fad9-4048-8eac-032360227c34">
-        <File Id="System.Collections.dll" Source="System.Collections.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Collections.Immutable.dll" Guid="5f487d96-18fb-48da-b859-50afb75ab26b">
-        <File Id="System.Collections.Immutable.dll" Source="System.Collections.Immutable.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Collections.NonGeneric.dll" Guid="cf2c2489-cac8-4ec0-a22b-3d8392d919b1">
-        <File Id="System.Collections.NonGeneric.dll" Source="System.Collections.NonGeneric.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Collections.Specialized.dll" Guid="c337f0a5-0553-4755-aa9e-576806bddab6">
-        <File Id="System.Collections.Specialized.dll" Source="System.Collections.Specialized.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.ComponentModel.Annotations.dll" Guid="43a84862-2baf-4b6c-b702-21ab8f04f226">
-        <File Id="System.ComponentModel.Annotations.dll" Source="System.ComponentModel.Annotations.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.ComponentModel.DataAnnotations.dll" Guid="552167cb-1cb1-4a2a-89e1-a040a423c1be">
-        <File Id="System.ComponentModel.DataAnnotations.dll" Source="System.ComponentModel.DataAnnotations.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.ComponentModel.dll" Guid="594e00e1-48f5-4d64-97f6-83b6f595afa5">
-        <File Id="System.ComponentModel.dll" Source="System.ComponentModel.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.ComponentModel.EventBasedAsync.dll" Guid="498b64ba-213a-4873-acce-9c135f32f04a">
-        <File Id="System.ComponentModel.EventBasedAsync.dll" Source="System.ComponentModel.EventBasedAsync.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.ComponentModel.Primitives.dll" Guid="0ec21a68-47a2-4e1b-97ca-4570430a6123">
-        <File Id="System.ComponentModel.Primitives.dll" Source="System.ComponentModel.Primitives.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.ComponentModel.TypeConverter.dll" Guid="111a1898-f92b-4030-b36c-1f7bffb5e94d">
-        <File Id="System.ComponentModel.TypeConverter.dll" Source="System.ComponentModel.TypeConverter.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Configuration.ConfigurationManager.dll" Guid="244ee384-bd61-40d6-b501-3aec3f72889b">
-        <File Id="System.Configuration.ConfigurationManager.dll" Source="System.Configuration.ConfigurationManager.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Configuration.dll" Guid="acebea5d-ff8b-406d-a990-230cb4ef3d9a">
-        <File Id="System.Configuration.dll" Source="System.Configuration.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Configuration.Install.dll" Guid="058a3fef-f902-4579-89d3-8270d859c9de">
-        <File Id="System.Configuration.Install.dll" Source="System.Configuration.Install.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Console.dll" Guid="02629de2-26fc-42f3-a05f-31716c4d3346">
-        <File Id="System.Console.dll" Source="System.Console.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Core.dll" Guid="8ca06717-83ea-4278-8191-7708b3b4b9f8">
-        <File Id="System.Core.dll" Source="System.Core.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Data.Common.dll" Guid="d3076c6a-340a-4b0d-aa4e-a4c90f0e0a0a">
-        <File Id="System.Data.Common.dll" Source="System.Data.Common.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Data.DataSetExtensions.dll" Guid="1a808f87-04a6-41a2-82f4-cc56f0f87238">
-        <File Id="System.Data.DataSetExtensions.dll" Source="System.Data.DataSetExtensions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Data.dll" Guid="454867ff-2250-4355-826e-75ca3287905e">
-        <File Id="System.Data.dll" Source="System.Data.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Design.dll" Guid="c33698cf-03c9-4d29-9c0f-613fc3c0cb00">
-        <File Id="System.Design.dll" Source="System.Design.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Diagnostics.Contracts.dll" Guid="7f670458-b7e8-4c39-b1e2-4331174196a0">
-        <File Id="System.Diagnostics.Contracts.dll" Source="System.Diagnostics.Contracts.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Diagnostics.Debug.dll" Guid="7affe390-8f77-4ac7-bcfc-1a0d78db501f">
-        <File Id="System.Diagnostics.Debug.dll" Source="System.Diagnostics.Debug.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Diagnostics.DiagnosticSource.dll" Guid="32400246-013f-4943-a8e5-76a99ed52a19">
-        <File Id="System.Diagnostics.DiagnosticSource.dll" Source="System.Diagnostics.DiagnosticSource.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Diagnostics.EventLog.dll" Guid="a2263dc2-f232-44fc-bd12-72e3e188f638">
-        <File Id="System.Diagnostics.EventLog.dll" Source="System.Diagnostics.EventLog.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Diagnostics.EventLog.Messages.dll" Guid="63fc9f06-cdb2-4c0a-b4bf-2dea66d21e40">
-        <File Id="System.Diagnostics.EventLog.Messages.dll" Source="System.Diagnostics.EventLog.Messages.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Diagnostics.FileVersionInfo.dll" Guid="7131764f-d57a-4071-b2f9-023450d0b29a">
-        <File Id="System.Diagnostics.FileVersionInfo.dll" Source="System.Diagnostics.FileVersionInfo.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Diagnostics.PerformanceCounter.dll" Guid="5ca2fde6-29d9-4507-ac4c-36f650b81820">
-        <File Id="System.Diagnostics.PerformanceCounter.dll" Source="System.Diagnostics.PerformanceCounter.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Diagnostics.Process.dll" Guid="2583822f-0238-41f2-bfc0-dc7d16f676f9">
-        <File Id="System.Diagnostics.Process.dll" Source="System.Diagnostics.Process.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Diagnostics.StackTrace.dll" Guid="55ccb2a7-633b-42fc-baa1-7d21e3b247f1">
-        <File Id="System.Diagnostics.StackTrace.dll" Source="System.Diagnostics.StackTrace.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Diagnostics.TextWriterTraceListener.dll" Guid="27d438e3-bef0-46ff-8c3b-1e5046d08821">
-        <File Id="System.Diagnostics.TextWriterTraceListener.dll" Source="System.Diagnostics.TextWriterTraceListener.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Diagnostics.Tools.dll" Guid="d5fa9d77-323a-4234-bc2f-627aa578ca61">
-        <File Id="System.Diagnostics.Tools.dll" Source="System.Diagnostics.Tools.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Diagnostics.TraceSource.dll" Guid="ee526a85-a287-4804-8187-769927db419d">
-        <File Id="System.Diagnostics.TraceSource.dll" Source="System.Diagnostics.TraceSource.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Diagnostics.Tracing.dll" Guid="fb0f7ba9-6ac7-454e-9351-6210b058f61d">
-        <File Id="System.Diagnostics.Tracing.dll" Source="System.Diagnostics.Tracing.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.DirectoryServices.dll" Guid="25293641-1753-4fa9-a1a5-8f76d15f75bf">
-        <File Id="System.DirectoryServices.dll" Source="System.DirectoryServices.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.dll" Guid="718764cd-c3e4-4555-994e-628a194f88f7">
-        <File Id="System.dll" Source="System.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Drawing.Common.dll" Guid="517d77bf-3bf6-4f8a-8d93-423daa69860b">
-        <File Id="System.Drawing.Common.dll" Source="System.Drawing.Common.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Drawing.Design.dll" Guid="aaf446f1-418c-4bb6-9ae5-b3884d5343f9">
-        <File Id="System.Drawing.Design.dll" Source="System.Drawing.Design.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Drawing.dll" Guid="32a463a9-17b9-4bb2-9325-a368ccd094e8">
-        <File Id="System.Drawing.dll" Source="System.Drawing.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Drawing.Primitives.dll" Guid="f4a339d6-a346-45c9-a136-3d15ccf81808">
-        <File Id="System.Drawing.Primitives.dll" Source="System.Drawing.Primitives.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Dynamic.Runtime.dll" Guid="4b998874-80dc-4720-addb-1db7ee4f2763">
-        <File Id="System.Dynamic.Runtime.dll" Source="System.Dynamic.Runtime.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Formats.Asn1.dll" Guid="e64346a0-4760-47f4-b6da-421f6efc79b2">
-        <File Id="System.Formats.Asn1.dll" Source="System.Formats.Asn1.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Globalization.Calendars.dll" Guid="496f7a0a-610b-4d65-85e6-17a46b50ccad">
-        <File Id="System.Globalization.Calendars.dll" Source="System.Globalization.Calendars.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Globalization.dll" Guid="4ac162d9-43a0-4fc6-9169-d6c62a796f8f">
-        <File Id="System.Globalization.dll" Source="System.Globalization.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Globalization.Extensions.dll" Guid="f16c4500-5e84-447a-9323-88d98410ca54">
-        <File Id="System.Globalization.Extensions.dll" Source="System.Globalization.Extensions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.IO.Compression.Brotli.dll" Guid="9923d45a-b716-40eb-838d-06a9cd38dbe6">
-        <File Id="System.IO.Compression.Brotli.dll" Source="System.IO.Compression.Brotli.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.IO.Compression.dll" Guid="64c27117-b2a6-46d4-8203-b0062c40c4ac">
-        <File Id="System.IO.Compression.dll" Source="System.IO.Compression.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.IO.Compression.FileSystem.dll" Guid="36e62bb0-5f8b-4d9b-8285-da92442e6846">
-        <File Id="System.IO.Compression.FileSystem.dll" Source="System.IO.Compression.FileSystem.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.IO.Compression.ZipFile.dll" Guid="b2fb141f-305e-4f59-9f38-9157e95c054a">
-        <File Id="System.IO.Compression.ZipFile.dll" Source="System.IO.Compression.ZipFile.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.IO.dll" Guid="dc4c8acb-1d6c-47bd-bdaa-2dea0266e2e6">
-        <File Id="System.IO.dll" Source="System.IO.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.IO.FileSystem.AccessControl.dll" Guid="0d6e296e-c3bf-4efe-9a3b-53e0cdf0b539">
-        <File Id="System.IO.FileSystem.AccessControl.dll" Source="System.IO.FileSystem.AccessControl.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.IO.FileSystem.dll" Guid="0b991bdf-962c-47e1-b648-c908a7269481">
-        <File Id="System.IO.FileSystem.dll" Source="System.IO.FileSystem.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.IO.FileSystem.DriveInfo.dll" Guid="5cc474aa-5429-4194-af7e-c66171f3190a">
-        <File Id="System.IO.FileSystem.DriveInfo.dll" Source="System.IO.FileSystem.DriveInfo.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.IO.FileSystem.Primitives.dll" Guid="85f8d39d-671f-40df-9e4e-692145501a3e">
-        <File Id="System.IO.FileSystem.Primitives.dll" Source="System.IO.FileSystem.Primitives.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.IO.FileSystem.Watcher.dll" Guid="fa027b45-e13c-461f-9fe7-b6262e4f14f9">
-        <File Id="System.IO.FileSystem.Watcher.dll" Source="System.IO.FileSystem.Watcher.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.IO.IsolatedStorage.dll" Guid="eb0d4358-535e-44ae-9d01-cb7d036b5052">
-        <File Id="System.IO.IsolatedStorage.dll" Source="System.IO.IsolatedStorage.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.IO.MemoryMappedFiles.dll" Guid="8170554c-571e-4883-80b1-6ca6cbf9d5c9">
-        <File Id="System.IO.MemoryMappedFiles.dll" Source="System.IO.MemoryMappedFiles.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.IO.Packaging.dll" Guid="8a21552b-af10-482f-af56-65a23532d077">
-        <File Id="System.IO.Packaging.dll" Source="System.IO.Packaging.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.IO.Pipes.AccessControl.dll" Guid="65abf02b-59a9-427e-ae59-fabf1a3b8d81">
-        <File Id="System.IO.Pipes.AccessControl.dll" Source="System.IO.Pipes.AccessControl.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.IO.Pipes.dll" Guid="8359c846-4145-4e60-a884-04c1189e59f8">
-        <File Id="System.IO.Pipes.dll" Source="System.IO.Pipes.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.IO.UnmanagedMemoryStream.dll" Guid="19a5863c-e1d5-4f01-8dc8-1ff5887de023">
-        <File Id="System.IO.UnmanagedMemoryStream.dll" Source="System.IO.UnmanagedMemoryStream.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Linq.dll" Guid="9bf32c00-474a-4f5d-a718-28d73755c268">
-        <File Id="System.Linq.dll" Source="System.Linq.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Linq.Expressions.dll" Guid="60e9c72c-22f6-4384-91fa-3ddf44986911">
-        <File Id="System.Linq.Expressions.dll" Source="System.Linq.Expressions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Linq.Parallel.dll" Guid="ade6ceaa-4066-49ae-90fc-4390a17b1233">
-        <File Id="System.Linq.Parallel.dll" Source="System.Linq.Parallel.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Linq.Queryable.dll" Guid="7fbac25a-7e5c-4362-8e6f-3aea4eecd1c2">
-        <File Id="System.Linq.Queryable.dll" Source="System.Linq.Queryable.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Memory.dll" Guid="4fcebde0-b1ca-4bb3-9ca9-25812967efd8">
-        <File Id="System.Memory.dll" Source="System.Memory.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.dll" Guid="1ee887c0-7819-458f-9254-87c9ebdd1269">
-        <File Id="System.Net.dll" Source="System.Net.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.Http.dll" Guid="c3171aa3-d0ef-4efa-85f4-fdaf6e09a19a">
-        <File Id="System.Net.Http.dll" Source="System.Net.Http.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.Http.Json.dll" Guid="606da30f-6959-4f3f-99b0-4d7101ff749b">
-        <File Id="System.Net.Http.Json.dll" Source="System.Net.Http.Json.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.HttpListener.dll" Guid="6e5672ca-0bbc-4285-a370-417fed4010fc">
-        <File Id="System.Net.HttpListener.dll" Source="System.Net.HttpListener.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.Mail.dll" Guid="6d370fb2-3d94-4a6f-970f-d62a36aa92ba">
-        <File Id="System.Net.Mail.dll" Source="System.Net.Mail.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.NameResolution.dll" Guid="49076f65-6ef5-4cc1-b3f6-149a405e0313">
-        <File Id="System.Net.NameResolution.dll" Source="System.Net.NameResolution.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.NetworkInformation.dll" Guid="22649326-0f7e-48a6-a9df-3f9f1629bf5a">
-        <File Id="System.Net.NetworkInformation.dll" Source="System.Net.NetworkInformation.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.Ping.dll" Guid="7b4ad360-dbd9-4787-b597-2d3fbe43dcb6">
-        <File Id="System.Net.Ping.dll" Source="System.Net.Ping.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.Primitives.dll" Guid="5f59de95-ad8e-4230-84c3-134fafbd14f6">
-        <File Id="System.Net.Primitives.dll" Source="System.Net.Primitives.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.Requests.dll" Guid="d5c29655-717a-47c3-bf6c-17b56262a23c">
-        <File Id="System.Net.Requests.dll" Source="System.Net.Requests.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.Security.dll" Guid="a57c394a-61c8-40e5-b580-94b8930ae51c">
-        <File Id="System.Net.Security.dll" Source="System.Net.Security.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.ServicePoint.dll" Guid="b9a2b13a-981e-40d5-ac96-12c6218b7e25">
-        <File Id="System.Net.ServicePoint.dll" Source="System.Net.ServicePoint.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.Sockets.dll" Guid="814de34c-2f9d-43e5-8cc8-28448f4340af">
-        <File Id="System.Net.Sockets.dll" Source="System.Net.Sockets.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.WebClient.dll" Guid="1455b057-1dce-4acb-a72a-f7cccc86f8a1">
-        <File Id="System.Net.WebClient.dll" Source="System.Net.WebClient.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.WebHeaderCollection.dll" Guid="15ac36d5-9b9a-46eb-96e9-72dabe2399d1">
-        <File Id="System.Net.WebHeaderCollection.dll" Source="System.Net.WebHeaderCollection.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.WebProxy.dll" Guid="e6de3983-ab3f-42d1-8e6e-aa9aa4b565b0">
-        <File Id="System.Net.WebProxy.dll" Source="System.Net.WebProxy.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.WebSockets.Client.dll" Guid="db568f2c-46aa-4194-af43-056b34eac488">
-        <File Id="System.Net.WebSockets.Client.dll" Source="System.Net.WebSockets.Client.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Net.WebSockets.dll" Guid="b0d5cf6d-48b2-4f72-bec1-418d1692de77">
-        <File Id="System.Net.WebSockets.dll" Source="System.Net.WebSockets.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Numerics.dll" Guid="77b61775-d9f9-49a1-b2d7-8db0dd609458">
-        <File Id="System.Numerics.dll" Source="System.Numerics.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Numerics.Vectors.dll" Guid="f569cd22-3e81-445b-a8d7-0823c9e903dd">
-        <File Id="System.Numerics.Vectors.dll" Source="System.Numerics.Vectors.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.ObjectModel.dll" Guid="6e16e9a8-24af-4840-bdd3-423294b5b097">
-        <File Id="System.ObjectModel.dll" Source="System.ObjectModel.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Printing.dll" Guid="efa9c824-469d-4701-8ba2-0766d572115c">
-        <File Id="System.Printing.dll" Source="System.Printing.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Private.CoreLib.dll" Guid="0be0544a-8dff-4657-906f-5ec105dd0e8c">
-        <File Id="System.Private.CoreLib.dll" Source="System.Private.CoreLib.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Private.DataContractSerialization.dll" Guid="48754e9c-599a-4564-adc3-93c5f1b829b6">
-        <File Id="System.Private.DataContractSerialization.dll" Source="System.Private.DataContractSerialization.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Private.Uri.dll" Guid="cd133688-4554-4722-90f4-52e15edff2f5">
-        <File Id="System.Private.Uri.dll" Source="System.Private.Uri.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Private.Xml.dll" Guid="ab99b9d1-37c6-4684-b93e-dba2a69016f9">
-        <File Id="System.Private.Xml.dll" Source="System.Private.Xml.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Private.Xml.Linq.dll" Guid="5d632f39-3519-40a8-af87-a393f06c5b64">
-        <File Id="System.Private.Xml.Linq.dll" Source="System.Private.Xml.Linq.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Reflection.DispatchProxy.dll" Guid="1f0be496-b4c4-4ee9-8cca-df870dd17315">
-        <File Id="System.Reflection.DispatchProxy.dll" Source="System.Reflection.DispatchProxy.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Reflection.dll" Guid="1eb66407-1f09-4ade-a5ed-7f6ddbd6fe16">
-        <File Id="System.Reflection.dll" Source="System.Reflection.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Reflection.Emit.dll" Guid="b8c70952-5ba0-4874-9901-58a40b482c2d">
-        <File Id="System.Reflection.Emit.dll" Source="System.Reflection.Emit.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Reflection.Emit.ILGeneration.dll" Guid="d8c49591-25a6-47b7-a98c-3d4b0c0b72e9">
-        <File Id="System.Reflection.Emit.ILGeneration.dll" Source="System.Reflection.Emit.ILGeneration.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Reflection.Emit.Lightweight.dll" Guid="54e8afc1-637b-4b45-bc38-7daffb081bb1">
-        <File Id="System.Reflection.Emit.Lightweight.dll" Source="System.Reflection.Emit.Lightweight.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Reflection.Extensions.dll" Guid="44dc9b54-0531-4111-9f3c-f88844457958">
-        <File Id="System.Reflection.Extensions.dll" Source="System.Reflection.Extensions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Reflection.Metadata.dll" Guid="3b1e8f81-3ac8-42ab-95a3-26fb5f2b42f3">
-        <File Id="System.Reflection.Metadata.dll" Source="System.Reflection.Metadata.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Reflection.Primitives.dll" Guid="96ec2def-cbf9-499c-a9a4-32371ac5599a">
-        <File Id="System.Reflection.Primitives.dll" Source="System.Reflection.Primitives.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Reflection.TypeExtensions.dll" Guid="86c94a48-3f9a-40ea-ac57-79591cfbdcbf">
-        <File Id="System.Reflection.TypeExtensions.dll" Source="System.Reflection.TypeExtensions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Resources.Extensions.dll" Guid="780441d2-f203-4672-a2b2-8efd35a26d06">
-        <File Id="System.Resources.Extensions.dll" Source="System.Resources.Extensions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Resources.Reader.dll" Guid="b76c0e25-d58f-4b7a-b064-43588f43a5b2">
-        <File Id="System.Resources.Reader.dll" Source="System.Resources.Reader.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Resources.ResourceManager.dll" Guid="b8ef540b-d60b-4325-9c22-3a0438123f98">
-        <File Id="System.Resources.ResourceManager.dll" Source="System.Resources.ResourceManager.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Resources.Writer.dll" Guid="135d40cb-37f3-4d9f-9b61-b9051a30a5c7">
-        <File Id="System.Resources.Writer.dll" Source="System.Resources.Writer.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Runtime.CompilerServices.Unsafe.dll" Guid="20728a11-0d8c-43d2-bf3d-f6396c21f92e">
-        <File Id="System.Runtime.CompilerServices.Unsafe.dll" Source="System.Runtime.CompilerServices.Unsafe.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Runtime.CompilerServices.VisualC.dll" Guid="66366819-9591-4203-98fe-5587c8179e12">
-        <File Id="System.Runtime.CompilerServices.VisualC.dll" Source="System.Runtime.CompilerServices.VisualC.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Runtime.dll" Guid="f68b8d06-6c8b-4716-9d85-904daaa5c4ae">
-        <File Id="System.Runtime.dll" Source="System.Runtime.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Runtime.Extensions.dll" Guid="3a568c86-4cf1-4fdb-9558-77c0bf371ec9">
-        <File Id="System.Runtime.Extensions.dll" Source="System.Runtime.Extensions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Runtime.Handles.dll" Guid="7a46d4f9-264d-45fc-a77e-3ae72f54181b">
-        <File Id="System.Runtime.Handles.dll" Source="System.Runtime.Handles.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Runtime.InteropServices.dll" Guid="e129f4ab-a93a-4b7d-8a08-7769518f74b8">
-        <File Id="System.Runtime.InteropServices.dll" Source="System.Runtime.InteropServices.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Runtime.InteropServices.RuntimeInformation.dll" Guid="2d4bc2c7-7368-42bc-a958-ca126c0c9a24">
-        <File Id="System.Runtime.InteropServices.RuntimeInformation.dll" Source="System.Runtime.InteropServices.RuntimeInformation.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Runtime.Intrinsics.dll" Guid="77f25fe9-dd86-4210-beb8-294dab89983d">
-        <File Id="System.Runtime.Intrinsics.dll" Source="System.Runtime.Intrinsics.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Runtime.Loader.dll" Guid="5dd8f1f7-3ebc-4c47-b799-2766207ecd5d">
-        <File Id="System.Runtime.Loader.dll" Source="System.Runtime.Loader.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Runtime.Numerics.dll" Guid="8b2a8da3-3365-43d5-85bb-a17b1587a7e8">
-        <File Id="System.Runtime.Numerics.dll" Source="System.Runtime.Numerics.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Runtime.Serialization.dll" Guid="6eadd36f-e67a-4fd8-ac01-5507ff074d03">
-        <File Id="System.Runtime.Serialization.dll" Source="System.Runtime.Serialization.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Runtime.Serialization.Formatters.dll" Guid="32a504fb-b91a-42a0-b200-db052abdac58">
-        <File Id="System.Runtime.Serialization.Formatters.dll" Source="System.Runtime.Serialization.Formatters.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Runtime.Serialization.Json.dll" Guid="9853da68-3a87-4c03-8aca-1647d0e6b681">
-        <File Id="System.Runtime.Serialization.Json.dll" Source="System.Runtime.Serialization.Json.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Runtime.Serialization.Primitives.dll" Guid="a87cafef-68d7-4e22-ad0d-37b6aa575c56">
-        <File Id="System.Runtime.Serialization.Primitives.dll" Source="System.Runtime.Serialization.Primitives.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Runtime.Serialization.Xml.dll" Guid="5ebf2ed7-a2a2-458c-9cbe-ca4670061692">
-        <File Id="System.Runtime.Serialization.Xml.dll" Source="System.Runtime.Serialization.Xml.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.AccessControl.dll" Guid="f3b649bd-970e-4d6f-9e8b-4aedbd879934">
-        <File Id="System.Security.AccessControl.dll" Source="System.Security.AccessControl.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.Claims.dll" Guid="e3a9c154-3977-4ec2-8ece-e84be8054ec9">
-        <File Id="System.Security.Claims.dll" Source="System.Security.Claims.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.Cryptography.Algorithms.dll" Guid="89ee66fc-4d34-48d4-87b9-194ea198c4d1">
-        <File Id="System.Security.Cryptography.Algorithms.dll" Source="System.Security.Cryptography.Algorithms.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.Cryptography.Cng.dll" Guid="288c3694-39fe-4366-8446-561706793ea1">
-        <File Id="System.Security.Cryptography.Cng.dll" Source="System.Security.Cryptography.Cng.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.Cryptography.Csp.dll" Guid="61bc164c-cbd9-47d1-a4a7-475e70566c5b">
-        <File Id="System.Security.Cryptography.Csp.dll" Source="System.Security.Cryptography.Csp.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.Cryptography.Encoding.dll" Guid="a7521c6b-400f-499a-a41a-f9726b38718c">
-        <File Id="System.Security.Cryptography.Encoding.dll" Source="System.Security.Cryptography.Encoding.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.Cryptography.OpenSsl.dll" Guid="6dd5cf2d-61a8-4f07-9ed7-7019a27e8779">
-        <File Id="System.Security.Cryptography.OpenSsl.dll" Source="System.Security.Cryptography.OpenSsl.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.Cryptography.Pkcs.dll" Guid="c6e98905-b29e-4068-9d0a-224e2fc7c96f">
-        <File Id="System.Security.Cryptography.Pkcs.dll" Source="System.Security.Cryptography.Pkcs.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.Cryptography.Primitives.dll" Guid="beb02784-2afc-4883-af3d-8715d9bda827">
-        <File Id="System.Security.Cryptography.Primitives.dll" Source="System.Security.Cryptography.Primitives.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.Cryptography.ProtectedData.dll" Guid="ad3089c0-36a6-475a-a791-c02370571630">
-        <File Id="System.Security.Cryptography.ProtectedData.dll" Source="System.Security.Cryptography.ProtectedData.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.Cryptography.X509Certificates.dll" Guid="f26bccb7-d00e-4109-8cb7-611aa0cb3eed">
-        <File Id="System.Security.Cryptography.X509Certificates.dll" Source="System.Security.Cryptography.X509Certificates.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.Cryptography.Xml.dll" Guid="411150b7-6334-4a0d-876f-3d6089e64ec3">
-        <File Id="System.Security.Cryptography.Xml.dll" Source="System.Security.Cryptography.Xml.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.dll" Guid="2c379c89-4bc3-47df-bf05-ff3a7f2e7dee">
-        <File Id="System.Security.dll" Source="System.Security.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.Permissions.dll" Guid="336400c8-7b43-4ee8-bc34-586fca7012f5">
-        <File Id="System.Security.Permissions.dll" Source="System.Security.Permissions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.Principal.dll" Guid="a23721a5-d0c1-4d18-bad3-7372a01d5cc0">
-        <File Id="System.Security.Principal.dll" Source="System.Security.Principal.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.Principal.Windows.dll" Guid="57fde0c9-89eb-4070-8a5d-741bff19e0c7">
-        <File Id="System.Security.Principal.Windows.dll" Source="System.Security.Principal.Windows.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Security.SecureString.dll" Guid="6cb51d8c-0ee4-49c0-ab8e-88c9b89620e4">
-        <File Id="System.Security.SecureString.dll" Source="System.Security.SecureString.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.ServiceModel.Web.dll" Guid="b603b24f-0323-4bf3-a6fe-288e8353468d">
-        <File Id="System.ServiceModel.Web.dll" Source="System.ServiceModel.Web.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.ServiceProcess.dll" Guid="48a1431d-10f3-45d8-8714-ff906bc00f73">
-        <File Id="System.ServiceProcess.dll" Source="System.ServiceProcess.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Text.Encoding.CodePages.dll" Guid="b37afebe-b48d-4318-8ed6-5f52b865d8f2">
-        <File Id="System.Text.Encoding.CodePages.dll" Source="System.Text.Encoding.CodePages.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Text.Encoding.dll" Guid="2cd0eeb5-716f-41c9-a5c6-2fd5299b8b90">
-        <File Id="System.Text.Encoding.dll" Source="System.Text.Encoding.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Text.Encoding.Extensions.dll" Guid="2a5df015-b431-4226-8b55-85c5051600c9">
-        <File Id="System.Text.Encoding.Extensions.dll" Source="System.Text.Encoding.Extensions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Text.Encodings.Web.dll" Guid="6d1a01c3-b088-47c4-8954-e2c52d24fc5e">
-        <File Id="System.Text.Encodings.Web.dll" Source="System.Text.Encodings.Web.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Text.Json.dll" Guid="4d3b4990-5dd2-4dc4-8687-6d5fc05ab276">
-        <File Id="System.Text.Json.dll" Source="System.Text.Json.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Text.RegularExpressions.dll" Guid="9b5c98d3-dc37-44fd-a11e-1eaeda699db0">
-        <File Id="System.Text.RegularExpressions.dll" Source="System.Text.RegularExpressions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Threading.AccessControl.dll" Guid="bcbdac55-5712-4d5d-8d8c-b420254fbc34">
-        <File Id="System.Threading.AccessControl.dll" Source="System.Threading.AccessControl.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Threading.Channels.dll" Guid="2c115372-8a23-4d79-a3c5-444655de9344">
-        <File Id="System.Threading.Channels.dll" Source="System.Threading.Channels.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Threading.dll" Guid="076b5ebd-c73f-4e03-ae94-791814732327">
-        <File Id="System.Threading.dll" Source="System.Threading.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Threading.Overlapped.dll" Guid="be3ee901-1e52-4d5b-8d4b-75973b733ed2">
-        <File Id="System.Threading.Overlapped.dll" Source="System.Threading.Overlapped.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Threading.Tasks.Dataflow.dll" Guid="d9bf65ab-e7c5-49fe-9bae-96a78255c4ef">
-        <File Id="System.Threading.Tasks.Dataflow.dll" Source="System.Threading.Tasks.Dataflow.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Threading.Tasks.dll" Guid="878c734c-3e09-41f6-8118-c07d52043ced">
-        <File Id="System.Threading.Tasks.dll" Source="System.Threading.Tasks.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Threading.Tasks.Extensions.dll" Guid="c64c74ec-c1eb-43da-b7cb-2be6855af2ad">
-        <File Id="System.Threading.Tasks.Extensions.dll" Source="System.Threading.Tasks.Extensions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Threading.Tasks.Parallel.dll" Guid="4c5de31d-9d12-48af-b3e2-5e0548a3e474">
-        <File Id="System.Threading.Tasks.Parallel.dll" Source="System.Threading.Tasks.Parallel.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Threading.Thread.dll" Guid="db7e5509-e606-4f39-a9ed-13a709fe61be">
-        <File Id="System.Threading.Thread.dll" Source="System.Threading.Thread.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Threading.ThreadPool.dll" Guid="0e804ef0-31cc-4c9d-acac-6f142cb92d02">
-        <File Id="System.Threading.ThreadPool.dll" Source="System.Threading.ThreadPool.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Threading.Timer.dll" Guid="c447c420-c6ed-4a0b-b6d5-4b68a44af791">
-        <File Id="System.Threading.Timer.dll" Source="System.Threading.Timer.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Transactions.dll" Guid="3ada3769-0f86-4c71-8649-5cb994a90ad2">
-        <File Id="System.Transactions.dll" Source="System.Transactions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Transactions.Local.dll" Guid="8f49714f-ddd4-445e-96da-8018805017f7">
-        <File Id="System.Transactions.Local.dll" Source="System.Transactions.Local.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.ValueTuple.dll" Guid="d3919817-ad80-40cf-84aa-62866a7fa9aa">
-        <File Id="System.ValueTuple.dll" Source="System.ValueTuple.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Web.dll" Guid="5205c969-f230-4d2a-b992-1e4e401b9362">
-        <File Id="System.Web.dll" Source="System.Web.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Web.HttpUtility.dll" Guid="73bf9f7c-8ea3-4da1-8322-cb85a2883d26">
-        <File Id="System.Web.HttpUtility.dll" Source="System.Web.HttpUtility.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Windows.Controls.Ribbon.dll" Guid="38169652-6a79-4597-8346-66e055bfe439">
-        <File Id="System.Windows.Controls.Ribbon.dll" Source="System.Windows.Controls.Ribbon.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Windows.dll" Guid="504e0c0e-64c0-4139-a21e-36e2b805191b">
-        <File Id="System.Windows.dll" Source="System.Windows.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Windows.Extensions.dll" Guid="3b6351c3-bdb0-4f53-8544-8608184ffecd">
-        <File Id="System.Windows.Extensions.dll" Source="System.Windows.Extensions.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Windows.Forms.Design.dll" Guid="f6b3b945-538b-4ff9-bcca-c97a288076fc">
-        <File Id="System.Windows.Forms.Design.dll" Source="System.Windows.Forms.Design.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Windows.Forms.Design.Editors.dll" Guid="9eca7119-53ed-4c5e-8749-d13d41d8c5d9">
-        <File Id="System.Windows.Forms.Design.Editors.dll" Source="System.Windows.Forms.Design.Editors.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Windows.Forms.dll" Guid="2de45ae3-8d5b-430e-acc8-df87d8e503a7">
-        <File Id="System.Windows.Forms.dll" Source="System.Windows.Forms.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Windows.Forms.Primitives.dll" Guid="68974ea4-fcea-4616-b5ba-cefd069644bb">
-        <File Id="System.Windows.Forms.Primitives.dll" Source="System.Windows.Forms.Primitives.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Windows.Input.Manipulations.dll" Guid="65a75638-db14-47bd-9e85-ddfba9e5b68e">
-        <File Id="System.Windows.Input.Manipulations.dll" Source="System.Windows.Input.Manipulations.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Windows.Presentation.dll" Guid="a2152c32-a667-4782-890e-c3232bb2e80b">
-        <File Id="System.Windows.Presentation.dll" Source="System.Windows.Presentation.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Xaml.dll" Guid="a400e005-6f51-4bc5-98e7-1ab2c331255b">
-        <File Id="System.Xaml.dll" Source="System.Xaml.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Xml.dll" Guid="947e8eec-81c3-4a7c-9751-a9cab824bde0">
-        <File Id="System.Xml.dll" Source="System.Xml.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Xml.Linq.dll" Guid="bec11c6e-6e74-4ac4-9d7d-6b5482511e01">
-        <File Id="System.Xml.Linq.dll" Source="System.Xml.Linq.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Xml.ReaderWriter.dll" Guid="0989a2a8-a1f0-457c-97a5-1c061487c5dc">
-        <File Id="System.Xml.ReaderWriter.dll" Source="System.Xml.ReaderWriter.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Xml.Serialization.dll" Guid="73ae4d2d-6b2b-4c7f-a12a-629e390f6c03">
-        <File Id="System.Xml.Serialization.dll" Source="System.Xml.Serialization.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Xml.XDocument.dll" Guid="792e66c3-eb43-475f-b931-7c413bde7684">
-        <File Id="System.Xml.XDocument.dll" Source="System.Xml.XDocument.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Xml.XmlDocument.dll" Guid="64015d97-14ff-4f6d-9d30-ab203d9967ff">
-        <File Id="System.Xml.XmlDocument.dll" Source="System.Xml.XmlDocument.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Xml.XmlSerializer.dll" Guid="a4e04379-de34-4085-9c6b-c5b105c69ab1">
-        <File Id="System.Xml.XmlSerializer.dll" Source="System.Xml.XmlSerializer.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Xml.XPath.dll" Guid="0cb4c01b-9396-4d79-b2e0-5e4ba6b915b6">
-        <File Id="System.Xml.XPath.dll" Source="System.Xml.XPath.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="System.Xml.XPath.XDocument.dll" Guid="2a1101a3-1229-4d9a-a24f-71c4f3ee78b7">
-        <File Id="System.Xml.XPath.XDocument.dll" Source="System.Xml.XPath.XDocument.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Ubiety.Dns.Core.dll" Guid="ef4bf6c5-656f-4392-81b0-3539fed5674b">
-        <File Id="Ubiety.Dns.Core.dll" Source="Ubiety.Dns.Core.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="ucrtbase.dll" Guid="cc8b09ad-1c0b-4f3d-9c06-e08b5a4baee3">
-        <File Id="ucrtbase.dll" Source="ucrtbase.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="UIAutomationClient.dll" Guid="e6f8e4d3-adcf-401e-9da1-0fe1ffb58b55">
-        <File Id="UIAutomationClient.dll" Source="UIAutomationClient.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="UIAutomationClientSideProviders.dll" Guid="2998f9b1-e3dd-4359-a1d8-c9dbb652d2e7">
-        <File Id="UIAutomationClientSideProviders.dll" Source="UIAutomationClientSideProviders.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="UIAutomationProvider.dll" Guid="a60dc79c-73e9-46bf-b397-d5b1c66c60e4">
-        <File Id="UIAutomationProvider.dll" Source="UIAutomationProvider.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="UIAutomationTypes.dll" Guid="261549b5-60bb-4065-ac78-f339d385b764">
-        <File Id="UIAutomationTypes.dll" Source="UIAutomationTypes.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="vcruntime140_cor3.dll" Guid="6628af0c-ff80-42b1-8c26-91eb81690d9a">
-        <File Id="vcruntime140_cor3.dll" Source="vcruntime140_cor3.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="WindowsBase.dll" Guid="db2317c6-0a9e-404a-96fd-85376f26f113">
-        <File Id="WindowsBase.dll" Source="WindowsBase.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="WindowsFormsIntegration.dll" Guid="c75d4c00-61ce-4911-bfc7-13abd400679d">
-        <File Id="WindowsFormsIntegration.dll" Source="WindowsFormsIntegration.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="wpfgfx_cor3.dll" Guid="e842cfb8-da76-4b20-a2d3-aff89e4fb3c1">
-        <File Id="wpfgfx_cor3.dll" Source="wpfgfx_cor3.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
-      <Component Id="Zstandard.Net.dll" Guid="ee4e722c-12b0-43fe-a420-4ec7eb3035ea">
-        <File Id="Zstandard.Net.dll" Source="Zstandard.Net.dll" KeyPath="yes" Checksum="yes"/>
-      </Component>
+			<Component Id="Accessibility.dll" Guid="5b4e8066-11bc-4a24-a12c-fb1daec69318">
+				<File Id="Accessibility.dll" Source="Accessibility.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_console_l1_1_0.dll" Guid="df6b5667-4c87-41cf-a924-bd94e2b90db6">
+				<File Id="api_ms_win_core_console_l1_1_0.dll" Source="api-ms-win-core-console-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_console_l1_2_0.dll" Guid="3dde2519-187a-487e-be56-d62286299183">
+				<File Id="api_ms_win_core_console_l1_2_0.dll" Source="api-ms-win-core-console-l1-2-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_datetime_l1_1_0.dll" Guid="f3d454ea-72b7-414a-a64f-ee6951effed6">
+				<File Id="api_ms_win_core_datetime_l1_1_0.dll" Source="api-ms-win-core-datetime-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_debug_l1_1_0.dll" Guid="c7e14bad-9beb-4e6c-99a9-6055e66e3137">
+				<File Id="api_ms_win_core_debug_l1_1_0.dll" Source="api-ms-win-core-debug-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_errorhandling_l1_1_0.dll" Guid="f9f99863-32eb-4eba-aaf1-3b5cd795b368">
+				<File Id="api_ms_win_core_errorhandling_l1_1_0.dll" Source="api-ms-win-core-errorhandling-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_file_l1_1_0.dll" Guid="a56b6cd6-0c3b-41db-b809-bae59d7add11">
+				<File Id="api_ms_win_core_file_l1_1_0.dll" Source="api-ms-win-core-file-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_file_l1_2_0.dll" Guid="81f5d5f7-dba3-49aa-a151-5fb3f7909357">
+				<File Id="api_ms_win_core_file_l1_2_0.dll" Source="api-ms-win-core-file-l1-2-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_file_l2_1_0.dll" Guid="a3aec618-d6cd-4af1-b21c-4dbccbd0dc54">
+				<File Id="api_ms_win_core_file_l2_1_0.dll" Source="api-ms-win-core-file-l2-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_handle_l1_1_0.dll" Guid="68ba460b-7237-4c37-a420-642fc5f49233">
+				<File Id="api_ms_win_core_handle_l1_1_0.dll" Source="api-ms-win-core-handle-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_heap_l1_1_0.dll" Guid="c7d9a5a5-665b-421f-a315-98da8d052aa9">
+				<File Id="api_ms_win_core_heap_l1_1_0.dll" Source="api-ms-win-core-heap-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_interlocked_l1_1_0.dll" Guid="f0b43685-a02c-42e1-9aad-0014a9b78529">
+				<File Id="api_ms_win_core_interlocked_l1_1_0.dll" Source="api-ms-win-core-interlocked-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_libraryloader_l1_1_0.dll" Guid="e4204a36-eb6a-419f-a4b9-43eca2299708">
+				<File Id="api_ms_win_core_libraryloader_l1_1_0.dll" Source="api-ms-win-core-libraryloader-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_localization_l1_2_0.dll" Guid="8caf6c85-71ed-489f-b9a0-ee29c68ce2b1">
+				<File Id="api_ms_win_core_localization_l1_2_0.dll" Source="api-ms-win-core-localization-l1-2-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_memory_l1_1_0.dll" Guid="36b89c13-869b-4702-a976-96127fb25ae7">
+				<File Id="api_ms_win_core_memory_l1_1_0.dll" Source="api-ms-win-core-memory-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_namedpipe_l1_1_0.dll" Guid="cc0a42c7-fd54-4fdd-8c3d-fc8f24cf6786">
+				<File Id="api_ms_win_core_namedpipe_l1_1_0.dll" Source="api-ms-win-core-namedpipe-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_processenvironment_l1_1_0.dll" Guid="5cf6f534-8b34-4973-bd32-97b6b5a4f9be">
+				<File Id="api_ms_win_core_processenvironment_l1_1_0.dll" Source="api-ms-win-core-processenvironment-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_processthreads_l1_1_0.dll" Guid="c9c27d47-c0db-4a0e-8c7c-fb3dcceccf2c">
+				<File Id="api_ms_win_core_processthreads_l1_1_0.dll" Source="api-ms-win-core-processthreads-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_processthreads_l1_1_1.dll" Guid="e071f040-ff5a-4535-9913-c646118e88ba">
+				<File Id="api_ms_win_core_processthreads_l1_1_1.dll" Source="api-ms-win-core-processthreads-l1-1-1.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_profile_l1_1_0.dll" Guid="38b26c1f-8b2f-4c27-a77a-1f2183d2f597">
+				<File Id="api_ms_win_core_profile_l1_1_0.dll" Source="api-ms-win-core-profile-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_rtlsupport_l1_1_0.dll" Guid="de4641c7-2396-4e2d-abdd-10bb06e15f59">
+				<File Id="api_ms_win_core_rtlsupport_l1_1_0.dll" Source="api-ms-win-core-rtlsupport-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_string_l1_1_0.dll" Guid="b435c8b8-68fa-40c1-9362-09c80cbee200">
+				<File Id="api_ms_win_core_string_l1_1_0.dll" Source="api-ms-win-core-string-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_synch_l1_1_0.dll" Guid="91906248-115a-4d83-937c-7237835007ad">
+				<File Id="api_ms_win_core_synch_l1_1_0.dll" Source="api-ms-win-core-synch-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_synch_l1_2_0.dll" Guid="ae082e35-85de-4254-a4d7-f5ac573fb485">
+				<File Id="api_ms_win_core_synch_l1_2_0.dll" Source="api-ms-win-core-synch-l1-2-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_sysinfo_l1_1_0.dll" Guid="7b30ad73-599a-4a9e-b828-e4f0d0b20aed">
+				<File Id="api_ms_win_core_sysinfo_l1_1_0.dll" Source="api-ms-win-core-sysinfo-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_timezone_l1_1_0.dll" Guid="20166367-62f3-4902-b469-fe6030112a2c">
+				<File Id="api_ms_win_core_timezone_l1_1_0.dll" Source="api-ms-win-core-timezone-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_core_util_l1_1_0.dll" Guid="38b895dd-3e75-458e-a71a-b60629bf8385">
+				<File Id="api_ms_win_core_util_l1_1_0.dll" Source="api-ms-win-core-util-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_crt_conio_l1_1_0.dll" Guid="523e9fc2-d7ce-41c6-a128-e8b83870143c">
+				<File Id="api_ms_win_crt_conio_l1_1_0.dll" Source="api-ms-win-crt-conio-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_crt_convert_l1_1_0.dll" Guid="0f353b72-44c5-4966-8c9b-a558fa5ea152">
+				<File Id="api_ms_win_crt_convert_l1_1_0.dll" Source="api-ms-win-crt-convert-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_crt_environment_l1_1_0.dll" Guid="4d5af895-fcc3-44a1-b8ce-25eb39a4211d">
+				<File Id="api_ms_win_crt_environment_l1_1_0.dll" Source="api-ms-win-crt-environment-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_crt_filesystem_l1_1_0.dll" Guid="c1c67746-561c-430b-8fc2-de944c74fd22">
+				<File Id="api_ms_win_crt_filesystem_l1_1_0.dll" Source="api-ms-win-crt-filesystem-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_crt_heap_l1_1_0.dll" Guid="fa9505b5-7702-4696-991f-0ace1afd76c7">
+				<File Id="api_ms_win_crt_heap_l1_1_0.dll" Source="api-ms-win-crt-heap-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_crt_locale_l1_1_0.dll" Guid="6a7c3934-aca1-4750-ac46-9332c57b43cf">
+				<File Id="api_ms_win_crt_locale_l1_1_0.dll" Source="api-ms-win-crt-locale-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_crt_math_l1_1_0.dll" Guid="000c7e17-a841-4a61-a6bf-fa74ad5f15fd">
+				<File Id="api_ms_win_crt_math_l1_1_0.dll" Source="api-ms-win-crt-math-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_crt_multibyte_l1_1_0.dll" Guid="9d36b0b0-6909-43ed-9592-27f4f47341d7">
+				<File Id="api_ms_win_crt_multibyte_l1_1_0.dll" Source="api-ms-win-crt-multibyte-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_crt_private_l1_1_0.dll" Guid="385683aa-e005-4f66-aa71-e51bcf6fa17c">
+				<File Id="api_ms_win_crt_private_l1_1_0.dll" Source="api-ms-win-crt-private-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_crt_process_l1_1_0.dll" Guid="b909a472-31a3-472e-9c00-d17eb2071bfa">
+				<File Id="api_ms_win_crt_process_l1_1_0.dll" Source="api-ms-win-crt-process-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_crt_runtime_l1_1_0.dll" Guid="f160d4a2-b4d1-4573-af51-1108808c33bf">
+				<File Id="api_ms_win_crt_runtime_l1_1_0.dll" Source="api-ms-win-crt-runtime-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_crt_stdio_l1_1_0.dll" Guid="d7add748-7de3-4c81-ae87-cc79a037cf04">
+				<File Id="api_ms_win_crt_stdio_l1_1_0.dll" Source="api-ms-win-crt-stdio-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_crt_string_l1_1_0.dll" Guid="b909be93-f277-4559-93fb-ca629d2789bf">
+				<File Id="api_ms_win_crt_string_l1_1_0.dll" Source="api-ms-win-crt-string-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_crt_time_l1_1_0.dll" Guid="faf3160d-f915-4b6a-8045-c26d88a42b1b">
+				<File Id="api_ms_win_crt_time_l1_1_0.dll" Source="api-ms-win-crt-time-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="api_ms_win_crt_utility_l1_1_0.dll" Guid="2c0154e0-8fcd-41b3-a240-7a641fda6a90">
+				<File Id="api_ms_win_crt_utility_l1_1_0.dll" Source="api-ms-win-crt-utility-l1-1-0.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="BouncyCastle.Crypto.dll" Guid="b3fb9a6a-356a-441a-911a-2d41e4738dd2">
+				<File Id="BouncyCastle.Crypto.dll" Source="BouncyCastle.Crypto.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="clrcompression.dll" Guid="99815aa9-6687-4e3b-9d7a-016bd6fee0f6">
+				<File Id="clrcompression.dll" Source="clrcompression.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="clretwrc.dll" Guid="c5322fe9-7d9a-461f-bb6a-b26e2983fcb7">
+				<File Id="clretwrc.dll" Source="clretwrc.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="clrjit.dll" Guid="f4e992b4-4842-485e-9367-644ca12bdc52">
+				<File Id="clrjit.dll" Source="clrjit.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="coreclr.dll" Guid="49bb367b-fd29-474c-9d66-e594aaa6be64">
+				<File Id="coreclr.dll" Source="coreclr.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="CutList.db" Guid="74151829-877b-47de-9928-c07fb1ece39c">
+				<File Id="CutList.db" Source="CutList.db" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="D3DCompiler_47_cor3.dll" Guid="a0eb22be-1c8f-4065-98b2-0297fc0c1cf9">
+				<File Id="D3DCompiler_47_cor3.dll" Source="D3DCompiler_47_cor3.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="dbgshim.dll" Guid="487465d7-aa3a-4dff-871e-84a694f86851">
+				<File Id="dbgshim.dll" Source="dbgshim.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="DirectWriteForwarder.dll" Guid="a7e0d2bf-11f6-4575-82e1-35c40dda34a6">
+				<File Id="DirectWriteForwarder.dll" Source="DirectWriteForwarder.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="e_sqlite3.dll" Guid="c06c27d5-27d0-4480-a3e5-d87480d16076">
+				<File Id="e_sqlite3.dll" Source="e_sqlite3.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Google.Protobuf.dll" Guid="2bb5a00b-8d95-40ef-afb6-aaccbbc7ec0c">
+				<File Id="Google.Protobuf.dll" Source="Google.Protobuf.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="hostfxr.dll" Guid="da180707-c961-4988-8c51-999c346a10fb">
+				<File Id="hostfxr.dll" Source="hostfxr.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="hostpolicy.dll" Guid="56fb249b-98a8-4365-8754-6a5fe7956285">
+				<File Id="hostpolicy.dll" Source="hostpolicy.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="K4os.Compression.LZ4.dll" Guid="f26c3d96-5bf9-401f-b6c5-558753b5019d">
+				<File Id="K4os.Compression.LZ4.dll" Source="K4os.Compression.LZ4.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="K4os.Compression.LZ4.Streams.dll" Guid="98623300-2be7-4b0f-8c99-6342f528245d">
+				<File Id="K4os.Compression.LZ4.Streams.dll" Source="K4os.Compression.LZ4.Streams.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="K4os.Hash.xxHash.dll" Guid="d11db3de-72e7-4102-84e4-b93119969d0d">
+				<File Id="K4os.Hash.xxHash.dll" Source="K4os.Hash.xxHash.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.CSharp.dll" Guid="89814003-fde4-45e2-ae66-dbca14247d01">
+				<File Id="Microsoft.CSharp.dll" Source="Microsoft.CSharp.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.Data.Sqlite.dll" Guid="bd0d7774-7292-4609-9451-cb5f8f0947cc">
+				<File Id="Microsoft.Data.Sqlite.dll" Source="Microsoft.Data.Sqlite.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.DiaSymReader.Native.amd64.dll" Guid="d4a4bd90-f433-40f1-9318-c151d83bdf74">
+				<File Id="Microsoft.DiaSymReader.Native.amd64.dll" Source="Microsoft.DiaSymReader.Native.amd64.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.DotNet.PlatformAbstractions.dll" Guid="fe6b0912-86b2-4b4b-a4fa-6bf493754a2a">
+				<File Id="Microsoft.DotNet.PlatformAbstractions.dll" Source="Microsoft.DotNet.PlatformAbstractions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.EntityFrameworkCore.Abstractions.dll" Guid="2dc99e44-dabc-472c-b501-81c5c34802b5">
+				<File Id="Microsoft.EntityFrameworkCore.Abstractions.dll" Source="Microsoft.EntityFrameworkCore.Abstractions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.EntityFrameworkCore.dll" Guid="f190dcc0-33d8-48fd-b4d9-a1c4f21c3836">
+				<File Id="Microsoft.EntityFrameworkCore.dll" Source="Microsoft.EntityFrameworkCore.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.EntityFrameworkCore.Relational.dll" Guid="5bd7b06e-3a6e-4b42-a05e-44bc24b3852b">
+				<File Id="Microsoft.EntityFrameworkCore.Relational.dll" Source="Microsoft.EntityFrameworkCore.Relational.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.EntityFrameworkCore.Sqlite.dll" Guid="1e862b5b-d1fb-4cc8-98f6-bc8d374ee379">
+				<File Id="Microsoft.EntityFrameworkCore.Sqlite.dll" Source="Microsoft.EntityFrameworkCore.Sqlite.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.Extensions.Caching.Abstractions.dll" Guid="3a788114-9329-4346-a1f1-56186297da36">
+				<File Id="Microsoft.Extensions.Caching.Abstractions.dll" Source="Microsoft.Extensions.Caching.Abstractions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.Extensions.Caching.Memory.dll" Guid="7be49e65-c3a4-414c-a38f-1b737d045c5c">
+				<File Id="Microsoft.Extensions.Caching.Memory.dll" Source="Microsoft.Extensions.Caching.Memory.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.Extensions.Configuration.Abstractions.dll" Guid="6d1fb54f-b74c-4140-9324-c185b83c9b72">
+				<File Id="Microsoft.Extensions.Configuration.Abstractions.dll" Source="Microsoft.Extensions.Configuration.Abstractions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.Extensions.DependencyInjection.Abstractions.dll" Guid="39b4c262-24b3-4f48-bf18-bd7228e1c752">
+				<File Id="Microsoft.Extensions.DependencyInjection.Abstractions.dll" Source="Microsoft.Extensions.DependencyInjection.Abstractions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.Extensions.DependencyInjection.dll" Guid="6bf9d484-6385-48a5-be7e-4abb60fb8827">
+				<File Id="Microsoft.Extensions.DependencyInjection.dll" Source="Microsoft.Extensions.DependencyInjection.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.Extensions.DependencyModel.dll" Guid="eb89962f-8e11-44cc-809f-ee4344f948c3">
+				<File Id="Microsoft.Extensions.DependencyModel.dll" Source="Microsoft.Extensions.DependencyModel.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.Extensions.Logging.Abstractions.dll" Guid="2c6e3747-29c6-4827-94c7-c894154c0640">
+				<File Id="Microsoft.Extensions.Logging.Abstractions.dll" Source="Microsoft.Extensions.Logging.Abstractions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.Extensions.Logging.dll" Guid="2d5daff6-2bb3-4d8b-aeed-8b5cc3e7fba5">
+				<File Id="Microsoft.Extensions.Logging.dll" Source="Microsoft.Extensions.Logging.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.Extensions.Options.dll" Guid="43be2f51-fcb5-479c-868d-01383a064a81">
+				<File Id="Microsoft.Extensions.Options.dll" Source="Microsoft.Extensions.Options.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.Extensions.Primitives.dll" Guid="a5a37b54-2b5d-4f49-8a1f-b4f5ecc81f2c">
+				<File Id="Microsoft.Extensions.Primitives.dll" Source="Microsoft.Extensions.Primitives.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.VisualBasic.Core.dll" Guid="811d31ec-7f6b-40c0-8a95-8f3f8536b79e">
+				<File Id="Microsoft.VisualBasic.Core.dll" Source="Microsoft.VisualBasic.Core.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.VisualBasic.dll" Guid="57cf9cc5-58d6-4127-9b41-0ab33c135f38">
+				<File Id="Microsoft.VisualBasic.dll" Source="Microsoft.VisualBasic.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.VisualBasic.Forms.dll" Guid="64ed5b1b-cd5d-44a8-b714-bc9d7b09e2a0">
+				<File Id="Microsoft.VisualBasic.Forms.dll" Source="Microsoft.VisualBasic.Forms.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.Win32.Primitives.dll" Guid="d0948d3c-9a5e-437f-85ab-031f1569fdc2">
+				<File Id="Microsoft.Win32.Primitives.dll" Source="Microsoft.Win32.Primitives.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.Win32.Registry.AccessControl.dll" Guid="82f21929-cca2-4aa8-b21c-17a86ed01659">
+				<File Id="Microsoft.Win32.Registry.AccessControl.dll" Source="Microsoft.Win32.Registry.AccessControl.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.Win32.Registry.dll" Guid="9afc815c-ff8d-44c4-9f34-f63532cf61e2">
+				<File Id="Microsoft.Win32.Registry.dll" Source="Microsoft.Win32.Registry.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Microsoft.Win32.SystemEvents.dll" Guid="90a45cea-4706-4fc6-8e7c-cfef6a2555fe">
+				<File Id="Microsoft.Win32.SystemEvents.dll" Source="Microsoft.Win32.SystemEvents.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="mscordaccore.dll" Guid="60d7e85c-309d-4a43-a2ef-69aa2cc44498">
+				<File Id="mscordaccore.dll" Source="mscordaccore.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="mscordaccore_amd64_amd64_5.0.621.22011.dll" Guid="dd1c3337-d14d-411e-86d1-c8dc0c249fff">
+				<File Id="mscordaccore_amd64_amd64_5.0.621.22011.dll" Source="mscordaccore_amd64_amd64_5.0.621.22011.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="mscordbi.dll" Guid="a942c9ed-3be7-4f92-876e-0ac500dff412">
+				<File Id="mscordbi.dll" Source="mscordbi.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="mscorlib.dll" Guid="3861ae4e-d3c3-42e5-b716-5a26e954cb48">
+				<File Id="mscorlib.dll" Source="mscorlib.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="mscorrc.dll" Guid="89d05c25-516d-4e2e-b85b-029e4eeabfec">
+				<File Id="mscorrc.dll" Source="mscorrc.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="MySql.Data.dll" Guid="c9349b4b-7e04-4e7b-84e5-b4afd7a81121">
+				<File Id="MySql.Data.dll" Source="MySql.Data.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="MySql.EntityFrameworkCore.dll" Guid="fb834199-f9bd-40be-a6f7-8f13bdb3e7e8">
+				<File Id="MySql.EntityFrameworkCore.dll" Source="MySql.EntityFrameworkCore.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="netstandard.dll" Guid="54dd6d82-c1ae-4086-83d4-2adcb454f1b2">
+				<File Id="netstandard.dll" Source="netstandard.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Newtonsoft.Json.dll" Guid="ede992dc-4005-430c-8e2a-492b2d46f5ef">
+				<File Id="Newtonsoft.Json.dll" Source="Newtonsoft.Json.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PenImc_cor3.dll" Guid="8bce25d6-04ab-46da-84f1-f85d594ee6bf">
+				<File Id="PenImc_cor3.dll" Source="PenImc_cor3.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PresentationCore.dll" Guid="b9504cab-8a6a-4bb7-a091-2acd3096fa07">
+				<File Id="PresentationCore.dll" Source="PresentationCore.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PresentationFramework_SystemCore.dll" Guid="fba3057a-1691-4b2a-94d4-c41f122bc3e9">
+				<File Id="PresentationFramework_SystemCore.dll" Source="PresentationFramework-SystemCore.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PresentationFramework_SystemData.dll" Guid="393b06f8-ae94-4f31-a1db-e25385231c50">
+				<File Id="PresentationFramework_SystemData.dll" Source="PresentationFramework-SystemData.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PresentationFramework_SystemDrawing.dll" Guid="9a704cad-85e6-4b33-9763-b3a09a62d753">
+				<File Id="PresentationFramework_SystemDrawing.dll" Source="PresentationFramework-SystemDrawing.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PresentationFramework_SystemXml.dll" Guid="4d7fa66c-7fea-4b6d-997c-8a011d918e9a">
+				<File Id="PresentationFramework_SystemXml.dll" Source="PresentationFramework-SystemXml.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PresentationFramework_SystemXmlLinq.dll" Guid="6961de29-7699-4c11-85e1-e5005d5f6a57">
+				<File Id="PresentationFramework_SystemXmlLinq.dll" Source="PresentationFramework-SystemXmlLinq.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PresentationFramework.Aero.dll" Guid="1ae1afd0-3f91-416a-85c9-b22ee70170a5">
+				<File Id="PresentationFramework.Aero.dll" Source="PresentationFramework.Aero.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PresentationFramework.Aero2.dll" Guid="bb2d8f31-7a98-425d-84e1-fa93e2287073">
+				<File Id="PresentationFramework.Aero2.dll" Source="PresentationFramework.Aero2.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PresentationFramework.AeroLite.dll" Guid="edb5bc88-df78-41a8-9d0c-0a541fbed8de">
+				<File Id="PresentationFramework.AeroLite.dll" Source="PresentationFramework.AeroLite.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PresentationFramework.Classic.dll" Guid="66288983-716d-4048-8e9a-862be39e91ac">
+				<File Id="PresentationFramework.Classic.dll" Source="PresentationFramework.Classic.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PresentationFramework.dll" Guid="3900dcbf-e2b5-4660-b13d-43ee2b0184ee">
+				<File Id="PresentationFramework.dll" Source="PresentationFramework.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PresentationFramework.Luna.dll" Guid="ba4027ba-f865-490e-8eb9-aff8f84ac99f">
+				<File Id="PresentationFramework.Luna.dll" Source="PresentationFramework.Luna.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PresentationFramework.Royale.dll" Guid="fa0cd788-c5cb-4219-961f-22f702424ba2">
+				<File Id="PresentationFramework.Royale.dll" Source="PresentationFramework.Royale.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PresentationNative_cor3.dll" Guid="2da2ae7c-3708-4399-bfeb-95361b64808e">
+				<File Id="PresentationNative_cor3.dll" Source="PresentationNative_cor3.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="PresentationUI.dll" Guid="b7bd3382-adab-4ac7-a621-7c316a31616c">
+				<File Id="PresentationUI.dll" Source="PresentationUI.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="ReachFramework.dll" Guid="2a088901-c804-4fa0-869c-0eec57aeab7d">
+				<File Id="ReachFramework.dll" Source="ReachFramework.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="SolidPrice.dll" Guid="f4d82a4d-1d09-4bc6-9d35-2c5edb51e773">
+				<File Id="SolidPrice.dll" Source="SolidPrice.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="SolidPrice.exe" Guid="9665ccee-aca7-45b6-a19a-ccbb0286bcf9">
+				<File Id="SolidPrice.exe" Source="SolidPrice.exe" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="SolidWorks.Interop.sldworks.dll" Guid="dc822bb6-1663-4008-93a8-c517c91de024">
+				<File Id="SolidWorks.Interop.sldworks.dll" Source="SolidWorks.Interop.sldworks.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="SolidWorks.Interop.swconst.dll" Guid="17e00288-71ab-41ef-8059-6a2445bb561a">
+				<File Id="SolidWorks.Interop.swconst.dll" Source="SolidWorks.Interop.swconst.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="SQLitePCLRaw.batteries_v2.dll" Guid="ac441bde-7817-499e-a156-9de2c5424a33">
+				<File Id="SQLitePCLRaw.batteries_v2.dll" Source="SQLitePCLRaw.batteries_v2.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="SQLitePCLRaw.core.dll" Guid="c2400850-e971-46a2-8a39-45566ba2303b">
+				<File Id="SQLitePCLRaw.core.dll" Source="SQLitePCLRaw.core.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="SQLitePCLRaw.nativelibrary.dll" Guid="dab423fd-4872-4c19-b618-fe9ba005e49d">
+				<File Id="SQLitePCLRaw.nativelibrary.dll" Source="SQLitePCLRaw.nativelibrary.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="SQLitePCLRaw.provider.dynamic_cdecl.dll" Guid="ff8cda3d-32f3-4cb8-b802-c206adf1a6c9">
+				<File Id="SQLitePCLRaw.provider.dynamic_cdecl.dll" Source="SQLitePCLRaw.provider.dynamic_cdecl.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.AppContext.dll" Guid="868397cd-ce75-418c-9b85-35581786c38d">
+				<File Id="System.AppContext.dll" Source="System.AppContext.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Buffers.dll" Guid="833b0f65-585a-4b47-a022-4fb394dd1d2e">
+				<File Id="System.Buffers.dll" Source="System.Buffers.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.CodeDom.dll" Guid="c9483421-b192-48db-923d-3eab513b49d6">
+				<File Id="System.CodeDom.dll" Source="System.CodeDom.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Collections.Concurrent.dll" Guid="61a9c7a5-b6fe-4650-aad5-f8686fb11c2f">
+				<File Id="System.Collections.Concurrent.dll" Source="System.Collections.Concurrent.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Collections.dll" Guid="ee7724b6-6193-46b4-af06-6d3b9e1ba57b">
+				<File Id="System.Collections.dll" Source="System.Collections.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Collections.Immutable.dll" Guid="485729e0-549c-40f1-bb4a-ffc14893711c">
+				<File Id="System.Collections.Immutable.dll" Source="System.Collections.Immutable.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Collections.NonGeneric.dll" Guid="daa5c1d9-eb23-48c1-b377-154fe5780f45">
+				<File Id="System.Collections.NonGeneric.dll" Source="System.Collections.NonGeneric.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Collections.Specialized.dll" Guid="236ffb08-3b09-4c90-b303-c9adc1b30b59">
+				<File Id="System.Collections.Specialized.dll" Source="System.Collections.Specialized.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.ComponentModel.Annotations.dll" Guid="39dc0895-42c7-4b1d-b1db-2c888e142ac8">
+				<File Id="System.ComponentModel.Annotations.dll" Source="System.ComponentModel.Annotations.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.ComponentModel.DataAnnotations.dll" Guid="8a7c5967-ba2e-4594-849d-1afb9688cd0e">
+				<File Id="System.ComponentModel.DataAnnotations.dll" Source="System.ComponentModel.DataAnnotations.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.ComponentModel.dll" Guid="0286326d-d028-4464-b1d7-091ed6dbdcaf">
+				<File Id="System.ComponentModel.dll" Source="System.ComponentModel.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.ComponentModel.EventBasedAsync.dll" Guid="e0407955-e787-45a3-b424-cb6c9fbdabe2">
+				<File Id="System.ComponentModel.EventBasedAsync.dll" Source="System.ComponentModel.EventBasedAsync.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.ComponentModel.Primitives.dll" Guid="e374b80f-3d38-4320-a105-32cbe2b7eb38">
+				<File Id="System.ComponentModel.Primitives.dll" Source="System.ComponentModel.Primitives.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.ComponentModel.TypeConverter.dll" Guid="25e56432-8a77-484e-9ca1-e8957036bfed">
+				<File Id="System.ComponentModel.TypeConverter.dll" Source="System.ComponentModel.TypeConverter.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Configuration.ConfigurationManager.dll" Guid="73cd4c85-376c-44fa-a914-57adb5fa0e26">
+				<File Id="System.Configuration.ConfigurationManager.dll" Source="System.Configuration.ConfigurationManager.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Configuration.dll" Guid="aecd5264-182e-453c-accd-91c3f2361ce7">
+				<File Id="System.Configuration.dll" Source="System.Configuration.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Configuration.Install.dll" Guid="292cede0-0229-4a06-b781-5019129b99f9">
+				<File Id="System.Configuration.Install.dll" Source="System.Configuration.Install.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Console.dll" Guid="249d4973-289e-48d2-8fab-42f4674c3d6a">
+				<File Id="System.Console.dll" Source="System.Console.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Core.dll" Guid="e463328f-cbcf-4c79-be85-cfcf5264877c">
+				<File Id="System.Core.dll" Source="System.Core.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Data.Common.dll" Guid="88384611-a372-4717-b38d-cefbf7262452">
+				<File Id="System.Data.Common.dll" Source="System.Data.Common.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Data.DataSetExtensions.dll" Guid="24ef66aa-2bb9-475a-89d1-d8e078d2b6bd">
+				<File Id="System.Data.DataSetExtensions.dll" Source="System.Data.DataSetExtensions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Data.dll" Guid="e83b4143-d265-4656-bb27-50727120a0fd">
+				<File Id="System.Data.dll" Source="System.Data.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Design.dll" Guid="f283f1c3-52cc-4f43-a2f8-909ba5c71072">
+				<File Id="System.Design.dll" Source="System.Design.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Diagnostics.Contracts.dll" Guid="31836a8d-3cbc-433b-a4b7-600ccd59e029">
+				<File Id="System.Diagnostics.Contracts.dll" Source="System.Diagnostics.Contracts.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Diagnostics.Debug.dll" Guid="54fa5ab8-760b-4be9-86b4-dda56858b71e">
+				<File Id="System.Diagnostics.Debug.dll" Source="System.Diagnostics.Debug.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Diagnostics.DiagnosticSource.dll" Guid="f6e9784a-a875-48d0-b97e-5f48e4558087">
+				<File Id="System.Diagnostics.DiagnosticSource.dll" Source="System.Diagnostics.DiagnosticSource.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Diagnostics.EventLog.dll" Guid="36c339d3-8c41-43a5-bb48-dc64e83a9fbb">
+				<File Id="System.Diagnostics.EventLog.dll" Source="System.Diagnostics.EventLog.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Diagnostics.EventLog.Messages.dll" Guid="deaf001f-9964-46f9-8fe2-6058b791407f">
+				<File Id="System.Diagnostics.EventLog.Messages.dll" Source="System.Diagnostics.EventLog.Messages.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Diagnostics.FileVersionInfo.dll" Guid="89756dc6-4aed-471b-9c79-1df64b4619d2">
+				<File Id="System.Diagnostics.FileVersionInfo.dll" Source="System.Diagnostics.FileVersionInfo.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Diagnostics.PerformanceCounter.dll" Guid="02e3dcdd-4c43-4687-93c0-07a945c917b3">
+				<File Id="System.Diagnostics.PerformanceCounter.dll" Source="System.Diagnostics.PerformanceCounter.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Diagnostics.Process.dll" Guid="8c3148a8-863a-48ed-b332-ddc7839eddec">
+				<File Id="System.Diagnostics.Process.dll" Source="System.Diagnostics.Process.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Diagnostics.StackTrace.dll" Guid="7d6ddf66-f49b-44a9-b7e3-04e70dcc76d4">
+				<File Id="System.Diagnostics.StackTrace.dll" Source="System.Diagnostics.StackTrace.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Diagnostics.TextWriterTraceListener.dll" Guid="f57f57f7-1223-4e21-8d33-50f91ff329c5">
+				<File Id="System.Diagnostics.TextWriterTraceListener.dll" Source="System.Diagnostics.TextWriterTraceListener.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Diagnostics.Tools.dll" Guid="625d63ee-065d-47f5-83ce-807194d6fdc2">
+				<File Id="System.Diagnostics.Tools.dll" Source="System.Diagnostics.Tools.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Diagnostics.TraceSource.dll" Guid="0f7597cd-970b-4b18-bc39-9443fac859ac">
+				<File Id="System.Diagnostics.TraceSource.dll" Source="System.Diagnostics.TraceSource.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Diagnostics.Tracing.dll" Guid="64e006ed-2c9b-4a97-97eb-eb776cbc5ced">
+				<File Id="System.Diagnostics.Tracing.dll" Source="System.Diagnostics.Tracing.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.DirectoryServices.dll" Guid="8fe4ca7c-ff86-471f-a203-d6c91b80e0cc">
+				<File Id="System.DirectoryServices.dll" Source="System.DirectoryServices.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.dll" Guid="9b78f436-0d3b-4a7d-84bd-b49f40a3a7d0">
+				<File Id="System.dll" Source="System.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Drawing.Common.dll" Guid="8297385c-689c-470e-903c-a404ad1246bd">
+				<File Id="System.Drawing.Common.dll" Source="System.Drawing.Common.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Drawing.Design.dll" Guid="aacd8f19-531e-47e5-9f20-ee28d99c2921">
+				<File Id="System.Drawing.Design.dll" Source="System.Drawing.Design.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Drawing.dll" Guid="e7266f88-85c1-45a9-84c6-dc0c68ace219">
+				<File Id="System.Drawing.dll" Source="System.Drawing.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Drawing.Primitives.dll" Guid="3f1a91c9-69dc-42c7-9181-a46cb903e283">
+				<File Id="System.Drawing.Primitives.dll" Source="System.Drawing.Primitives.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Dynamic.Runtime.dll" Guid="7d96335e-5162-4b7f-8e20-bd334e333e2b">
+				<File Id="System.Dynamic.Runtime.dll" Source="System.Dynamic.Runtime.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Formats.Asn1.dll" Guid="74210c04-7a77-4aea-b56e-5ad86af9597b">
+				<File Id="System.Formats.Asn1.dll" Source="System.Formats.Asn1.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Globalization.Calendars.dll" Guid="c30b18d7-d918-41c5-8d32-6812c8f4b422">
+				<File Id="System.Globalization.Calendars.dll" Source="System.Globalization.Calendars.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Globalization.dll" Guid="e0766d74-fe44-4672-adc7-5017c9980fe1">
+				<File Id="System.Globalization.dll" Source="System.Globalization.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Globalization.Extensions.dll" Guid="c9bff952-b588-413a-a7e9-477df3726e3d">
+				<File Id="System.Globalization.Extensions.dll" Source="System.Globalization.Extensions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.IO.Compression.Brotli.dll" Guid="bacac7ff-88d2-4bb4-b081-3a8f874dae47">
+				<File Id="System.IO.Compression.Brotli.dll" Source="System.IO.Compression.Brotli.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.IO.Compression.dll" Guid="44a81d37-5535-4e90-b01e-28d4efc90a51">
+				<File Id="System.IO.Compression.dll" Source="System.IO.Compression.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.IO.Compression.FileSystem.dll" Guid="629aeea9-2540-40fe-a517-7db01a6133f9">
+				<File Id="System.IO.Compression.FileSystem.dll" Source="System.IO.Compression.FileSystem.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.IO.Compression.ZipFile.dll" Guid="9695fb23-3cbc-4d5a-a00e-99f223239d70">
+				<File Id="System.IO.Compression.ZipFile.dll" Source="System.IO.Compression.ZipFile.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.IO.dll" Guid="334d1cf1-aeb9-4ccc-99f5-52ab223e69fe">
+				<File Id="System.IO.dll" Source="System.IO.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.IO.FileSystem.AccessControl.dll" Guid="2c152c3b-be18-44a8-a162-ce8558e12921">
+				<File Id="System.IO.FileSystem.AccessControl.dll" Source="System.IO.FileSystem.AccessControl.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.IO.FileSystem.dll" Guid="4003917a-333d-45c1-9fef-8190e7b666a9">
+				<File Id="System.IO.FileSystem.dll" Source="System.IO.FileSystem.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.IO.FileSystem.DriveInfo.dll" Guid="722fac8a-1e4f-4bfa-a31e-3d4945515fc4">
+				<File Id="System.IO.FileSystem.DriveInfo.dll" Source="System.IO.FileSystem.DriveInfo.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.IO.FileSystem.Primitives.dll" Guid="6d803f1b-a1c3-4950-beb1-c3f5af72b0b1">
+				<File Id="System.IO.FileSystem.Primitives.dll" Source="System.IO.FileSystem.Primitives.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.IO.FileSystem.Watcher.dll" Guid="af8f2afd-84c6-4359-9d11-b993ad48017a">
+				<File Id="System.IO.FileSystem.Watcher.dll" Source="System.IO.FileSystem.Watcher.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.IO.IsolatedStorage.dll" Guid="151540f5-9e8d-4cb4-ba37-8354a9f50423">
+				<File Id="System.IO.IsolatedStorage.dll" Source="System.IO.IsolatedStorage.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.IO.MemoryMappedFiles.dll" Guid="be21cb85-4214-4b18-84b2-91727fa657ab">
+				<File Id="System.IO.MemoryMappedFiles.dll" Source="System.IO.MemoryMappedFiles.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.IO.Packaging.dll" Guid="2a075a4e-8e07-4f38-853b-a668e1ff5979">
+				<File Id="System.IO.Packaging.dll" Source="System.IO.Packaging.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.IO.Pipes.AccessControl.dll" Guid="f8de66f1-6b2d-403d-9af0-1a0b18f01741">
+				<File Id="System.IO.Pipes.AccessControl.dll" Source="System.IO.Pipes.AccessControl.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.IO.Pipes.dll" Guid="1aa0cd2b-773f-47d5-8ae9-cca7a2391482">
+				<File Id="System.IO.Pipes.dll" Source="System.IO.Pipes.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.IO.UnmanagedMemoryStream.dll" Guid="885c62cd-a3c9-4549-8c53-39749746f069">
+				<File Id="System.IO.UnmanagedMemoryStream.dll" Source="System.IO.UnmanagedMemoryStream.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Linq.dll" Guid="4c9c9a91-0f15-4c33-b702-17272f23ca59">
+				<File Id="System.Linq.dll" Source="System.Linq.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Linq.Expressions.dll" Guid="af8acf88-d2a2-4f44-bbe7-ebf30e2ae96c">
+				<File Id="System.Linq.Expressions.dll" Source="System.Linq.Expressions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Linq.Parallel.dll" Guid="29383d0d-fc3c-4a3c-91a9-41a15da34884">
+				<File Id="System.Linq.Parallel.dll" Source="System.Linq.Parallel.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Linq.Queryable.dll" Guid="48f68b27-73f1-4d21-9f62-ec74e619342f">
+				<File Id="System.Linq.Queryable.dll" Source="System.Linq.Queryable.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Memory.dll" Guid="e7917178-6e89-4838-9fd2-6eb75fc2cd3d">
+				<File Id="System.Memory.dll" Source="System.Memory.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.dll" Guid="3da872fb-deb2-47b5-ba8f-a2049a863493">
+				<File Id="System.Net.dll" Source="System.Net.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.Http.dll" Guid="cba1e437-4799-41b9-869e-ac2932980732">
+				<File Id="System.Net.Http.dll" Source="System.Net.Http.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.Http.Json.dll" Guid="f7c19a29-c20c-4ce4-808e-c9eb328638be">
+				<File Id="System.Net.Http.Json.dll" Source="System.Net.Http.Json.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.HttpListener.dll" Guid="ebd28293-2ddd-4bc9-9330-74efebbd9008">
+				<File Id="System.Net.HttpListener.dll" Source="System.Net.HttpListener.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.Mail.dll" Guid="2462d2b6-3a09-4b3e-8549-47e9b6888b25">
+				<File Id="System.Net.Mail.dll" Source="System.Net.Mail.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.NameResolution.dll" Guid="aa7458d3-eb8b-4070-9a3c-33f295a08cd5">
+				<File Id="System.Net.NameResolution.dll" Source="System.Net.NameResolution.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.NetworkInformation.dll" Guid="7799ea61-60f2-4578-9d40-eaf702de35c7">
+				<File Id="System.Net.NetworkInformation.dll" Source="System.Net.NetworkInformation.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.Ping.dll" Guid="57fd7834-cf48-43df-a508-65240eadfe80">
+				<File Id="System.Net.Ping.dll" Source="System.Net.Ping.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.Primitives.dll" Guid="c265b294-968d-4a5c-ba1e-1c2aa9907361">
+				<File Id="System.Net.Primitives.dll" Source="System.Net.Primitives.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.Requests.dll" Guid="5c424339-2d12-4993-bb22-8c8c70dd6fe3">
+				<File Id="System.Net.Requests.dll" Source="System.Net.Requests.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.Security.dll" Guid="29a1f660-3ce1-4ddf-a301-3bcb0dcb1572">
+				<File Id="System.Net.Security.dll" Source="System.Net.Security.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.ServicePoint.dll" Guid="a9190ad2-cedb-417a-88f1-94048d2d5016">
+				<File Id="System.Net.ServicePoint.dll" Source="System.Net.ServicePoint.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.Sockets.dll" Guid="2f099d0f-16f2-41a8-bd2b-0b6131037378">
+				<File Id="System.Net.Sockets.dll" Source="System.Net.Sockets.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.WebClient.dll" Guid="76ed612c-18f9-4213-b279-31cfa7bf2fd6">
+				<File Id="System.Net.WebClient.dll" Source="System.Net.WebClient.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.WebHeaderCollection.dll" Guid="dd943db5-3508-446b-97e2-47d5f0b4310e">
+				<File Id="System.Net.WebHeaderCollection.dll" Source="System.Net.WebHeaderCollection.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.WebProxy.dll" Guid="64bf4bce-6203-421a-8385-f06dcc007e99">
+				<File Id="System.Net.WebProxy.dll" Source="System.Net.WebProxy.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.WebSockets.Client.dll" Guid="9c3e6292-89af-4718-8f1b-ac90f5bfc6bd">
+				<File Id="System.Net.WebSockets.Client.dll" Source="System.Net.WebSockets.Client.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Net.WebSockets.dll" Guid="9c8b44a6-1061-401d-9904-10fbf693394e">
+				<File Id="System.Net.WebSockets.dll" Source="System.Net.WebSockets.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Numerics.dll" Guid="839385be-9d43-4e49-87a4-a4f158f69e1d">
+				<File Id="System.Numerics.dll" Source="System.Numerics.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Numerics.Vectors.dll" Guid="4ae6eeee-100b-492c-991e-7d1ffef78dd9">
+				<File Id="System.Numerics.Vectors.dll" Source="System.Numerics.Vectors.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.ObjectModel.dll" Guid="7621a6dd-7ba4-4bad-b491-366cef03598c">
+				<File Id="System.ObjectModel.dll" Source="System.ObjectModel.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Printing.dll" Guid="2c170dd3-56af-48d8-9ec6-c517c678e25a">
+				<File Id="System.Printing.dll" Source="System.Printing.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Private.CoreLib.dll" Guid="a6978c72-1c7e-4f6c-bc92-0c4f26212a59">
+				<File Id="System.Private.CoreLib.dll" Source="System.Private.CoreLib.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Private.DataContractSerialization.dll" Guid="f7aa437f-b068-4130-939e-aa7a8c27d713">
+				<File Id="System.Private.DataContractSerialization.dll" Source="System.Private.DataContractSerialization.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Private.Uri.dll" Guid="9885b722-0e6b-40dd-b610-945b90a2fb41">
+				<File Id="System.Private.Uri.dll" Source="System.Private.Uri.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Private.Xml.dll" Guid="5c871465-cdfb-42c4-8655-7512a38df6e5">
+				<File Id="System.Private.Xml.dll" Source="System.Private.Xml.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Private.Xml.Linq.dll" Guid="5113e6c9-c718-4234-9081-2ed8b1530d8c">
+				<File Id="System.Private.Xml.Linq.dll" Source="System.Private.Xml.Linq.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Reflection.DispatchProxy.dll" Guid="5da0c94a-f067-44fc-b8e7-e125adfc3110">
+				<File Id="System.Reflection.DispatchProxy.dll" Source="System.Reflection.DispatchProxy.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Reflection.dll" Guid="ea65c487-05ff-418a-9386-991153e106a6">
+				<File Id="System.Reflection.dll" Source="System.Reflection.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Reflection.Emit.dll" Guid="a4f358e2-d9c1-4e7c-b516-57b5691d9bc1">
+				<File Id="System.Reflection.Emit.dll" Source="System.Reflection.Emit.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Reflection.Emit.ILGeneration.dll" Guid="84880090-7cfe-4016-b661-d171f90b1d1c">
+				<File Id="System.Reflection.Emit.ILGeneration.dll" Source="System.Reflection.Emit.ILGeneration.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Reflection.Emit.Lightweight.dll" Guid="c611274f-1c47-4375-b4c4-baa9a3abd9df">
+				<File Id="System.Reflection.Emit.Lightweight.dll" Source="System.Reflection.Emit.Lightweight.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Reflection.Extensions.dll" Guid="aeb99051-6078-4a59-ada1-d3bc17e09228">
+				<File Id="System.Reflection.Extensions.dll" Source="System.Reflection.Extensions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Reflection.Metadata.dll" Guid="bd041d6c-8a9d-4be8-a0bb-334add525ddf">
+				<File Id="System.Reflection.Metadata.dll" Source="System.Reflection.Metadata.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Reflection.Primitives.dll" Guid="1114d24a-e53f-47a2-a05f-4acadc45e783">
+				<File Id="System.Reflection.Primitives.dll" Source="System.Reflection.Primitives.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Reflection.TypeExtensions.dll" Guid="507c3aca-1016-42e6-bac2-f8351d936f29">
+				<File Id="System.Reflection.TypeExtensions.dll" Source="System.Reflection.TypeExtensions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Resources.Extensions.dll" Guid="4884402e-1555-453d-adc8-1150e76416b2">
+				<File Id="System.Resources.Extensions.dll" Source="System.Resources.Extensions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Resources.Reader.dll" Guid="cee31712-7e29-407c-af62-dc5022435312">
+				<File Id="System.Resources.Reader.dll" Source="System.Resources.Reader.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Resources.ResourceManager.dll" Guid="fccf12e5-0e5e-49dc-880a-cc6fcfcdde6c">
+				<File Id="System.Resources.ResourceManager.dll" Source="System.Resources.ResourceManager.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Resources.Writer.dll" Guid="89b9a61f-2c38-4f94-9ec7-03d35918a5f9">
+				<File Id="System.Resources.Writer.dll" Source="System.Resources.Writer.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Runtime.CompilerServices.Unsafe.dll" Guid="41c996d8-0334-4592-8a67-d881dac3d8b8">
+				<File Id="System.Runtime.CompilerServices.Unsafe.dll" Source="System.Runtime.CompilerServices.Unsafe.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Runtime.CompilerServices.VisualC.dll" Guid="bcdaf763-ff32-4c65-9578-3b646749cf2d">
+				<File Id="System.Runtime.CompilerServices.VisualC.dll" Source="System.Runtime.CompilerServices.VisualC.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Runtime.dll" Guid="a3688f57-430f-42f1-b355-388196423d30">
+				<File Id="System.Runtime.dll" Source="System.Runtime.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Runtime.Extensions.dll" Guid="b3c0da83-bc72-4fba-b60d-5848ae263764">
+				<File Id="System.Runtime.Extensions.dll" Source="System.Runtime.Extensions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Runtime.Handles.dll" Guid="715489b1-45b6-4843-910a-1e399abd4d6b">
+				<File Id="System.Runtime.Handles.dll" Source="System.Runtime.Handles.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Runtime.InteropServices.dll" Guid="b5564076-e765-49fa-af0a-c5165a9930b6">
+				<File Id="System.Runtime.InteropServices.dll" Source="System.Runtime.InteropServices.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Runtime.InteropServices.RuntimeInformation.dll" Guid="7a074aea-7847-4c3a-98f5-eaf1499e3b20">
+				<File Id="System.Runtime.InteropServices.RuntimeInformation.dll" Source="System.Runtime.InteropServices.RuntimeInformation.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Runtime.Intrinsics.dll" Guid="59ec8614-6e38-4353-89dd-693b06b9af9e">
+				<File Id="System.Runtime.Intrinsics.dll" Source="System.Runtime.Intrinsics.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Runtime.Loader.dll" Guid="20eab9cd-23ec-4cb9-95b9-64b03993d7af">
+				<File Id="System.Runtime.Loader.dll" Source="System.Runtime.Loader.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Runtime.Numerics.dll" Guid="f94d2111-7036-4d15-83a0-4d0caf5566b6">
+				<File Id="System.Runtime.Numerics.dll" Source="System.Runtime.Numerics.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Runtime.Serialization.dll" Guid="b12f650c-d0e4-422c-b18f-6ba3cd032b60">
+				<File Id="System.Runtime.Serialization.dll" Source="System.Runtime.Serialization.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Runtime.Serialization.Formatters.dll" Guid="c2a1d0e5-4d80-4c1c-9c01-eb5dc9de504b">
+				<File Id="System.Runtime.Serialization.Formatters.dll" Source="System.Runtime.Serialization.Formatters.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Runtime.Serialization.Json.dll" Guid="8671c3a3-d2ca-4cc6-9677-be9f061b4abf">
+				<File Id="System.Runtime.Serialization.Json.dll" Source="System.Runtime.Serialization.Json.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Runtime.Serialization.Primitives.dll" Guid="5df518d8-eeea-461a-9914-272b1d5f1075">
+				<File Id="System.Runtime.Serialization.Primitives.dll" Source="System.Runtime.Serialization.Primitives.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Runtime.Serialization.Xml.dll" Guid="d7406bc4-a309-4bef-8241-463e0e685250">
+				<File Id="System.Runtime.Serialization.Xml.dll" Source="System.Runtime.Serialization.Xml.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.AccessControl.dll" Guid="6987c2ae-0c49-4d2b-8155-adf5be9febc3">
+				<File Id="System.Security.AccessControl.dll" Source="System.Security.AccessControl.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.Claims.dll" Guid="f9840a74-ef76-4623-84bf-1205f0445724">
+				<File Id="System.Security.Claims.dll" Source="System.Security.Claims.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.Cryptography.Algorithms.dll" Guid="5ca09b10-ff36-4633-ad46-5fd8f4e5b085">
+				<File Id="System.Security.Cryptography.Algorithms.dll" Source="System.Security.Cryptography.Algorithms.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.Cryptography.Cng.dll" Guid="634edfbc-bc58-440f-be6f-a6396c2df641">
+				<File Id="System.Security.Cryptography.Cng.dll" Source="System.Security.Cryptography.Cng.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.Cryptography.Csp.dll" Guid="f0880afe-cac1-4ae4-a1f4-7bfd111cb6c0">
+				<File Id="System.Security.Cryptography.Csp.dll" Source="System.Security.Cryptography.Csp.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.Cryptography.Encoding.dll" Guid="bdd05d8e-76c3-419f-bf55-fb9876ae27d4">
+				<File Id="System.Security.Cryptography.Encoding.dll" Source="System.Security.Cryptography.Encoding.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.Cryptography.OpenSsl.dll" Guid="2f4ccd71-832d-4266-8ff8-1b446d7b7ccf">
+				<File Id="System.Security.Cryptography.OpenSsl.dll" Source="System.Security.Cryptography.OpenSsl.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.Cryptography.Pkcs.dll" Guid="96406f53-18aa-4d1f-8034-f576bc7f51f0">
+				<File Id="System.Security.Cryptography.Pkcs.dll" Source="System.Security.Cryptography.Pkcs.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.Cryptography.Primitives.dll" Guid="2e4f6b16-cc6b-4755-8100-e2fe9906bcfc">
+				<File Id="System.Security.Cryptography.Primitives.dll" Source="System.Security.Cryptography.Primitives.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.Cryptography.ProtectedData.dll" Guid="10676434-ff3b-4dcb-8935-b341357e669c">
+				<File Id="System.Security.Cryptography.ProtectedData.dll" Source="System.Security.Cryptography.ProtectedData.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.Cryptography.X509Certificates.dll" Guid="1f010e50-7aa9-4228-bc55-0de999e2a887">
+				<File Id="System.Security.Cryptography.X509Certificates.dll" Source="System.Security.Cryptography.X509Certificates.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.Cryptography.Xml.dll" Guid="a6901c77-20da-46af-92c0-d52b30c6b2ac">
+				<File Id="System.Security.Cryptography.Xml.dll" Source="System.Security.Cryptography.Xml.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.dll" Guid="4105cc2a-1539-447b-858c-9701a9ab5af4">
+				<File Id="System.Security.dll" Source="System.Security.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.Permissions.dll" Guid="6511c0e9-0b89-471d-9a3b-ddbced564577">
+				<File Id="System.Security.Permissions.dll" Source="System.Security.Permissions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.Principal.dll" Guid="a1c66d8f-bc6b-4a29-b52f-955377941e53">
+				<File Id="System.Security.Principal.dll" Source="System.Security.Principal.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.Principal.Windows.dll" Guid="ce47a2d6-7bdb-4f74-b60d-903be1f3629f">
+				<File Id="System.Security.Principal.Windows.dll" Source="System.Security.Principal.Windows.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Security.SecureString.dll" Guid="7423b7ae-217a-4b92-a726-24d10f3b91b0">
+				<File Id="System.Security.SecureString.dll" Source="System.Security.SecureString.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.ServiceModel.Web.dll" Guid="fe4c6546-256c-4c63-a92e-49b8a743d3a8">
+				<File Id="System.ServiceModel.Web.dll" Source="System.ServiceModel.Web.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.ServiceProcess.dll" Guid="0554373d-3ece-4081-a544-efda9ea9ace5">
+				<File Id="System.ServiceProcess.dll" Source="System.ServiceProcess.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Text.Encoding.CodePages.dll" Guid="90985910-3225-4ea4-989a-0bcce7c4c999">
+				<File Id="System.Text.Encoding.CodePages.dll" Source="System.Text.Encoding.CodePages.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Text.Encoding.dll" Guid="157a465c-885f-4d5f-8c3d-444caecd1932">
+				<File Id="System.Text.Encoding.dll" Source="System.Text.Encoding.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Text.Encoding.Extensions.dll" Guid="70644234-0a8e-4460-b4cd-9128261c20b0">
+				<File Id="System.Text.Encoding.Extensions.dll" Source="System.Text.Encoding.Extensions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Text.Encodings.Web.dll" Guid="de55f10c-767e-45dd-9155-fb76133b9d81">
+				<File Id="System.Text.Encodings.Web.dll" Source="System.Text.Encodings.Web.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Text.Json.dll" Guid="4127a2a6-17f6-49ea-b419-1cf9bce5b64e">
+				<File Id="System.Text.Json.dll" Source="System.Text.Json.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Text.RegularExpressions.dll" Guid="bac23468-cc22-42d6-a95d-c2355fdaed64">
+				<File Id="System.Text.RegularExpressions.dll" Source="System.Text.RegularExpressions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Threading.AccessControl.dll" Guid="2a5bb711-559a-4075-be84-71d016f8648b">
+				<File Id="System.Threading.AccessControl.dll" Source="System.Threading.AccessControl.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Threading.Channels.dll" Guid="52dfab95-0a27-4c27-9a11-b8254f963726">
+				<File Id="System.Threading.Channels.dll" Source="System.Threading.Channels.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Threading.dll" Guid="3f23e9e3-6fe2-4f55-aef6-5d26a74a6919">
+				<File Id="System.Threading.dll" Source="System.Threading.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Threading.Overlapped.dll" Guid="90399652-c77f-40c9-b1b6-d508135cfa78">
+				<File Id="System.Threading.Overlapped.dll" Source="System.Threading.Overlapped.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Threading.Tasks.Dataflow.dll" Guid="263f87f2-8af6-496a-9235-a4cc55db6b2c">
+				<File Id="System.Threading.Tasks.Dataflow.dll" Source="System.Threading.Tasks.Dataflow.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Threading.Tasks.dll" Guid="27d0f623-3a6b-4b5d-80c4-bcc19e631f82">
+				<File Id="System.Threading.Tasks.dll" Source="System.Threading.Tasks.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Threading.Tasks.Extensions.dll" Guid="20e47e92-1f42-4881-b87c-c125e8d8486a">
+				<File Id="System.Threading.Tasks.Extensions.dll" Source="System.Threading.Tasks.Extensions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Threading.Tasks.Parallel.dll" Guid="474ec9ce-81e8-4bb5-b354-8d08f53613f2">
+				<File Id="System.Threading.Tasks.Parallel.dll" Source="System.Threading.Tasks.Parallel.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Threading.Thread.dll" Guid="13fd3cd0-c1cb-4bb9-a0f9-2b137482fa2c">
+				<File Id="System.Threading.Thread.dll" Source="System.Threading.Thread.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Threading.ThreadPool.dll" Guid="6d3e94c7-86d2-415a-a113-e96877488ae5">
+				<File Id="System.Threading.ThreadPool.dll" Source="System.Threading.ThreadPool.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Threading.Timer.dll" Guid="e4e2f4e3-50df-47db-90cf-3e2335fac4cc">
+				<File Id="System.Threading.Timer.dll" Source="System.Threading.Timer.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Transactions.dll" Guid="dabde126-a40c-4b67-a2ce-c27ea34867e8">
+				<File Id="System.Transactions.dll" Source="System.Transactions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Transactions.Local.dll" Guid="bb8fef36-675b-438a-9f80-536f844ce0f7">
+				<File Id="System.Transactions.Local.dll" Source="System.Transactions.Local.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.ValueTuple.dll" Guid="0d2d914e-4a50-453e-a519-571fe3bbdf65">
+				<File Id="System.ValueTuple.dll" Source="System.ValueTuple.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Web.dll" Guid="6194c743-2f83-4bcf-9500-6712337be1ad">
+				<File Id="System.Web.dll" Source="System.Web.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Web.HttpUtility.dll" Guid="754bc5d3-27e5-49ed-995f-38344184d398">
+				<File Id="System.Web.HttpUtility.dll" Source="System.Web.HttpUtility.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Windows.Controls.Ribbon.dll" Guid="aa0b907e-dbd5-4c09-8ead-1dbeb9747685">
+				<File Id="System.Windows.Controls.Ribbon.dll" Source="System.Windows.Controls.Ribbon.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Windows.dll" Guid="277ce6f1-17f4-48f8-8638-2cac3184de5b">
+				<File Id="System.Windows.dll" Source="System.Windows.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Windows.Extensions.dll" Guid="34337700-f220-4819-a1ce-f11ec18e052c">
+				<File Id="System.Windows.Extensions.dll" Source="System.Windows.Extensions.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Windows.Forms.Design.dll" Guid="8944957c-0c8a-4e4e-9491-e4d4eee9fb34">
+				<File Id="System.Windows.Forms.Design.dll" Source="System.Windows.Forms.Design.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Windows.Forms.Design.Editors.dll" Guid="37b4b502-c574-401a-a3a0-a7d94137e451">
+				<File Id="System.Windows.Forms.Design.Editors.dll" Source="System.Windows.Forms.Design.Editors.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Windows.Forms.dll" Guid="b518f2ff-ee8a-4683-b8f9-dd7a8e9e9880">
+				<File Id="System.Windows.Forms.dll" Source="System.Windows.Forms.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Windows.Forms.Primitives.dll" Guid="60ed1585-c161-4b20-9aae-a6e9ab7216ea">
+				<File Id="System.Windows.Forms.Primitives.dll" Source="System.Windows.Forms.Primitives.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Windows.Input.Manipulations.dll" Guid="d7e58fd3-0f8b-4db0-9055-1b45f81dc331">
+				<File Id="System.Windows.Input.Manipulations.dll" Source="System.Windows.Input.Manipulations.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Windows.Presentation.dll" Guid="a0761b8a-49c1-4565-b5c4-10ebcbe94a2c">
+				<File Id="System.Windows.Presentation.dll" Source="System.Windows.Presentation.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Xaml.dll" Guid="6fa75b48-73e6-4649-b401-25d3f5e51caf">
+				<File Id="System.Xaml.dll" Source="System.Xaml.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Xml.dll" Guid="5b205fe4-6148-453e-af82-09c0e7dbcfb5">
+				<File Id="System.Xml.dll" Source="System.Xml.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Xml.Linq.dll" Guid="39ff2cb7-7a98-4c92-9415-c41ec268b76e">
+				<File Id="System.Xml.Linq.dll" Source="System.Xml.Linq.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Xml.ReaderWriter.dll" Guid="6ea84461-e5f2-4716-a286-784661796128">
+				<File Id="System.Xml.ReaderWriter.dll" Source="System.Xml.ReaderWriter.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Xml.Serialization.dll" Guid="9fd3f2b2-6db0-4253-a073-6f27d60e41a2">
+				<File Id="System.Xml.Serialization.dll" Source="System.Xml.Serialization.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Xml.XDocument.dll" Guid="6e3b5475-00d3-4b51-aaac-e127c72e808e">
+				<File Id="System.Xml.XDocument.dll" Source="System.Xml.XDocument.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Xml.XmlDocument.dll" Guid="9c4e93b4-95c4-4cce-879f-1b8085472203">
+				<File Id="System.Xml.XmlDocument.dll" Source="System.Xml.XmlDocument.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Xml.XmlSerializer.dll" Guid="b21bc0de-c09d-43bc-adf6-64092ab311ca">
+				<File Id="System.Xml.XmlSerializer.dll" Source="System.Xml.XmlSerializer.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Xml.XPath.dll" Guid="9b8f0502-be46-4c49-8f7f-a8a3a265d4cd">
+				<File Id="System.Xml.XPath.dll" Source="System.Xml.XPath.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="System.Xml.XPath.XDocument.dll" Guid="1318a312-035b-4737-a054-7a273dda388d">
+				<File Id="System.Xml.XPath.XDocument.dll" Source="System.Xml.XPath.XDocument.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Ubiety.Dns.Core.dll" Guid="345cc737-2fbc-4101-878b-2b3df1929450">
+				<File Id="Ubiety.Dns.Core.dll" Source="Ubiety.Dns.Core.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="ucrtbase.dll" Guid="98375f40-7430-4cfe-9d59-7fc13083fd1d">
+				<File Id="ucrtbase.dll" Source="ucrtbase.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="UIAutomationClient.dll" Guid="b04562bb-a5de-4bec-8cee-b195dd2b60ac">
+				<File Id="UIAutomationClient.dll" Source="UIAutomationClient.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="UIAutomationClientSideProviders.dll" Guid="17ada698-73ab-4b57-bc20-2c2639b22a35">
+				<File Id="UIAutomationClientSideProviders.dll" Source="UIAutomationClientSideProviders.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="UIAutomationProvider.dll" Guid="b10fca99-9e08-4888-8f07-4a0b5b5b3e1b">
+				<File Id="UIAutomationProvider.dll" Source="UIAutomationProvider.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="UIAutomationTypes.dll" Guid="ce4b03c4-94ab-4959-8e38-3efff390db94">
+				<File Id="UIAutomationTypes.dll" Source="UIAutomationTypes.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="vcruntime140_cor3.dll" Guid="c38c2fdf-dd51-4703-8555-438035e48fab">
+				<File Id="vcruntime140_cor3.dll" Source="vcruntime140_cor3.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="WindowsBase.dll" Guid="5b3f4c26-fb8f-47c2-aac4-d044c7628e43">
+				<File Id="WindowsBase.dll" Source="WindowsBase.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="WindowsFormsIntegration.dll" Guid="e3e5030e-93e5-4b4d-8676-2f82b08fbcb4">
+				<File Id="WindowsFormsIntegration.dll" Source="WindowsFormsIntegration.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="wpfgfx_cor3.dll" Guid="29c3104f-7e88-4c44-8803-f88644a6b023">
+				<File Id="wpfgfx_cor3.dll" Source="wpfgfx_cor3.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
+			<Component Id="Zstandard.Net.dll" Guid="4f310bad-e399-45c1-97e3-eb156686ac0e">
+				<File Id="Zstandard.Net.dll" Source="Zstandard.Net.dll" KeyPath="yes" Checksum="yes"/>
+			</Component>
 		</ComponentGroup>
 	</Fragment>
 </Wix>

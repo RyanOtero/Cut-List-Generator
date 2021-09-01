@@ -1,3 +1,8 @@
+(?<=\sId="[\w-]*)-
+
+******************************
+
+
 using System.IO;
 
 DirectoryInfo d = new DirectoryInfo(@"C:\Users\Ryan\Desktop\publish");
