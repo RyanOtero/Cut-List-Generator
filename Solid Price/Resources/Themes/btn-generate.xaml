@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="GenerateButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="0">
+                        <Viewbox Stretch="Uniform">
+                            <Canvas Name="Layer_1" Canvas.Left="0" Canvas.Top="0" Width="30" Height="30">
+                                <Canvas.RenderTransform>
+                                    <TranslateTransform X="1.0" Y="1.0" />
+                                </Canvas.RenderTransform>
+                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path11" Fill="{StaticResource Light}" Data="M5.3 16.8V7.2c0-0.5 0.5-0.9 1-0.9h14.3v1.6c0 0.6 0.3 1 0.8 1c0.2 0 0.4-0.1 0.6-0.2l5.5-3.4c0.3-0.2 0.5-0.5 0.5-0.8
+	c0-0.3-0.2-0.6-0.5-0.8l-5.5-3.4C21.7 0.1 21.5 0 21.3 0c-0.5 0-0.8 0.4-0.8 1v1.7H6.2c-2.6 0-4.7 2.1-4.7 4.6v9.6
+	c0 1 0.8 1.8 1.8 1.8S5.3 17.9 5.3 16.8z M26.6 11.3c-1 0-1.8 0.8-1.8 1.8v9.6c0 0.5-0.4 0.9-0.9 0.9H9.5v-1.6c0-0.7-0.4-1-0.8-1
+	c-0.2 0-0.4 0.1-0.6 0.2l-5.5 3.4c-0.3 0.2-0.5 0.5-0.5 0.8c0 0.3 0.2 0.6 0.5 0.8l5.5 3.4C8.3 29.9 8.5 30 8.7 30
+	c0.4 0 0.8-0.3 0.8-1v-1.7h14.3c2.6 0 4.6-2.1 4.6-4.6v-9.6C28.4 12.1 27.6 11.3 26.6 11.3z"/>
+                            </Canvas>
+                        </Viewbox>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsFocused" Value="True">
+                            <Setter Property="Background" Value="Transparent" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

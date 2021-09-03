@@ -47,8 +47,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Resources\Themes\btn-config.xaml" />
     <Page Remove="Resources\Themes\window-close.xaml" />
-    <Page Remove="Resources\Themes\window-config.xaml" />
     <Page Remove="Resources\Themes\window-maximize.xaml" />
     <Page Remove="Resources\Themes\window-minimize.xaml" />
     <Page Remove="Resources\window-close-regular.xaml" />
@@ -100,7 +100,7 @@
     <Resource Include="Resources\Themes\window-close.xaml" />
     <Resource Include="Resources\Themes\window-maximize.xaml" />
     <Resource Include="Resources\Themes\window-minimize.xaml" />
-    <Resource Include="Resources\Themes\window-config.xaml" />
+    <Resource Include="Resources\Themes\btn-config.xaml" />
     <Resource Include="solidprice.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -153,6 +153,22 @@
   <ItemGroup>
     <Page Update="Resources\Themes\AddEditWindowStyle.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Resources\Themes\btn-browse.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Themes\btn-generate.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Themes\btn-save.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Themes\btn-clear.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AddStockItemWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
