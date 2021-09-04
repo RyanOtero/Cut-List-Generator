@@ -8,9 +8,12 @@
                 <ResourceDictionary Source="/Resources/Themes/window-maximize.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/btn-config.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/btn-refresh.xaml" />
+                <ResourceDictionary Source="/Resources/Themes/btn-browse.xaml" />
+                <ResourceDictionary Source="/Resources/Themes/btn-add.xaml" />
+                <ResourceDictionary Source="/Resources/Themes/btn-delete.xaml" />
+                <ResourceDictionary Source="/Resources/Themes/btn-edit.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/btn-save.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/btn-generate.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/btn-clear.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/TextStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/CheckBoxStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Themes/ComboBoxStyle.xaml" />

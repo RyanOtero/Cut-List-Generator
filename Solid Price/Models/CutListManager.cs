@@ -136,7 +136,7 @@ namespace SolidPrice.Models {
             } catch (Exception e) {
                 ErrorMessage("Database Error clm.cs 134", "There was an error while accessing the database.");
             }
-            CutList.OrderBy(x => x.Description).ThenBy(x => x.StickNumber).ThenBy(x => x.Length);
+            CutList.OrderBy(x => x.Description).ThenBy(x => x.StickNumber).ThenByDescending(x => x.Length);
             OrderList.OrderBy(x => x.Qty).ThenBy(x => x.StockItem);
         }
 
