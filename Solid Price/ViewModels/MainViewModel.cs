@@ -248,7 +248,8 @@ namespace SolidPrice.ViewModels {
             ClearCommand = new RelayCommand(x => ClearCutList(), () => CutList != null && CutList.Count > 0 && !IsWorking);
             SourceBrowseCommand = new RelayCommand(x => SourceBrowse(), () => !IsWorking);
             RefreshCommand = new RelayCommand(x => {
-                CutListManager.Instance.ConnectionString = ConnectionString; CutListManager.Instance.Refresh();
+                CutListManager.Instance.ConnectionString = ConnectionString;
+                CutListManager.Instance.Refresh();
                 GetTotalText();
             }, () => !IsWorking);
             AddStockItemCommand = new RelayCommand(x => {
@@ -368,7 +369,7 @@ namespace SolidPrice.ViewModels {
                 List<CutItem> tempList = CutListManager.Instance.CutList.ToList();
                 ClearCutList();
                 CutListManager.Instance.SortCutListForDisplay(IsDetailed, tempList);
-                CutListManager.Instance.Refresh();
+                //CutListManager.Instance.Refresh();
             });
             ConfigCommand = new RelayCommand(x => {
                 var vModel = new ConfigViewModel();
@@ -433,7 +434,6 @@ namespace SolidPrice.ViewModels {
             loadingAnimFadeIn.Begin();
             loadingAnimBounce.Begin();
             await Task.Run(() => CutListManager.Instance.Generate(SourceText, IsDetailed));
-            CutListManager.Instance.Refresh();
             loadingAnimFadeOut.Begin();
             GetTotalText();
             IsWorking = false;

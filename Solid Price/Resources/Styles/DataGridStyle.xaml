@@ -15,7 +15,12 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
+    <Style TargetType="DataGridCell">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    </Style>
+
     <Style TargetType="{x:Type DataGridRow}">
         <Setter Property="Background" Value="{StaticResource Darker}"/>
         <Setter Property="Foreground" Value="{StaticResource Light}"/>

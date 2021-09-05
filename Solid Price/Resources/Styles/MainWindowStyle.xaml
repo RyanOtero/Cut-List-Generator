@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    x:Class="SolidPrice.Themes.MainWindowStyle">
+                    x:Class="SolidPrice.Styles.MainWindowStyle">
     <ControlTemplate x:Key="WindowTemplate" TargetType="{x:Type Window}">
         <Grid>
             <Grid.ColumnDefinitions>

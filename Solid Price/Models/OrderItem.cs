@@ -101,13 +101,13 @@ namespace SolidPrice.Models {
         }
 
         public int CompareTo(OrderItem other) {
-            int i = Qty.CompareTo(other.Qty);
+            int i = StockItem.ExternalDescription.CompareTo(other.StockItem.ExternalDescription);
             if (i == 1) {
                 return 1;
-            } else if (i == 1) {
-                return 1;
+            } else if (i == -1) {
+                return -1;
             } else {
-                return StockItem.CompareTo(other.StockItem);
+                return Qty.CompareTo(other.Qty);
             }
 
         }

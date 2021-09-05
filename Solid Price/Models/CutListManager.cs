@@ -115,20 +115,22 @@ namespace SolidPrice.Models {
             OrderList.Clear();
             try {
                 using (var ctx = new CutListGeneratorContext(ConnectionString)) {
-                    var sTypes = ctx.StockItems.Include(s => s.Vendor);
-                    foreach (StockItem item in sTypes.ToList()) {
+                    List<StockItem> sTypes = ctx.StockItems.Include(s => s.Vendor).ToList();
+                    foreach (StockItem item in sTypes) {
                         StockItems.Add(item);
                     }
-                    var vendors = ctx.Vendors;
-                    foreach (Vendor item in vendors.ToList()) {
+                    List<Vendor> vendors = ctx.Vendors.ToList();
+                    foreach (Vendor item in vendors) {
                         Vendors.Add(item);
                     }
-                    var oList = ctx.OrderItems;
-                    foreach (OrderItem item in oList.ToList()) {
+                    List<OrderItem> oList = ctx.OrderItems.ToList();
+                    oList.Sort();
+                    foreach (OrderItem item in oList) {
                         OrderList.Add(item);
                     }
-                    var cList = ctx.CutItems;
-                    foreach (CutItem item in cList.ToList()) {
+                    List<CutItem> cList = ctx.CutItems.ToList();
+                    cList.Sort();
+                    foreach (CutItem item in cList) {
                         CutList.Add(item);
                     }
 
@@ -136,8 +138,6 @@ namespace SolidPrice.Models {
             } catch (Exception e) {
                 ErrorMessage("Database Error clm.cs 134", "There was an error while accessing the database.");
             }
-            CutList.OrderBy(x => x.Description).ThenBy(x => x.StickNumber).ThenByDescending(x => x.Length);
-            OrderList.OrderBy(x => x.Qty).ThenBy(x => x.StockItem);
         }
 
         public void NewCutList() {
@@ -282,11 +282,11 @@ namespace SolidPrice.Models {
                               from x in tol.DefaultIfEmpty()
                               select new OrderItem(c.StickNumber, c.StockItem);
 
-            foreach (OrderItem item in queryResult) {
+            List<OrderItem> qList = queryResult.ToList();
+            qList.Sort();
+            foreach (OrderItem item in qList) {
                 OrderList.Add(item);
             }
-
-            OrderList.OrderBy(x => x.Qty).ThenBy(x => x.StockItem);
 
             if (!isDetailed) {
                 foreach (CutItem item in tempList) {

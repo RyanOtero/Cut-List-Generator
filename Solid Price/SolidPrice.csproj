@@ -31,6 +31,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Resources\StylesStyles\**" />
+    <EmbeddedResource Remove="Resources\StylesStyles\**" />
+    <None Remove="Resources\StylesStyles\**" />
+    <Page Remove="Resources\StylesStyles\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="CutList.db" />
     <None Remove="Resources\Fonts\SansitaOne.ttf" />
     <None Remove="Resources\Logo.blend" />
@@ -47,10 +54,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Remove="Resources\Themes\btn-config.xaml" />
-    <Page Remove="Resources\Themes\window-close.xaml" />
-    <Page Remove="Resources\Themes\window-maximize.xaml" />
-    <Page Remove="Resources\Themes\window-minimize.xaml" />
     <Page Remove="Resources\window-close-regular.xaml" />
     <Page Remove="Resources\window-maximize-regular.xaml" />
     <Page Remove="Resources\window-minimize-solid.xaml" />
@@ -97,10 +100,6 @@
     <Resource Include="Resources\solidprice.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Themes\window-close.xaml" />
-    <Resource Include="Resources\Themes\window-maximize.xaml" />
-    <Resource Include="Resources\Themes\window-minimize.xaml" />
-    <Resource Include="Resources\Themes\btn-config.xaml" />
     <Resource Include="solidprice.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -117,7 +116,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Update="Resources\Themes\AddEditWindowStyle - Copy.xaml.cs">
+    <Compile Update="Resources\Styles\AddEditWindowStyle - Copy.xaml.cs">
       <DependentUpon>MessageWindowStyle.xaml.cs</DependentUpon>
     </Compile>
     <Compile Update="Views\AddStockItemWindow.xaml.cs">
@@ -151,33 +150,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Resources\Themes\AddEditWindowStyle.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
-    <Page Update="Resources\Themes\btn-add.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Resources\Themes\btn-delete.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Resources\Themes\btn-edit.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Resources\Themes\btn-browse.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Resources\Themes\btn-generate.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Resources\Themes\btn-save.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Views\AddStockItemWindow.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

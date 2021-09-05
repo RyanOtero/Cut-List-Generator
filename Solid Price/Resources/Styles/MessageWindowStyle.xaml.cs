@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace SolidPrice.Themes {
+namespace SolidPrice.Styles {
     public partial class MessageWindowStyle : ResourceDictionary {
 
         public MessageWindowStyle() {

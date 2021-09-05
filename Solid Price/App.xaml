@@ -2,29 +2,30 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/Themes/Colors.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/window-close.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/window-minimize.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/window-maximize.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/btn-config.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/btn-refresh.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/btn-browse.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/btn-add.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/btn-delete.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/btn-edit.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/btn-save.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/btn-generate.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/TextStyle.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/CheckBoxStyle.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/ComboBoxStyle.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/DataGridStyle.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/ButtonStyle.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/RectBorderStyle.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/TabControlStyle.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/TitleFont.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/MainWindowStyle.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/AddEditWindowStyle.xaml" />
-                <ResourceDictionary Source="/Resources/Themes/MessageWindowStyle.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/window-close.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/window-minimize.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/window-maximize.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/btn-config.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/btn-refresh.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/btn-browse.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/btn-add.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/btn-delete.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/btn-edit.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/btn-save.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/btn-generate.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/TextStyle.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/ToolTipStyle.xaml"/>
+                <ResourceDictionary Source="/Resources/Styles/CheckBoxStyle.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/ComboBoxStyle.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/DataGridStyle.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/ButtonStyle.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/RectBorderStyle.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/TabControlStyle.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/TitleFont.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/MainWindowStyle.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/AddEditWindowStyle.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/MessageWindowStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

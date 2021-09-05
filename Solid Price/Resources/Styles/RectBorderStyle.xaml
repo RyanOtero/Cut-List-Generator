@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    x:Class="SolidPrice.Themes.RectBorderStyle">
+                    x:Class="SolidPrice.Styles.RectBorderStyle">
     <Style x:Key="RectBorderStyle" TargetType="Rectangle">
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Fill" Value="Transparent" />

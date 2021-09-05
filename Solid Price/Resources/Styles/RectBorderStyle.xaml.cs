@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using System.Windows.Shapes;
 
-namespace SolidPrice.Themes {
+namespace SolidPrice.Styles {
     public partial class RectBorderStyle : ResourceDictionary {
 
         public RectBorderStyle() {
