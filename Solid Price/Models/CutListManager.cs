@@ -180,7 +180,7 @@ namespace SolidPrice.Models {
             var progId = "SldWorks.Application";
             var progType = Type.GetTypeFromProgID(progId);
             swApp = new SldWorks();
-            swApp.Visible = true;
+            swApp.Visible = false;
             List<string> openFiles = new();
             ModelDoc2 doc;
             doc = (ModelDoc2)swApp.GetFirstDocument();

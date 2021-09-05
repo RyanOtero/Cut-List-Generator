@@ -54,10 +54,10 @@
                     </Grid.RowDefinitions>
                     <Label x:Name="filePathLabel" Content="File Path:&#xA;" FontSize="16" Margin="16,0,0,4" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Bottom" Width="80" Height="30" Grid.Column="0" Grid.Row="1"  Grid.ColumnSpan="2"/>
                     <TextBox x:Name="filePathTextBox" Margin="25,0,10,5.5" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Bottom" Text="{Binding Path=SourceText, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" />
-                    <Button Style="{StaticResource BrowseButton}" Height="27" Width="27" Grid.Row="1" Grid.Column="3" Command="{Binding SourceBrowseCommand}"/>
-                    <Button Style="{StaticResource GenerateButton}" Height="29" Width="29" Grid.Row="2" Grid.Column="3" Command="{Binding GenerateCommand}"/>
-                    <Button Style="{StaticResource SaveButton}" Height="22" Width="22" Grid.Row="3" Grid.Column="3" Command="{Binding SaveCommand}"/>
-                    <Button Style="{StaticResource DeleteButton}" Height="20" Width="20" Grid.Row="4" Grid.Column="3" Command="{Binding ClearCommand}"/>
+                    <Button ToolTip="Browse" Style="{StaticResource BrowseButton}" Height="27" Width="27" Grid.Row="1" Grid.Column="3" Command="{Binding SourceBrowseCommand}"/>
+                    <Button ToolTip="Get Cut List" Style="{StaticResource GenerateButton}" Height="29" Width="29" Grid.Row="2" Grid.Column="3" Command="{Binding GenerateCommand}"/>
+                    <Button ToolTip="Export" Style="{StaticResource SaveButton}" Height="22" Width="22" Grid.Row="3" Grid.Column="3" Command="{Binding SaveCommand}"/>
+                    <Button ToolTip="Clear Lists" Style="{StaticResource DeleteButton}" Height="20" Width="20" Grid.Row="4" Grid.Column="3" Command="{Binding ClearCommand}"/>
                     <CheckBox x:Name="detailedCutListCheckBox" IsChecked="{Binding IsDetailed, Mode=TwoWay}" Content="Detailed Cut List" Command="{Binding IsDetailedCommand}" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" FlowDirection="RightToLeft" Grid.Column="1" Grid.Row="2">
                         <CheckBox.Resources>
                             <Style TargetType="{x:Type Path}">
@@ -117,9 +117,9 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Style="{StaticResource AddButton}" Height="22" Width="22" Grid.Row="4" Grid.Column="0" Command="{Binding AddVendorCommand}"/>
-                        <Button Style="{StaticResource EditButton}" Height="28" Width="28" Margin="5 0 2 3" Grid.Row="4" Grid.Column="1" Command="{Binding EditVendorCommand}"/>
-                        <Button Style="{StaticResource DeleteButton}" Height="20" Width="20" Grid.Row="4" Grid.Column="2" Command="{Binding DeleteVendorCommand}"/>
+                        <Button ToolTip="Add Vendor" Style="{StaticResource AddButton}" Height="22" Width="22" Grid.Row="4" Grid.Column="0" Command="{Binding AddVendorCommand}"/>
+                        <Button ToolTip="Edit Vendor" Style="{StaticResource EditButton}" Height="28" Width="28" Margin="5 0 2 3" Grid.Row="4" Grid.Column="1" Command="{Binding EditVendorCommand}"/>
+                        <Button ToolTip="Delete Vendor" Style="{StaticResource DeleteButton}" Height="20" Width="20" Grid.Row="4" Grid.Column="2" Command="{Binding DeleteVendorCommand}"/>
                     </Grid>
                     <DataGrid x:Name="vendorDataGrid" ItemsSource="{Binding Path=Vendors}" SelectedItem="{Binding SelectedVendor, Mode=TwoWay}" HeadersVisibility="Column" CanUserAddRows="False" AutoGenerateColumns="False" Margin="20,0,20,20" Grid.Column="0" Grid.Row="1">
                         <DataGrid.Columns>
@@ -146,9 +146,9 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Style="{StaticResource AddButton}" Height="22" Width="22" Grid.Row="4" Grid.Column="0" Command="{Binding AddStockItemCommand}"/>
-                        <Button Style="{StaticResource EditButton}" Height="28" Width="28" Margin="5 0 2 3" Grid.Row="4" Grid.Column="1" Command="{Binding EditStockItemCommand}"/>
-                        <Button Style="{StaticResource DeleteButton}" Height="20" Width="20" Grid.Row="4" Grid.Column="2" Command="{Binding DeleteStockItemCommand}"/>
+                        <Button ToolTip="Add Stock Type" Style="{StaticResource AddButton}" Height="22" Width="22" Grid.Row="4" Grid.Column="0" Command="{Binding AddStockItemCommand}"/>
+                        <Button ToolTip="Edit Stock Type" Style="{StaticResource EditButton}" Height="28" Width="28" Margin="5 0 2 3" Grid.Row="4" Grid.Column="1" Command="{Binding EditStockItemCommand}"/>
+                        <Button ToolTip="Delete Stock Type" Style="{StaticResource DeleteButton}" Height="20" Width="20" Grid.Row="4" Grid.Column="2" Command="{Binding DeleteStockItemCommand}"/>
                     </Grid>
                     <DataGrid x:Name="StockItemsDataGrid" ItemsSource="{Binding Path=StockItems}" SelectedItem="{Binding SelectedStockItem, Mode=TwoWay}" HeadersVisibility="Column" CanUserAddRows="False" AutoGenerateColumns="False" Margin="20,0,20,20" Grid.Column="0" Grid.Row="1">
                         <DataGrid.Columns>
@@ -171,8 +171,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource RefreshButton}" Height="22" Width="22" Grid.Row="0" Grid.Column="0" Command="{Binding RefreshCommand}" />
-            <Button Style="{StaticResource ConfigButton}" Height="22" Width="22" Grid.Row="0" Grid.Column="1" Command="{Binding ConfigCommand}"/>
+            <Button ToolTip="Configuration" Style="{StaticResource RefreshButton}" Height="22" Width="22" Grid.Row="0" Grid.Column="0" Command="{Binding RefreshCommand}" />
+            <Button ToolTip="Refresh Database" Style="{StaticResource ConfigButton}" Height="22" Width="22" Grid.Row="0" Grid.Column="1" Command="{Binding ConfigCommand}"/>
         </Grid>
 
 
