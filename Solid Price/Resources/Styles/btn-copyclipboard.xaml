@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="CopyButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="0">
+                        <Viewbox Stretch="Uniform">
+                            <Canvas Name="Layer_1" Canvas.Left="0" Canvas.Top="0" Width="30" Height="30">
+                                <Canvas.RenderTransform>
+                                    <TranslateTransform X="1.0" Y="1.0" />
+                                </Canvas.RenderTransform>
+                                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path11" Fill="{StaticResource Light}" Data="M20.6,26.3v2.3c0,0.8-0.6,1.4-1.4,1.4H3.3c-0.8,0-1.4-0.6-1.4-1.4V7c0-0.8,0.6-1.4,1.4-1.4h4.2V23c0,1.8,1.5,3.3,3.3,3.3
+	H20.6z M20.6,6.1V0h-9.8C10,0,9.4,0.6,9.4,1.4V23c0,0.8,0.6,1.4,1.4,1.4h15.9c0.8,0,1.4-0.6,1.4-1.4V7.5H22
+	C21.3,7.5,20.6,6.9,20.6,6.1z M27.7,4.3l-3.9-3.9c-0.3-0.3-0.6-0.4-1-0.4h-0.4v5.6h5.6V5.3C28.1,4.9,28,4.5,27.7,4.3z"/>
+                            </Canvas>
+                        </Viewbox>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="Layer_1" Value=".36"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="path11" Property="Fill" Value="{StaticResource Hover}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="path11" Property="Fill" Value="{StaticResource Pressed}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

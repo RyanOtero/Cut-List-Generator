@@ -153,6 +153,9 @@ namespace SolidPrice.ViewModels {
         public RelayCommand IsDetailedCommand { get; set; }
 
         public RelayCommand ConfigCommand { get; set; }
+
+        public RelayCommand DonateCommand { get; set; }
+
         #endregion
 
 
@@ -380,6 +383,15 @@ namespace SolidPrice.ViewModels {
                 win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
                 win.ShowDialog();
             }, () => !IsWorking);
+            DonateCommand = new RelayCommand(x => {
+                var vModel = new DonateViewModel();
+                var win = new DonateWindow();
+                win.DataContext = vModel;
+                Window mainWindow = App.Current.MainWindow;
+                win.Left = mainWindow.Left + (mainWindow.Width - win.Width) / 2;
+                win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
+                win.ShowDialog();
+            });
             #endregion
 
             asyncLock = new object();
@@ -388,8 +400,8 @@ namespace SolidPrice.ViewModels {
             OrderList = CutListManager.Instance.OrderList;
             Vendors = CutListManager.Instance.Vendors;
             StockItems = CutListManager.Instance.StockItems;
-            OrderTotal = "Total:";
-            CutListTotal = "Total:";
+            OrderTotal = "";
+            CutListTotal = "";
             loadingAnimFadeIn = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimFadeIn");
             loadingAnimBounce = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimBounce");
             loadingAnimFadeOut = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimFadeOut");
@@ -424,12 +436,12 @@ namespace SolidPrice.ViewModels {
             foreach (OrderItem item in OrderList) {
                 runningTotal += decimal.Parse(item.TotalCost.Substring(1));
             }
-            OrderTotal = "Total: " + string.Format("{0:c}", runningTotal);
+            OrderTotal = string.Format("{0:c}", runningTotal);
             runningTotal = 0;
             foreach (CutItem item in CutList) {
                 runningTotal += decimal.Parse(item.TotalCost.Substring(1));
             }
-            CutListTotal = "Total: " + string.Format("{0:c}", runningTotal);
+            CutListTotal = string.Format("{0:c}", runningTotal);
         }
 
         #endregion

@@ -54,10 +54,10 @@
                     </Grid.RowDefinitions>
                     <Label x:Name="filePathLabel" Content="File Path:&#xA;" FontSize="16" Margin="16,0,0,4" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Bottom" Width="80" Height="30" Grid.Column="0" Grid.Row="1"  Grid.ColumnSpan="2"/>
                     <TextBox x:Name="filePathTextBox" Margin="25,0,10,5.5" AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Bottom" Text="{Binding Path=SourceText, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" />
-                    <Button ToolTip="Browse" Style="{StaticResource BrowseButton}" Height="27" Width="27" Grid.Row="1" Grid.Column="3" Command="{Binding SourceBrowseCommand}"/>
-                    <Button ToolTip="Get Cut List" Style="{StaticResource GenerateButton}" Height="29" Width="29" Grid.Row="2" Grid.Column="3" Command="{Binding GenerateCommand}"/>
-                    <Button ToolTip="Export" Style="{StaticResource SaveButton}" Height="22" Width="22" Grid.Row="3" Grid.Column="3" Command="{Binding SaveCommand}"/>
-                    <Button ToolTip="Clear Lists" Style="{StaticResource DeleteButton}" Height="20" Width="20" Grid.Row="4" Grid.Column="3" Command="{Binding ClearCommand}"/>
+                    <Button ToolTip="Browse" Style="{StaticResource BrowseButton}" Height="27" Grid.Row="1" Grid.Column="3" Command="{Binding SourceBrowseCommand}"/>
+                    <Button ToolTip="Get Cut List" Style="{StaticResource GenerateButton}" Height="29" Grid.Row="2" Grid.Column="3" Command="{Binding GenerateCommand}"/>
+                    <Button ToolTip="Export" Style="{StaticResource SaveButton}" Height="22" Grid.Row="3" Grid.Column="3" Command="{Binding SaveCommand}"/>
+                    <Button ToolTip="Clear Lists" Style="{StaticResource DeleteButton}" Height="20" Grid.Row="4" Grid.Column="3" Command="{Binding ClearCommand}"/>
                     <CheckBox x:Name="detailedCutListCheckBox" IsChecked="{Binding IsDetailed, Mode=TwoWay}" Content="Detailed Cut List" Command="{Binding IsDetailedCommand}" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" FlowDirection="RightToLeft" Grid.Column="1" Grid.Row="2">
                         <CheckBox.Resources>
                             <Style TargetType="{x:Type Path}">
@@ -72,8 +72,8 @@
                             </Style>
                         </CheckBox.Resources>
                     </CheckBox>
-                    <Label Content="Order List" Grid.Column="0" FontSize="18" HorizontalAlignment="Left" Grid.Row="3" Grid.ColumnSpan="2" Margin="28,-27,0,0" />
-                    <Label Content="{Binding OrderTotal}"  HorizontalAlignment="Left" Grid.Column="1" Grid.Row="3" Margin="60,-21.5,0,0" Width="160" />
+                    <Label Content="Order List:" Grid.Column="0" FontSize="18" HorizontalAlignment="Left" Grid.Row="3" Grid.ColumnSpan="2" Margin="28,-27,0,0" />
+                    <Label Content="{Binding OrderTotal}" FontSize="18" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="3" Margin="50,-27,0,0" Width="160" />
                     <DataGrid x:Name="orderListDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding OrderList}" Margin="20,5,10,35" Grid.Column="0" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Path=Qty, Mode=OneWay}" Header="Qty" Width="*" />
@@ -84,8 +84,8 @@
                             <DataGridTextColumn Binding="{Binding Path=VendorName, Mode=OneWay}" Header="Vendor" Width="2.5*" />
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Label Content="Cut List" Grid.Column="0" FontSize="18" HorizontalAlignment="Left" Grid.Row="6" Grid.ColumnSpan="2" Margin="28,-27,0,0" />
-                    <Label Content="{Binding CutListTotal}" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="6" Margin="40,-21.5,0,0" Width="160" />
+                    <Label Content="Cut List:" Grid.Column="0" FontSize="18" HorizontalAlignment="Left" Grid.Row="6" Grid.ColumnSpan="2" Margin="28,-27,0,0" />
+                    <Label Content="{Binding CutListTotal}" FontSize="18" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="6" Margin="30,-27,0,0" Width="160" />
                     <DataGrid x:Name="cutListDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding CutList}" Margin="20,5,20,35" Grid.Row="6" Grid.ColumnSpan="3">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Path=Qty, Mode=OneWay}" Header="Qty" Width="1.5*" />
@@ -117,9 +117,9 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button ToolTip="Add Vendor" Style="{StaticResource AddButton}" Height="22" Width="22" Grid.Row="4" Grid.Column="0" Command="{Binding AddVendorCommand}"/>
-                        <Button ToolTip="Edit Vendor" Style="{StaticResource EditButton}" Height="28" Width="28" Margin="5 0 2 3" Grid.Row="4" Grid.Column="1" Command="{Binding EditVendorCommand}"/>
-                        <Button ToolTip="Delete Vendor" Style="{StaticResource DeleteButton}" Height="20" Width="20" Grid.Row="4" Grid.Column="2" Command="{Binding DeleteVendorCommand}"/>
+                        <Button ToolTip="Add Vendor" Style="{StaticResource AddButton}" Height="22" Grid.Row="4" Grid.Column="0" Command="{Binding AddVendorCommand}"/>
+                        <Button ToolTip="Edit Vendor" Style="{StaticResource EditButton}" Height="25" Margin="5 0 2 3" Grid.Row="4" Grid.Column="1" Command="{Binding EditVendorCommand}"/>
+                        <Button ToolTip="Delete Vendor" Style="{StaticResource DeleteButton}" Height="20" Grid.Row="4" Grid.Column="2" Command="{Binding DeleteVendorCommand}"/>
                     </Grid>
                     <DataGrid x:Name="vendorDataGrid" ItemsSource="{Binding Path=Vendors}" SelectedItem="{Binding SelectedVendor, Mode=TwoWay}" HeadersVisibility="Column" CanUserAddRows="False" AutoGenerateColumns="False" Margin="20,0,20,20" Grid.Column="0" Grid.Row="1">
                         <DataGrid.Columns>
@@ -146,9 +146,9 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button ToolTip="Add Stock Type" Style="{StaticResource AddButton}" Height="22" Width="22" Grid.Row="4" Grid.Column="0" Command="{Binding AddStockItemCommand}"/>
-                        <Button ToolTip="Edit Stock Type" Style="{StaticResource EditButton}" Height="28" Width="28" Margin="5 0 2 3" Grid.Row="4" Grid.Column="1" Command="{Binding EditStockItemCommand}"/>
-                        <Button ToolTip="Delete Stock Type" Style="{StaticResource DeleteButton}" Height="20" Width="20" Grid.Row="4" Grid.Column="2" Command="{Binding DeleteStockItemCommand}"/>
+                        <Button ToolTip="Add Stock Type" Style="{StaticResource AddButton}" Height="22" Grid.Row="4" Grid.Column="0" Command="{Binding AddStockItemCommand}"/>
+                        <Button ToolTip="Edit Stock Type" Style="{StaticResource EditButton}" Height="25" Margin="5 0 2 3" Grid.Row="4" Grid.Column="1" Command="{Binding EditStockItemCommand}"/>
+                        <Button ToolTip="Delete Stock Type" Style="{StaticResource DeleteButton}" Height="20" Grid.Row="4" Grid.Column="2" Command="{Binding DeleteStockItemCommand}"/>
                     </Grid>
                     <DataGrid x:Name="StockItemsDataGrid" ItemsSource="{Binding Path=StockItems}" SelectedItem="{Binding SelectedStockItem, Mode=TwoWay}" HeadersVisibility="Column" CanUserAddRows="False" AutoGenerateColumns="False" Margin="20,0,20,20" Grid.Column="0" Grid.Row="1">
                         <DataGrid.Columns>
@@ -166,15 +166,15 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Grid Height="35" Width="60" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 0 20 0" Grid.Row="0" Grid.Column="0">
+        <Grid Height="35" Width="90" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 0 20 0" Grid.Row="0" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button ToolTip="Configuration" Style="{StaticResource RefreshButton}" Height="22" Width="22" Grid.Row="0" Grid.Column="0" Command="{Binding RefreshCommand}" />
-            <Button ToolTip="Refresh Database" Style="{StaticResource ConfigButton}" Height="22" Width="22" Grid.Row="0" Grid.Column="1" Command="{Binding ConfigCommand}"/>
+            <Button ToolTip="Donate" Style="{StaticResource DonateButton}" Height="22" Grid.Row="0" Grid.Column="0" Command="{Binding DonateCommand}" />
+            <Button ToolTip="Configuration" Style="{StaticResource RefreshButton}" Height="22" Grid.Row="0" Grid.Column="1" Command="{Binding RefreshCommand}" />
+            <Button ToolTip="Refresh Database" Style="{StaticResource ConfigButton}" Height="22" Grid.Row="0" Grid.Column="2" Command="{Binding ConfigCommand}"/>
         </Grid>
-
-
     </Grid>
 </Window>

@@ -1,0 +1,43 @@
+﻿<Window x:Class="SolidPrice.Views.DonateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SolidPrice.Views"
+        mc:Ignorable="d"
+        Title="Donations" Height="400" Width="600"
+         ResizeMode="NoResize" ShowInTaskbar="True"
+        WindowStyle="None" SizeToContent="Manual"
+        Style="{DynamicResource ResourceKey=AddEditWindowStyle}">
+    <Grid Width="525">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="15*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.25*"/>
+        </Grid.RowDefinitions> 
+        <Label Content="Donations are greatly appreciated!" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label Content="Please report bugs/send feature requests to rotero87@gmail.com" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" FontSize="14" Padding="0 10 0 0" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+        <Label Name="BTC" Content="BTC: bc1q8umqg0lj06pka3yvw0wga9aa6c5r7m04k7gayp" Grid.Column="1" Grid.Row="2"/>
+        <Button Style="{StaticResource CopyButton}" Height="15" Width="15" Margin="0 0 0 8" Command="{Binding CopyCommand}" CommandParameter="{Binding ElementName=BTC, Path=Content}" Grid.Column="0" Grid.Row="2"/>
+        <Label Name="ETH" Content="ETH: 0xc7aC90EB1f3B009383D9731e8dC01E878e0e433B" Grid.Column="1" Grid.Row="3"/>
+        <Button Style="{StaticResource CopyButton}"  Height="15" Width="15" Margin="0 0 0 8" Command="{Binding CopyCommand}" CommandParameter="{Binding ElementName=ETH, Path=Content}" Grid.Column="0" Grid.Row="3"/>
+        <Label Name="XRP" Content="XRP: rBpD2vCJXiqZpppuVGctq3cWboLW1GUby" Grid.Column="1" Grid.Row="4"/>
+        <Button Style="{StaticResource CopyButton}" Height="15" Width="15" Margin="0 0 0 8" Command="{Binding CopyCommand}" CommandParameter="{Binding ElementName=XRP, Path=Content}" Grid.Column="0" Grid.Row="4"/>
+        <Label Name="DOGE" Content="DOGE: DJr87AgPGKVAAi3xdTC3zSNuvksdDjjoG1" Grid.Column="1" Grid.Row="5"/>
+        <Button Style="{StaticResource CopyButton}" Height="15" Width="15" Margin="0 0 0 8" Command="{Binding CopyCommand}" CommandParameter="{Binding ElementName=DOGE, Path=Content}" Grid.Column="0" Grid.Row="5"/>
+        <Label Name="LTC" Content="LTC: ltc1qvthfr4u4ag6cr43pqspn87pp0aftryvhtvvy86" Grid.Column="1" Grid.Row="6"/>
+        <Button Style="{StaticResource CopyButton}" Height="15" Width="15" Margin="0 0 0 8" Command="{Binding CopyCommand}" CommandParameter="{Binding ElementName=LTC, Path=Content}" Grid.Column="0" Grid.Row="6"/>
+        <Label Name="XLM" Content="XLM: GCPPMECSLM5PKWC7LBZOQRTVAEYZN2D6R6UFZMC463EIHTCLOBYGJ7O2" Grid.Column="1" Grid.Row="7"/>
+        <Button Style="{StaticResource CopyButton}" Height="15" Width="15" Margin="0 0 0 8" Command="{Binding CopyCommand}" CommandParameter="{Binding ElementName=XLM, Path=Content}" Grid.Column="0" Grid.Row="7"/>
+    </Grid>
+</Window>
