@@ -407,6 +407,18 @@ namespace SolidPrice.ViewModels {
         }
 
         #region Methods
+
+        public override void CloseWin(object obj) {
+            if (CutListManager.Instance.SWApp != null) {
+                Task.Run(() => {
+                    CutListManager.Instance.SWApp.ExitApp();
+                    System.Runtime.InteropServices.Marshal.FinalReleaseComObject(CutListManager.Instance.SWApp);
+                    CutListManager.Instance.SWApp = null;
+                });
+            }
+            base.CloseWin(obj);
+        }
+
         private void GetTotalText() {
             decimal runningTotal = 0;
             foreach (OrderItem item in OrderList) {

@@ -10,6 +10,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using static SolidPrice.Utils.Messenger;
@@ -19,7 +20,6 @@ namespace SolidPrice.Models {
 
         #region Fields
         private static readonly CutListManager instance = new CutListManager();
-        private SldWorks swApp;
         int fileerror = 0;
         int filewarning = 0;
         bool inBodyFolder = false;
@@ -38,6 +38,8 @@ namespace SolidPrice.Models {
         #region Properties
 
         public static CutListManager Instance => instance;
+
+        public SldWorks SWApp { get; set; }
 
         public string ConnectionString {
             get => connectionString;
@@ -84,8 +86,20 @@ namespace SolidPrice.Models {
             Vendors = new ObservableCollection<Vendor>();
             StockItems = new ObservableCollection<StockItem>();
             OrderList = new ObservableCollection<OrderItem>();
+            Task.Run(() => {
+                try {
+                    var progId = "SldWorks.Application";
+                    var progType = System.Type.GetTypeFromProgID(progId);
+                    SWApp = Activator.CreateInstance(progType) as SldWorks;
+                    SWApp.Visible = false;
+                } catch (Exception e) {
+                    ErrorMessage("SolidWorks Error", "Unable to connect to SolidWorks. Please make sure that SolidWorks is installed in the default location.");
+                }
+
+            });
         }
         #endregion
+
 
         #region INotifyPropertyChanged
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
@@ -100,7 +114,7 @@ namespace SolidPrice.Models {
                     return;
                 }
             }
-            if (ConnectionString.Contains("server=;") || ConnectionString.Contains("database=;") 
+            if (ConnectionString.Contains("server=;") || ConnectionString.Contains("database=;")
                 || ConnectionString.Contains("user=;") || ConnectionString.Contains("password=;")) {
                 ErrorMessage("Database Error clm.cs 110", "The connection string is incomplete.");
                 return;
@@ -158,6 +172,10 @@ namespace SolidPrice.Models {
 
         #region Generation
         public void Generate(string filePath, bool isDetailed) {
+            if (SWApp == null) {
+                ErrorMessage("SolidWorks Error", "Unable to connect to SolidWorks.");
+                return;
+            }
             Stopwatch timer = new Stopwatch();
             timer.Start();
             if (string.IsNullOrEmpty(filePath)) return;
@@ -172,18 +190,13 @@ namespace SolidPrice.Models {
             isAssembly = filePath.ToLower().Contains(".sldasm");
 
             if (!isPart && !isAssembly) {
-                Application.Current.Dispatcher.Invoke(delegate {
-                    ErrorMessage("Invalid File clm.cs 173", "Please select a part file or an assembly file.");
-                });
+                ErrorMessage("Invalid File clm.cs 173", "Please select a part file or an assembly file.");
                 return;
             }
-            var progId = "SldWorks.Application";
-            var progType = Type.GetTypeFromProgID(progId);
-            swApp = new SldWorks();
-            swApp.Visible = false;
+
             List<string> openFiles = new();
             ModelDoc2 doc;
-            doc = (ModelDoc2)swApp.GetFirstDocument();
+            doc = (ModelDoc2)SWApp.GetFirstDocument();
             while (doc != null) {
                 openFiles.Add(doc.GetPathName());
                 doc = (ModelDoc2)doc.GetNext();
@@ -196,18 +209,18 @@ namespace SolidPrice.Models {
                 } else {
                     for (int i = openFiles.Count - 1; i > -1; i--) {
                         if (openFiles[i] != filePath) {
-                            swApp.CloseDoc(openFiles[i]);
+                            SWApp.CloseDoc(openFiles[i]);
                         }
                     }
-                    doc = (ModelDoc2)swApp.GetFirstDocument();
+                    doc = (ModelDoc2)SWApp.GetFirstDocument();
                 }
             }
 
             if (doc == null) {
                 try {
-                doc = isAssembly ?
-                    swApp.OpenDoc6(filePath, (int)swDocumentTypes_e.swDocASSEMBLY, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning) :
-                    swApp.OpenDoc6(filePath, (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning);
+                    doc = isAssembly ?
+                        SWApp.OpenDoc6(filePath, (int)swDocumentTypes_e.swDocASSEMBLY, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning) :
+                        SWApp.OpenDoc6(filePath, (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_Silent, "", ref fileerror, ref filewarning);
                 } catch (Exception e) {
                     ErrorMessage("SolidWorks Error", "There was an error while trying to access SolidWorks.");
                     return;
@@ -217,13 +230,13 @@ namespace SolidPrice.Models {
 
 
             // Set the working directory to the document directory
-            swApp.SetCurrentWorkingDirectory(doc.GetPathName().Substring(0, doc.GetPathName().LastIndexOf("\\")));
+            SWApp.SetCurrentWorkingDirectory(doc.GetPathName().Substring(0, doc.GetPathName().LastIndexOf("\\")));
 
-            swApp.CommandInProgress = true;
+            SWApp.CommandInProgress = true;
             ModelDoc2 swModel;
             Component2 swAssy = default(Component2);
             PartDoc swPart = default(PartDoc);
-            swModel = swApp.ActiveDoc as ModelDoc2;
+            swModel = SWApp.ActiveDoc as ModelDoc2;
             ConfigurationManager swConfMgr = swModel.ConfigurationManager;
             Configuration swConf = swConfMgr.ActiveConfiguration;
 
@@ -246,7 +259,7 @@ namespace SolidPrice.Models {
                 //throw;
             }
 
-            swApp.CloseAllDocuments(true);
+            SWApp.CloseAllDocuments(true);
 
             if (hadError) {
                 hadError = false;
@@ -254,7 +267,6 @@ namespace SolidPrice.Models {
             }
             SortCutListForDisplay(isDetailed, tempList);
 
-            swApp = null;
             timer.Stop();
             TimeSpan ts = timer.Elapsed;
 

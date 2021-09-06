@@ -19,13 +19,14 @@
         <Grid Grid.Row="0" Grid.ColumnSpan="2" 
             MinHeight="40" >
         </Grid>
-        <Image Name="img" Margin="5" Grid.Row="0" 
+        <!--<Image Name="img" Margin="5" Grid.Row="0" 
             Grid.Column="0" Width="50" 
-            Height="50"  Stretch="Fill" />
+            Height="50"  Stretch="Fill" />-->
         <TextBlock Margin="30,5,30,5"   
             VerticalAlignment="Center" 
             TextWrapping="Wrap" Name="txtMsg" 
             Grid.Row="0" Grid.Column="1"
+                   MaxWidth="400"
             Foreground="{StaticResource Light}" FontSize="14"/>
         <Grid Grid.Row="1" Grid.ColumnSpan="2"  
             Grid.Column="0" >
