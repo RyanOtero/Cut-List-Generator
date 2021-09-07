@@ -36,27 +36,31 @@ namespace SolidPrice.Styles {
                     senderRect.CaptureMouse();
                     if (senderRect.Name.ToLower().Contains("right")) {
                         width += 5;
-                        if (width > 0)
+                        if (width > mainWindow.MinWidth)
                             mainWindow.Width = width;
                     }
                     if (senderRect.Name.ToLower().Contains("left")) {
                         width -= 5;
-                        mainWindow.Left += width;
-                        width = mainWindow.Width - width;
-                        if (width > 0) {
+                        if (mainWindow.Width - width > mainWindow.MinWidth) {
+                            mainWindow.Left += width;
+                            width = mainWindow.Width - width;
+                        }
+                        if (width > mainWindow.MinWidth) {
                             mainWindow.Width = width;
                         }
                     }
                     if (senderRect.Name.ToLower().Contains("bottom")) {
                         height += 5;
-                        if (height > 0)
+                        if (height > mainWindow.MinHeight)
                             mainWindow.Height = height;
                     }
                     if (senderRect.Name.ToLower().Contains("top")) {
                         height -= 5;
-                        mainWindow.Top += height;
-                        height = mainWindow.Height - height;
-                        if (height > 0) {
+                        if (mainWindow.Height - height > mainWindow.MinHeight) {
+                            mainWindow.Top += height;
+                            height = mainWindow.Height - height;
+                        }
+                        if (height > mainWindow.MinHeight) {
                             mainWindow.Height = height;
                         }
                     }
