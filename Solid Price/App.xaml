@@ -6,6 +6,7 @@
                 <ResourceDictionary Source="/Resources/Styles/window-close.xaml" />
                 <ResourceDictionary Source="/Resources/Styles/window-minimize.xaml" />
                 <ResourceDictionary Source="/Resources/Styles/window-maximize.xaml" />
+                <ResourceDictionary Source="/Resources/Styles/ButtonStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Styles/btn-config.xaml" />
                 <ResourceDictionary Source="/Resources/Styles/btn-copyclipboard.xaml" />
                 <ResourceDictionary Source="/Resources/Styles/btn-refresh.xaml" />
@@ -21,7 +22,6 @@
                 <ResourceDictionary Source="/Resources/Styles/CheckBoxStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Styles/ComboBoxStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Styles/DataGridStyle.xaml" />
-                <ResourceDictionary Source="/Resources/Styles/ButtonStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Styles/RectBorderStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Styles/TabControlStyle.xaml" />
                 <ResourceDictionary Source="/Resources/Styles/TitleFont.xaml" />
