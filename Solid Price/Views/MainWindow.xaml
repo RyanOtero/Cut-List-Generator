@@ -173,8 +173,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button ToolTip="Donate" Style="{StaticResource DonateButton}" Height="22" Grid.Row="0" Grid.Column="0" Command="{Binding DonateCommand}" />
-            <Button ToolTip="Configuration" Style="{StaticResource RefreshButton}" Height="22" Grid.Row="0" Grid.Column="1" Command="{Binding RefreshCommand}" />
-            <Button ToolTip="Refresh Database" Style="{StaticResource ConfigButton}" Height="22" Grid.Row="0" Grid.Column="2" Command="{Binding ConfigCommand}"/>
+            <Button ToolTip="Refresh Database" Style="{StaticResource RefreshButton}" Height="22" Grid.Row="0" Grid.Column="1" Command="{Binding RefreshCommand}" />
+            <Button ToolTip="Configuration" Style="{StaticResource ConfigButton}" Height="22" Grid.Row="0" Grid.Column="2" Command="{Binding ConfigCommand}"/>
         </Grid>
     </Grid>
 </Window>

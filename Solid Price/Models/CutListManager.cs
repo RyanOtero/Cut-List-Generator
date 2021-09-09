@@ -492,6 +492,8 @@ namespace SolidPrice.Models {
                 int i = 0;
                 int qty = 0;
                 float length = 0;
+                float width = 0;
+                float thickness = 0;
                 float angle1 = 0;
                 float angle2 = 0;
                 string angleDirection = "-";
@@ -524,6 +526,15 @@ namespace SolidPrice.Models {
                         case "length":
                             float.TryParse(CustomPropResolvedVal, out length);
                             break;
+                        case "bounding box length":
+                            float.TryParse(CustomPropResolvedVal, out length);
+                            break;
+                        case "bounding box width":
+                            float.TryParse(CustomPropResolvedVal, out width);
+                            break;
+                        case "sheet metal thickness":
+                            float.TryParse(CustomPropResolvedVal, out thickness);
+                            break;
                         case "angle1":
                             float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle1);
                             break;
@@ -553,9 +564,15 @@ namespace SolidPrice.Models {
                         ctx.Vendors.Add(vendor);
                         ctx.SaveChanges();
                     }
+                    MaterialType mat;
+                    if (material == "material <not specified>") {
+                        mat = StockItem.MaterialFromDescription(description);
+                    } else {
+                        mat = StockItem.MaterialFromDescription(material);
+                    }
                     sItem = new StockItem(vendor: vendor, internalDescription: description,
                         externalDescription: description,
-                        materialType: StockItem.MaterialFromDescription(description),
+                        materialType: mat,
                         profType: StockItem.ProfileFromDescription(description));
                     ctx.StockItems.Add(sItem);
                     ctx.Vendors.Update(vendor);
