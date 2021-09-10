@@ -104,8 +104,8 @@ namespace SolidPrice.Models {
         public string VendorName { get { return Vendor?.VendorName; } }
         public decimal CostPerSheet => CostPerSqFoot * ((decimal)StockLengthInInches * (decimal)StockWidthInInches / 144);
         public string MatTypeString => CultureInfo.InvariantCulture.TextInfo.ToTitleCase(MatType.ToString().Replace("_", " "));
-        public string CostPerSqFootString => string.Format("{0:c}", CostPerSqFoot);
-        public string CostPerSheetString => string.Format("{0:c}", CostPerSheet);
+        public string CostPerSqFootString => string.Format("{0:c}", Math.Round(CostPerSqFoot, 2 , MidpointRounding.ToPositiveInfinity));
+        public string CostPerSheetString => string.Format("{0:c}", Math.Round(CostPerSheet, 2, MidpointRounding.ToPositiveInfinity));
         #endregion
 
         #region Constructors

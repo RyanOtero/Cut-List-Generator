@@ -12,8 +12,8 @@ namespace SolidPrice.Models {
     internal class CutListGeneratorContext : DbContext {
 
         //comment out to scaffold
-        private static bool _created = bool.Parse(Application.Current.Properties["IsCreated"].ToString());
-        private static bool isMySQL;
+        //private static bool _created = bool.Parse(Application.Current.Properties["IsCreated"].ToString());
+        //private static bool isMySQL;
         /////////////
         public string ConnectionString { get; set; }
         public DbSet<StockItem> StockItems { get; set; }
@@ -22,31 +22,32 @@ namespace SolidPrice.Models {
         public DbSet<CutItem> CutItems { get; set; }
         public DbSet<SheetStockItem> SheetStockItems { get; internal set; }
         public DbSet<SheetCutItem> SheetCutItems { get; set; }
+        public DbSet<SheetOrderItem> SheetOrderItems { get; set; }
 
         public CutListGeneratorContext() { }
 
         public CutListGeneratorContext(string connectionString) : base() {
 
             //comment out to scaffold
-            isMySQL = (bool)Application.Current.Properties["UseExternalDB"];
-            ConnectionString = connectionString;
-            if (!_created && !isMySQL) {
-                try {
-                    Directory.CreateDirectory(@"C:\ProgramData\Solid Price");
-                    FileInfo fi;
-                    if (!Debugger.IsAttached) {
-                        fi = new FileInfo(@"C:\Program Files (x86)\Solid Price\CutList.db");
-                    } else {
-                        fi = new FileInfo(@"C:\Users\Ryan\source\repos\Solid Price\Solid Price\CutList.db");
-                    }
-                    fi.CopyTo(@"C:\ProgramData\Solid Price\CutList.db", true);
-                    Application.Current.Properties["IsCreated"] = true;
-                    _created = true;
-                } catch (Exception e) {
-                    ErrorMessage("Database Error cgc.cs 43", "Please enter a connection string in the format of:\n" +
-                                "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
-                }
-            }
+            //isMySQL = (bool)Application.Current.Properties["UseExternalDB"];
+            //ConnectionString = connectionString;
+            //if (!_created && !isMySQL) {
+            //    try {
+            //        Directory.CreateDirectory(@"C:\ProgramData\Solid Price");
+            //        FileInfo fi;
+            //        if (!Debugger.IsAttached) {
+            //            fi = new FileInfo(@"C:\Program Files (x86)\Solid Price\CutList.db");
+            //        } else {
+            //            fi = new FileInfo(@"C:\Users\Ryan\source\repos\Solid Price\Solid Price\CutList.db");
+            //        }
+            //        fi.CopyTo(@"C:\ProgramData\Solid Price\CutList.db", true);
+            //        Application.Current.Properties["IsCreated"] = true;
+            //        _created = true;
+            //    } catch (Exception e) {
+            //        ErrorMessage("Database Error cgc.cs 43", "Please enter a connection string in the format of:\n" +
+            //                    "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
+            //    }
+            //}
             /////////////
         }
 
@@ -86,39 +87,42 @@ namespace SolidPrice.Models {
             //optionsBuilder.EnableSensitiveDataLogging(true);
 
             //Uncomment to scaffold
-            //try {
-            //    optionsBuilder.UseMySQL("server=localhost;database=solid price;user=root;password=password");
-            //    base.OnConfiguring(optionsBuilder);
-            //} catch (Exception) {
-            //    ErrorMessage("Database Error", "Please enter a connection string in the format of:\n" +
-            //        "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
-            //}
+            try
+            {
+                optionsBuilder.UseMySQL("server=localhost;database=solid price;user=root;password=password");
+                base.OnConfiguring(optionsBuilder);
+            }
+            catch (Exception)
+            {
+                ErrorMessage("Database Error", "Please enter a connection string in the format of:\n" +
+                    "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
+            }
             //////////////
 
             //comment out to scaffold
-            if (isMySQL) {
-                try {
-                    optionsBuilder.UseMySQL(ConnectionString);
-                    base.OnConfiguring(optionsBuilder);
-                } catch (Exception) {
-                    ErrorMessage("Database Error cgc.cs 94", "Please enter a connection string in the format of:\n" +
-                        "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
-                }
-            } else {
-                try {
-                    ///////Release
-                    optionsBuilder.UseSqlite(ConnectionString);
-                    //optionsBuilder.UseSqlite(ConnectionString, option => {
-                    //    option.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
-                    //});
-                    base.OnConfiguring(optionsBuilder);
+            //if (isMySQL) {
+            //    try {
+            //        optionsBuilder.UseMySQL(ConnectionString);
+            //        base.OnConfiguring(optionsBuilder);
+            //    } catch (Exception) {
+            //        ErrorMessage("Database Error cgc.cs 94", "Please enter a connection string in the format of:\n" +
+            //            "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
+            //    }
+            //} else {
+            //    try {
+            //        ///////Release
+            //        optionsBuilder.UseSqlite(ConnectionString);
+            //        //optionsBuilder.UseSqlite(ConnectionString, option => {
+            //        //    option.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
+            //        //});
+            //        base.OnConfiguring(optionsBuilder);
 
-                } catch (Exception e) {
-                    string s = e.Message;
-                    ErrorMessage("Database Error cgc.cs 105", "Please enter a connection string in the format of:\n" +
-                        "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
-                }
-            }
+            //    } catch (Exception e) {
+            //        string s = e.Message;
+            //        ErrorMessage("Database Error cgc.cs 105", "Please enter a connection string in the format of:\n" +
+            //            "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
+            //    }
+            //}
             ///////////////
         }
     }

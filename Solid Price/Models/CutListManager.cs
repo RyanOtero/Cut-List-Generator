@@ -578,12 +578,12 @@ namespace SolidPrice.Models {
                     if (thickness != 0) {
 
                     } else {
-                        sSItem = new SheetStockItem(vendor: vendor, internalDescription: description,
-                       externalDescription: description,
-                       materialType: mat, thickness: thickness, finish: finish);
-                        ctx.SheetStockItems.Add(sItem);
-                        ctx.Vendors.Update(vendor);
-                        ctx.SaveChanges();
+                       // sSItem = new SheetStockItem(vendor: vendor, internalDescription: description,
+                       //externalDescription: description,
+                       //materialType: mat, thickness: thickness, finish: finish);
+                       // ctx.SheetStockItems.Add(sSItem);
+                       // ctx.Vendors.Update(vendor);
+                       // ctx.SaveChanges();
                     }
                     sItem = new StockItem(vendor: vendor, internalDescription: description,
                         externalDescription: description,

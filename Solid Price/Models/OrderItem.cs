@@ -39,11 +39,6 @@ namespace SolidPrice.Models {
 
         public string Description {
             get { return StockItem?.ExternalDescription; }
-            //get => description;
-            //set {
-            //    description = value;
-            //    OnPropertyChanged();
-            //}
         }
 
         public float StockLengthInFeet {
@@ -51,11 +46,6 @@ namespace SolidPrice.Models {
                 if (StockItem == null) return 0;
                 return StockItem.StockLength;
             }
-            //get => stockLengthInFeet;
-            //set {
-            //    stockLengthInFeet = value;
-            //    OnPropertyChanged();
-            //}
         }
 
         public decimal CostPerLength {
@@ -63,34 +53,20 @@ namespace SolidPrice.Models {
                 if (StockItem == null) return 0;
                 return StockItem.CostPerLength;
             }
-            //get => costPerLength;
-            //set {
-            //    costPerLength = value;
-            //    OnPropertyChanged();
-            //}
         }
 
         public string VendorName {
             get { return StockItem?.VendorName; }
-            //get => vendorName;
-            //set {
-            //    vendorName = value;
-            //    OnPropertyChanged();
-            //}
         }
 
-        public string CostPerLengthString { get { return string.Format("{0:c}", CostPerLength); } }
-        public string TotalCost { get { return string.Format("{0:c}", CostPerLength * Qty); } }
+        public string CostPerLengthString => stockItem.CostPerLengthString;
+        public string TotalCost => string.Format("{0:c}", Math.Round(CostPerLength * Qty, 2, MidpointRounding.ToPositiveInfinity));
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public OrderItem() { }
 
         public OrderItem(int qty, StockItem stockItem) {
-            //Description = stockItem.ExternalDescription;
-            //StockLengthInFeet = stockItem.StockLength;
-            //VendorName = stockItem.VendorName;
-            //CostPerLength = stockItem.CostPerLength;
             Qty = qty;
             StockItem = stockItem;
             StockItemID = stockItem.ID;
