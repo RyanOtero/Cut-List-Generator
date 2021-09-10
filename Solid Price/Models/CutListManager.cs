@@ -581,7 +581,7 @@ namespace SolidPrice.Models {
                         sSItem = new SheetStockItem(vendor: vendor, internalDescription: description,
                        externalDescription: description,
                        materialType: mat, thickness: thickness, finish: finish);
-                        ctx.SheetStockItems.Add(sItem);
+                        ctx.SheetStockItems.Add(sSItem);
                         ctx.Vendors.Update(vendor);
                         ctx.SaveChanges();
                     }

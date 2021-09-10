@@ -22,6 +22,8 @@ namespace SolidPrice.Models {
         public DbSet<CutItem> CutItems { get; set; }
         public DbSet<SheetStockItem> SheetStockItems { get; internal set; }
         public DbSet<SheetCutItem> SheetCutItems { get; set; }
+        public DbSet<SheetOrderItem> SheetOrderItems { get; set; }
+
 
         public CutListGeneratorContext() { }
 

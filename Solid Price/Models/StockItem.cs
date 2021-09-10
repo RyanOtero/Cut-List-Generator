@@ -87,8 +87,8 @@ namespace SolidPrice.Models {
         public float StockLengthInInches => StockLength * 12;
         public string MatTypeString => CultureInfo.InvariantCulture.TextInfo.ToTitleCase(MatType.ToString().Replace("_", " "));
         public string ProfTypeString => CultureInfo.InvariantCulture.TextInfo.ToTitleCase(ProfType.ToString().Replace("_", " "));
-        public string CostPerFootString => string.Format("{0:c}", CostPerFoot);
-        public string CostPerLengthString => string.Format("{0:c}", CostPerLength);
+        public string CostPerFootString => string.Format("{0:c}", Math.Round(CostPerFoot, 2, MidpointRounding.ToPositiveInfinity));
+        public string CostPerLengthString => string.Format("{0:c}", Math.Round(CostPerLength, 2, MidpointRounding.ToPositiveInfinity));
         #endregion
 
         #region Constructors

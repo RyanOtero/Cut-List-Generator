@@ -27,7 +27,7 @@
         <StaticResource ResourceKey="ViewModel" />
     </Window.DataContext>
     <!--Content-->
-    <Grid Grid.Row="1" Margin="0 10 0 0">
+    <Grid Grid.Row="1" Margin="0 5 0 0">
         <Canvas x:Name="LoadingCanvas" VerticalAlignment="Top" HorizontalAlignment="Center" Opacity="0" Grid.Row="1" Height="16" Width="500" Margin="0 -26 0 0">
             <Path Fill="{StaticResource Light}">
                 <Path.Data>
@@ -86,7 +86,7 @@
                     </DataGrid>
                     <Label Content="Cut List:" Grid.Column="0" FontSize="18" HorizontalAlignment="Left" Grid.Row="6" Grid.ColumnSpan="2" Margin="28,-27,0,0" />
                     <Label Content="{Binding CutListTotal}" FontSize="18" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="6" Margin="30,-27,0,0" Width="160" />
-                    <DataGrid x:Name="cutListDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding CutList}" Margin="20,5,20,35" Grid.Row="6" Grid.ColumnSpan="3">
+                    <DataGrid x:Name="cutListDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding CutList}" Margin="20,5,20,20" Grid.Row="6" Grid.ColumnSpan="3">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Path=Qty, Mode=OneWay}" Header="Qty" Width="1.5*" />
                             <DataGridTextColumn Binding="{Binding Path=Description, Mode=OneWay}" Header="Description" Width="8.5*" />
@@ -102,34 +102,8 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Vendors" Style="{DynamicResource TabItemStyle}" >
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="60" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Grid Width="120" Height="60" VerticalAlignment="Top" Margin="20,0,0,10" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Button ToolTip="Add Vendor" Style="{StaticResource AddButton}" Height="22" Grid.Row="4" Grid.Column="0" Command="{Binding AddVendorCommand}"/>
-                        <Button ToolTip="Edit Vendor" Style="{StaticResource EditButton}" Height="25" Margin="5 0 2 3" Grid.Row="4" Grid.Column="1" Command="{Binding EditVendorCommand}"/>
-                        <Button ToolTip="Delete Vendor" Style="{StaticResource DeleteButton}" Height="20" Grid.Row="4" Grid.Column="2" Command="{Binding DeleteVendorCommand}"/>
-                    </Grid>
-                    <DataGrid x:Name="vendorDataGrid" ItemsSource="{Binding Path=Vendors}" SelectedItem="{Binding SelectedVendor, Mode=TwoWay}" HeadersVisibility="Column" CanUserAddRows="False" AutoGenerateColumns="False" Margin="20,0,20,20" Grid.Column="0" Grid.Row="1">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Path=VendorName, Mode=OneWay}" Header="Vendor Name" Width="3*" />
-                            <DataGridTextColumn Binding="{Binding Path=PhoneNumber, Mode=OneWay}" Header="Phone Number" Width="2*" />
-                            <DataGridTextColumn Binding="{Binding Path=ContactName, Mode=OneWay}" Header="Contact Name" Width="2*" />
-                            <DataGridTextColumn Binding="{Binding Path=ContactEmail, Mode=OneWay}" Header="Contact Email" Width="2*" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
+            <TabItem Header="Sheet Cut List" Style="{DynamicResource TabItemStyle}">
+
             </TabItem>
             <TabItem Header="Stock Types" Style="{DynamicResource TabItemStyle}">
                 <Grid>
@@ -161,6 +135,38 @@
                             <DataGridTextColumn Binding="{Binding Path=StockLength, Mode=OneWay}" Header="Stock Length" Width="1.5*" />
                             <DataGridTextColumn Binding="{Binding Path=InternalDescription, Mode=OneWay}" Header="Internal Description" Width="3*" />
                             <DataGridTextColumn Binding="{Binding Path=ExternalDescription, Mode=OneWay}" Header="External Description" Width="3*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Sheet Types" Style="{DynamicResource TabItemStyle}">
+
+            </TabItem>
+            <TabItem Header="Vendors" Style="{DynamicResource TabItemStyle}" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Width="120" Height="60" VerticalAlignment="Top" Margin="20,0,0,10" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button ToolTip="Add Vendor" Style="{StaticResource AddButton}" Height="22" Grid.Row="4" Grid.Column="0" Command="{Binding AddVendorCommand}"/>
+                        <Button ToolTip="Edit Vendor" Style="{StaticResource EditButton}" Height="25" Margin="5 0 2 3" Grid.Row="4" Grid.Column="1" Command="{Binding EditVendorCommand}"/>
+                        <Button ToolTip="Delete Vendor" Style="{StaticResource DeleteButton}" Height="20" Grid.Row="4" Grid.Column="2" Command="{Binding DeleteVendorCommand}"/>
+                    </Grid>
+                    <DataGrid x:Name="vendorDataGrid" ItemsSource="{Binding Path=Vendors}" SelectedItem="{Binding SelectedVendor, Mode=TwoWay}" HeadersVisibility="Column" CanUserAddRows="False" AutoGenerateColumns="False" Margin="20,0,20,20" Grid.Column="0" Grid.Row="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Path=VendorName, Mode=OneWay}" Header="Vendor Name" Width="3*" />
+                            <DataGridTextColumn Binding="{Binding Path=PhoneNumber, Mode=OneWay}" Header="Phone Number" Width="2*" />
+                            <DataGridTextColumn Binding="{Binding Path=ContactName, Mode=OneWay}" Header="Contact Name" Width="2*" />
+                            <DataGridTextColumn Binding="{Binding Path=ContactEmail, Mode=OneWay}" Header="Contact Email" Width="2*" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
