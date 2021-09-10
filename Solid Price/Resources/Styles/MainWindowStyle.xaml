@@ -15,7 +15,7 @@
 		because the title and window content obscure the rest-->
             <Border CornerRadius="15" Grid.RowSpan="2" Background="{StaticResource Dark}" BorderThickness="3" BorderBrush="{StaticResource Light}" />
             <!--title bar-->
-            <Border CornerRadius="15,15,0,0" BorderThickness="3,3,3,0" Background="{StaticResource Dark}" BorderBrush="{StaticResource Light}" MouseDown="Window_MouseDown">
+            <Border CornerRadius="15,15,0,0" BorderThickness="3,3,3,0" Background="{StaticResource Dark}" BorderBrush="{StaticResource Light}" MouseMove="Window_MouseMove" MouseDown="Window_MouseDown">
                 <!--Window Icon and Title Foreground="#639fc7" -->
                 <Grid>
                     <StackPanel Orientation="Horizontal" Margin="12,12,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="30">

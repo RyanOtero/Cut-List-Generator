@@ -111,22 +111,13 @@ namespace SolidPrice.Models {
                 decimal num = StockItem != null ? StockItem.CostPerFoot : 0;
                 return string.Format("{0:c}", num / 12 * (decimal)Length);
             }
-            //get => cost;
-            //set {
-            //    cost = value;
-            //    OnPropertyChanged();
-            //}
         }
 
         public string TotalCost {
             get {
                 decimal num = StockItem != null ? StockItem.CostPerFoot : 0;
                 return string.Format("{0:c}", num / 12 * (decimal)Length * Qty);
-            }        //    get => totalCost;
-                     //    set {
-                     //        totalCost = value;
-                     //        OnPropertyChanged();
-                     //    }
+            }
         }
 
         public string StickNumberString {
@@ -160,29 +151,18 @@ namespace SolidPrice.Models {
         }
 
         public int CompareTo(CutItem other) {
-            int i = Description.CompareTo(other.Description);
-            if (i == -1) {
-                return -1;
-            } else if (i == 1) {
-                return 1;
-            } else {
-                int j = StickNumber.CompareTo(other.StickNumber);
-                if (j == 1) {
-                    return 1;
-                } else if (j == -1) {
-                    return -1;
-                } else {
-                    int k = Length.CompareTo(other.Length);
-                    if (k == -1) {
-                        return 1;
-                    } else if (k == 1) {
-                        return -1;
-                    } else {
-                        return 0;
+            if (other != null) {
+                if (Description != other.Description) {
+                    if (StickNumber != other.StickNumber) {
+                        return Length.CompareTo(other.Length);
                     }
+                } else {
+                    return StickNumber.CompareTo(other.StickNumber);
                 }
+            } else {
+                return Description.CompareTo(other.Description);
             }
-
+            return 1;
         }
 
         public bool Equals(CutItem other) {

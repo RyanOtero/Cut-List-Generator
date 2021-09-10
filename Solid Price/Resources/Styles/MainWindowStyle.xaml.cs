@@ -32,6 +32,19 @@ namespace SolidPrice.Styles {
         /** 
         * Window Events
         **/
+        private void Window_MouseMove(object sender, MouseEventArgs e) {
+            Window win = App.Current.MainWindow;
+
+            if (e.LeftButton == MouseButtonState.Pressed && win.WindowState == WindowState.Maximized) {
+                win.WindowState = WindowState.Normal;
+                win.Top = 0;
+            }
+            if (e.LeftButton == MouseButtonState.Pressed) {
+                Window.GetWindow((FrameworkElement)e.Source).DragMove();
+            }
+
+        }
+
         private void Window_MouseDown(object sender, MouseButtonEventArgs e) {
             Window win = App.Current.MainWindow;
 
@@ -42,8 +55,8 @@ namespace SolidPrice.Styles {
                     win.WindowState = WindowState.Maximized;
             }
 
-            if (e.ChangedButton == MouseButton.Left) {
-                Window.GetWindow(((FrameworkElement)e.Source)).DragMove();
+            if (true) {
+
             }
         }
     }

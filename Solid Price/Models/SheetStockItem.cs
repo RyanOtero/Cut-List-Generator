@@ -4,16 +4,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
-namespace SolidPrice.Models
-{
-    public class SheetStockItem : IEquatable<SheetStockItem>, INotifyPropertyChanged
-    {
+namespace SolidPrice.Models {
+    public class SheetStockItem : IEquatable<SheetStockItem>, INotifyPropertyChanged {
 
         #region Fields
         private MaterialType matType;
-        private float stockLength;
-        private float stockWidth;
+        private float stockLengthInInches;
+        private float stockWidthInInches;
         private float thickness;
+        private string finish;
         private string internalDescription;
         private string externalDescription;
         private Vendor vendor;
@@ -25,96 +24,85 @@ namespace SolidPrice.Models
         #region Properties
         public int ID { get; set; }
 
-        public MaterialType MatType
-        {
+        public MaterialType MatType {
             get => matType;
-            set
-            {
+            set {
                 matType = value;
                 OnPropertyChanged();
             }
         }
 
-        public float StockLength
-        {
-            get => stockLength;
-            set
-            {
-                stockLength = value;
+        public float StockLengthInInches {
+            get => stockLengthInInches;
+            set {
+                stockLengthInInches = value;
                 OnPropertyChanged();
             }
         }
-        public float StockWidth
-        {
-            get => stockWidth;
-            set
-            {
-                stockWidth = value;
+        public float StockWidthInInches {
+            get => stockWidthInInches;
+            set {
+                stockWidthInInches = value;
                 OnPropertyChanged();
             }
         }
 
-        public float Thickness
-        {
+        public float Thickness {
             get => thickness;
-            set
-            {
+            set {
                 thickness = value;
                 OnPropertyChanged();
             }
         }
 
-        public string InternalDescription
-        {
+        public string Finish {
+            get => finish;
+            set {
+                finish = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string InternalDescription {
             get => internalDescription;
-            set
-            {
+            set {
                 internalDescription = value;
                 OnPropertyChanged();
             }
         }
-        public string ExternalDescription
-        {
+        public string ExternalDescription {
             get => externalDescription;
-            set
-            {
+            set {
                 externalDescription = value;
                 OnPropertyChanged();
             }
         }
         [ForeignKey("VendorID")]
-        public virtual Vendor Vendor
-        {
+        public virtual Vendor Vendor {
             get => vendor;
-            set
-            {
+            set {
                 vendor = value;
                 OnPropertyChanged();
             }
         }
-        public decimal CostPerSqFoot
-        {
+        public decimal CostPerSqFoot {
             get => costPerSqFoot;
-            set
-            {
+            set {
                 costPerSqFoot = value;
                 OnPropertyChanged();
             }
         }
 
-        public string VendorItemNumber
-        {
+        public string VendorItemNumber {
             get => vendorItemNumber;
-            set
-            {
+            set {
                 vendorItemNumber = value;
                 OnPropertyChanged();
             }
         }
 
         public string VendorName { get { return Vendor?.VendorName; } }
-        public decimal CostPerSheet => CostPerSqFoot * (decimal)StockLength * (decimal)StockWidth;
-        public float StockLengthInInches => StockLength * 12;
+        public decimal CostPerSheet => CostPerSqFoot * ((decimal)StockLengthInInches * (decimal)StockWidthInInches / 144);
         public string MatTypeString => CultureInfo.InvariantCulture.TextInfo.ToTitleCase(MatType.ToString().Replace("_", " "));
         public string CostPerSqFootString => string.Format("{0:c}", CostPerSqFoot);
         public string CostPerSheetString => string.Format("{0:c}", CostPerSheet);
@@ -124,13 +112,13 @@ namespace SolidPrice.Models
         public SheetStockItem() { }
 
         public SheetStockItem(Vendor vendor = null, MaterialType materialType = MaterialType.steel,
-            ProfileType profType = ProfileType.square_tube, decimal costPerFoot = 0m,
-            float stockLength = 24, string internalDescription = "", string externalDescription = "", string vendorItemNumber = "")
-        {
+            decimal costPerSqFoot = 0m, float stockLength = 96, float stockWidth = 48, float thickness = 0, string finish = "", string internalDescription = "", string externalDescription = "", string vendorItemNumber = "") {
             MatType = materialType;
             CostPerSqFoot = costPerSqFoot;
-            StockLength = stockLength;
-            StockWidth = stockWidth;
+            StockLengthInInches = stockLength;
+            StockWidthInInches = stockWidth;
+            Thickness = thickness;
+            Finish = finish;
             InternalDescription = internalDescription;
             ExternalDescription = externalDescription;
             Vendor = vendor;
@@ -139,121 +127,97 @@ namespace SolidPrice.Models
         #endregion
 
         #region INotifyPropertyChanged
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
 
         #region From Description Methods
-        public static MaterialType MaterialFromDescription(string desc)
-        {
+        public static MaterialType MaterialFromDescription(string desc) {
             MaterialType mType = MaterialType.none;
             bool breaker = false;
             string[] descArray = desc.Split(" ");
             MaterialType[] types = (MaterialType[])Enum.GetValues(typeof(MaterialType));
 
-            foreach (MaterialType t in types)
-            {
+            foreach (MaterialType t in types) {
                 if (breaker) break;
 
-                switch (t)
-                {
+                switch (t) {
                     case MaterialType.stainless_steel:
-                        foreach (string str in descArray)
-                        {
-                            if (str.ToLower().Contains("stainless") || str.ToLower() == "ss")
-                            {
+                        foreach (string str in descArray) {
+                            if (str.ToLower().Contains("stainless") || str.ToLower() == "ss") {
                                 mType = MaterialType.stainless_steel;
                                 breaker = true;
                             }
                         }
                         break;
                     case MaterialType.steel:
-                        foreach (string str in descArray)
-                        {
-                            if (str.ToLower() == "steel")
-                            {
+                        foreach (string str in descArray) {
+                            if (str.ToLower() == "steel") {
                                 mType = MaterialType.steel;
                                 breaker = true;
                             }
                         }
                         break;
                     case MaterialType.titanium:
-                        foreach (string str in descArray)
-                        {
-                            if (str.ToLower() == "titanium")
-                            {
+                        foreach (string str in descArray) {
+                            if (str.ToLower() == "titanium") {
                                 mType = MaterialType.titanium;
                                 breaker = true;
                             }
                         }
                         break;
                     case MaterialType.brass:
-                        foreach (string str in descArray)
-                        {
-                            if (str.ToLower() == "brass")
-                            {
+                        foreach (string str in descArray) {
+                            if (str.ToLower() == "brass") {
                                 mType = MaterialType.brass;
                                 breaker = true;
                             }
                         }
                         break;
                     case MaterialType.bronze:
-                        foreach (string str in descArray)
-                        {
-                            if (str.ToLower() == "bronze")
-                            {
+                        foreach (string str in descArray) {
+                            if (str.ToLower() == "bronze") {
                                 mType = MaterialType.bronze;
                                 breaker = true;
                             }
                         }
                         break;
                     case MaterialType.zinc:
-                        foreach (string str in descArray)
-                        {
-                            if (str.ToLower() == "zinc")
-                            {
+                        foreach (string str in descArray) {
+                            if (str.ToLower() == "zinc") {
                                 mType = MaterialType.zinc;
                                 breaker = true;
                             }
                         }
                         break;
                     case MaterialType.copper:
-                        foreach (string str in descArray)
-                        {
-                            if (str.ToLower() == "copper")
-                            {
+                        foreach (string str in descArray) {
+                            if (str.ToLower() == "copper") {
                                 mType = MaterialType.copper;
                                 breaker = true;
                             }
                         }
                         break;
                     case MaterialType.nickel:
-                        foreach (string str in descArray)
-                        {
-                            if (str.ToLower() == "nickel")
-                            {
+                        foreach (string str in descArray) {
+                            if (str.ToLower() == "nickel") {
                                 mType = MaterialType.nickel;
                                 breaker = true;
                             }
                         }
                         break;
                     case MaterialType.wood:
-                        foreach (string str in descArray)
-                        {
-                            if (str.ToLower() == "wood" || str.ToLower() == "lumber")
-                            {
+                        foreach (string str in descArray) {
+                            if (str.ToLower() == "wood" || str.ToLower() == "lumber") {
                                 mType = MaterialType.wood;
                                 breaker = true;
                             }
                         }
                         break;
                     case MaterialType.aluminum:
-                        foreach (string str in descArray)
-                        {
-                            if (str.ToLower().Contains("alum"))
-                            {
+                        foreach (string str in descArray) {
+                            if (str.ToLower().Contains("alum")) {
                                 mType = MaterialType.aluminum;
                                 breaker = true;
                             }
@@ -269,58 +233,35 @@ namespace SolidPrice.Models
         #endregion
 
         #region Comparison Methods
-        public int CompareTo(SheetStockItem other)
-        {
-            if (other != null)
-            {
-                if (ID == other.ID)
-                {
-                    if (Vendor.ID == other.Vendor.ID)
-                    {
-                        if (InternalDescription == other.InternalDescription)
-                        {
-                            if (ExternalDescription == other.ExternalDescription)
-                            {
-                                if (CostPerFoot == other.CostPerFoot)
-                                {
-                                    if (MatType == other.MatType)
-                                    {
-                                        if (ProfType == other.ProfType)
-                                        {
-                                            return StockLength.CompareTo(other.StockLength);
+        public int CompareTo(SheetStockItem other) {
+            if (other != null) {
+                if (ID == other.ID) {
+                    if (Vendor.ID == other.Vendor.ID) {
+                        if (InternalDescription == other.InternalDescription) {
+                            if (ExternalDescription == other.ExternalDescription) {
+                                if (CostPerSqFoot == other.CostPerSqFoot) {
+                                    if (MatType == other.MatType) {
+                                        if (Finish == other.Finish) {
+                                            return StockLengthInInches.CompareTo(other.StockLengthInInches);
+                                        } else {
+                                            Finish.CompareTo(other.Finish);
                                         }
-                                        else
-                                        {
-                                            ProfType.CompareTo(other.ProfType);
-                                        }
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         MatType.CompareTo(other.MatType);
                                     }
+                                } else {
+                                    return CostPerSqFoot.CompareTo(other.CostPerSqFoot);
                                 }
-                                else
-                                {
-                                    return CostPerFoot.CompareTo(other.CostPerFoot);
-                                }
-                            }
-                            else
-                            {
+                            } else {
                                 return ExternalDescription.CompareTo(other.ExternalDescription);
                             }
-                        }
-                        else
-                        {
+                        } else {
                             return InternalDescription.CompareTo(other.InternalDescription);
                         }
-                    }
-                    else
-                    {
+                    } else {
                         return Vendor.ID.CompareTo(other.Vendor.ID);
                     }
-                }
-                else
-                {
+                } else {
                     return ID.CompareTo(other.ID);
                 }
             }
@@ -331,22 +272,18 @@ namespace SolidPrice.Models
 
         public override int GetHashCode() => ID.GetHashCode();
 
-        public bool Equals(SheetStockItem other)
-        {
-            if (other is null)
-            {
+        public bool Equals(SheetStockItem other) {
+            if (other is null) {
                 return false;
             }
 
             // Optimization for a common success case.
-            if (Object.ReferenceEquals(this, other))
-            {
+            if (Object.ReferenceEquals(this, other)) {
                 return true;
             }
 
             // If run-time types are not exactly the same, return false.
-            if (this.GetType() != other.GetType())
-            {
+            if (this.GetType() != other.GetType()) {
                 return false;
             }
 
@@ -355,21 +292,20 @@ namespace SolidPrice.Models
             // System.Object, which defines Equals as reference equality.
             return (ID == other.ID) &&
                 (MatType == other.MatType) &&
-                (ProfType == other.ProfType) &&
-                (StockLength == other.StockLength) &&
+                (StockLengthInInches == other.StockLengthInInches) &&
+                (StockWidthInInches == other.StockWidthInInches) &&
+                (Thickness == other.Thickness) &&
+                (Finish == other.Finish) &&
                 (InternalDescription == other.InternalDescription) &&
                 (ExternalDescription == other.ExternalDescription) &&
                 (Vendor == other.Vendor) &&
-                (CostPerFoot == other.CostPerFoot);
+                (CostPerSqFoot == other.CostPerSqFoot);
 
         }
 
-        public static bool operator ==(SheetStockItem left, SheetStockItem right)
-        {
-            if (left is null)
-            {
-                if (right is null)
-                {
+        public static bool operator ==(SheetStockItem left, SheetStockItem right) {
+            if (left is null) {
+                if (right is null) {
                     return true;
                 }
 

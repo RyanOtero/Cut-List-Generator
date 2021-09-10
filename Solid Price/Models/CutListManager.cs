@@ -500,8 +500,10 @@ namespace SolidPrice.Models {
                 string angleRotation = "-";
                 string description = "";
                 string material = "";
+                string finish = "";
                 bool isNew = false;
                 StockItem sItem = null;
+                SheetStockItem sSItem = null;
 
 
                 for (i = 0; i <= (vCustomPropNames.Count - 1); i++) {
@@ -534,6 +536,9 @@ namespace SolidPrice.Models {
                             break;
                         case "sheet metal thickness":
                             float.TryParse(CustomPropResolvedVal, out thickness);
+                            break;
+                        case "surface treatment":
+                            finish = CustomPropResolvedVal;
                             break;
                         case "angle1":
                             float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle1);
@@ -569,6 +574,16 @@ namespace SolidPrice.Models {
                         mat = StockItem.MaterialFromDescription(description);
                     } else {
                         mat = StockItem.MaterialFromDescription(material);
+                    }
+                    if (thickness != 0) {
+
+                    } else {
+                        sSItem = new SheetStockItem(vendor: vendor, internalDescription: description,
+                       externalDescription: description,
+                       materialType: mat, thickness: thickness, finish: finish);
+                        ctx.SheetStockItems.Add(sItem);
+                        ctx.Vendors.Update(vendor);
+                        ctx.SaveChanges();
                     }
                     sItem = new StockItem(vendor: vendor, internalDescription: description,
                         externalDescription: description,

@@ -20,6 +20,8 @@ namespace SolidPrice.Models {
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<CutItem> CutItems { get; set; }
+        public DbSet<SheetStockItem> SheetStockItems { get; internal set; }
+        public DbSet<SheetCutItem> SheetCutItems { get; set; }
 
         public CutListGeneratorContext() { }
 
@@ -51,10 +53,14 @@ namespace SolidPrice.Models {
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<StockItem>()
                 .HasOne(s => s.Vendor).WithMany();
+            modelBuilder.Entity<SheetStockItem>()
+               .HasOne(s => s.Vendor).WithMany();
             modelBuilder.Entity<OrderItem>()
                 .HasOne(o => o.StockItem).WithMany();
             modelBuilder.Entity<CutItem>()
                 .HasOne(c => c.StockItem).WithMany();
+            modelBuilder.Entity<SheetCutItem>()
+                .HasOne(c => c.SheetStockItem).WithMany();
 
             modelBuilder.Entity<StockItem>()
                 .Navigation(s => s.Vendor)
@@ -64,6 +70,12 @@ namespace SolidPrice.Models {
                 .UsePropertyAccessMode(PropertyAccessMode.Property);
             modelBuilder.Entity<CutItem>()
                 .Navigation(c => c.StockItem)
+                .UsePropertyAccessMode(PropertyAccessMode.Property);
+            modelBuilder.Entity<SheetStockItem>()
+                .Navigation(s => s.Vendor)
+                .UsePropertyAccessMode(PropertyAccessMode.Property);
+            modelBuilder.Entity<SheetCutItem>()
+                .Navigation(c => c.SheetStockItem)
                 .UsePropertyAccessMode(PropertyAccessMode.Property);
         }
 
