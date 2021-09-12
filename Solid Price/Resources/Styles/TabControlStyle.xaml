@@ -18,21 +18,28 @@
 
     <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{StaticResource Light}"/>
         <Setter Property="Margin" Value="0"/>
-        <Setter Property="Padding" Value="10,4,10,4"/>
+        <Setter Property="Padding" Value="10 4 10 4"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
-                        <Border x:Name="mainBorder" Background="{StaticResource Dark}" BorderThickness="2" CornerRadius="4,4,0,0" BorderBrush="{TemplateBinding BorderBrush}" Margin="0">
-                            <Border x:Name="innerBorder" Background="{StaticResource Light}" BorderThickness="2" CornerRadius="4,4,0,0" BorderBrush="{StaticResource Light}" Margin="-2,-2,-2,0" Opacity="0"/>
-                        </Border>
-                        <ContentPresenter x:Name="contentPresenter" TextBlock.FontWeight="Bold" TextBlock.FontSize="14" TextBlock.Foreground="{StaticResource Light}" ContentSource="Header" Focusable="False" HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                        <Border x:Name="mainBorder" Background="{StaticResource Dark}" BorderThickness="1" CornerRadius="8 8 0 0"
+                                BorderBrush="{TemplateBinding BorderBrush}" Margin="0"/>
+                        <ContentPresenter x:Name="contentPresenter" TextBlock.FontWeight="Bold" TextBlock.FontSize="14"
+                                              TextBlock.Foreground="{StaticResource Light}" ContentSource="Header"
+                                              Focusable="False"
+                                              HorizontalAlignment="{Binding HorizontalContentAlignment,
+                                RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" 
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                              VerticalAlignment="{Binding VerticalContentAlignment,
+                                RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                        <Border x:Name="hoverBorder" Background="Transparent" BorderBrush="{StaticResource Light}"
+                                BorderThickness="2" CornerRadius="8 8 0 0" Margin="0"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <MultiDataTrigger>
@@ -55,9 +62,10 @@
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false"/>
+                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True"/>
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top"/>
                             </MultiDataTrigger.Conditions>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{StaticResource Light}"/>
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -65,7 +73,6 @@
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Panel.ZIndex" Value="1"/>
-                            <Setter Property="Opacity" TargetName="innerBorder" Value="1"/>
                             <Setter Property="TextBlock.Foreground" TargetName="contentPresenter" Value="{StaticResource Dark}"/>
                         </MultiDataTrigger>
                     </ControlTemplate.Triggers>
@@ -84,7 +91,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
-                    <Grid x:Name="templateRoot" Margin="10" ClipToBounds="true" SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local">
+                    <Grid x:Name="templateRoot" Margin="15" ClipToBounds="true" SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition x:Name="ColumnDefinition0"/>
                             <ColumnDefinition x:Name="ColumnDefinition1" Width="0"/>
