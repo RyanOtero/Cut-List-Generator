@@ -12,6 +12,8 @@ namespace SolidPrice.Styles {
         private static double oldTop;
         private static double oldLeft;
         private static double virtualLeft;
+        private static double virtualTop;
+
 
         public MainWindowStyle() {
             InitializeComponent();
@@ -19,15 +21,24 @@ namespace SolidPrice.Styles {
 
         public static void GetVirtualWindowSize(Window win) {
             Window virtualWindow = new Window();
-            virtualWindow.Top = win.Top;
-            virtualWindow.Left = win.Left;
+            //virtualWindow.Top = win.Top;
+            //virtualWindow.Left = win.Left;
             virtualWindow.Width = 1f;
             virtualWindow.Height = 1f;
             virtualWindow.Opacity = 0;
             virtualWindow.Background = Brushes.Transparent;
             virtualWindow.Show();
             virtualWindow.WindowState = WindowState.Maximized;
-            virtualLeft = virtualWindow.Left < 0 ? -virtualWindow.Width + 16 : 0;
+
+            virtualLeft = virtualWindow.Left + 8;
+            virtualTop = virtualWindow.Top + 8;
+            if (win.Left < 0)
+            {
+                virtualWindow.Left = -virtualWindow.Width;
+                
+            }
+            //virtualLeft = virtualWindow.Left < 0 ? -virtualWindow.Width + 16 : 0;
+            //virtualTop = virtualWindow.Top + 8;
             win.MaxHeight = virtualWindow.Height - 16;
             win.MaxWidth = virtualWindow.Width - 16;
             virtualWindow.Close();
@@ -40,10 +51,11 @@ namespace SolidPrice.Styles {
             oldWidth = win.Width;
             oldTop = win.Top;
             oldLeft = win.Left;
+            win.Top = virtualTop;
+            win.Left = virtualLeft;
             win.Height = win.MaxHeight;
             win.Width = win.MaxWidth;
-            win.Top = 0;
-            win.Left = virtualLeft;
+
             isMaxed = true;
         }
 
