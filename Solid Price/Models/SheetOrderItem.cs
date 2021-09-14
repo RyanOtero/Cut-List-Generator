@@ -55,7 +55,16 @@ namespace SolidPrice.Models
             get
             {
                 if (SheetStockItem == null) return 0;
-                return SheetStockItem.StockLengthInInches;
+                return SheetStockItem.StockLengthInInches / 12;
+            }
+        }
+
+        public float StockWidthInFeet
+        {
+            get
+            {
+                if (SheetStockItem == null) return 0;
+                return SheetStockItem.StockWidthInInches / 12;
             }
         }
 

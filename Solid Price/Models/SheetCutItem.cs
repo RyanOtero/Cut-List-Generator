@@ -6,6 +6,16 @@ using System.Runtime.CompilerServices;
 namespace SolidPrice.Models {
     public class SheetCutItem : IComparable<SheetCutItem>, IEquatable<SheetCutItem>, INotifyPropertyChanged {
 
+        public enum Grain
+        {
+            [Description("-")]
+            none,
+            [Description("Length")]
+            Length,
+            [Description("Width")]
+            Width
+        }
+
         #region Fields
         private float length;
         private float width;
@@ -13,6 +23,7 @@ namespace SolidPrice.Models {
         private int sheetStockItemID;
         private int qty;
         private int sheetNumber;
+        private Grain grainDirection;
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
@@ -66,6 +77,15 @@ namespace SolidPrice.Models {
             }
         }
 
+        public Grain GrainDirection
+        {
+            get => grainDirection;
+            set {
+                grainDirection = value;
+                OnPropertyChanged();
+            }
+        }
+
         public int SheetNumber {
             get => sheetNumber;
             set {
@@ -102,12 +122,13 @@ namespace SolidPrice.Models {
 
         public SheetCutItem() { }
 
-        public SheetCutItem(SheetStockItem sheetStockItem, int qty, float length, float width, int sheetNumber = 0) {
+        public SheetCutItem(SheetStockItem sheetStockItem, int qty, float length, float width, Grain grainDirection, int sheetNumber = 0) {
             SheetStockItem = sheetStockItem;
             SheetStockItemID = sheetStockItem.ID;
             Qty = qty;
             Length = length;
             Width = width;
+            GrainDirection = grainDirection;
             SheetNumber = sheetNumber;
         }
 
@@ -147,7 +168,7 @@ namespace SolidPrice.Models {
         }
 
         public SheetCutItem Clone() {
-            return new SheetCutItem(SheetStockItem, Qty, Length, Width, SheetNumber);
+            return new SheetCutItem(SheetStockItem, Qty, Length, Width, GrainDirection, SheetNumber);
         }
     }
 }

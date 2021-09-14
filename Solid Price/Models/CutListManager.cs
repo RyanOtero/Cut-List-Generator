@@ -28,6 +28,9 @@ namespace SolidPrice.Models {
         private ObservableCollection<OrderItem> orderList;
         private ObservableCollection<Vendor> vendors;
         private ObservableCollection<StockItem> stockItems;
+        private ObservableCollection<SheetCutItem> sheetCutList;
+        private ObservableCollection<SheetOrderItem> sheetOrderList;
+        private ObservableCollection<SheetStockItem> sheetStockItems;
         private string connectionString;
         private bool hadError;
         private CutListGeneratorContext ctx;
@@ -46,14 +49,6 @@ namespace SolidPrice.Models {
             set { connectionString = value; OnPropertyChanged(); }
         }
 
-        public ObservableCollection<OrderItem> OrderList {
-            get => orderList;
-            set {
-                orderList = value;
-                BindingOperations.EnableCollectionSynchronization(orderList, asyncLock);
-            }
-        }
-
         public ObservableCollection<CutItem> CutList {
             get => cutList;
             set {
@@ -61,11 +56,12 @@ namespace SolidPrice.Models {
                 BindingOperations.EnableCollectionSynchronization(cutList, asyncLock);
             }
         }
-        public ObservableCollection<Vendor> Vendors {
-            get => vendors;
+
+        public ObservableCollection<OrderItem> OrderList {
+            get => orderList;
             set {
-                vendors = value;
-                BindingOperations.EnableCollectionSynchronization(vendors, asyncLock);
+                orderList = value;
+                BindingOperations.EnableCollectionSynchronization(orderList, asyncLock);
             }
         }
 
@@ -76,6 +72,39 @@ namespace SolidPrice.Models {
                 BindingOperations.EnableCollectionSynchronization(stockItems, asyncLock);
             }
         }
+
+        public ObservableCollection<SheetCutItem> SheetCutList {
+            get => sheetCutList;
+            set {
+                sheetCutList = value;
+                BindingOperations.EnableCollectionSynchronization(sheetCutList, asyncLock);
+            }
+        }
+
+        public ObservableCollection<SheetOrderItem> SheetOrderList {
+            get => sheetOrderList;
+            set {
+                sheetOrderList = value;
+                BindingOperations.EnableCollectionSynchronization(sheetOrderList, asyncLock);
+            }
+        }
+
+        public ObservableCollection<SheetStockItem> SheetStockItems {
+            get => sheetStockItems;
+            set {
+                sheetStockItems = value;
+                BindingOperations.EnableCollectionSynchronization(sheetStockItems, asyncLock);
+            }
+        }
+
+        public ObservableCollection<Vendor> Vendors {
+            get => vendors;
+            set {
+                vendors = value;
+                BindingOperations.EnableCollectionSynchronization(vendors, asyncLock);
+            }
+        }
+
         #endregion
 
         #region Constructors
@@ -83,9 +112,14 @@ namespace SolidPrice.Models {
         private CutListManager() {
             asyncLock = new object();
             CutList = new ObservableCollection<CutItem>();
-            Vendors = new ObservableCollection<Vendor>();
             StockItems = new ObservableCollection<StockItem>();
             OrderList = new ObservableCollection<OrderItem>();
+            Vendors = new ObservableCollection<Vendor>();
+            SheetCutList = new ObservableCollection<SheetCutItem>();
+            SheetStockItems = new ObservableCollection<SheetStockItem>();
+            SheetOrderList = new ObservableCollection<SheetOrderItem>();
+            Vendors = new ObservableCollection<Vendor>();
+
             Task.Run(() => {
                 try {
                     var progId = "SldWorks.Application";
@@ -123,31 +157,48 @@ namespace SolidPrice.Models {
                 ErrorMessage("Database Error clm.cs 115", "The connection string is invalid.");
                 return;
             }
-            StockItems.Clear();
-            Vendors.Clear();
             CutList.Clear();
             OrderList.Clear();
+            StockItems.Clear();
+            SheetCutList.Clear();
+            SheetOrderList.Clear();
+            SheetStockItems.Clear();
+            Vendors.Clear();
             try {
                 using (var ctx = new CutListGeneratorContext(ConnectionString)) {
-                    List<StockItem> sTypes = ctx.StockItems.Include(s => s.Vendor).ToList();
-                    foreach (StockItem item in sTypes) {
-                        StockItems.Add(item);
+                    List<CutItem> cList = ctx.CutItems.ToList();
+                    cList.Sort();
+                    foreach (CutItem item in cList) {
+                        CutList.Add(item);
                     }
-                    List<Vendor> vendors = ctx.Vendors.ToList();
-                    foreach (Vendor item in vendors) {
-                        Vendors.Add(item);
+                    List<SheetCutItem> sCList = ctx.SheetCutItems.ToList();
+                    sCList.Sort();
+                    foreach (SheetCutItem item in sCList) {
+                        SheetCutList.Add(item);
                     }
                     List<OrderItem> oList = ctx.OrderItems.ToList();
                     oList.Sort();
                     foreach (OrderItem item in oList) {
                         OrderList.Add(item);
                     }
-                    List<CutItem> cList = ctx.CutItems.ToList();
-                    cList.Sort();
-                    foreach (CutItem item in cList) {
-                        CutList.Add(item);
+                    List<SheetOrderItem> sOList = ctx.SheetOrderItems.ToList();
+                    sOList.Sort();
+                    foreach (SheetOrderItem item in sOList) {
+                        SheetOrderList.Add(item);
+                    }
+                    List<StockItem> sTypes = ctx.StockItems.Include(s => s.Vendor).ToList();
+                    foreach (StockItem item in sTypes) {
+                        StockItems.Add(item);
+                    }
+                    List<SheetStockItem> sSTypes = ctx.SheetStockItems.Include(s => s.Vendor).ToList();
+                    foreach (SheetStockItem item in sSTypes) {
+                        SheetStockItems.Add(item);
                     }
 
+                    List<Vendor> vendors = ctx.Vendors.ToList();
+                    foreach (Vendor item in vendors) {
+                        Vendors.Add(item);
+                    }
                 }
             } catch (Exception e) {
                 ErrorMessage("Database Error clm.cs 134", "There was an error while accessing the database.");
@@ -159,6 +210,8 @@ namespace SolidPrice.Models {
                 using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
                     ctx.CutItems.RemoveRange(ctx.CutItems);
                     ctx.OrderItems.RemoveRange(ctx.OrderItems);
+                    ctx.SheetCutItems.RemoveRange(ctx.SheetCutItems);
+                    ctx.SheetOrderItems.RemoveRange(ctx.SheetOrderItems);
                     ctx.SaveChanges();
                 }
             } catch (Exception e) {
@@ -185,7 +238,8 @@ namespace SolidPrice.Models {
 
             inBodyFolder = false;
             NewCutList();
-            List<CutItem> tempList = new List<CutItem>();
+            List<CutItem> tempCList = new List<CutItem>();
+            List<SheetCutItem> tempSCList = new List<SheetCutItem>();
             isPart = filePath.ToLower().Contains(".sldprt");
             isAssembly = filePath.ToLower().Contains(".sldasm");
 
@@ -248,9 +302,9 @@ namespace SolidPrice.Models {
             try {
                 using (ctx = new CutListGeneratorContext(ConnectionString)) {
                     if (isAssembly) {
-                        TraverseComponent(tempList, swAssy, TraverseFeatures);
+                        TraverseComponent(tempCList, tempSCList, swAssy, TraverseFeatures);
                     } else {
-                        TraverseFeatures(tempList, (Feature)swPart.FirstFeature(), true, "Root Feature", "");
+                        TraverseFeatures(tempCList, tempSCList, (Feature)swPart.FirstFeature(), true, "Root Feature", "");
                     }
                 }
 
@@ -265,7 +319,7 @@ namespace SolidPrice.Models {
                 hadError = false;
                 return;
             }
-            SortCutListForDisplay(isDetailed, tempList);
+            SortCutListForDisplay(isDetailed, tempCListv tempSCList);
 
             timer.Stop();
             TimeSpan ts = timer.Elapsed;
