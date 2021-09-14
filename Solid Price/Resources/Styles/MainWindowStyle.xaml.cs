@@ -1,7 +1,6 @@
 ﻿using SolidPrice.Views;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace SolidPrice.Styles {
     public partial class MainWindowStyle : ResourceDictionary {
@@ -11,51 +10,30 @@ namespace SolidPrice.Styles {
         private static double oldWidth;
         private static double oldTop;
         private static double oldLeft;
-        private static double virtualLeft;
-        private static double virtualTop;
 
 
         public MainWindowStyle() {
             InitializeComponent();
         }
 
-        public static void GetVirtualWindowSize(Window win) {
-            Window virtualWindow = new Window();
-            //virtualWindow.Top = win.Top;
-            //virtualWindow.Left = win.Left;
-            virtualWindow.Width = 1f;
-            virtualWindow.Height = 1f;
-            virtualWindow.Opacity = 0;
-            virtualWindow.Background = Brushes.Transparent;
-            virtualWindow.Show();
-            virtualWindow.WindowState = WindowState.Maximized;
-
-            virtualLeft = virtualWindow.Left + 8;
-            virtualTop = virtualWindow.Top + 8;
-            if (win.Left < 0)
-            {
-                virtualWindow.Left = -virtualWindow.Width;
-                
-            }
-            //virtualLeft = virtualWindow.Left < 0 ? -virtualWindow.Width + 16 : 0;
-            //virtualTop = virtualWindow.Top + 8;
-            win.MaxHeight = virtualWindow.Height - 16;
-            win.MaxWidth = virtualWindow.Width - 16;
-            virtualWindow.Close();
+        public static void PostitionWindowOnScreen(Window window, double horizontalShift = 0, double verticalShift = 0) {
+            WpfScreenHelper.Screen screen = WpfScreenHelper.Screen.FromHandle(new System.Windows.Interop.WindowInteropHelper(window).Handle);
+            window.Width = screen.Bounds.Width;
+            window.Height = screen.Bounds.Height - 2 * -verticalShift;
+            window.Left = screen.Bounds.X + ((screen.Bounds.Width - window.ActualWidth) / 2) + horizontalShift;
+            window.Top = screen.Bounds.Y + ((screen.Bounds.Height - window.ActualHeight) / 2) + verticalShift;
         }
+
 
         public static void MaxState() {
             Window win = App.Current.MainWindow;
-            GetVirtualWindowSize(win);
             oldHeight = win.Height;
             oldWidth = win.Width;
             oldTop = win.Top;
             oldLeft = win.Left;
-            win.Top = virtualTop;
-            win.Left = virtualLeft;
-            win.Height = win.MaxHeight;
-            win.Width = win.MaxWidth;
-
+            double offset = WpfScreenHelper.Screen.PrimaryScreen.WorkingArea.Height == SystemParameters.PrimaryScreenHeight ?
+                0 : SystemParameters.PrimaryScreenHeight - SystemParameters.WorkArea.Height;
+            PostitionWindowOnScreen(win, 0, -offset / 2);
             isMaxed = true;
         }
 

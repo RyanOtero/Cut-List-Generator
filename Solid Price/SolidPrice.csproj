@@ -86,6 +86,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.5" />
+    <PackageReference Include="WpfScreenHelper" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
