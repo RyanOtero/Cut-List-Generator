@@ -133,6 +133,38 @@
                         </DataGrid>
                     </Grid>
                 </TabItem>
+                <TabItem Header="Stock Types" Style="{DynamicResource TabItemStyle}"
+                        Visibility="{Binding IsStockVisible, Source={StaticResource ViewModel}, Converter={StaticResource b2v}}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid Width="120" Height="60" VerticalAlignment="Top" Margin="20,0,0,10" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button ToolTip="Add Stock Type" Style="{StaticResource AddButton}" Height="22" Grid.Row="4" Grid.Column="0" Command="{Binding AddStockItemCommand}"/>
+                            <Button ToolTip="Edit Stock Type" Style="{StaticResource EditButton}" Height="25" Margin="5 0 2 3" Grid.Row="4" Grid.Column="1" Command="{Binding EditStockItemCommand}"/>
+                            <Button ToolTip="Delete Stock Type" Style="{StaticResource DeleteButton}" Height="20" Grid.Row="4" Grid.Column="2" Command="{Binding DeleteStockItemCommand}"/>
+                        </Grid>
+                        <DataGrid x:Name="StockItemsDataGrid" ItemsSource="{Binding Path=StockItems}" SelectedItem="{Binding SelectedStockItem, Mode=TwoWay}" HeadersVisibility="Column" CanUserAddRows="False" AutoGenerateColumns="False" Margin="20,0,20,20" Grid.Column="0" Grid.Row="1">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Path=VendorName, Mode=OneWay}" Header="Vendor" Width="*" />
+                                <DataGridTextColumn Binding="{Binding Path=VendorItemNumber, Mode=OneWay}" Header="Item #" Width="*" />
+                                <DataGridTextColumn Binding="{Binding Path=MatTypeString, Mode=OneWay}" Header="Material Type" Width="1.6*" />
+                                <DataGridTextColumn Binding="{Binding Path=ProfTypeString, Mode=OneWay}" Header="Profile Type" Width="1.6*" />
+                                <DataGridTextColumn Binding="{Binding Path=CostPerFootString, Mode=OneWay}" Header="Cost/FT" Width="1*" />
+                                <DataGridTextColumn Binding="{Binding Path=CostPerLengthString, Mode=OneWay}" Header="Cost/Length" Width="1.5*" />
+                                <DataGridTextColumn Binding="{Binding Path=StockLength, Mode=OneWay}" Header="Stock Length" Width="1.5*" />
+                                <DataGridTextColumn Binding="{Binding Path=InternalDescription, Mode=OneWay}" Header="Internal Description" Width="3*" />
+                                <DataGridTextColumn Binding="{Binding Path=ExternalDescription, Mode=OneWay}" Header="External Description" Width="3*" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
                 <TabItem Header="Sheet Cut List" Style="{DynamicResource TabItemStyle}"
                          Visibility="{Binding IsSheetVisible, Source={StaticResource ViewModel}, Converter={StaticResource b2v}}">
                     <Grid>
@@ -170,38 +202,6 @@
                                 <DataGridTextColumn Binding="{Binding Path=SheetNumberString, Mode=OneWay}" Header="Sheet No." Width="2.5*" Visibility="{Binding IsDetailed, Source={StaticResource ViewModel}, Converter={StaticResource b2v}}" />
                                 <DataGridTextColumn Binding="{Binding Path=Cost, Mode=OneWay}" Header="Cost Each" Width="2.5*" Visibility="{Binding ShowPricing, Source={StaticResource ViewModel},Converter={StaticResource b2v}}" />
                                 <DataGridTextColumn Binding="{Binding Path=TotalCost, Mode=OneWay}" Header="Total" Width="2*" Visibility="{Binding ShowPricing, Source={StaticResource ViewModel}, Converter={StaticResource b2v}}" />
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Stock Types" Style="{DynamicResource TabItemStyle}"
-                        Visibility="{Binding IsStockVisible, Source={StaticResource ViewModel}, Converter={StaticResource b2v}}">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="60" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Grid Width="120" Height="60" VerticalAlignment="Top" Margin="20,0,0,10" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Button ToolTip="Add Stock Type" Style="{StaticResource AddButton}" Height="22" Grid.Row="4" Grid.Column="0" Command="{Binding AddStockItemCommand}"/>
-                            <Button ToolTip="Edit Stock Type" Style="{StaticResource EditButton}" Height="25" Margin="5 0 2 3" Grid.Row="4" Grid.Column="1" Command="{Binding EditStockItemCommand}"/>
-                            <Button ToolTip="Delete Stock Type" Style="{StaticResource DeleteButton}" Height="20" Grid.Row="4" Grid.Column="2" Command="{Binding DeleteStockItemCommand}"/>
-                        </Grid>
-                        <DataGrid x:Name="StockItemsDataGrid" ItemsSource="{Binding Path=StockItems}" SelectedItem="{Binding SelectedStockItem, Mode=TwoWay}" HeadersVisibility="Column" CanUserAddRows="False" AutoGenerateColumns="False" Margin="20,0,20,20" Grid.Column="0" Grid.Row="1">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding Path=VendorName, Mode=OneWay}" Header="Vendor" Width="*" />
-                                <DataGridTextColumn Binding="{Binding Path=VendorItemNumber, Mode=OneWay}" Header="Item #" Width="*" />
-                                <DataGridTextColumn Binding="{Binding Path=MatTypeString, Mode=OneWay}" Header="Material Type" Width="1.6*" />
-                                <DataGridTextColumn Binding="{Binding Path=ProfTypeString, Mode=OneWay}" Header="Profile Type" Width="1.6*" />
-                                <DataGridTextColumn Binding="{Binding Path=CostPerFootString, Mode=OneWay}" Header="Cost/FT" Width="1*" />
-                                <DataGridTextColumn Binding="{Binding Path=CostPerLengthString, Mode=OneWay}" Header="Cost/Length" Width="1.5*" />
-                                <DataGridTextColumn Binding="{Binding Path=StockLength, Mode=OneWay}" Header="Stock Length" Width="1.5*" />
-                                <DataGridTextColumn Binding="{Binding Path=InternalDescription, Mode=OneWay}" Header="Internal Description" Width="3*" />
-                                <DataGridTextColumn Binding="{Binding Path=ExternalDescription, Mode=OneWay}" Header="External Description" Width="3*" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>

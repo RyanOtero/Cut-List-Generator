@@ -30,29 +30,31 @@ namespace SolidPrice.Models {
         public CutListGeneratorContext(string connectionString) : base() {
 
             //comment out to scaffold
-            //isMySQL = (bool)Application.Current.Properties["UseExternalDB"];
-            //ConnectionString = connectionString;
-            //if (!_created && !isMySQL) {
-            //    try {
-            //        Directory.CreateDirectory(@"C:\ProgramData\Solid Price");
-            //        FileInfo fi;
-            //        if (!Debugger.IsAttached) {
-            //            fi = new FileInfo(@"C:\Program Files (x86)\Solid Price\CutList.db");
-            //        } else {
-            //            fi = new FileInfo(@"C:\Users\Ryan\source\repos\Solid Price\Solid Price\CutList.db");
-            //        }
-            //        fi.CopyTo(@"C:\ProgramData\Solid Price\CutList.db", true);
-            //        Application.Current.Properties["IsCreated"] = true;
-            //        _created = true;
-            //    } catch (Exception e) {
-            //        ErrorMessage("Database Error cgc.cs 43", "Please enter a connection string in the format of:\n" +
-            //                    "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
-            //    }
-            //}
+            isMySQL = (bool)Application.Current.Properties["UseExternalDB"];
+            ConnectionString = connectionString;
+            if (!_created && !isMySQL) {
+                try {
+                    Directory.CreateDirectory(@"C:\ProgramData\Solid Price");
+                    FileInfo fi;
+                    if (!Debugger.IsAttached) {
+                        fi = new FileInfo(@"C:\Program Files (x86)\Solid Price\CutList.db");
+                    } else {
+                        fi = new FileInfo(@"C:\Users\Ryan\source\repos\Solid Price\Solid Price\CutList.db");
+                    }
+                    fi.CopyTo(@"C:\ProgramData\Solid Price\CutList.db", true);
+                    Application.Current.Properties["IsCreated"] = true;
+                    _created = true;
+                } catch (Exception e) {
+                    ErrorMessage("Database Error cgc.cs 43", "Please enter a connection string in the format of:\n" +
+                                "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
+                }
+            }
             /////////////
 
-            ConnectionString = "Name=CutList.db";
-            Database.EnsureCreated();
+            ///////////Uncomment to scaffold a sqlite file
+            //ConnectionString = @"Data Source=C:\Users\Ryan\source\repos\Solid Price\Solid Price\CutList.db";
+            //Database.EnsureDeleted();
+            //Database.EnsureCreated();
 
         }
 
@@ -113,11 +115,12 @@ namespace SolidPrice.Models {
             } else {
                 try {
                     ///////Release
-                    //optionsBuilder.UseSqlite(ConnectionString);
-                    optionsBuilder.UseSqlite(ConnectionString, option => {
-                        option.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
-                    });
-                    base.OnConfiguring(optionsBuilder);
+                    optionsBuilder.UseSqlite(ConnectionString);
+                    ////Debug
+                    //optionsBuilder.UseSqlite(ConnectionString, option => {
+                    //    option.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
+                    //});
+                    //base.OnConfiguring(optionsBuilder);
 
                 } catch (Exception e) {
                     string s = e.Message;
