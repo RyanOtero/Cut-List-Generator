@@ -59,6 +59,8 @@ namespace SolidPrice.ViewModels {
         #endregion
 
         #region Properties
+
+        #region DB Props
         public bool UseExternalDB {
             get => useExternalDB;
             set {
@@ -137,6 +139,7 @@ namespace SolidPrice.ViewModels {
                 }
             }
         }
+        #endregion
 
         #region Command Props
         public RelayCommand GenerateCommand { get; set; }
@@ -177,6 +180,7 @@ namespace SolidPrice.ViewModels {
 
         #endregion
 
+        #region Tab Visibility
         public bool IsStock {
             get => isStock;
             set {
@@ -219,7 +223,9 @@ namespace SolidPrice.ViewModels {
             get => isSheetVisible;
             set { SetProperty(ref isSheetVisible, value); }
         }
+        #endregion
 
+        #region List Props
         public Vendor SelectedVendor {
             get => selectedVendor;
             set { SetProperty(ref selectedVendor, value); }
@@ -326,6 +332,7 @@ namespace SolidPrice.ViewModels {
                 BindingOperations.EnableCollectionSynchronization(sheetOrderList, asyncLock);
             }
         }
+        #endregion
 
         public bool IsWorking {
             get => isWorking;

@@ -129,7 +129,6 @@ namespace SolidPrice.Models {
                 } catch (Exception e) {
                     ErrorMessage("SolidWorks Error", "Unable to connect to SolidWorks. Please make sure that SolidWorks is installed in the default location.");
                 }
-
             });
         }
         #endregion
@@ -141,7 +140,7 @@ namespace SolidPrice.Models {
         }
         #endregion
 
-        #region Methods
+        #region Other Methods
         public void Refresh() {
             if (!bool.Parse(App.Current.Properties["IsCreated"].ToString())) {
                 using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
@@ -166,39 +165,48 @@ namespace SolidPrice.Models {
             Vendors.Clear();
             try {
                 using (var ctx = new CutListGeneratorContext(ConnectionString)) {
-                    List<CutItem> cList = ctx.CutItems.ToList();
-                    cList.Sort();
-                    foreach (CutItem item in cList) {
-                        CutList.Add(item);
-                    }
-                    List<SheetCutItem> sCList = ctx.SheetCutItems.ToList();
-                    sCList.Sort();
-                    foreach (SheetCutItem item in sCList) {
-                        SheetCutList.Add(item);
-                    }
-                    List<OrderItem> oList = ctx.OrderItems.ToList();
-                    oList.Sort();
-                    foreach (OrderItem item in oList) {
-                        OrderList.Add(item);
-                    }
-                    List<SheetOrderItem> sOList = ctx.SheetOrderItems.ToList();
-                    sOList.Sort();
-                    foreach (SheetOrderItem item in sOList) {
-                        SheetOrderList.Add(item);
-                    }
-                    List<StockItem> sTypes = ctx.StockItems.Include(s => s.Vendor).ToList();
-                    foreach (StockItem item in sTypes) {
-                        StockItems.Add(item);
-                    }
-                    List<SheetStockItem> sSTypes = ctx.SheetStockItems.Include(s => s.Vendor).ToList();
-                    foreach (SheetStockItem item in sSTypes) {
-                        SheetStockItems.Add(item);
-                    }
-
                     List<Vendor> vendors = ctx.Vendors.ToList();
                     foreach (Vendor item in vendors) {
                         Vendors.Add(item);
                     }
+                    
+                    List<StockItem> sTypes = ctx.StockItems.Include(s => s.Vendor).ToList();
+                    foreach (StockItem item in sTypes) {
+                        StockItems.Add(item);
+                    } 
+
+                    List<SheetStockItem> sSTypes = ctx.SheetStockItems.Include(s => s.Vendor).ToList();
+                    foreach (SheetStockItem item in sSTypes) {
+                        SheetStockItems.Add(item);
+                    } 
+                    
+                    List<CutItem> cList = ctx.CutItems.Include(c => c.StockItem).ToList();
+                    cList.Sort();
+                    foreach (CutItem item in cList) {
+                        CutList.Add(item);
+                    }
+
+                    List<SheetCutItem> sCList = ctx.SheetCutItems.Include(c => c.SheetStockItem).ToList();
+                    sCList.Sort();
+                    foreach (SheetCutItem item in sCList) {
+                        SheetCutList.Add(item);
+                    }
+
+                    List<OrderItem> oList = ctx.OrderItems.Include(c => c.StockItem).ToList();
+                    oList.Sort();
+                    foreach (OrderItem item in oList) {
+                        OrderList.Add(item);
+                    }
+
+                    List<SheetOrderItem> sOList = ctx.SheetOrderItems.Include(c => c.SheetStockItem).ToList();
+                    sOList.Sort();
+                    foreach (SheetOrderItem item in sOList) {
+                        SheetOrderList.Add(item);
+                    }
+
+
+
+
                 }
             } catch (Exception e) {
                 ErrorMessage("Database Error clm.cs 134", "There was an error while accessing the database.");
@@ -239,7 +247,6 @@ namespace SolidPrice.Models {
             bool isAssembly;
 
             inBodyFolder = false;
-            NewCutList();
             List<CutItem> tempCList = new List<CutItem>();
             List<SheetCutItem> tempSCList = new List<SheetCutItem>();
             isPart = filePath.ToLower().Contains(".sldprt");
@@ -534,7 +541,7 @@ namespace SolidPrice.Models {
             }
         }
 
-        public void AddCutItem(List<CutItem> cutList, List<SheetCutItem> sheetCutList, Feature thisFeat) {
+        public void AddCutItem(List<CutItem> tempCutList, List<SheetCutItem> tempSheetCutList, Feature thisFeat) {
             CustomPropertyManager CustomPropMgr = default(CustomPropertyManager);
             CustomPropMgr = thisFeat.CustomPropertyManager;
             List<string> vCustomPropNames = new((string[])CustomPropMgr.GetNames());
@@ -558,6 +565,7 @@ namespace SolidPrice.Models {
                 string material = "";
                 string finish = "";
                 bool isNew = false;
+                Grain grainDirection = Grain.none;
                 StockItem sItem = null;
                 SheetStockItem sSItem = null;
 
@@ -575,11 +583,6 @@ namespace SolidPrice.Models {
                         case "description":
                             description = CustomPropResolvedVal;
                             if (description == "") description = "no description property in file!";
-                            var sItems = ctx.StockItems.Include(i => i.Vendor).ToList();
-                            sItem = sItems.SingleOrDefault(item => item.InternalDescription == description);
-                            if (sItem == null) {
-                                isNew = true;
-                            }
                             break;
                         case "length":
                             float.TryParse(CustomPropResolvedVal, out length);
@@ -594,6 +597,14 @@ namespace SolidPrice.Models {
                             float.TryParse(CustomPropResolvedVal, out thickness);
                             break;
                         case "surface treatment":
+                            finish = CustomPropResolvedVal;
+                            break;
+                        case "grain":
+                            if (CustomPropResolvedVal == "length") {
+                                grainDirection = Grain.Length;
+                            } else if (CustomPropResolvedVal == "width") {
+                                grainDirection = Grain.Width;
+                            }
                             finish = CustomPropResolvedVal;
                             break;
                         case "angle1":
@@ -616,46 +627,75 @@ namespace SolidPrice.Models {
                     }
                 }
                 Vendor vendor;
-                if (isNew) {
-                    if (ctx.Vendors.Any()) {
-                        vendor = ctx.Vendors.AsEnumerable().ElementAt(0);
-                    } else {
-                        vendor = new Vendor("N/A", "N/A", "N/A", "N/A");
-                        vendor.ID = 1;
-                        ctx.Vendors.Add(vendor);
-                        ctx.SaveChanges();
+                if (thickness != 0) {
+                    var sSItems = ctx.SheetStockItems.Include(i => i.Vendor).ToList();
+                    sSItem = sSItems.SingleOrDefault(item => item.InternalDescription == description);
+                    if (sItem == null) {
+                        isNew = true;
                     }
-                    MaterialType mat;
-                    if (material == "material <not specified>") {
-                        mat = StockItem.MaterialFromDescription(description);
-                    } else {
-                        mat = StockItem.MaterialFromDescription(material);
-                    }
-                    if (thickness != 0) {
-
-                    } else {
+                    if (isNew) {
+                        if (ctx.Vendors.Any()) {
+                            vendor = ctx.Vendors.AsEnumerable().ElementAt(0);
+                        } else {
+                            vendor = new Vendor("N/A", "N/A", "N/A", "N/A");
+                            vendor.ID = 1;
+                            ctx.Vendors.Add(vendor);
+                            ctx.SaveChanges();
+                        }
+                        MaterialType mat;
+                        if (material == "material <not specified>") {
+                            mat = StockItem.MaterialFromDescription(description);
+                        } else {
+                            mat = StockItem.MaterialFromDescription(material);
+                        }
                         sSItem = new SheetStockItem(vendor: vendor, internalDescription: description,
-                       externalDescription: description,
-                       materialType: mat, thickness: thickness, finish: finish);
+                                             externalDescription: description,
+                                             materialType: mat, thickness: thickness, finish: finish);
                         ctx.SheetStockItems.Add(sSItem);
+                        SheetStockItems.Add(sSItem);
                         ctx.Vendors.Update(vendor);
                         ctx.SaveChanges();
+                        isNew = false;
                     }
-                    sItem = new StockItem(vendor: vendor, internalDescription: description,
-                        externalDescription: description,
-                        materialType: mat,
-                        profType: StockItem.ProfileFromDescription(description));
-                    ctx.StockItems.Add(sItem);
-                    ctx.Vendors.Update(vendor);
-                    ctx.SaveChanges();
+                    
+                    SheetCutItem sCItem = new SheetCutItem(sSItem, qty, length, width, grainDirection);
+                    tempSheetCutList.Add(sCItem);
+
+                } else {
+                    var sItems = ctx.StockItems.Include(i => i.Vendor).ToList();
+                    sItem = sItems.SingleOrDefault(item => item.InternalDescription == description);
+                    if (sItem == null) {
+                        isNew = true;
+                    }
+                    if (isNew) {
+                        if (ctx.Vendors.Any()) {
+                            vendor = ctx.Vendors.AsEnumerable().ElementAt(0);
+                        } else {
+                            vendor = new Vendor("N/A", "N/A", "N/A", "N/A");
+                            vendor.ID = 1;
+                            ctx.Vendors.Add(vendor);
+                            ctx.SaveChanges();
+                        }
+                        MaterialType mat;
+                        if (material == "material <not specified>") {
+                            mat = StockItem.MaterialFromDescription(description);
+                        } else {
+                            mat = StockItem.MaterialFromDescription(material);
+                        }
+                        sItem = new StockItem(vendor: vendor, internalDescription: description,
+                       externalDescription: description,
+                       materialType: mat,
+                       profType: StockItem.ProfileFromDescription(description));
+                        ctx.StockItems.Add(sItem);
+                        StockItems.Add(sItem);
+                        ctx.Vendors.Update(vendor);
+                        ctx.SaveChanges();
+                        isNew = false;
+                    }
+
+                    CutItem cItem = new CutItem(sItem, qty, length, angle1, angle2, angleDirection, angleRotation);
+                    tempCutList.Add(cItem);
                 }
-                isNew = false;
-
-                CutItem cItem = new CutItem(sItem, qty, length, angle1, angle2, angleDirection, angleRotation);
-                cutList.Add(cItem);
-
-
-
             }
         }
 
@@ -738,7 +778,6 @@ namespace SolidPrice.Models {
                 action(tempCList, tempSCList, feature, true, "Root Feature", swComp.ReferencedConfiguration);
             }
         }
-
 
         public void TraverseFeatures(List<CutItem> tempCList, List<SheetCutItem> tempSCList, Feature thisFeat, bool isTopLevel, string parentName, string config) {
             if (hadError) return;

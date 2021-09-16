@@ -8,6 +8,7 @@ namespace SolidPrice.Models {
         private StockItem stockItem;
         private int qty;
         private int stockItemID;
+        private string description;
 
         public int ID { get; set; }
 
