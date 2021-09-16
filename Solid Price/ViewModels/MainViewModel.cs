@@ -27,6 +27,11 @@ namespace SolidPrice.ViewModels {
         private string sourceText;
         private bool isDetailed;
         private bool showPricing;
+        private bool isStock;
+        private bool isSheet;
+        private bool isBoth;
+        private bool isStockVisible;
+        private bool isSheetVisible;
         private ObservableCollection<Vendor> vendors;
         private ObservableCollection<StockItem> stockItems;
         private ObservableCollection<CutItem> cutList;
@@ -51,7 +56,6 @@ namespace SolidPrice.ViewModels {
         Storyboard loadingAnimFadeOut;
         Storyboard loadingAnimBounce;
         private bool isWorking;
-
         #endregion
 
         #region Properties
@@ -88,7 +92,7 @@ namespace SolidPrice.ViewModels {
                 }
             }
         }
-        
+
         public string UserString {
             get => userString;
             set {
@@ -99,7 +103,7 @@ namespace SolidPrice.ViewModels {
                 }
             }
         }
-        
+
         public string PasswordString {
             get => passwordString;
             set {
@@ -172,6 +176,49 @@ namespace SolidPrice.ViewModels {
         public RelayCommand DonateCommand { get; set; }
 
         #endregion
+
+        public bool IsStock {
+            get => isStock;
+            set {
+                SetProperty(ref isStock, value);
+                if (value) {
+                    IsStockVisible = true;
+                    IsSheetVisible = false;
+                }
+            }
+        }
+
+        public bool IsSheet {
+            get => isSheet;
+            set {
+                SetProperty(ref isSheet, value);
+                if (value) {
+                    IsStockVisible = false;
+                    IsSheetVisible = true;
+                }
+            }
+        }
+
+        public bool IsBoth {
+            get => isBoth;
+            set {
+                SetProperty(ref isBoth, value);
+                if (value) {
+                    IsStockVisible = true;
+                    IsSheetVisible = true;
+                }
+            }
+        }
+
+        public bool IsStockVisible {
+            get => isStockVisible;
+            set { SetProperty(ref isStockVisible, value); }
+        }
+
+        public bool IsSheetVisible {
+            get => isSheetVisible;
+            set { SetProperty(ref isSheetVisible, value); }
+        }
 
         public Vendor SelectedVendor {
             get => selectedVendor;
@@ -290,6 +337,7 @@ namespace SolidPrice.ViewModels {
 
         public MainViewModel() {
             IsWorking = false;
+            IsStock = true;
             UseExternalDB = bool.Parse(Application.Current.Properties["UseExternalDB"].ToString());
             ServerString = Application.Current.Properties["ServerString"].ToString();
             DatabaseString = Application.Current.Properties["DatabaseString"].ToString();
@@ -297,7 +345,7 @@ namespace SolidPrice.ViewModels {
             PasswordString = Application.Current.Properties["PasswordString"].ToString();
 
             #region Commands Set
-            GenerateCommand = new RelayCommand(x => { 
+            GenerateCommand = new RelayCommand(x => {
                 IsWorking = true;
                 GenerateCutList();
             }, () => !string.IsNullOrEmpty(SourceText) && !IsWorking);

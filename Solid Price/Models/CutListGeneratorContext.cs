@@ -12,8 +12,8 @@ namespace SolidPrice.Models {
     internal class CutListGeneratorContext : DbContext {
 
         //comment out to scaffold
-        //private static bool _created = bool.Parse(Application.Current.Properties["IsCreated"].ToString());
-        //private static bool isMySQL;
+        private static bool _created = bool.Parse(Application.Current.Properties["IsCreated"].ToString());
+        private static bool isMySQL;
         /////////////
         public string ConnectionString { get; set; }
         public DbSet<StockItem> StockItems { get; set; }
@@ -50,6 +50,10 @@ namespace SolidPrice.Models {
             //    }
             //}
             /////////////
+
+            ConnectionString = "Name=CutList.db";
+            Database.EnsureCreated();
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
@@ -88,39 +92,39 @@ namespace SolidPrice.Models {
             //optionsBuilder.EnableSensitiveDataLogging(true);
 
             //Uncomment to scaffold
-            try {
-                optionsBuilder.UseMySQL("server=localhost;database=solid price;user=root;password=password");
-                base.OnConfiguring(optionsBuilder);
-            } catch (Exception) {
-                ErrorMessage("Database Error", "Please enter a connection string in the format of:\n" +
-                    "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
-            }
+            //try {
+            //    optionsBuilder.UseMySQL("server=localhost;database=solid price;user=root;password=password");
+            //    base.OnConfiguring(optionsBuilder);
+            //} catch (Exception) {
+            //    ErrorMessage("Database Error", "Please enter a connection string in the format of:\n" +
+            //        "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
+            //}
             //////////////
 
             //comment out to scaffold
-            //if (isMySQL) {
-            //    try {
-            //        optionsBuilder.UseMySQL(ConnectionString);
-            //        base.OnConfiguring(optionsBuilder);
-            //    } catch (Exception) {
-            //        ErrorMessage("Database Error cgc.cs 94", "Please enter a connection string in the format of:\n" +
-            //            "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
-            //    }
-            //} else {
-            //    try {
-            //        ///////Release
-            //        optionsBuilder.UseSqlite(ConnectionString);
-            //        //optionsBuilder.UseSqlite(ConnectionString, option => {
-            //        //    option.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
-            //        //});
-            //        base.OnConfiguring(optionsBuilder);
+            if (isMySQL) {
+                try {
+                    optionsBuilder.UseMySQL(ConnectionString);
+                    base.OnConfiguring(optionsBuilder);
+                } catch (Exception) {
+                    ErrorMessage("Database Error cgc.cs 94", "Please enter a connection string in the format of:\n" +
+                        "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
+                }
+            } else {
+                try {
+                    ///////Release
+                    //optionsBuilder.UseSqlite(ConnectionString);
+                    optionsBuilder.UseSqlite(ConnectionString, option => {
+                        option.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
+                    });
+                    base.OnConfiguring(optionsBuilder);
 
-            //    } catch (Exception e) {
-            //        string s = e.Message;
-            //        ErrorMessage("Database Error cgc.cs 105", "Please enter a connection string in the format of:\n" +
-            //            "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
-            //    }
-            //}
+                } catch (Exception e) {
+                    string s = e.Message;
+                    ErrorMessage("Database Error cgc.cs 105", "Please enter a connection string in the format of:\n" +
+                        "\nserver=[Server Name];database=[Database Name];user=[User Name];password=[Password]");
+                }
+            }
             ///////////////
         }
     }

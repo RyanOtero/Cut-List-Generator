@@ -9,7 +9,7 @@ using SolidPrice.Models;
 namespace SolidPrice.Migrations
 {
     [DbContext(typeof(CutListGeneratorContext))]
-    [Migration("20210915134715_addsheetfunctionality")]
+    [Migration("20210916021611_addsheetfunctionality")]
     partial class addsheetfunctionality
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

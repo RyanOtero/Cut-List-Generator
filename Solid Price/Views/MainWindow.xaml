@@ -72,9 +72,9 @@
                               Style="{StaticResource ToggleRight}" Width="112" Margin="0 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="0">
-                        <RadioButton Style="{StaticResource ToggleLeft}" Width="62">Stock</RadioButton>
-                        <RadioButton Style="{StaticResource ToggleMiddle}" Width="65">Both</RadioButton>
-                        <RadioButton Style="{StaticResource ToggleRight}" Width="62">Sheet</RadioButton>
+                        <RadioButton Style="{StaticResource ToggleLeft}" Width="62" IsChecked="{Binding IsStock}">Stock</RadioButton>
+                        <RadioButton Style="{StaticResource ToggleMiddle}" Width="65" IsChecked="{Binding IsBoth}">Both</RadioButton>
+                        <RadioButton Style="{StaticResource ToggleRight}" Width="62" IsChecked="{Binding IsSheet}">Sheet</RadioButton>
                     </StackPanel>
                     <Button ToolTip="Clear Lists" Style="{StaticResource DeleteButton}" HorizontalAlignment="Left" Height="20" Grid.Column="3" Command="{Binding ClearCommand}"/>
                     <Button ToolTip="Export" Style="{StaticResource SaveButton}" HorizontalAlignment="Left" Height="22" Grid.Column="4" Command="{Binding SaveCommand}"/>
@@ -92,7 +92,8 @@
                 </Grid>
             </Grid>
             <TabControl Style="{DynamicResource TabControlStyle}" Margin="0,0,0,0" Grid.Row="1">
-                <TabItem Header="Cut List" Style="{DynamicResource TabItemStyle}" Margin="-2,0,0,0">
+                <TabItem Header="Cut List" Style="{DynamicResource TabItemStyle}" Margin="-2,0,0,0"
+                         Visibility="{Binding IsStockVisible, Source={StaticResource ViewModel}, Converter={StaticResource b2v}}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
@@ -132,7 +133,8 @@
                         </DataGrid>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Sheet Cut List" Style="{DynamicResource TabItemStyle}">
+                <TabItem Header="Sheet Cut List" Style="{DynamicResource TabItemStyle}"
+                         Visibility="{Binding IsSheetVisible, Source={StaticResource ViewModel}, Converter={StaticResource b2v}}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
@@ -172,7 +174,8 @@
                         </DataGrid>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Stock Types" Style="{DynamicResource TabItemStyle}">
+                <TabItem Header="Stock Types" Style="{DynamicResource TabItemStyle}"
+                        Visibility="{Binding IsStockVisible, Source={StaticResource ViewModel}, Converter={StaticResource b2v}}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="60" />
@@ -203,7 +206,8 @@
                         </DataGrid>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Sheet Types" Style="{DynamicResource TabItemStyle}">
+                <TabItem Header="Sheet Types" Style="{DynamicResource TabItemStyle}"
+                         Visibility="{Binding IsSheetVisible, Source={StaticResource ViewModel}, Converter={StaticResource b2v}}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="60" />
