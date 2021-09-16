@@ -8,16 +8,18 @@ using static SolidPrice.Utils.Messenger;
 
 
 namespace SolidPrice.ViewModels {
-    public class EditStockItemViewModel : ViewModelBase {
+    public class EditSheetStockItemViewModel : ViewModelBase {
 
         #region Fields
         private MaterialType selectedMatType;
-        private ProfileType selectedProfType;
         private float stockLength;
+        private float stockWidth;
+        private float thickness;
+        private string finish;
         private string internalDescription;
         private string externalDescription;
         private Vendor selectedVendor;
-        private decimal costPerFoot;
+        private decimal costPerSqFoot;
         private string vendorItemNumber;
         #endregion
 
@@ -27,14 +29,24 @@ namespace SolidPrice.ViewModels {
             set { SetProperty(ref selectedMatType, value); }
         }
 
-        public ProfileType SelectedProfType {
-            get => selectedProfType;
-            set { SetProperty(ref selectedProfType, value); }
-        }
-
         public float StockLength {
             get => stockLength;
             set { SetProperty(ref stockLength, value); }
+        }
+
+        public float StockWidth {
+            get => stockWidth;
+            set { SetProperty(ref stockWidth, value); }
+        }
+
+        public float Thickness {
+            get => thickness;
+            set { SetProperty(ref thickness, value); }
+        }
+
+        public string Finish {
+            get => finish;
+            set { SetProperty(ref finish, value); }
         }
 
         public string InternalDescription {
@@ -52,9 +64,9 @@ namespace SolidPrice.ViewModels {
             set { SetProperty(ref selectedVendor, value); }
         }
 
-        public decimal CostPerFoot {
-            get => costPerFoot;
-            set { SetProperty(ref costPerFoot, value); }
+        public decimal CostPerSqFoot {
+            get => costPerSqFoot;
+            set { SetProperty(ref costPerSqFoot, value); }
         }
 
         public string VendorItemNumber {
@@ -67,32 +79,37 @@ namespace SolidPrice.ViewModels {
         public MainViewModel MainVModel { get; set; }
         #endregion
 
-        public EditStockItemViewModel(StockItem sItem) {
-            SelectedMatType = sItem.MatType;
-            SelectedProfType = sItem.ProfType;
-            StockLength = sItem.StockLength;
-            InternalDescription = sItem.InternalDescription;
-            ExternalDescription = sItem.ExternalDescription;
-            CostPerFoot = sItem.CostPerFoot;
-            SelectedVendor = sItem.Vendor;
-            VendorItemNumber = sItem.VendorItemNumber;
+        public EditSheetStockItemViewModel(SheetStockItem sSItem) {
+            SelectedMatType = sSItem.MatType;
+            StockLength = sSItem.StockLengthInInches;
+            StockWidth = sSItem.StockWidthInInches;
+            Thickness = sSItem.Thickness;
+            Finish = sSItem.Finish;
+            InternalDescription = sSItem.InternalDescription;
+            ExternalDescription = sSItem.ExternalDescription;
+            CostPerSqFoot = sSItem.CostPerSqFoot;
+            SelectedVendor = sSItem.Vendor;
+            VendorItemNumber = sSItem.VendorItemNumber;
             MainVModel = (MainViewModel)Application.Current.MainWindow.DataContext;
             ConfirmCommand = new RelayCommand((x) => {
                 if (!string.IsNullOrEmpty(InternalDescription) && !string.IsNullOrEmpty(ExternalDescription) && SelectedVendor != null) {
-                    if (SelectedVendor != sItem.Vendor || SelectedMatType != sItem.MatType || SelectedProfType != sItem.ProfType || CostPerFoot != sItem.CostPerFoot
-                        || StockLength != sItem.StockLength || InternalDescription != sItem.InternalDescription || ExternalDescription != sItem.ExternalDescription || sItem.VendorItemNumber != VendorItemNumber) {
+                    if (SelectedVendor != sSItem.Vendor || SelectedMatType != sSItem.MatType || Thickness != sSItem.Thickness || CostPerSqFoot != sSItem.CostPerSqFoot
+                        || StockLength != sSItem.StockLengthInInches || StockWidth != sSItem.StockWidthInInches || Thickness != sSItem.Thickness || Finish != sSItem.Finish || InternalDescription != sSItem.InternalDescription 
+                        || ExternalDescription != sSItem.ExternalDescription || sSItem.VendorItemNumber != VendorItemNumber) {
                         try {
-                            sItem.MatType = SelectedMatType;
-                            sItem.ProfType = SelectedProfType;
-                            sItem.StockLength = StockLength;
-                            sItem.InternalDescription = InternalDescription;
-                            sItem.ExternalDescription = ExternalDescription;
-                            sItem.CostPerFoot = CostPerFoot;
-                            sItem.Vendor = SelectedVendor;
-                            sItem.VendorItemNumber = VendorItemNumber;
+                            sSItem.MatType = SelectedMatType;
+                            sSItem.StockLengthInInches = StockLength;
+                            sSItem.StockWidthInInches = StockWidth;
+                            sSItem.Thickness = Thickness;
+                            sSItem.Finish = Finish;
+                            sSItem.InternalDescription = InternalDescription;
+                            sSItem.ExternalDescription = ExternalDescription;
+                            sSItem.CostPerSqFoot = CostPerSqFoot;
+                            sSItem.Vendor = SelectedVendor;
+                            sSItem.VendorItemNumber = VendorItemNumber;
                             using (CutListGeneratorContext ctx = new CutListGeneratorContext(MainVModel.ConnectionString)) {
                                 ctx.Entry(SelectedVendor).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
-                                ctx.StockItems.Update(sItem);
+                                ctx.SheetStockItems.Update(sSItem);
                                 ctx.SaveChanges();
                             }
                             List<CutItem> tempCList = CutListManager.Instance.CutList.ToList();

@@ -164,7 +164,7 @@
                                 <DataGridTextColumn Binding="{Binding Path=Description, Mode=OneWay}" Header="Description" Width="8.5*" />
                                 <DataGridTextColumn Binding="{Binding Path=Length, Mode=OneWay}" Header="Length (IN)" Width="2.75*" />
                                 <DataGridTextColumn Binding="{Binding Path=Width, Mode=OneWay}" Header="Width (IN)" Width="2.75*" />
-                                <DataGridTextColumn Binding="{Binding Path=Grain, Mode=OneWay}" Header="Grain" Width="2.75*" />
+                                <DataGridTextColumn Binding="{Binding Path=Grain, Mode=OneWay}" Header="Grain Direction" Width="2.75*" />
                                 <DataGridTextColumn Binding="{Binding Path=SheetNumberString, Mode=OneWay}" Header="Sheet No." Width="2.5*" Visibility="{Binding IsDetailed, Source={StaticResource ViewModel}, Converter={StaticResource b2v}}" />
                                 <DataGridTextColumn Binding="{Binding Path=Cost, Mode=OneWay}" Header="Cost Each" Width="2.5*" Visibility="{Binding ShowPricing, Source={StaticResource ViewModel},Converter={StaticResource b2v}}" />
                                 <DataGridTextColumn Binding="{Binding Path=TotalCost, Mode=OneWay}" Header="Total" Width="2*" Visibility="{Binding ShowPricing, Source={StaticResource ViewModel}, Converter={StaticResource b2v}}" />
@@ -219,19 +219,19 @@
                             <Button ToolTip="Edit Sheet Type" Style="{StaticResource EditButton}" Height="25" Margin="5 0 2 3" Grid.Row="4" Grid.Column="1" Command="{Binding EditSheetStockItemCommand}"/>
                             <Button ToolTip="Delete Sheet Type" Style="{StaticResource DeleteButton}" Height="20" Grid.Row="4" Grid.Column="2" Command="{Binding DeleteSheetStockItemCommand}"/>
                         </Grid>
-                        <DataGrid x:Name="SheetStockItemsDataGrid" ItemsSource="{Binding Path=SheetStockItems}" SelectedItem="{Binding SelectedStockItem, Mode=TwoWay}" HeadersVisibility="Column" CanUserAddRows="False" AutoGenerateColumns="False" Margin="20,0,20,20" Grid.Column="0" Grid.Row="1">
+                        <DataGrid x:Name="SheetStockItemsDataGrid" ItemsSource="{Binding Path=SheetStockItems}" SelectedItem="{Binding SelectedSheetStockItem, Mode=TwoWay}" HeadersVisibility="Column" CanUserAddRows="False" AutoGenerateColumns="False" Margin="20,0,20,20" Grid.Column="0" Grid.Row="1">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Path=VendorName, Mode=OneWay}" Header="Vendor" Width="*" />
                                 <DataGridTextColumn Binding="{Binding Path=VendorItemNumber, Mode=OneWay}" Header="Item #" Width=".75*" />
                                 <DataGridTextColumn Binding="{Binding Path=MatTypeString, Mode=OneWay}" Header="Material Type" Width="1.25*" />
                                 <DataGridTextColumn Binding="{Binding Path=CostPerSqFootString, Mode=OneWay}" Header="Cost/SQFT" Width="*" />
                                 <DataGridTextColumn Binding="{Binding Path=CostPerSheetString, Mode=OneWay}" Header="Cost/Sheet" Width="*" />
-                                <DataGridTextColumn Binding="{Binding Path=Length, Mode=OneWay}" Header="Length" Width=".75*" />
-                                <DataGridTextColumn Binding="{Binding Path=Width, Mode=OneWay}" Header="Width" Width=".75*" />
+                                <DataGridTextColumn Binding="{Binding Path=StockLengthInInches, Mode=OneWay}" Header="Length" Width=".75*" />
+                                <DataGridTextColumn Binding="{Binding Path=StockWidthInInches, Mode=OneWay}" Header="Width" Width=".75*" />
                                 <DataGridTextColumn Binding="{Binding Path=Thickness, Mode=OneWay}" Header="Thickness" Width="*" />
                                 <DataGridTextColumn Binding="{Binding Path=Finish, Mode=OneWay}" Header="Finish" Width="*" />
-                                <DataGridTextColumn Binding="{Binding Path=InternalDescription, Mode=OneWay}" Header="Internal Description" Width="2.5*" />
-                                <DataGridTextColumn Binding="{Binding Path=ExternalDescription, Mode=OneWay}" Header="External Description" Width="2.5*" />
+                                <DataGridTextColumn Binding="{Binding Path=InternalDescription, Mode=OneWay}" Header="Internal Description" Width="2*" />
+                                <DataGridTextColumn Binding="{Binding Path=ExternalDescription, Mode=OneWay}" Header="External Description" Width="2*" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>

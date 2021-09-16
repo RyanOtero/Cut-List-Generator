@@ -9,7 +9,7 @@ using SolidPrice.Models;
 namespace SolidPrice.Migrations
 {
     [DbContext(typeof(CutListGeneratorContext))]
-    [Migration("20210910192710_addsheetfunctionality")]
+    [Migration("20210915134715_addsheetfunctionality")]
     partial class addsheetfunctionality
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,7 +17,7 @@ namespace SolidPrice.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.9");
+                .HasAnnotation("ProductVersion", "5.0.10");
 
             modelBuilder.Entity("SolidPrice.Models.CutItem", b =>
                 {
@@ -79,6 +79,9 @@ namespace SolidPrice.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("GrainDirection")
                         .HasColumnType("int");
 
                     b.Property<float>("Length")

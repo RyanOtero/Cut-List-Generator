@@ -220,6 +220,8 @@ namespace SolidPrice.Models {
             }
             CutList.Clear();
             OrderList.Clear();
+            SheetOrderList.Clear();
+            sheetCutList.Clear();
         }
         #endregion
 
@@ -319,7 +321,7 @@ namespace SolidPrice.Models {
                 hadError = false;
                 return;
             }
-            SortCutListForDisplay(isDetailed, tempCListv tempSCList);
+            SortCutListForDisplay(isDetailed, tempCList, tempSCList);
 
             timer.Stop();
             TimeSpan ts = timer.Elapsed;
@@ -331,16 +333,16 @@ namespace SolidPrice.Models {
             Debug.Print("RunTime " + elapsedTime);
         }
 
-        public void SortCutListForDisplay(bool isDetailed, List<CutItem> tempList) {
-            SortCuts(tempList);
+        public void SortCutListForDisplay(bool isDetailed, List<CutItem> tempCList, List<SheetCutItem> tempSCList) {
+            SortCuts(tempCList);
             List<CutItem> tempOrderList = new List<CutItem>();
             List<string> distinctOrderItems = new List<string>();
-            for (int i = tempList.Count - 1; i > -1; i--) {
-                if (distinctOrderItems.Contains(tempList[i].Description)) {
+            for (int i = tempCList.Count - 1; i > -1; i--) {
+                if (distinctOrderItems.Contains(tempCList[i].Description)) {
                     continue;
                 }
-                distinctOrderItems.Add(tempList[i].Description);
-                tempOrderList.Add(tempList[i]);
+                distinctOrderItems.Add(tempCList[i].Description);
+                tempOrderList.Add(tempCList[i]);
             }
 
             var queryResult = from c in tempOrderList
@@ -355,13 +357,13 @@ namespace SolidPrice.Models {
             }
 
             if (!isDetailed) {
-                foreach (CutItem item in tempList) {
+                foreach (CutItem item in tempCList) {
                     item.StickNumber = 0;
                 }
-                Consolidate(tempList);
+                Consolidate(tempCList);
             }
 
-            foreach (CutItem item in tempList) {
+            foreach (CutItem item in tempCList) {
                 CutList.Add(item);
             }
 
@@ -532,7 +534,7 @@ namespace SolidPrice.Models {
             }
         }
 
-        public void AddCutItem(List<CutItem> cutList, Feature thisFeat) {
+        public void AddCutItem(List<CutItem> cutList, List<SheetCutItem> sheetCutList, Feature thisFeat) {
             CustomPropertyManager CustomPropMgr = default(CustomPropertyManager);
             CustomPropMgr = thisFeat.CustomPropertyManager;
             List<string> vCustomPropNames = new((string[])CustomPropMgr.GetNames());
@@ -657,7 +659,7 @@ namespace SolidPrice.Models {
             }
         }
 
-        public void FindCutlist(List<CutItem> cutList, Feature thisFeat, string parentName, string config) {
+        public void FindCutlist(List<CutItem> cutList, List<SheetCutItem> sheetCutList, Feature thisFeat, string parentName, string config) {
             if (hadError) return;
             int BodyCount = 0;
 
@@ -708,12 +710,12 @@ namespace SolidPrice.Models {
                 //Debug.Print("\t" + s);
                 if (BodyCount > 0) {
                     object obj = thisFeat.IsSuppressed2((int)swInConfigurationOpts_e.swThisConfiguration, null);
-                    if (obj != null) AddCutItem(cutList, thisFeat);
+                    if (obj != null) AddCutItem(cutList, sheetCutList, thisFeat);
                 }
             }
         }
 
-        public void TraverseComponent(List<CutItem> tempList, Component2 swComp, Action<List<CutItem>, Feature, bool, string, string> action) {
+        public void TraverseComponent(List<CutItem> tempCList, List<SheetCutItem> tempSCList, Component2 swComp, Action<List<CutItem>, List<SheetCutItem>, Feature, bool, string, string> action) {
             if (hadError) return;
             object[] vChildComp;
             Component2 swChildComp;
@@ -722,7 +724,7 @@ namespace SolidPrice.Models {
             if (vChildComp.Length > 0) {
                 for (int i = 0; i < vChildComp.Length; i++) {
                     swChildComp = (Component2)vChildComp[i];
-                    if (swChildComp.GetSuppression() == 2) TraverseComponent(tempList, swChildComp, action);
+                    if (swChildComp.GetSuppression() == 2) TraverseComponent(tempCList, tempSCList, swChildComp, action);
                 }
             } else {
 
@@ -733,23 +735,23 @@ namespace SolidPrice.Models {
                 bool b = model.ForceRebuild3(false);
                 //Debug.Print(b.ToString());
                 Feature feature = (Feature)model.FirstFeature();
-                action(tempList, feature, true, "Root Feature", swComp.ReferencedConfiguration);
+                action(tempCList, tempSCList, feature, true, "Root Feature", swComp.ReferencedConfiguration);
             }
         }
 
 
-        public void TraverseFeatures(List<CutItem> tempList, Feature thisFeat, bool isTopLevel, string parentName, string config) {
+        public void TraverseFeatures(List<CutItem> tempCList, List<SheetCutItem> tempSCList, Feature thisFeat, bool isTopLevel, string parentName, string config) {
             if (hadError) return;
             Feature curFeat = default(Feature);
             curFeat = thisFeat;
             while (curFeat != null) {
-                if (tempList != null) {
-                    FindCutlist(tempList, curFeat, parentName, config);
+                if (tempCList != null || tempSCList != null) {
+                    FindCutlist(tempCList, tempSCList, curFeat, parentName, config);
                 }
                 Feature subfeat = default(Feature);
                 subfeat = (Feature)curFeat.GetFirstSubFeature();
                 while (subfeat != null) {
-                    TraverseFeatures(tempList, subfeat, false, curFeat.Name, config);
+                    TraverseFeatures(tempCList, tempSCList, subfeat, false, curFeat.Name, config);
                     Feature nextSubFeat = default(Feature);
                     nextSubFeat = (Feature)subfeat.GetNextSubFeature();
                     subfeat = nextSubFeat;

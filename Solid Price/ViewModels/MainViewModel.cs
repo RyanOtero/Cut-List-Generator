@@ -31,11 +31,17 @@ namespace SolidPrice.ViewModels {
         private ObservableCollection<StockItem> stockItems;
         private ObservableCollection<CutItem> cutList;
         private ObservableCollection<OrderItem> orderList;
+        private ObservableCollection<SheetStockItem> sheetStockItems;
+        private ObservableCollection<SheetCutItem> sheetCutList;
+        private ObservableCollection<SheetOrderItem> sheetOrderList;
         //private bool atWork;
         private string orderTotal;
+        private string sheetOrderTotal;
         private string cutListTotal;
+        private string sheetCutListTotal;
         private Vendor selectedVendor;
         private StockItem selectedStockItem;
+        private SheetStockItem selectedSheetStockItem;
         private bool useExternalDB;
         private string serverString;
         private string databaseString;
@@ -71,6 +77,7 @@ namespace SolidPrice.ViewModels {
                 }
             }
         }
+
         public string DatabaseString {
             get => databaseString;
             set {
@@ -81,6 +88,7 @@ namespace SolidPrice.ViewModels {
                 }
             }
         }
+        
         public string UserString {
             get => userString;
             set {
@@ -91,6 +99,7 @@ namespace SolidPrice.ViewModels {
                 }
             }
         }
+        
         public string PasswordString {
             get => passwordString;
             set {
@@ -144,6 +153,12 @@ namespace SolidPrice.ViewModels {
 
         public RelayCommand EditStockItemCommand { get; set; }
 
+        public RelayCommand AddSheetStockItemCommand { get; set; }
+
+        public RelayCommand DeleteSheetStockItemCommand { get; set; }
+
+        public RelayCommand EditSheetStockItemCommand { get; set; }
+
         public RelayCommand AddVendorCommand { get; set; }
 
         public RelayCommand DeleteVendorCommand { get; set; }
@@ -158,8 +173,6 @@ namespace SolidPrice.ViewModels {
 
         #endregion
 
-
-
         public Vendor SelectedVendor {
             get => selectedVendor;
             set { SetProperty(ref selectedVendor, value); }
@@ -169,6 +182,12 @@ namespace SolidPrice.ViewModels {
             get => selectedStockItem;
             set { SetProperty(ref selectedStockItem, value); }
         }
+
+        public SheetStockItem SelectedSheetStockItem {
+            get => selectedSheetStockItem;
+            set { SetProperty(ref selectedSheetStockItem, value); }
+        }
+
         public bool IsDetailed {
             get => isDetailed;
             set { SetProperty(ref isDetailed, value); }
@@ -200,6 +219,20 @@ namespace SolidPrice.ViewModels {
             }
         }
 
+        public string SheetOrderTotal {
+            get => sheetOrderTotal;
+            set {
+                SetProperty(ref sheetOrderTotal, value);
+            }
+        }
+
+        public string SheetCutListTotal {
+            get => sheetCutListTotal;
+            set {
+                SetProperty(ref sheetCutListTotal, value);
+            }
+        }
+
         public ObservableCollection<Vendor> Vendors {
             get => vendors;
             set { SetProperty(ref vendors, value); }
@@ -223,6 +256,27 @@ namespace SolidPrice.ViewModels {
             set {
                 SetProperty(ref orderList, value);
                 BindingOperations.EnableCollectionSynchronization(orderList, asyncLock);
+            }
+        }
+
+        public ObservableCollection<SheetStockItem> SheetStockItems {
+            get => sheetStockItems;
+            set { SetProperty(ref sheetStockItems, value); }
+        }
+
+        public ObservableCollection<SheetCutItem> SheetCutList {
+            get => sheetCutList;
+            set {
+                SetProperty(ref sheetCutList, value);
+                BindingOperations.EnableCollectionSynchronization(sheetCutList, asyncLock);
+            }
+        }
+
+        public ObservableCollection<SheetOrderItem> SheetOrderList {
+            get => sheetOrderList;
+            set {
+                SetProperty(ref sheetOrderList, value);
+                BindingOperations.EnableCollectionSynchronization(sheetOrderList, asyncLock);
             }
         }
 
@@ -263,6 +317,15 @@ namespace SolidPrice.ViewModels {
                 win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
                 win.ShowDialog();
             }, () => !IsWorking);
+            AddSheetStockItemCommand = new RelayCommand(x => {
+                var win = new AddSheetStockItemWindow();
+                win.DataContext = new AddSheetStockItemViewModel();
+                Window mainWindow = App.Current.MainWindow;
+                win.Left = mainWindow.Left + (mainWindow.Width - win.Width) / 2;
+                win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
+                win.ShowDialog();
+            }, () => !IsWorking);
+
             AddVendorCommand = new RelayCommand(x => {
                 var win = new AddVendorWindow();
                 win.DataContext = new AddVendorViewModel();
@@ -287,6 +350,31 @@ namespace SolidPrice.ViewModels {
 
 
                             ctx.StockItems.Remove(SelectedStockItem);
+                            ctx.SaveChanges();
+                            CutListManager.Instance.Refresh();
+                        }
+                    } catch (Exception e) {
+                        string s = e.Message;
+                        ErrorMessage("Database Error mvm.cs 282", "There was an error while accessing the database.");
+                    }
+                }
+            }, () => !IsWorking);
+            DeleteSheetStockItemCommand = new RelayCommand(x => {
+                if (SelectedSheetStockItem == null) {
+                    return;
+                }
+
+                MessageBoxButton button = MessageBoxButton.YesNo;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result;
+
+                result = MessageWindow.Show("Delete Sheet Type", "Are you sure you want to delete this sheet type from the database?", button, icon);
+                if (result == MessageBoxResult.Yes) {
+                    try {
+                        using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
+
+
+                            ctx.SheetStockItems.Remove(SelectedSheetStockItem);
                             ctx.SaveChanges();
                             CutListManager.Instance.Refresh();
                         }
@@ -351,6 +439,20 @@ namespace SolidPrice.ViewModels {
                 win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
                 win.ShowDialog();
             }, () => !IsWorking);
+            EditSheetStockItemCommand = new RelayCommand(x => {
+                if (SelectedSheetStockItem == null) {
+                    ErrorMessage("Stock Type mvm.cs 330", "Please select a sheet type to edit.");
+                    return;
+                }
+                var vModel = new EditSheetStockItemViewModel(SelectedSheetStockItem);
+                var win = new EditSheetStockItemWindow();
+                win.DataContext = vModel;
+                Window mainWindow = App.Current.MainWindow;
+                win.Left = mainWindow.Left + (mainWindow.Width - win.Width) / 2;
+                win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
+                win.ShowDialog();
+            }, () => !IsWorking);
+
             EditVendorCommand = new RelayCommand(x => {
                 if (SelectedVendor == null) {
                     ErrorMessage("Vender mvm.cs 340", "Please select a vendor to edit.");
@@ -369,9 +471,10 @@ namespace SolidPrice.ViewModels {
                 win.ShowDialog();
             }, () => !IsWorking);
             IsDetailedCommand = new RelayCommand(x => {
-                List<CutItem> tempList = CutListManager.Instance.CutList.ToList();
+                List<CutItem> tempCList = CutListManager.Instance.CutList.ToList();
+                List<SheetCutItem> tempSCList = CutListManager.Instance.SheetCutList.ToList();
                 ClearCutList();
-                CutListManager.Instance.SortCutListForDisplay(IsDetailed, tempList);
+                CutListManager.Instance.SortCutListForDisplay(IsDetailed, tempCList, tempSCList);
                 //CutListManager.Instance.Refresh();
             });
             ConfigCommand = new RelayCommand(x => {
@@ -397,11 +500,16 @@ namespace SolidPrice.ViewModels {
             asyncLock = new object();
             CutListManager.Instance.ConnectionString = ConnectionString;
             CutList = CutListManager.Instance.CutList;
+            SheetCutList = CutListManager.Instance.SheetCutList;
             OrderList = CutListManager.Instance.OrderList;
-            Vendors = CutListManager.Instance.Vendors;
+            SheetOrderList = CutListManager.Instance.SheetOrderList;
             StockItems = CutListManager.Instance.StockItems;
+            SheetStockItems = CutListManager.Instance.SheetStockItems;
+            Vendors = CutListManager.Instance.Vendors;
             OrderTotal = "";
+            SheetOrderTotal = "";
             CutListTotal = "";
+            SheetCutListTotal = "";
             loadingAnimFadeIn = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimFadeIn");
             loadingAnimBounce = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimBounce");
             loadingAnimFadeOut = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimFadeOut");
@@ -417,6 +525,8 @@ namespace SolidPrice.ViewModels {
 
             GetTotalText();
         }
+
+
 
         #region Methods
 
@@ -442,6 +552,16 @@ namespace SolidPrice.ViewModels {
                 runningTotal += decimal.Parse(item.TotalCost.Substring(1));
             }
             CutListTotal = string.Format("{0:c}", runningTotal);
+            runningTotal = 0;
+            foreach (SheetOrderItem item in SheetOrderList) {
+                runningTotal += decimal.Parse(item.TotalCost.Substring(1));
+            }
+            SheetOrderTotal = string.Format("{0:c}", runningTotal);
+            runningTotal = 0;
+            foreach (SheetCutItem item in SheetCutList) {
+                runningTotal += decimal.Parse(item.TotalCost.Substring(1));
+            }
+            SheetCutListTotal = string.Format("{0:c}", runningTotal);
         }
 
         #endregion

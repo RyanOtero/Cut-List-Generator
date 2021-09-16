@@ -45,6 +45,7 @@ namespace SolidPrice.Migrations
                     Qty = table.Column<int>(type: "int", nullable: false),
                     Length = table.Column<float>(type: "float", nullable: false),
                     Width = table.Column<float>(type: "float", nullable: false),
+                    GrainDirection = table.Column<int>(type: "int", nullable: false),
                     SheetNumber = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

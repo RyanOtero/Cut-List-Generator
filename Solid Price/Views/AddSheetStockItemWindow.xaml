@@ -1,0 +1,68 @@
+﻿<Window x:Class="SolidPrice.Views.AddSheetStockItemWindow" Name="AddSheetStockItemWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:utils="clr-namespace:SolidPrice.Utils"
+        xmlns:models="clr-namespace:SolidPrice.Models"
+        Title="Add Sheet Item" Height="480" Width="420" ResizeMode="NoResize" ShowInTaskbar="True" 
+        WindowStyle="None" SizeToContent="Manual"
+        Style="{DynamicResource ResourceKey=AddEditWindowStyle}" >
+    <Window.Resources>
+        <utils:FloatToStringConverter x:Key="FloatToStringConverter"/>
+        <utils:DollarToStringConverter x:Key="DollarToStringConverter"/>
+    </Window.Resources>
+    <Grid Margin="20,20,20,20" utils:EnterKeyTraversal.IsEnabled="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.25*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".05*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.75*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Material Type:" HorizontalAlignment="Right" Margin="0,2,5,0" VerticalAlignment="Bottom" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="1"/>
+        <ComboBox SelectedItem="{Binding SelectedMatType}" ItemsSource="{Binding Source={utils:EnumBindingSource {x:Type models:MaterialType}}}" Margin="0,0,15,0" HorizontalAlignment="Left" 
+                  VerticalAlignment="Bottom" Width="200" Height="20" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="1"/>
+        <Label Content="Vendor:" HorizontalAlignment="Right" Margin="0,2,5,0" VerticalAlignment="Bottom" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="2"/>
+        <ComboBox SelectedItem="{Binding SelectedVendor}" ItemsSource="{Binding MainVModel.Vendors}" DisplayMemberPath="VendorName" Margin="0,0,15,0" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                  Width="200" Height="20" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2"/>
+        <Label Content="Stock Length (IN):" HorizontalAlignment="Right" Margin="0,2,5,0" VerticalAlignment="Bottom" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="3"/>
+        <TextBox x:Name="StockLengthTextBox" Text="{Binding StockLength, UpdateSourceTrigger=LostFocus, Converter={StaticResource FloatToStringConverter}}" Margin="0,0,15,0" HorizontalAlignment="Left"
+                 AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Bottom" Width="200" Height="Auto" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="3"/>
+        <Label Content="Stock Width (IN):" HorizontalAlignment="Right" Margin="0,2,5,0" VerticalAlignment="Bottom" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="4"/>
+        <TextBox x:Name="StockWidthTextBox" Text="{Binding StockWidth, UpdateSourceTrigger=LostFocus, Converter={StaticResource FloatToStringConverter}}" Margin="0,0,15,0" HorizontalAlignment="Left"
+                 AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Bottom" Width="200" Height="Auto" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="4"/>
+        <Label Content="Thickness (IN):" HorizontalAlignment="Right" Margin="0,2,5,0" VerticalAlignment="Bottom" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="5"/>
+        <TextBox x:Name="ThicknessTextBox" Text="{Binding Thickness, UpdateSourceTrigger=LostFocus, Converter={StaticResource FloatToStringConverter}}" Margin="0,0,15,0" HorizontalAlignment="Left" 
+                 AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Bottom" Width="200" Height="Auto" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="5"/>
+        <Label Content="Finish:" HorizontalAlignment="Right" Margin="0,2,5,0" VerticalAlignment="Bottom" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="6"/>
+        <TextBox x:Name="FinishTextBox" Text="{Binding Finish, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,15,0" HorizontalAlignment="Left" AcceptsReturn="False" TextWrapping="NoWrap"
+                 VerticalAlignment="Bottom" Width="200" Height="Auto" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="6"/>
+        <Label Content="Cost/SQFT:" HorizontalAlignment="Right" Margin="0,2,5,0" VerticalAlignment="Bottom" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="7"/>
+        <TextBox x:Name="CostPerFootTextBox" Text="{Binding CostPerSqFoot, UpdateSourceTrigger=LostFocus, Converter={StaticResource DollarToStringConverter}}" Margin="0,0,15,0" HorizontalAlignment="Left"
+                 AcceptsReturn="False" TextWrapping="NoWrap" VerticalAlignment="Bottom" Width="200" Height="Auto" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="7"/>
+        <Label Content="Internal Description:" HorizontalAlignment="Right" Margin="0,2,5,0" VerticalAlignment="Bottom" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="8"/>
+        <TextBox x:Name="InternalDescriptionTextBox" Text="{Binding InternalDescription, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,15,0" HorizontalAlignment="Left" AcceptsReturn="False" 
+                 TextWrapping="NoWrap" VerticalAlignment="Bottom" Width="200" Height="Auto" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="8"/>
+        <Label Content="External Description:" HorizontalAlignment="Right" Margin="0,2,5,0" VerticalAlignment="Bottom" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="9"/>
+        <TextBox x:Name="ExternalDescriptionTextBox" Text="{Binding ExternalDescription, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,15,0" HorizontalAlignment="Left" AcceptsReturn="False"
+                 TextWrapping="NoWrap" VerticalAlignment="Bottom" Width="200" Height="Auto" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="9"/>
+        <Label Content="Vendor Item #:" HorizontalAlignment="Right" Margin="0,2,5,0" VerticalAlignment="Bottom" Height="Auto" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="10"/>
+        <TextBox x:Name="VendorItemNumberTextBox" Text="{Binding VendorItemNumber, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,15,0" HorizontalAlignment="Left" AcceptsReturn="False" 
+                 TextWrapping="NoWrap" VerticalAlignment="Bottom" Width="200" Height="Auto" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="10"/>
+        <Button x:Name="ConfirmEditStockTypeButton" Tag="IgnoreEnterKeyTraversal" Content="Confirm" Command="{Binding ConfirmCommand}" CommandParameter="{Binding ElementName=AddSheetStockItemWin}" 
+                Margin="80,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="2"/>
+        <Button x:Name="CancelEditStockTypeButton" Tag="IgnoreEnterKeyTraversal" Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=AddSheetStockItemWin}" 
+                Margin="0,10,80,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="11"/>
+
+    </Grid>
+</Window>

@@ -4,17 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
 namespace SolidPrice.Models {
-    public class SheetCutItem : IComparable<SheetCutItem>, IEquatable<SheetCutItem>, INotifyPropertyChanged {
-
-        public enum Grain
-        {
-            [Description("-")]
-            none,
-            [Description("Length")]
-            Length,
-            [Description("Width")]
-            Width
-        }
+    public partial class SheetCutItem : IComparable<SheetCutItem>, IEquatable<SheetCutItem>, INotifyPropertyChanged {
 
         #region Fields
         private float length;
