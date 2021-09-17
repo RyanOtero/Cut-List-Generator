@@ -152,18 +152,18 @@ namespace SolidPrice.Models {
 
         public int CompareTo(CutItem other) {
             if (other != null) {
-                if (Description != other.Description) {
-                    if (StickNumber != other.StickNumber) {
-                        return Length.CompareTo(other.Length);
+                if (Description == other.Description) {
+                    if (StickNumber == other.StickNumber) {
+                        return -Length.CompareTo(other.Length);
+                    } else {
+                        return StickNumber.CompareTo(other.StickNumber);
                     }
                 } else {
-                    return StickNumber.CompareTo(other.StickNumber);
+                    return Description.CompareTo(other.Description);
                 }
-            } else {
-                return Description.CompareTo(other.Description);
             }
             return 1;
-        }
+            }
 
         public bool Equals(CutItem other) {
             if (other.Length == Length &&

@@ -372,7 +372,7 @@ namespace SolidPrice.Models {
                 }
                 Consolidate(tempCList);
             }
-
+            tempCList.Sort();
             foreach (CutItem item in tempCList) {
                 CutList.Add(item);
             }
@@ -521,6 +521,7 @@ namespace SolidPrice.Models {
                 }
             }
             Consolidate(temp);
+            temp.Sort();
             cutList.Clear();
             foreach (CutItem item in temp) {
                 cutList.Add(item);
@@ -578,7 +579,7 @@ namespace SolidPrice.Models {
 
                     string CustomPropResolvedVal;
                     CustomPropMgr.Get2(CustomPropName, out _, out CustomPropResolvedVal);
-                    //Debug.Print("\t\t" + CustomPropName + ": " + CustomPropResolvedVal);
+                    Debug.Print("\t\t" + CustomPropName + ": " + CustomPropResolvedVal);
                     switch (CustomPropName.ToLower()) {
                         case "quantity":
                             Int32.TryParse(CustomPropResolvedVal, out qty);
@@ -611,10 +612,18 @@ namespace SolidPrice.Models {
                             finish = CustomPropResolvedVal;
                             break;
                         case "angle1":
-                            float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle1);
+                            if (CustomPropResolvedVal.Length > 0) {
+                                float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle1);
+                                break;
+                            }
+                            angle1 = 0;
                             break;
                         case "angle2":
-                            float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle2);
+                            if (CustomPropResolvedVal.Length > 0) {
+                                float.TryParse(CustomPropResolvedVal.Substring(0, CustomPropResolvedVal.Length - 1), out angle2);
+                                break;
+                            }
+                            angle2 = 0;
                             break;
                         case "material":
                             material = CustomPropResolvedVal;
@@ -632,8 +641,8 @@ namespace SolidPrice.Models {
                 Vendor vendor;
                 if (thickness != 0) {
                     var sSItems = ctx.SheetStockItems.Include(i => i.Vendor).ToList();
-                    sSItem = sSItems.SingleOrDefault(item => item.InternalDescription == description);
-                    if (sItem == null) {
+                    sSItem = sSItems.FirstOrDefault(item => item.InternalDescription == description);
+                    if (sSItem == null) {
                         isNew = true;
                     }
                     if (isNew) {
@@ -643,6 +652,7 @@ namespace SolidPrice.Models {
                             vendor = new Vendor("N/A", "N/A", "N/A", "N/A");
                             vendor.ID = 1;
                             ctx.Vendors.Add(vendor);
+                            Vendors.Add(vendor);
                             ctx.SaveChanges();
                         }
                         MaterialType mat;
@@ -666,7 +676,7 @@ namespace SolidPrice.Models {
 
                 } else {
                     var sItems = ctx.StockItems.Include(i => i.Vendor).ToList();
-                    sItem = sItems.SingleOrDefault(item => item.InternalDescription == description);
+                    sItem = sItems.FirstOrDefault(item => item.InternalDescription == description);
                     if (sItem == null) {
                         isNew = true;
                     }

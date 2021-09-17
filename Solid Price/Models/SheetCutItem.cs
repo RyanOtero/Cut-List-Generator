@@ -129,12 +129,12 @@ namespace SolidPrice.Models {
 
         public int CompareTo(SheetCutItem other) {
             if (other != null) {
-                if (Description != other.Description) {
-                    if (SheetNumber != other.SheetNumber) {
-                        if (Length != other.Length) {
-                            return Width.CompareTo(other.Width);
+                if (Description == other.Description) {
+                    if (SheetNumber == other.SheetNumber) {
+                        if (Length == other.Length) {
+                            return -Width.CompareTo(other.Width);
                         } else {
-                            return Length.CompareTo(other.Length);
+                            return -Length.CompareTo(other.Length);
                         }
                     } else {
                         return SheetNumber.CompareTo(other.SheetNumber);
