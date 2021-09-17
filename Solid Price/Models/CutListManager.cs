@@ -169,17 +169,17 @@ namespace SolidPrice.Models {
                     foreach (Vendor item in vendors) {
                         Vendors.Add(item);
                     }
-                    
+
                     List<StockItem> sTypes = ctx.StockItems.Include(s => s.Vendor).ToList();
                     foreach (StockItem item in sTypes) {
                         StockItems.Add(item);
-                    } 
+                    }
 
                     List<SheetStockItem> sSTypes = ctx.SheetStockItems.Include(s => s.Vendor).ToList();
                     foreach (SheetStockItem item in sSTypes) {
                         SheetStockItems.Add(item);
-                    } 
-                    
+                    }
+
                     List<CutItem> cList = ctx.CutItems.Include(c => c.StockItem).ToList();
                     cList.Sort();
                     foreach (CutItem item in cList) {
@@ -341,6 +341,9 @@ namespace SolidPrice.Models {
         }
 
         public void SortCutListForDisplay(bool isDetailed, List<CutItem> tempCList, List<SheetCutItem> tempSCList) {
+
+            /////////// TO DO: Sort Cuts and following for sheet metal
+
             SortCuts(tempCList);
             List<CutItem> tempOrderList = new List<CutItem>();
             List<string> distinctOrderItems = new List<string>();
@@ -643,7 +646,7 @@ namespace SolidPrice.Models {
                             ctx.SaveChanges();
                         }
                         MaterialType mat;
-                        if (material == "material <not specified>") {
+                        if (material.ToLower() == "material <not specified>") {
                             mat = StockItem.MaterialFromDescription(description);
                         } else {
                             mat = StockItem.MaterialFromDescription(material);
@@ -657,7 +660,7 @@ namespace SolidPrice.Models {
                         ctx.SaveChanges();
                         isNew = false;
                     }
-                    
+
                     SheetCutItem sCItem = new SheetCutItem(sSItem, qty, length, width, grainDirection);
                     tempSheetCutList.Add(sCItem);
 
@@ -674,6 +677,7 @@ namespace SolidPrice.Models {
                             vendor = new Vendor("N/A", "N/A", "N/A", "N/A");
                             vendor.ID = 1;
                             ctx.Vendors.Add(vendor);
+                            Vendors.Add(vendor);
                             ctx.SaveChanges();
                         }
                         MaterialType mat;
