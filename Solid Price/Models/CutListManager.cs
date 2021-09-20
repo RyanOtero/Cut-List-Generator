@@ -399,18 +399,30 @@ namespace SolidPrice.Models {
         }
 
         public void SortCuts(List<CutItem> cutList) {
-
+            Dictionary<string, Dictionary<float, int>> cutCounts = new Dictionary<string, Dictionary<float, int>>();
             List<CutItem> temp = new List<CutItem>();
             StockItem sType = null;
             float leftOnStick = 0;
             int stickNum = 1;
-
+            cutList.Sort();
             foreach (CutItem item in cutList) {
                 for (int i = 0; i < item.Qty; i++) {
                     CutItem c = item.Clone();
                     c.Qty = 1;
                     c.StickNumber = 0;
                     temp.Add(c);
+                    if (cutCounts.ContainsKey(c.Description)) {
+                        if (cutCounts[c.Description].ContainsKey(c.Length)) {
+                            cutCounts[c.Description][c.Length]++;
+                        } else {
+                            cutCounts[c.Description][c.Length] = 1;
+                        }
+                    } else {
+                        Dictionary<float, int> cLengthCount = new Dictionary<float, int>();
+                        cLengthCount[c.Length] = 1;
+                        cutCounts[c.Description] = cLengthCount;
+                    }
+                    
                 }
             }
             cutList.Clear();
@@ -418,8 +430,6 @@ namespace SolidPrice.Models {
                 cutList.Add(item);
             }
             temp.Clear();
-            cutList.Sort();
-            cutList.Reverse();
             int count = cutList.Count;
 
             for (int i = count - 1; i > -1; i--) {
@@ -526,7 +536,9 @@ namespace SolidPrice.Models {
             foreach (CutItem item in temp) {
                 cutList.Add(item);
             }
-            cutList.Sort();
+            foreach (var item in cutCounts) {
+                Debug.Print(item.Key.Item1 + ", Length: " + item.Key.Item2 + ", Qty: " + item.Value + "\n");
+            }
         }
 
         public void Consolidate(List<CutItem> cList) {
@@ -579,7 +591,7 @@ namespace SolidPrice.Models {
 
                     string CustomPropResolvedVal;
                     CustomPropMgr.Get2(CustomPropName, out _, out CustomPropResolvedVal);
-                    Debug.Print("\t\t" + CustomPropName + ": " + CustomPropResolvedVal);
+                    //Debug.Print("\t\t" + CustomPropName + ": " + CustomPropResolvedVal);
                     switch (CustomPropName.ToLower()) {
                         case "quantity":
                             Int32.TryParse(CustomPropResolvedVal, out qty);
