@@ -425,6 +425,20 @@ namespace SolidPrice.Models {
                     
                 }
             }
+
+            foreach (KeyValuePair<string, Dictionary<float, int>> item in cutCounts) {
+                float stockLength = StockItems.First(x => x.ExternalDescription == item.Key).StockLengthInInches;
+                int numOfSticks = 1;
+
+            }
+
+
+
+
+
+
+
+
             cutList.Clear();
             foreach (CutItem item in temp) {
                 cutList.Add(item);
@@ -536,9 +550,9 @@ namespace SolidPrice.Models {
             foreach (CutItem item in temp) {
                 cutList.Add(item);
             }
-            foreach (var item in cutCounts) {
-                Debug.Print(item.Key.Item1 + ", Length: " + item.Key.Item2 + ", Qty: " + item.Value + "\n");
-            }
+            //foreach (var item in cutCounts) {
+            //    Debug.Print(item.Key.Item1 + ", Length: " + item.Key.Item2 + ", Qty: " + item.Value + "\n");
+            //}
         }
 
         public void Consolidate(List<CutItem> cList) {
