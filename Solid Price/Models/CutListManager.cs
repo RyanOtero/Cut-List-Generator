@@ -342,7 +342,7 @@ namespace SolidPrice.Models {
 
         public void SortCutListForDisplay(bool isDetailed, List<CutItem> tempCList, List<SheetCutItem> tempSCList) {
 
-            /////////// TO DO: Sort Cuts and following for sheet metal
+            /////////// TO DO: Sort Cuts for sheet metal
 
             SortCuts(tempCList);
             List<CutItem> tempOrderList = new List<CutItem>();
@@ -398,158 +398,87 @@ namespace SolidPrice.Models {
             }
         }
 
+        public static void BestStick(int sticknumber, float capacity, List<CutItem> cutItemsInput, List<CutItem> cutItemsOutput) {
+            List<CutItem> bestStick = new List<CutItem>();
+            StickRecursion(capacity, 0, cutItemsInput, ref bestStick);
+            foreach (var cut in bestStick) {
+                cut.StickNumber = sticknumber;
+                cutItemsInput.Remove(cut);
+                cutItemsOutput.Add(cut);
+            }
+        }
+
+        private static void StickRecursion(float capacity, int index, List<CutItem> cutItems, ref List<CutItem> currentStick) {
+            if (index >= cutItems.Count) return;
+            List<CutItem> potentialStick = currentStick.ToList();
+            if (index > 0) {
+                if (potentialStick.Sum() + cutItems[index].Length > capacity) {
+                    potentialStick.RemoveAt(potentialStick.Count - 1);
+                }
+            }
+            for (int i = 0; i < cutItems[index].Qty; i++) {
+                potentialStick.Add(cutItems[index]);
+                if (potentialStick.Sum() > capacity) {
+                    potentialStick.RemoveAt(potentialStick.Count - 1);
+                    break;
+                } else if (potentialStick.Sum() <= capacity && i == cutItems[index].Qty - 1) {
+                    currentStick = potentialStick;
+                    break;
+                }
+            }
+            if (currentStick.Sum() == capacity) return;
+            for (int j = index + 1; j < cutItems.Count; j++) {
+                StickRecursion(capacity, j, cutItems, ref potentialStick);
+            }
+            if (potentialStick.Sum() > currentStick.Sum()) {
+                currentStick = potentialStick;
+            }
+        }
+
         public void SortCuts(List<CutItem> cutList) {
-            Dictionary<string, Dictionary<float, int>> cutCounts = new Dictionary<string, Dictionary<float, int>>();
-            List<CutItem> temp = new List<CutItem>();
-            StockItem sType = null;
-            float leftOnStick = 0;
-            int stickNum = 1;
-            cutList.Sort();
-            foreach (CutItem item in cutList) {
-                for (int i = 0; i < item.Qty; i++) {
-                    CutItem c = item.Clone();
-                    c.Qty = 1;
-                    c.StickNumber = 0;
-                    temp.Add(c);
-                    if (cutCounts.ContainsKey(c.Description)) {
-                        if (cutCounts[c.Description].ContainsKey(c.Length)) {
-                            cutCounts[c.Description][c.Length]++;
-                        } else {
-                            cutCounts[c.Description][c.Length] = 1;
-                        }
-                    } else {
-                        Dictionary<float, int> cLengthCount = new Dictionary<float, int>();
-                        cLengthCount[c.Length] = 1;
-                        cutCounts[c.Description] = cLengthCount;
-                    }
-                    
-                }
-            }
-
-            foreach (KeyValuePair<string, Dictionary<float, int>> item in cutCounts) {
-                float stockLength = StockItems.First(x => x.ExternalDescription == item.Key).StockLengthInInches;
-                int numOfSticks = 1;
-
-            }
-
-
-
-
-
-
-
-
-            cutList.Clear();
-            foreach (CutItem item in temp) {
-                cutList.Add(item);
-            }
-            temp.Clear();
-            int count = cutList.Count;
-
-            for (int i = count - 1; i > -1; i--) {
-                //First item initialization
-                if (i == count - 1) {
-                    sType = cutList[i].StockItem;
-                    cutList[i].StickNumber = stickNum;
-                    leftOnStick = cutList[i].StockItem.StockLengthInInches - cutList[i].Length;
-                    bool isLarger = false;
-                    while (leftOnStick <= 0) {
-                        stickNum++;
-                        leftOnStick += cutList[i].StockItem.StockLengthInInches;
-                        isLarger = true;
-                    }
-                    if (isLarger) stickNum++;
-                    temp.Add(cutList[i]);
-                    cutList.RemoveAt(i);
-                    //If still same stock type as previous
-                } else if (cutList[i].StockItem == sType) {
-                    //If there is enough left on the current stick
-                    if (leftOnStick >= cutList[i].Length) {
-                        leftOnStick -= cutList[i].Length;
-                        cutList[i].StickNumber = stickNum;
-                        if (leftOnStick == 0) {
-                            stickNum++;
-                            leftOnStick = cutList[i].StockItem.StockLengthInInches;
-                        }
-                        temp.Add(cutList[i]);
-                        cutList.RemoveAt(i);
-                        //If the piece is longer than the stock length
-                    } else if (cutList[i].Length > sType.StockLengthInInches) {
-                        sType = cutList[i].StockItem;
-                        leftOnStick = cutList[i].StockItem.StockLengthInInches - cutList[i].Length;
-                        cutList[i].StickNumber = stickNum;
-                        bool isLarger = false;
-                        while (leftOnStick <= 0) {
-                            stickNum++;
-                            leftOnStick += cutList[i].StockItem.StockLengthInInches;
-                            isLarger = true;
-                        }
-                        if (isLarger) stickNum++;
-                        temp.Add(cutList[i]);
-                        cutList.RemoveAt(i);
-                        //If the piece is longer than current stick
-                    } else {
-                        bool isBroken = false;
-                        bool areMoreOfStockItem = false;
-                        //check what other cuts may fit on the current stick and remove them
-                        for (int j = i - 1; j > -1; j--) {
-                            if (cutList[j].StockItem == sType) {
-                                areMoreOfStockItem = true;
-                                if (leftOnStick >= cutList[j].Length) {
-                                    leftOnStick -= cutList[j].Length;
-                                    cutList[j].StickNumber = stickNum;
-                                    if (leftOnStick == 0) {
-                                        stickNum++;
-                                        leftOnStick = cutList[i].StockItem.StockLengthInInches;
-                                    }
-                                    temp.Add(cutList[j]);
-                                    cutList.RemoveAt(j);
-                                    i--;
-                                    isBroken = true;
-                                }
-                            }
-                        }
-                        //if no other cuts will fit on current stick, go to full stock length and retry current iteration
-                        if (!isBroken && areMoreOfStockItem) {
-                            leftOnStick = cutList[i].StockItem.StockLengthInInches;
-                            stickNum++;
-                            i++;
-                            continue;
-                            //if other cuts fit on current stick, retry current iteration
-                        } else if (isBroken) {
-                            continue;
-                            //if no more cuts fit on the stick
-                        } else {
-                            stickNum++;
-                            cutList[i].StickNumber = stickNum;
-                            temp.Add(cutList[i]);
-                            cutList.RemoveAt(i);
-                            continue;
-                        }
-                    }
-                    // If new StockItem
-                } else {
-                    sType = cutList[i].StockItem;
-                    stickNum = 1;
-                    leftOnStick = cutList[i].StockItem.StockLengthInInches - cutList[i].Length;
-                    cutList[i].StickNumber = stickNum;
-                    bool isLarger = false;
-                    while (leftOnStick <= 0) {
-                        stickNum++;
-                        leftOnStick += cutList[i].StockItem.StockLengthInInches;
-                        isLarger = true;
-                    }
-                    if (isLarger) stickNum++;
-                    temp.Add(cutList[i]);
-                    cutList.RemoveAt(i);
-                }
-            }
-            Consolidate(temp);
+            List<CutItem> temp = cutList.ToList();
+            //foreach (CutItem item in cutList) {
+            //    for (int i = 0; i < item.Qty; i++) {
+            //        CutItem c = item.Clone();
+            //        c.Qty = 1;
+            //        c.StickNumber = 0;
+            //        temp.Add(c);
+            //    }
+            //}
             temp.Sort();
-            cutList.Clear();
-            foreach (CutItem item in temp) {
-                cutList.Add(item);
+            List<int> stockItems = new List<int>();
+            foreach (var cut in temp) {
+                if (!stockItems.Contains(cut.StockItemID)) {
+                    stockItems.Add(cut.StockItemID);
+                }
             }
+            List<List<CutItem>> stratifiedCutList = new List<List<CutItem>>();
+            foreach (var stockItemID in stockItems) {
+                stratifiedCutList.Add(temp.FindAll(c => c.StockItemID == stockItemID));
+            }
+            
+            List<List<CutItem>> stratifiedCutListOutput = new List<List<CutItem>>();
+            foreach (var list in stratifiedCutList) {
+                List<CutItem> cutItems = new List<CutItem>();
+                int stickNo = 1;
+                while (list.Count > 0) {
+                    BestStick(stickNo, list[0].StockItem.StockLengthInInches, list, cutItems);
+                    stickNo++;
+                }
+                stratifiedCutListOutput.Add(cutItems);
+            }
+
+            temp.Clear();
+            foreach (var list in stratifiedCutListOutput) {
+                foreach (var item in list) {
+                    temp.Add(item);
+                }
+            }
+
+            Consolidate(temp);
+
+            cutList.Clear();
+            cutList = temp.ToList();
             //foreach (var item in cutCounts) {
             //    Debug.Print(item.Key.Item1 + ", Length: " + item.Key.Item2 + ", Qty: " + item.Value + "\n");
             //}
@@ -846,5 +775,140 @@ namespace SolidPrice.Models {
             }
         }
         #endregion
+
+        #region old SortCuts()
+        //public void OldSortCuts(List<CutItem> cutList) {
+        //    List<CutItem> temp = new List<CutItem>();
+        //    StockItem sType = null;
+        //    float leftOnStick = 0;
+        //    int stickNum = 1;
+        //    cutList.Sort();
+        //    foreach (CutItem item in cutList) {
+        //        for (int i = 0; i < item.Qty; i++) {
+        //            CutItem c = item.Clone();
+        //            c.Qty = 1;
+        //            c.StickNumber = 0;
+        //            temp.Add(c);
+        //        }
+        //    }
+        //    cutList.Clear();
+        //    foreach (CutItem item in temp) {
+        //        cutList.Add(item);
+        //    }
+        //    temp.Clear();
+        //    int count = cutList.Count;
+
+        //    for (int i = count - 1; i > -1; i--) {
+        //        //First item initialization
+        //        if (i == count - 1) {
+        //            sType = cutList[i].StockItem;
+        //            cutList[i].StickNumber = stickNum;
+        //            leftOnStick = cutList[i].StockItem.StockLengthInInches - cutList[i].Length;
+        //            bool isLarger = false;
+        //            while (leftOnStick <= 0) {
+        //                stickNum++;
+        //                leftOnStick += cutList[i].StockItem.StockLengthInInches;
+        //                isLarger = true;
+        //            }
+        //            if (isLarger) stickNum++;
+        //            temp.Add(cutList[i]);
+        //            cutList.RemoveAt(i);
+        //            //If still same stock type as previous
+        //        } else if (cutList[i].StockItem == sType) {
+        //            //If there is enough left on the current stick
+        //            if (leftOnStick >= cutList[i].Length) {
+        //                leftOnStick -= cutList[i].Length;
+        //                cutList[i].StickNumber = stickNum;
+        //                if (leftOnStick == 0) {
+        //                    stickNum++;
+        //                    leftOnStick = cutList[i].StockItem.StockLengthInInches;
+        //                }
+        //                temp.Add(cutList[i]);
+        //                cutList.RemoveAt(i);
+        //                //If the piece is longer than the stock length
+        //            } else if (cutList[i].Length > sType.StockLengthInInches) {
+        //                sType = cutList[i].StockItem;
+        //                leftOnStick = cutList[i].StockItem.StockLengthInInches - cutList[i].Length;
+        //                cutList[i].StickNumber = stickNum;
+        //                bool isLarger = false;
+        //                while (leftOnStick <= 0) {
+        //                    stickNum++;
+        //                    leftOnStick += cutList[i].StockItem.StockLengthInInches;
+        //                    isLarger = true;
+        //                }
+        //                if (isLarger) stickNum++;
+        //                temp.Add(cutList[i]);
+        //                cutList.RemoveAt(i);
+        //                //If the piece is longer than current stick
+        //            } else {
+        //                bool isBroken = false;
+        //                bool areMoreOfStockItem = false;
+        //                //check what other cuts may fit on the current stick and remove them
+        //                for (int j = i - 1; j > -1; j--) {
+        //                    if (cutList[j].StockItem == sType) {
+        //                        areMoreOfStockItem = true;
+        //                        if (leftOnStick >= cutList[j].Length) {
+        //                            leftOnStick -= cutList[j].Length;
+        //                            cutList[j].StickNumber = stickNum;
+        //                            if (leftOnStick == 0) {
+        //                                stickNum++;
+        //                                leftOnStick = cutList[i].StockItem.StockLengthInInches;
+        //                            }
+        //                            temp.Add(cutList[j]);
+        //                            cutList.RemoveAt(j);
+        //                            i--;
+        //                            isBroken = true;
+        //                        }
+        //                    }
+        //                }
+        //                //if no other cuts will fit on current stick, go to full stock length and retry current iteration
+        //                if (!isBroken && areMoreOfStockItem) {
+        //                    leftOnStick = cutList[i].StockItem.StockLengthInInches;
+        //                    stickNum++;
+        //                    i++;
+        //                    continue;
+        //                    //if other cuts fit on current stick, retry current iteration
+        //                } else if (isBroken) {
+        //                    continue;
+        //                    //if no more cuts fit on the stick
+        //                } else {
+        //                    stickNum++;
+        //                    cutList[i].StickNumber = stickNum;
+        //                    temp.Add(cutList[i]);
+        //                    cutList.RemoveAt(i);
+        //                    continue;
+        //                }
+        //            }
+        //            // If new StockItem
+        //        } else {
+        //            sType = cutList[i].StockItem;
+        //            stickNum = 1;
+        //            leftOnStick = cutList[i].StockItem.StockLengthInInches - cutList[i].Length;
+        //            cutList[i].StickNumber = stickNum;
+        //            bool isLarger = false;
+        //            while (leftOnStick <= 0) {
+        //                stickNum++;
+        //                leftOnStick += cutList[i].StockItem.StockLengthInInches;
+        //                isLarger = true;
+        //            }
+        //            if (isLarger) stickNum++;
+        //            temp.Add(cutList[i]);
+        //            cutList.RemoveAt(i);
+        //        }
+        //    }
+
+
+        //    Consolidate(temp);
+        //    temp.Sort();
+        //    cutList.Clear();
+        //    foreach (CutItem item in temp) {
+        //        cutList.Add(item);
+        //    }
+        //    //foreach (var item in cutCounts) {
+        //    //    Debug.Print(item.Key.Item1 + ", Length: " + item.Key.Item2 + ", Qty: " + item.Value + "\n");
+        //    //}
+        //}
+        #endregion
+
     }
 }
