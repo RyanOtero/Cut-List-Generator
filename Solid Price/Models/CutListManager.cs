@@ -476,8 +476,7 @@ namespace SolidPrice.Models {
             }
 
             Consolidate(temp);
-
-            cutList.Clear();
+            temp.Sort();
             cutList = temp.ToList();
             //foreach (var item in cutCounts) {
             //    Debug.Print(item.Key.Item1 + ", Length: " + item.Key.Item2 + ", Qty: " + item.Value + "\n");
