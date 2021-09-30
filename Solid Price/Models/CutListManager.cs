@@ -23,6 +23,7 @@ namespace SolidPrice.Models {
         int fileerror = 0;
         int filewarning = 0;
         bool inBodyFolder = false;
+        private ObservableCollection<CutItem> cutListDetailed;
         private ObservableCollection<CutItem> cutList;
         private readonly object asyncLock;
         private ObservableCollection<OrderItem> orderList;
@@ -47,6 +48,14 @@ namespace SolidPrice.Models {
         public string ConnectionString {
             get => connectionString;
             set { connectionString = value; OnPropertyChanged(); }
+        }
+
+        public ObservableCollection<CutItem> CutListDetailed {
+            get => cutListDetailed;
+            set {
+                cutListDetailed = value;
+                BindingOperations.EnableCollectionSynchronization(cutListDetailed, asyncLock);
+            }
         }
 
         public ObservableCollection<CutItem> CutList {
@@ -111,6 +120,7 @@ namespace SolidPrice.Models {
 
         private CutListManager() {
             asyncLock = new object();
+            CutListDetailed = new ObservableCollection<CutItem>();
             CutList = new ObservableCollection<CutItem>();
             StockItems = new ObservableCollection<StockItem>();
             OrderList = new ObservableCollection<OrderItem>();
@@ -156,7 +166,7 @@ namespace SolidPrice.Models {
                 ErrorMessage("Database Error clm.cs 115", "The connection string is invalid.");
                 return;
             }
-            CutList.Clear();
+            CutListDetailed.Clear();
             OrderList.Clear();
             StockItems.Clear();
             SheetCutList.Clear();
@@ -183,7 +193,7 @@ namespace SolidPrice.Models {
                     List<CutItem> cList = ctx.CutItems.Include(c => c.StockItem).ToList();
                     cList.Sort();
                     foreach (CutItem item in cList) {
-                        CutList.Add(item);
+                        CutListDetailed.Add(item);
                     }
 
                     List<SheetCutItem> sCList = ctx.SheetCutItems.Include(c => c.SheetStockItem).ToList();
@@ -226,7 +236,7 @@ namespace SolidPrice.Models {
                 ErrorMessage("Database Error clm.cs 148", "There was an error while accessing the database.");
 
             }
-            CutList.Clear();
+            CutListDetailed.Clear();
             OrderList.Clear();
             SheetOrderList.Clear();
             sheetCutList.Clear();
@@ -248,6 +258,7 @@ namespace SolidPrice.Models {
 
             inBodyFolder = false;
             List<CutItem> tempCList = new List<CutItem>();
+            List<CutItem> tempCListSimple = new List<CutItem>();
             List<SheetCutItem> tempSCList = new List<SheetCutItem>();
             isPart = filePath.ToLower().Contains(".sldprt");
             isAssembly = filePath.ToLower().Contains(".sldasm");
@@ -328,7 +339,7 @@ namespace SolidPrice.Models {
                 hadError = false;
                 return;
             }
-            SortCutListForDisplay(isDetailed, tempCList, tempSCList);
+            SortCutListForDisplay(tempCList, tempCListSimple);
 
             timer.Stop();
             TimeSpan ts = timer.Elapsed;
@@ -340,11 +351,11 @@ namespace SolidPrice.Models {
             Debug.Print("RunTime " + elapsedTime);
         }
 
-        public void SortCutListForDisplay(bool isDetailed, List<CutItem> tempCList, List<SheetCutItem> tempSCList) {
+        public void SortCutListForDisplay(List<CutItem> tempCList, List<CutItem> tempCListSimple) {
 
             /////////// TO DO: Sort Cuts for sheet metal
 
-            SortCuts(tempCList);
+            SortCuts(ref tempCList);
             List<CutItem> tempOrderList = new List<CutItem>();
             List<string> distinctOrderItems = new List<string>();
             for (int i = tempCList.Count - 1; i > -1; i--) {
@@ -366,14 +377,23 @@ namespace SolidPrice.Models {
                 OrderList.Add(item);
             }
 
-            if (!isDetailed) {
-                foreach (CutItem item in tempCList) {
-                    item.StickNumber = 0;
+            foreach (CutItem item in tempCList) {
+                for (int i = 0; i < item.Qty; i++) {
+                    CutItem c = item.Clone();
+                    c.Qty = 1;
+                    c.StickNumber = 0;
+                    tempCListSimple.Add(c);
                 }
-                Consolidate(tempCList);
             }
+
+            Consolidate(tempCListSimple);
+            tempCListSimple.Sort();
             tempCList.Sort();
             foreach (CutItem item in tempCList) {
+                CutListDetailed.Add(item);
+            }
+
+            foreach (CutItem item in tempCListSimple) {
                 CutList.Add(item);
             }
 
@@ -381,7 +401,7 @@ namespace SolidPrice.Models {
                 using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
                     ctx.CutItems.RemoveRange(ctx.CutItems);
                     ctx.OrderItems.RemoveRange(ctx.OrderItems);
-                    foreach (CutItem item in CutList) {
+                    foreach (CutItem item in CutListDetailed) {
                         CutItem c = item.Clone();
                         c.StockItem = null;
                         ctx.CutItems.Add(c);
@@ -403,13 +423,18 @@ namespace SolidPrice.Models {
             StickRecursion(capacity, 0, cutItemsInput, ref bestStick);
             foreach (var cut in bestStick) {
                 cut.StickNumber = sticknumber;
-                cutItemsInput.Remove(cut);
+                CutItem cutQtyToLower = cutItemsInput.Find(c => c.Length == cut.Length);
+                cutQtyToLower.Qty--;
+                if (cutQtyToLower.Qty == 0) {
+                    cutItemsInput.Remove(cutQtyToLower);
+                }
                 cutItemsOutput.Add(cut);
             }
         }
 
         private static void StickRecursion(float capacity, int index, List<CutItem> cutItems, ref List<CutItem> currentStick) {
             if (index >= cutItems.Count) return;
+
             List<CutItem> potentialStick = currentStick.ToList();
             if (index > 0) {
                 if (potentialStick.Sum() + cutItems[index].Length > capacity) {
@@ -417,7 +442,15 @@ namespace SolidPrice.Models {
                 }
             }
             for (int i = 0; i < cutItems[index].Qty; i++) {
-                potentialStick.Add(cutItems[index]);
+                if (potentialStick.Count > 0) {
+                    if (cutItems[index].Length == potentialStick[potentialStick.Count - 1].Length) {
+                        List<CutItem> alreadyInStick = potentialStick.FindAll(c => c.Length == cutItems[index].Length);
+                        if (cutItems[index].Qty <= alreadyInStick.Count) return;
+                    }
+                }
+                CutItem clone = cutItems[index].Clone();
+                clone.Qty = 1;
+                potentialStick.Add(clone);
                 if (potentialStick.Sum() > capacity) {
                     potentialStick.RemoveAt(potentialStick.Count - 1);
                     break;
@@ -435,7 +468,7 @@ namespace SolidPrice.Models {
             }
         }
 
-        public void SortCuts(List<CutItem> cutList) {
+        public void SortCuts(ref List<CutItem> cutList) {
             List<CutItem> temp = cutList.ToList();
             //foreach (CutItem item in cutList) {
             //    for (int i = 0; i < item.Qty; i++) {
@@ -446,6 +479,7 @@ namespace SolidPrice.Models {
             //    }
             //}
             temp.Sort();
+            Consolidate(temp);
             List<int> stockItems = new List<int>();
             foreach (var cut in temp) {
                 if (!stockItems.Contains(cut.StockItemID)) {
@@ -456,7 +490,7 @@ namespace SolidPrice.Models {
             foreach (var stockItemID in stockItems) {
                 stratifiedCutList.Add(temp.FindAll(c => c.StockItemID == stockItemID));
             }
-            
+
             List<List<CutItem>> stratifiedCutListOutput = new List<List<CutItem>>();
             foreach (var list in stratifiedCutList) {
                 List<CutItem> cutItems = new List<CutItem>();

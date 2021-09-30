@@ -112,10 +112,12 @@ namespace SolidPrice.ViewModels {
                                 ctx.SheetStockItems.Update(sSItem);
                                 ctx.SaveChanges();
                             }
-                            List<CutItem> tempCList = CutListManager.Instance.CutList.ToList();
+                            List<CutItem> tempCList = CutListManager.Instance.CutListDetailed.ToList();
+                            List<CutItem> tempCListSimple = CutListManager.Instance.CutListDetailed.ToList();
+
                             List<SheetCutItem> tempSCList = CutListManager.Instance.SheetCutList.ToList();
                             MainVModel.ClearCutList();
-                            CutListManager.Instance.SortCutListForDisplay(MainVModel.IsDetailed, tempCList, tempSCList);
+                            CutListManager.Instance.SortCutListForDisplay(tempCList, tempCListSimple);
                             CutListManager.Instance.Refresh();
                             CloseWin(x);
                         } catch (Exception e) {

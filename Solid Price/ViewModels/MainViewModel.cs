@@ -34,6 +34,7 @@ namespace SolidPrice.ViewModels {
         private bool isSheetVisible;
         private ObservableCollection<Vendor> vendors;
         private ObservableCollection<StockItem> stockItems;
+        private ObservableCollection<CutItem> cutListDetailed;
         private ObservableCollection<CutItem> cutList;
         private ObservableCollection<OrderItem> orderList;
         private ObservableCollection<SheetStockItem> sheetStockItems;
@@ -297,10 +298,10 @@ namespace SolidPrice.ViewModels {
         }
 
         public ObservableCollection<CutItem> CutList {
-            get => cutList;
+            get { return IsDetailed? cutListDetailed : cutList; }
             set {
-                SetProperty(ref cutList, value);
-                BindingOperations.EnableCollectionSynchronization(cutList, asyncLock);
+                SetProperty(ref cutListDetailed, value);
+                BindingOperations.EnableCollectionSynchronization(cutListDetailed, asyncLock);
             }
         }
 
@@ -526,10 +527,10 @@ namespace SolidPrice.ViewModels {
                 win.ShowDialog();
             }, () => !IsWorking);
             IsDetailedCommand = new RelayCommand(x => {
-                List<CutItem> tempCList = CutListManager.Instance.CutList.ToList();
-                List<SheetCutItem> tempSCList = CutListManager.Instance.SheetCutList.ToList();
-                ClearCutList();
-                CutListManager.Instance.SortCutListForDisplay(IsDetailed, tempCList, tempSCList);
+                //List<CutItem> tempCList = CutListManager.Instance.CutList.ToList();
+                //List<SheetCutItem> tempSCList = CutListManager.Instance.SheetCutList.ToList();
+                //ClearCutList();
+                //CutListManager.Instance.SortCutListForDisplay(IsDetailed, tempCList, tempSCList);
                 //CutListManager.Instance.Refresh();
             });
             ConfigCommand = new RelayCommand(x => {
@@ -554,7 +555,8 @@ namespace SolidPrice.ViewModels {
 
             asyncLock = new object();
             CutListManager.Instance.ConnectionString = ConnectionString;
-            CutList = CutListManager.Instance.CutList;
+            cutListDetailed = CutListManager.Instance.CutListDetailed;
+            cutList = CutListManager.Instance.CutList;
             SheetCutList = CutListManager.Instance.SheetCutList;
             OrderList = CutListManager.Instance.OrderList;
             SheetOrderList = CutListManager.Instance.SheetOrderList;
@@ -654,9 +656,9 @@ namespace SolidPrice.ViewModels {
             if (saveFileDialog.ShowDialog() == true) {
                 filePath = saveFileDialog.FileName;
                 if (filePath.Contains(".xlsx")) {
-                    GenerateExcel(ToDataTable(CutListManager.Instance.OrderList), ToDataTable(CutListManager.Instance.CutList), filePath);
+                    GenerateExcel(ToDataTable(CutListManager.Instance.OrderList), ToDataTable(CutListManager.Instance.CutListDetailed), filePath);
                 } else if (filePath.Contains(".csv")) {
-                    GenerateCSV(ToDataTable(CutListManager.Instance.OrderList), ToDataTable(CutListManager.Instance.CutList), filePath);
+                    GenerateCSV(ToDataTable(CutListManager.Instance.OrderList), ToDataTable(CutListManager.Instance.CutListDetailed), filePath);
                 }
             }
         }
