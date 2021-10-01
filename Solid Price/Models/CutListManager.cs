@@ -425,16 +425,23 @@ namespace SolidPrice.Models {
                 cut.StickNumber = sticknumber;
                 CutItem cutQtyToLower = cutItemsInput.Find(c => c.Length == cut.Length);
                 cutQtyToLower.Qty--;
+                cutItemsOutput.Add(cut);
                 if (cutQtyToLower.Qty == 0) {
                     cutItemsInput.Remove(cutQtyToLower);
                 }
-                cutItemsOutput.Add(cut);
             }
         }
 
         private static void StickRecursion(float capacity, int index, List<CutItem> cutItems, ref List<CutItem> currentStick) {
+            if (cutItems.Sum() <= capacity) {
+                foreach (var item in cutItems) {
+                    CutItem clone = item.Clone();
+                    clone.Qty = 1;
+                    currentStick.Add(clone);
+                }
+                return;
+            }
             if (index >= cutItems.Count) return;
-
             List<CutItem> potentialStick = currentStick.ToList();
             if (index > 0) {
                 if (potentialStick.Sum() + cutItems[index].Length > capacity) {

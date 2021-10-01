@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media.Animation;
 using static SolidPrice.Utils.Messenger;
@@ -298,7 +299,15 @@ namespace SolidPrice.ViewModels {
         }
 
         public ObservableCollection<CutItem> CutList {
-            get { return IsDetailed? cutListDetailed : cutList; }
+            get => cutList;
+            set {
+                SetProperty(ref cutList, value);
+                BindingOperations.EnableCollectionSynchronization(cutList, asyncLock);
+            }
+        }
+
+        public ObservableCollection<CutItem> CutListDetailed {
+            get => cutListDetailed;
             set {
                 SetProperty(ref cutListDetailed, value);
                 BindingOperations.EnableCollectionSynchronization(cutListDetailed, asyncLock);
@@ -352,6 +361,26 @@ namespace SolidPrice.ViewModels {
             UserString = Application.Current.Properties["UserString"].ToString();
             PasswordString = Application.Current.Properties["PasswordString"].ToString();
 
+
+            asyncLock = new object();
+            CutListManager.Instance.ConnectionString = ConnectionString;
+            CutListDetailed = CutListManager.Instance.CutListDetailed;
+            CutList = CutListManager.Instance.CutList;
+            SheetCutList = CutListManager.Instance.SheetCutList;
+            OrderList = CutListManager.Instance.OrderList;
+            SheetOrderList = CutListManager.Instance.SheetOrderList;
+            StockItems = CutListManager.Instance.StockItems;
+            SheetStockItems = CutListManager.Instance.SheetStockItems;
+            Vendors = CutListManager.Instance.Vendors;
+            OrderTotal = "";
+            SheetOrderTotal = "";
+            CutListTotal = "";
+            SheetCutListTotal = "";
+            loadingAnimFadeIn = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimFadeIn");
+            loadingAnimBounce = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimBounce");
+            loadingAnimFadeOut = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimFadeOut");
+            loadingAnimFadeOut.Completed += new EventHandler((s, e) => { loadingAnimBounce.Stop(); });
+
             #region Commands Set
             GenerateCommand = new RelayCommand(x => {
                 IsWorking = true;
@@ -381,7 +410,6 @@ namespace SolidPrice.ViewModels {
                 win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
                 win.ShowDialog();
             }, () => !IsWorking);
-
             AddVendorCommand = new RelayCommand(x => {
                 var win = new AddVendorWindow();
                 win.DataContext = new AddVendorViewModel();
@@ -508,7 +536,6 @@ namespace SolidPrice.ViewModels {
                 win.Top = mainWindow.Top + (mainWindow.Height - win.Height) / 2;
                 win.ShowDialog();
             }, () => !IsWorking);
-
             EditVendorCommand = new RelayCommand(x => {
                 if (SelectedVendor == null) {
                     ErrorMessage("Vender mvm.cs 340", "Please select a vendor to edit.");
@@ -527,6 +554,12 @@ namespace SolidPrice.ViewModels {
                 win.ShowDialog();
             }, () => !IsWorking);
             IsDetailedCommand = new RelayCommand(x => {
+                DataGrid grid = x as DataGrid; 
+                if (IsDetailed) {
+                    grid.ItemsSource = CutListDetailed;
+                } else {
+                    grid.ItemsSource = CutList;
+                }
                 //List<CutItem> tempCList = CutListManager.Instance.CutList.ToList();
                 //List<SheetCutItem> tempSCList = CutListManager.Instance.SheetCutList.ToList();
                 //ClearCutList();
@@ -552,25 +585,6 @@ namespace SolidPrice.ViewModels {
                 win.ShowDialog();
             });
             #endregion
-
-            asyncLock = new object();
-            CutListManager.Instance.ConnectionString = ConnectionString;
-            cutListDetailed = CutListManager.Instance.CutListDetailed;
-            cutList = CutListManager.Instance.CutList;
-            SheetCutList = CutListManager.Instance.SheetCutList;
-            OrderList = CutListManager.Instance.OrderList;
-            SheetOrderList = CutListManager.Instance.SheetOrderList;
-            StockItems = CutListManager.Instance.StockItems;
-            SheetStockItems = CutListManager.Instance.SheetStockItems;
-            Vendors = CutListManager.Instance.Vendors;
-            OrderTotal = "";
-            SheetOrderTotal = "";
-            CutListTotal = "";
-            SheetCutListTotal = "";
-            loadingAnimFadeIn = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimFadeIn");
-            loadingAnimBounce = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimBounce");
-            loadingAnimFadeOut = (Storyboard)App.Current.MainWindow.FindResource("LoadingAnimFadeOut");
-            loadingAnimFadeOut.Completed += new EventHandler((s, e) => { loadingAnimBounce.Stop(); });
 
             ////For testing
             //atWork = false;
@@ -599,6 +613,9 @@ namespace SolidPrice.ViewModels {
         }
 
         private void GetTotalText() {
+            if (CutList == null) {
+                return;
+            }
             decimal runningTotal = 0;
             foreach (OrderItem item in OrderList) {
                 runningTotal += decimal.Parse(item.TotalCost.Substring(1));

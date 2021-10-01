@@ -63,7 +63,7 @@
                         <ColumnDefinition Width="20" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1">
-                        <CheckBox IsChecked="{Binding IsDetailed, Mode=TwoWay}" Content="Detailed Cut List" Command="{Binding IsDetailedCommand}" Style="{StaticResource ToggleLeft}" Width="135"
+                        <CheckBox  IsChecked="{Binding IsDetailed, Mode=TwoWay}" Content="Detailed Cut List" Command="{Binding IsDetailedCommand}" CommandParameter="{Binding ElementName=CutListGrid}" Style="{StaticResource ToggleLeft}" Width="135"
                                 Margin="0 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" />
                         <CheckBox IsChecked="{Binding ShowPricing, Mode=TwoWay}" Content="Show Pricing" Style="{StaticResource ToggleRight}" Width="112" Margin="0 0 0 0" VerticalAlignment="Center"
                                 HorizontalAlignment="Right" />
@@ -125,7 +125,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Content="Cut List:" FontSize="18" HorizontalAlignment="Left" Margin="28 0 0 0" Grid.Row="0" />
                                 <Label Content="{Binding CutListTotal}" FontSize="18" HorizontalAlignment="Left" Margin="-30 0 0 0" Width="160" Grid.Column="1" Grid.Row="0" />
-                                <DataGrid AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding CutList}" Margin="20,35,20,20" Grid.Row="1"
+                                <DataGrid x:Name="CutListGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False" ItemsSource="{Binding CutList}" Margin="20,35,20,20" Grid.Row="1"
                                         Grid.ColumnSpan="2">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding Path=Qty, Mode=OneWay}" Header="Qty" Width="1.5*" />
