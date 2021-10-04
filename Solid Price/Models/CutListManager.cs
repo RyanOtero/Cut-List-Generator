@@ -430,14 +430,22 @@ namespace SolidPrice.Models {
                     cutItemsInput.Remove(cutQtyToLower);
                 }
             }
+            //checking for erroneous qty's in solidworks file
+            for (int i = cutItemsInput.Count - 1; i > -1 ; i--) {
+                if (cutItemsInput[i].Qty <= 0) {
+                    cutItemsInput.RemoveAt(i);
+                }
+            }
         }
 
         private static void StickRecursion(float capacity, int index, List<CutItem> cutItems, ref List<CutItem> currentStick) {
             if (cutItems.Sum() <= capacity) {
                 foreach (var item in cutItems) {
-                    CutItem clone = item.Clone();
-                    clone.Qty = 1;
-                    currentStick.Add(clone);
+                    for (int i = 0; i < item.Qty; i++) {
+                        CutItem clone = item.Clone();
+                        clone.Qty = 1;
+                        currentStick.Add(clone);
+                    }
                 }
                 return;
             }
