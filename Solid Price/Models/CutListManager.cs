@@ -236,6 +236,7 @@ namespace SolidPrice.Models {
                 ErrorMessage("Database Error clm.cs 148", "There was an error while accessing the database.");
 
             }
+            CutList.Clear();
             CutListDetailed.Clear();
             OrderList.Clear();
             SheetOrderList.Clear();

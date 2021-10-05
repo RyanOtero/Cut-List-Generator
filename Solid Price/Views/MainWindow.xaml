@@ -68,11 +68,11 @@
                         <CheckBox IsChecked="{Binding ShowPricing, Mode=TwoWay}" Content="Show Pricing" Style="{StaticResource ToggleRight}" Width="112" Margin="0 0 0 0" VerticalAlignment="Center"
                                 HorizontalAlignment="Right" />
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="0">
+                    <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="0">
                         <RadioButton Style="{StaticResource ToggleLeft}" Width="62" IsChecked="{Binding IsStock}">Stock</RadioButton>
                         <RadioButton Style="{StaticResource ToggleMiddle}" Width="65" IsChecked="{Binding IsBoth}">Both</RadioButton>
                         <RadioButton Style="{StaticResource ToggleRight}" Width="62" IsChecked="{Binding IsSheet}">Sheet</RadioButton>
-                    </StackPanel>
+                    </StackPanel>-->
                     <Button ToolTip="Clear Lists" Style="{StaticResource DeleteButton}" HorizontalAlignment="Left" Height="20" Grid.Column="3" Command="{Binding ClearCommand}" />
                     <Button ToolTip="Export" Style="{StaticResource SaveButton}" HorizontalAlignment="Left" Height="22" Grid.Column="4" Command="{Binding SaveCommand}" />
                     <Button Content="Generate" Height="30" Width="90" Grid.Column="6" Command="{Binding GenerateCommand}" />

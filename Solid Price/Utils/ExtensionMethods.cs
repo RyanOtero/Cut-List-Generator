@@ -11,7 +11,7 @@ namespace SolidPrice.Utils {
         public static float Sum(this IEnumerable<CutItem> cutItems) {
             float num = 0;
             foreach (CutItem item in cutItems) {
-                num += item.Length;
+                num += item.Length * item.Qty;
             }
             return num;
         }
