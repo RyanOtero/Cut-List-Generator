@@ -30,7 +30,7 @@ namespace SolidPrice.Utils {
             } catch {
             }
 
-            return result.HasValue ? (object)result.Value : DependencyProperty.UnsetValue;
+            return result.HasValue ? (object)result.Value : 24;
         }
     }
 }

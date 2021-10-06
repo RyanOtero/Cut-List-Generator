@@ -386,8 +386,8 @@ namespace SolidPrice.ViewModels {
                 IsWorking = true;
                 GenerateCutList();
             }, () => !string.IsNullOrEmpty(SourceText) && !IsWorking);
-            SaveCommand = new RelayCommand(x => SaveCutList(), () => CutList != null && CutList.Count > 0 && !IsWorking);
-            ClearCommand = new RelayCommand(x => ClearCutList(), () => CutList != null && CutList.Count > 0 && !IsWorking);
+            SaveCommand = new RelayCommand(x => SaveCutList(), () => CutList != null && (CutList.Count > 0 || OrderList.Count > 0) && !IsWorking);
+            ClearCommand = new RelayCommand(x => ClearCutList(), () => CutList != null && (CutList.Count > 0 || OrderList.Count > 0) && !IsWorking);
             SourceBrowseCommand = new RelayCommand(x => SourceBrowse(), () => !IsWorking);
             RefreshCommand = new RelayCommand(x => {
                 CutListManager.Instance.ConnectionString = ConnectionString;
@@ -554,7 +554,7 @@ namespace SolidPrice.ViewModels {
                 win.ShowDialog();
             }, () => !IsWorking);
             IsDetailedCommand = new RelayCommand(x => {
-                DataGrid grid = x as DataGrid; 
+                DataGrid grid = x as DataGrid;
                 if (IsDetailed) {
                     grid.ItemsSource = CutListDetailed;
                 } else {

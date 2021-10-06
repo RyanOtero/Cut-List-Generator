@@ -355,6 +355,27 @@ namespace SolidPrice.Models {
         public void SortCutListForDisplay(List<CutItem> tempCList, List<CutItem> tempCListSimple) {
 
             /////////// TO DO: Sort Cuts for sheet metal
+            ///remove when qty is erroneous
+            for (int i = tempCList.Count - 1; i > -1; i--) {
+                if (tempCList[i].Description.Contains("no description")) tempCList.RemoveAt(i);
+                if (tempCList[i].Qty < 1) tempCList.RemoveAt(i);
+                if (tempCList[i].Length <= 0) tempCList.RemoveAt(i);
+
+            }
+            //split oversize pieces
+            for (int i = tempCList.Count - 1; i > -1; i--) {
+                if (tempCList[i].Length > tempCList[i].StockItem.StockLengthInInches) {
+                    CutItem cut1 = tempCList[i].Clone();
+                    CutItem cut2 = tempCList[i].Clone();
+                    cut1.Length = tempCList[i].StockItem.StockLengthInInches;
+                    cut1.Angle2 = 0;
+                    cut2.Length = tempCList[i].Length - cut1.Length;
+                    cut2.Angle1 = 0;
+                    tempCList.Add(cut1);
+                    tempCList.Add(cut2);
+                    tempCList.RemoveAt(i);
+                }
+            }
 
             SortCuts(ref tempCList);
             List<CutItem> tempOrderList = new List<CutItem>();
@@ -425,6 +446,7 @@ namespace SolidPrice.Models {
             foreach (var cut in bestStick) {
                 cut.StickNumber = sticknumber;
                 CutItem cutQtyToLower = cutItemsInput.Find(c => c.Length == cut.Length);
+                if (cutQtyToLower == null) continue;
                 cutQtyToLower.Qty--;
                 cutItemsOutput.Add(cut);
                 if (cutQtyToLower.Qty == 0) {
@@ -432,7 +454,7 @@ namespace SolidPrice.Models {
                 }
             }
             //checking for erroneous qty's in solidworks file
-            for (int i = cutItemsInput.Count - 1; i > -1 ; i--) {
+            for (int i = cutItemsInput.Count - 1; i > -1; i--) {
                 if (cutItemsInput[i].Qty <= 0) {
                     cutItemsInput.RemoveAt(i);
                 }
@@ -464,9 +486,12 @@ namespace SolidPrice.Models {
                         if (cutItems[index].Qty <= alreadyInStick.Count) return;
                     }
                 }
-                CutItem clone = cutItems[index].Clone();
-                clone.Qty = 1;
-                potentialStick.Add(clone);
+                if (potentialStick.FindAll(c => c.Length == cutItems[index].Length).Count < cutItems.FindAll(c => c.Length == cutItems[index].Length).Sum()) {
+                    CutItem clone = cutItems[index].Clone();
+                    clone.Qty = 1;
+                    potentialStick.Add(clone);
+                }
+
                 if (potentialStick.Sum() > capacity) {
                     potentialStick.RemoveAt(potentialStick.Count - 1);
                     break;
@@ -475,9 +500,14 @@ namespace SolidPrice.Models {
                     break;
                 }
             }
+            if (currentStick.Sum() / capacity > .995) return;
             if (currentStick.Sum() == capacity) return;
             for (int j = index + 1; j < cutItems.Count; j++) {
                 StickRecursion(capacity, j, cutItems, ref potentialStick);
+                if (potentialStick.Sum() / capacity > .995) {
+                    currentStick = potentialStick;
+                    return;
+                }
             }
             if (potentialStick.Sum() > currentStick.Sum()) {
                 currentStick = potentialStick;

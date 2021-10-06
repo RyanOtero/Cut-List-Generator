@@ -20,17 +20,22 @@ namespace SolidPrice.Utils {
 
         // Convert from string to double
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
-            if (value == null)
+                    if (value == null)
                 return null;
-
+            string s = value.ToString();
+            if (s.Length > 0) {
+                if (s[0] == '$') {
+                    s = s.Remove(0, 1);
+                }
+            }
             double? result = null;
 
             try {
-                result = System.Convert.ToDouble(value);
+                result = System.Convert.ToDouble(s);
             } catch {
             }
 
-            return result.HasValue ? (object)result.Value : DependencyProperty.UnsetValue;
+            return result.HasValue ? (object)result.Value : 0;
         }
     }
 }
