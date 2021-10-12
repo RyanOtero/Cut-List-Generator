@@ -94,7 +94,7 @@ namespace SolidPrice.ViewModels {
             ConfirmCommand = new RelayCommand((x) => {
                 if (!string.IsNullOrEmpty(InternalDescription) && !string.IsNullOrEmpty(ExternalDescription) && SelectedVendor != null) {
                     if (SelectedVendor != sSItem.Vendor || SelectedMatType != sSItem.MatType || Thickness != sSItem.Thickness || CostPerSqFoot != sSItem.CostPerSqFoot
-                        || StockLength != sSItem.StockLengthInInches || StockWidth != sSItem.StockWidthInInches || Thickness != sSItem.Thickness || Finish != sSItem.Finish || InternalDescription != sSItem.InternalDescription 
+                        || StockLength != sSItem.StockLengthInInches || StockWidth != sSItem.StockWidthInInches || Thickness != sSItem.Thickness || Finish != sSItem.Finish || InternalDescription != sSItem.InternalDescription
                         || ExternalDescription != sSItem.ExternalDescription || sSItem.VendorItemNumber != VendorItemNumber) {
                         try {
                             sSItem.MatType = SelectedMatType;
@@ -116,9 +116,10 @@ namespace SolidPrice.ViewModels {
                             List<CutItem> tempCListSimple = CutListManager.Instance.CutListDetailed.ToList();
 
                             List<SheetCutItem> tempSCList = CutListManager.Instance.SheetCutList.ToList();
-                            MainVModel.ClearCutList();
+                            MainVModel.ClearLists();
                             CutListManager.Instance.SortCutListForDisplay(tempCList, tempCListSimple);
                             CutListManager.Instance.Refresh();
+                            MainVModel.GetTotalText();
                             CloseWin(x);
                         } catch (Exception e) {
                             string s = e.Message;

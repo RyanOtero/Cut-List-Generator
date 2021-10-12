@@ -62,7 +62,7 @@
                         <ColumnDefinition Width="90" />
                         <ColumnDefinition Width="20" />
                     </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="5" Margin="0 0 20 0">
                         <CheckBox  IsChecked="{Binding IsDetailed, Mode=TwoWay}" Content="Detailed Cut List" Command="{Binding IsDetailedCommand}" CommandParameter="{Binding ElementName=CutListGrid}" Style="{StaticResource ToggleLeft}" Width="135"
                                 Margin="0 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" />
                         <CheckBox IsChecked="{Binding ShowPricing, Mode=TwoWay}" Content="Show Pricing" Style="{StaticResource ToggleRight}" Width="112" Margin="0 0 0 0" VerticalAlignment="Center"
@@ -73,8 +73,8 @@
                         <RadioButton Style="{StaticResource ToggleMiddle}" Width="65" IsChecked="{Binding IsBoth}">Both</RadioButton>
                         <RadioButton Style="{StaticResource ToggleRight}" Width="62" IsChecked="{Binding IsSheet}">Sheet</RadioButton>
                     </StackPanel>-->
-                    <Button ToolTip="Clear Lists" Style="{StaticResource DeleteButton}" HorizontalAlignment="Left" Height="20" Grid.Column="3" Command="{Binding ClearCommand}" />
-                    <Button ToolTip="Export" Style="{StaticResource SaveButton}" HorizontalAlignment="Left" Height="22" Grid.Column="4" Command="{Binding SaveCommand}" />
+                    <Button ToolTip="Clear Lists" Style="{StaticResource DeleteButton}" Margin="50 0 0 0" HorizontalAlignment="Left" Height="20" Grid.Column="0" Command="{Binding ClearCommand}" />
+                    <Button ToolTip="Export" Style="{StaticResource SaveButton}" Margin="18 0 0 0" HorizontalAlignment="Left" Height="22" Grid.Column="0" Command="{Binding SaveCommand}" />
                     <Button Content="Generate" Height="30" Width="90" Grid.Column="6" Command="{Binding GenerateCommand}" />
                 </Grid>
                 <Grid Height="40" Width="90" HorizontalAlignment="Right" Margin="0 0 20 0" Grid.Row="0" Grid.Column="2">

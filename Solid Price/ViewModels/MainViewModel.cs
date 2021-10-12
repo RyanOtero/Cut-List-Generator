@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media.Animation;
 using static SolidPrice.Utils.Messenger;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -387,7 +388,7 @@ namespace SolidPrice.ViewModels {
                 GenerateCutList();
             }, () => !string.IsNullOrEmpty(SourceText) && !IsWorking);
             SaveCommand = new RelayCommand(x => SaveCutList(), () => CutList != null && (CutList.Count > 0 || OrderList.Count > 0) && !IsWorking);
-            ClearCommand = new RelayCommand(x => ClearCutList(), () => CutList != null && (CutList.Count > 0 || OrderList.Count > 0) && !IsWorking);
+            ClearCommand = new RelayCommand(x => ClearLists(), () => CutList != null && (CutList.Count > 0 || OrderList.Count > 0) && !IsWorking);
             SourceBrowseCommand = new RelayCommand(x => SourceBrowse(), () => !IsWorking);
             RefreshCommand = new RelayCommand(x => {
                 CutListManager.Instance.ConnectionString = ConnectionString;
@@ -419,96 +420,149 @@ namespace SolidPrice.ViewModels {
                 win.ShowDialog();
             }, () => !isWorking);
             DeleteStockItemCommand = new RelayCommand(x => {
-                if (SelectedStockItem == null) {
-                    return;
-                }
-
                 MessageBoxButton button = MessageBoxButton.YesNo;
                 MessageBoxImage icon = MessageBoxImage.Warning;
                 MessageBoxResult result;
 
-                result = MessageWindow.Show("Delete Stock Type", "Are you sure you want to delete this stock type from the database?", button, icon);
-                if (result == MessageBoxResult.Yes) {
-                    try {
-                        using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
-
-
-                            ctx.StockItems.Remove(SelectedStockItem);
-                            ctx.SaveChanges();
-                            CutListManager.Instance.Refresh();
+                if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) {
+                    result = MessageWindow.Show("Delete Stock Type", "Are you sure you want to delete all stock types from the database?", button, icon);
+                    if (result == MessageBoxResult.Yes) {
+                        try {
+                            using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
+                                ctx.StockItems.RemoveRange(ctx.StockItems);
+                                ctx.SaveChanges();
+                                CutListManager.Instance.Refresh();
+                            }
+                        } catch (Exception e) {
+                            string s = e.Message;
+                            ErrorMessage("Database Error mvm.cs 281", "There was an error while accessing the database.");
                         }
-                    } catch (Exception e) {
-                        string s = e.Message;
-                        ErrorMessage("Database Error mvm.cs 282", "There was an error while accessing the database.");
+                    }
+                } else {
+                    if (SelectedStockItem == null) {
+                        return;
+                    }
+
+                    result = MessageWindow.Show("Delete Stock Type", "Are you sure you want to delete this stock type from the database?", button, icon);
+                    if (result == MessageBoxResult.Yes) {
+                        try {
+                            using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
+
+                                ctx.StockItems.Remove(SelectedStockItem);
+                                ctx.SaveChanges();
+                                CutListManager.Instance.Refresh();
+                            }
+                        } catch (Exception e) {
+                            string s = e.Message;
+                            ErrorMessage("Database Error mvm.cs 282", "There was an error while accessing the database.");
+                        }
                     }
                 }
+
             }, () => !IsWorking);
             DeleteSheetStockItemCommand = new RelayCommand(x => {
-                if (SelectedSheetStockItem == null) {
-                    return;
-                }
-
                 MessageBoxButton button = MessageBoxButton.YesNo;
                 MessageBoxImage icon = MessageBoxImage.Warning;
                 MessageBoxResult result;
-
-                result = MessageWindow.Show("Delete Sheet Type", "Are you sure you want to delete this sheet type from the database?", button, icon);
-                if (result == MessageBoxResult.Yes) {
-                    try {
-                        using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
-
-
-                            ctx.SheetStockItems.Remove(SelectedSheetStockItem);
-                            ctx.SaveChanges();
-                            CutListManager.Instance.Refresh();
+                if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) {
+                    result = MessageWindow.Show("Delete Sheet Type", "Are you sure you want to delete all sheet types from the database?", button, icon);
+                    if (result == MessageBoxResult.Yes) {
+                        try {
+                            using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
+                                ctx.SheetStockItems.RemoveRange(ctx.SheetStockItems);
+                                ctx.SaveChanges();
+                                CutListManager.Instance.Refresh();
+                            }
+                        } catch (Exception e) {
+                            string s = e.Message;
+                            ErrorMessage("Database Error mvm.cs 282", "There was an error while accessing the database.");
                         }
-                    } catch (Exception e) {
-                        string s = e.Message;
-                        ErrorMessage("Database Error mvm.cs 282", "There was an error while accessing the database.");
+                    }
+                } else {
+                    if (SelectedSheetStockItem == null) {
+                        return;
+                    }
+                    result = MessageWindow.Show("Delete Sheet Type", "Are you sure you want to delete this sheet type from the database?", button, icon);
+                    if (result == MessageBoxResult.Yes) {
+                        try {
+                            using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
+                                ctx.SheetStockItems.Remove(SelectedSheetStockItem);
+                                ctx.SaveChanges();
+                                CutListManager.Instance.Refresh();
+                            }
+                        } catch (Exception e) {
+                            string s = e.Message;
+                            ErrorMessage("Database Error mvm.cs 282", "There was an error while accessing the database.");
+                        }
                     }
                 }
+
             }, () => !IsWorking);
             DeleteVendorCommand = new RelayCommand(x => {
-                if (SelectedVendor == null) {
-                    return;
-                }
-                if (SelectedVendor.ID == 1) {
-                    ErrorMessage("Forbidden Action mvm.cs 291", "You may not delete the default vendor.");
-                    return;
-                }
-
-                List<StockItem> sItems = StockItems.Where(s => s.Vendor == SelectedVendor).ToList();
-
                 MessageBoxButton button = MessageBoxButton.YesNo;
                 MessageBoxImage icon = MessageBoxImage.Warning;
                 MessageBoxResult result;
+                if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) {
+                    string msg = "Are you sure you want to delete all vendors from the database?";
+                    result = MessageWindow.Show("Delete Vendor", msg, button, icon);
+                    if (result == MessageBoxResult.Yes) {
+                        try {
+                            using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
 
-                string msg = "Are you sure you want to delete this vendor from the database?";
-                if (sItems.Count > 0) {
-                    msg = "There are Stock Types associated with this vendor. If this vendor is " +
-                    "deleted, thier vendor will be set to the default vendor. " +
-                    "Are you sure you want to delete this vendor from the database?";
-                }
-
-                result = MessageWindow.Show("Delete Vendor", msg, button, icon);
-                if (result == MessageBoxResult.Yes) {
-                    try {
-                        using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
-
-                            Vendor defaultVendor = Vendors.Single(v => v.ID == 1);
-                            ctx.Vendors.Remove(SelectedVendor);
-                            foreach (StockItem item in sItems) {
-                                item.Vendor = defaultVendor;
+                                Vendor defaultVendor = Vendors.Single(v => v.ID == 1);
+                                ctx.Vendors.RemoveRange(ctx.Vendors.Skip(1));
+                                foreach (StockItem item in ctx.StockItems) {
+                                    item.Vendor = defaultVendor;
+                                }
+                                ctx.StockItems.UpdateRange(ctx.StockItems);
+                                ctx.SaveChanges();
+                                CutListManager.Instance.Refresh();
                             }
-                            ctx.StockItems.UpdateRange(sItems);
-                            ctx.SaveChanges();
-                            CutListManager.Instance.Refresh();
+                        } catch (Exception e) {
+                            string s = e.Message;
+                            ErrorMessage("Database Error mvm.cs 324", "There was an error while accessing the database.");
                         }
-                    } catch (Exception e) {
-                        string s = e.Message;
-                        ErrorMessage("Database Error mvm.cs 324", "There was an error while accessing the database.");
+                    }
+                } else {
+                    if (SelectedVendor == null) {
+                        return;
+                    }
+                    if (SelectedVendor.ID == 1) {
+                        ErrorMessage("Forbidden Action mvm.cs 291", "You may not delete the default vendor.");
+                        return;
+                    }
+                    List<StockItem> sItems = StockItems.Where(s => s.Vendor == SelectedVendor).ToList();
+
+
+                    string msg = "Are you sure you want to delete this vendor from the database?";
+                    if (sItems.Count > 0) {
+                        msg = "There are Stock Types associated with this vendor. If this vendor is " +
+                        "deleted, thier vendor will be set to the default vendor. " +
+                        "Are you sure you want to delete this vendor from the database?";
+                    }
+
+                    result = MessageWindow.Show("Delete Vendor", msg, button, icon);
+                    if (result == MessageBoxResult.Yes) {
+                        try {
+                            using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
+
+                                Vendor defaultVendor = Vendors.Single(v => v.ID == 1);
+                                ctx.Vendors.Remove(SelectedVendor);
+                                foreach (StockItem item in sItems) {
+                                    item.Vendor = defaultVendor;
+                                }
+                                ctx.StockItems.UpdateRange(sItems);
+                                ctx.SaveChanges();
+                                CutListManager.Instance.Refresh();
+                            }
+                        } catch (Exception e) {
+                            string s = e.Message;
+                            ErrorMessage("Database Error mvm.cs 324", "There was an error while accessing the database.");
+                        }
                     }
                 }
+
+
             }, () => !IsWorking);
             EditStockItemCommand = new RelayCommand(x => {
                 if (SelectedStockItem == null) {
@@ -602,6 +656,7 @@ namespace SolidPrice.ViewModels {
         #region Methods
 
         public override void CloseWin(object obj) {
+            ClearLists();
             if (CutListManager.Instance.SWApp != null) {
                 Task.Run(() => {
                     CutListManager.Instance.SWApp.ExitApp();
@@ -612,11 +667,15 @@ namespace SolidPrice.ViewModels {
             base.CloseWin(obj);
         }
 
-        private void GetTotalText() {
+        public void GetTotalText() {
+            decimal runningTotal = 0;
             if (CutList == null) {
+                OrderTotal = string.Format("{0:c}", runningTotal);
+                CutListTotal = string.Format("{0:c}", runningTotal);
+                SheetOrderTotal = string.Format("{0:c}", runningTotal);
+                SheetCutListTotal = string.Format("{0:c}", runningTotal);
                 return;
             }
-            decimal runningTotal = 0;
             foreach (OrderItem item in OrderList) {
                 runningTotal += decimal.Parse(item.TotalCost.Substring(1));
             }
@@ -648,7 +707,7 @@ namespace SolidPrice.ViewModels {
                 IsWorking = false;
                 return;
             }
-            ClearCutList();
+            ClearLists();
             loadingAnimFadeIn.Begin();
             loadingAnimBounce.Begin();
             await Task.Run(() => CutListManager.Instance.Generate(SourceText, IsDetailed));
@@ -680,8 +739,9 @@ namespace SolidPrice.ViewModels {
             }
         }
 
-        public void ClearCutList() {
-            CutListManager.Instance.NewCutList();
+        public void ClearLists() {
+            CutListManager.Instance.NewLists();
+            GetTotalText();
         }
         #endregion
 

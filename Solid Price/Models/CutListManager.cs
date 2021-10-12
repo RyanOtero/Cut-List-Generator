@@ -223,7 +223,7 @@ namespace SolidPrice.Models {
             }
         }
 
-        public void NewCutList() {
+        public void NewLists() {
             try {
                 using (CutListGeneratorContext ctx = new CutListGeneratorContext(ConnectionString)) {
                     ctx.CutItems.RemoveRange(ctx.CutItems);
@@ -353,7 +353,12 @@ namespace SolidPrice.Models {
         }
 
         public void SortCutListForDisplay(List<CutItem> tempCList, List<CutItem> tempCListSimple) {
-
+            foreach (var item in tempCList) {
+                item.StickNumber = 0;
+            }
+            tempCListSimple.Clear();
+            tempCList.Sort();
+            Consolidate(tempCList);
             /////////// TO DO: Sort Cuts for sheet metal
             ///remove when qty is erroneous
             for (int i = tempCList.Count - 1; i > -1; i--) {
@@ -534,8 +539,7 @@ namespace SolidPrice.Models {
             //        temp.Add(c);
             //    }
             //}
-            temp.Sort();
-            Consolidate(temp);
+
             List<int> stockItems = new List<int>();
             foreach (var cut in temp) {
                 if (!stockItems.Contains(cut.StockItemID)) {

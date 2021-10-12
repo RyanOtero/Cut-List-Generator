@@ -98,9 +98,10 @@ namespace SolidPrice.ViewModels {
                             List<CutItem> tempCList = CutListManager.Instance.CutListDetailed.ToList();
                             List<CutItem> tempCListSimple = CutListManager.Instance.CutListDetailed.ToList();
                             List<SheetCutItem> tempSCList = CutListManager.Instance.SheetCutList.ToList();
-                            MainVModel.ClearCutList();
+                            MainVModel.ClearLists();
                             CutListManager.Instance.SortCutListForDisplay( tempCList, tempCListSimple);
                             CutListManager.Instance.Refresh();
+                            MainVModel.GetTotalText();
                             CloseWin(x);
                         } catch (Exception e) {
                             string s = e.Message;
