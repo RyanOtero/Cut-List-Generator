@@ -12,9 +12,9 @@ string str = "";
 
 foreach(FileInfo file in Files )
 {
-if (file.Name.Contains(".dll") || file.Name.Contains(".db") || file.Name.Contains(".exe")) {
+
   str = str + "\n" + "<Component Id=\"" + file.Name + "\" Guid=\"" + Guid.NewGuid() + "\">" + "\n" +
  "  <File Id=\"" + file.Name + "\" Source=\"" + file.Name + "\" KeyPath=\"yes\" Checksum=\"yes\"/>" + "\n" +
 "</Component>";
-}}
+}
  Console.WriteLine(str);

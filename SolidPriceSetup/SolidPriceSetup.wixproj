@@ -85,6 +85,7 @@
     <Content Include="clretwrc.dll" />
     <Content Include="clrjit.dll" />
     <Content Include="coreclr.dll" />
+    <Content Include="createdump.exe" />
     <Content Include="CutList.db" />
     <Content Include="D3DCompiler_47_cor3.dll" />
     <Content Include="dbgshim.dll" />
@@ -122,7 +123,7 @@
     <Content Include="Microsoft.Win32.Registry.dll" />
     <Content Include="Microsoft.Win32.SystemEvents.dll" />
     <Content Include="mscordaccore.dll" />
-    <Content Include="mscordaccore_amd64_amd64_5.0.621.22011.dll" />
+    <Content Include="mscordaccore_amd64_amd64_5.0.1021.41214.dll" />
     <Content Include="mscordbi.dll" />
     <Content Include="mscorlib.dll" />
     <Content Include="mscorrc.dll" />
@@ -147,9 +148,12 @@
     <Content Include="PresentationNative_cor3.dll" />
     <Content Include="PresentationUI.dll" />
     <Content Include="ReachFramework.dll" />
+    <Content Include="SolidPrice.deps.json" />
     <Content Include="SolidPrice.dll" />
     <Content Include="SolidPrice.exe" />
     <Content Include="solidprice.ico" />
+    <Content Include="SolidPrice.pdb" />
+    <Content Include="SolidPrice.runtimeconfig.json" />
     <Content Include="SolidPriceSetup.wixproj" />
     <Content Include="SolidWorks.Interop.sldworks.dll" />
     <Content Include="SolidWorks.Interop.swconst.dll" />
@@ -350,6 +354,7 @@
     <Content Include="WindowsBase.dll" />
     <Content Include="WindowsFormsIntegration.dll" />
     <Content Include="wpfgfx_cor3.dll" />
+    <Content Include="WpfScreenHelper.dll" />
     <Content Include="Zstandard.Net.dll" />
   </ItemGroup>
   <ItemGroup>

@@ -38,7 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="CutList.db" />
     <None Remove="Resources\Fonts\SansitaOne.ttf" />
     <None Remove="Resources\Logo.blend" />
     <None Remove="Resources\Logo.blend1" />
